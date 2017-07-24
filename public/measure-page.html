@@ -41,15 +41,13 @@
       }
 
       .table-container {
-        width: 100%;
         display: block;
         max-height: 400px;
         overflow-y: scroll;
       }
 
-      .arrests-by-area thead {
-        position: sticky;
-        top: 0;
+      table.arrests-by-area {
+        border-spacing: 0;
       }
 
 
@@ -126,6 +124,44 @@
         line-height: 18px;
         font-size: 14px;
         content: '!';
+        width: 18px; height: 18px;
+        border-radius: 9px;
+        background-color: #DEE0E2;
+        color: white;
+      }
+
+      .missing {
+        color: #BFC1C3;
+        display: inline-block;
+        font-size: 0;
+      }
+
+      .missing::after {
+        content: '–';
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 18px;
+        font-size: 14px;
+        width: 18px; height: 18px;
+        border-radius: 9px;
+        background-color: #DEE0E2;
+        color: white;
+      }
+
+      .sample-too-small {
+        color: #BFC1C3;
+        display: inline-block;
+        font-size: 0;
+      }
+
+      .sample-too-small::after {
+        content: '?';
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 18px;
+        font-size: 14px;
         width: 18px; height: 18px;
         border-radius: 9px;
         background-color: #DEE0E2;
@@ -1562,9 +1598,18 @@
         </table>
       </div>
 
-        <div style="display: table; width: 100%; margin-bottom: 40px;">
+        <div style="display: table; width: 100%; margin-bottom: 40px; margin-top: 10px;">
 
-          <p style="font-size: 16px; width: 50%; display: table-cell"><span class="na" style="margin-right: 10px;"></span> Data <a href="#data-reliability" style="color: #6F777B;">missing or suppressed</a>.</p>
+          <p style="font-size: 16px; width: 50%; display: table-cell">
+            <span class="na" style="margin-right: 5px;"></span> <a href="#data-reliability" style="color: #6F777B;">suppressed for privacy</a>
+
+            <span class="missing" style="margin-right: 5px; margin-left: 20px;"></span>
+
+             <a href="#data-reliability" style="color: #6F777B;">missing</a>
+
+            <span class="sample-too-small" style="margin-left: 20px; margin-right: 5px;"></span>
+
+             <a href="#data-reliability" style="color: #6F777B;">sample size too small</a></p>
 
           <p style="font-size: 16px; text-align: right; width: 50%; display: table-cell">Source: Arrests open data and Population estimates</p>
         </div>
