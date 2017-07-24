@@ -40,9 +40,16 @@
         margin-bottom: 20px;
       }
 
-      table.arrests-by-area {
-        margin-bottom: 10px;
+      .table-container {
         width: 100%;
+        display: block;
+        max-height: 400px;
+        overflow-y: scroll;
+      }
+
+      .arrests-by-area thead {
+        position: sticky;
+        top: 0;
       }
 
 
@@ -92,13 +99,18 @@
 
       .sortable::after {
         display: inline-block;
-        border-top: 6px solid #005ea5;
+        border-top: 6px solid transparent;
         border-left: 3px solid transparent;
         border-right: 3px solid transparent;
         content: '';
         line-height: 30px;
         vertical-align: middle;
         margin-left: 2px;
+      }
+
+      .sortable:hover::after,
+      .sortable.sorted::after {
+        border-top-color: #005ea5;
       }
 
       .na {
@@ -246,7 +258,7 @@
 
           <p style="margin-bottom: 5px; margin-top: 35px;" id="data-reliability">
             <i style="vertical-align: middle;" class="icon icon-important"></i>
-            <span style="vertical-align: top; line-height: 38px; padding-left: 10px; font-weight: bold;">Important information about the reliability of this data</span>
+            <span style="vertical-align: top; line-height: 38px; padding-left: 10px; font-weight: bold;">Important notes on the reliability of this data</span>
           </p>
 
           <details data-event="data-reliability" class="normalize" style="margin-bottom: 20px;">
@@ -330,7 +342,7 @@
 
       <details data-event="view-table" class="normalize">
         <summary>
-          <span class="summary">View the numbers in a table</span>
+          <span class="summary">View full data in a table</span>
         </summary>
         <div class="panel panel-border-narrow">
 
@@ -856,7 +868,9 @@
 
         <p style="font-weight: bold; text-align: center; font-size: 16px;"> Arrests by ethnicity and area per 1,000 population</p>
 
-        <table class="arrests-by-area " id="DataTables_Table_2" role="grid">
+        <div class="table-container">
+
+        <table class="arrests-by-area" id="DataTables_Table_2" role="grid">
           <thead>
             <tr role="row">
               <th colspan="1" rowspan="1" class="line"></th>
@@ -868,7 +882,7 @@
               <th class="" colspan="2" rowspan="1">White</th>
             </tr>
             <tr role="row" class="subhead-row">
-              <td style="padding-left: 0;" aria-controls="DataTables_Table_2" aria-label="Area: activate to sort column descending" aria-sort="ascending" class="line sorting_asc" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Area</a></td>
+              <td style="padding-left: 0;" aria-controls="DataTables_Table_2" aria-label="Area: activate to sort column descending" aria-sort="ascending" class="line sorting_asc" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable sorted">Area</a></td>
               <td aria-controls="DataTables_Table_2" aria-label="Arrests per 1,000: activate to sort column ascending" class="sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Rate</a></td>
               <td aria-controls="DataTables_Table_2" aria-label="Number of arrests: activate to sort column ascending" class="line sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Arrests</a></td>
               <td aria-controls="DataTables_Table_2" aria-label="Arrests per 1,000: activate to sort column ascending" class="sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Rate</a></td>
@@ -1546,6 +1560,7 @@
             </tr>
           </tbody>
         </table>
+      </div>
 
         <div style="display: table; width: 100%; margin-bottom: 40px;">
 
@@ -2155,7 +2170,8 @@
         <p style="margin-bottom: 10px;">Download combined data:</p>
 
         <p style="font-size: 16px; line-height: 24px; margin-bottom: 20px;">
-          <a href="#">Number of arrests (CSV, 12KB)</a><br>
+          <a href="#">Number of arrests 2006-2016 (CSV, 12KB)</a><br>
+          Arrests by ethnicity, police area and gender.
         </p>
 
       </div>
