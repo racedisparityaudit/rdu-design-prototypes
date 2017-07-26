@@ -1,4 +1,10 @@
-use Rack::Static, urls: [''], root: 'public', index: 'index.html'
+require 'rack/contrib'
+
+use Rack::TryStatic,
+  urls: [''],
+  root: 'public',
+  try: ['.html'],
+  index: 'index.html'
 
 run lambda { |env|
   [

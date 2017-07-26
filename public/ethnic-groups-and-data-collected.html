@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+  <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+
+  <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+
+    <style>
+
+      .panel ul {
+        list-style-type: disc;
+        padding-left: 20px;
+        margin-bottom: 20px;
+      }
+
+      .table-container {
+        display: block;
+        max-height: 400px;
+        overflow-y: scroll;
+      }
+
+      table.arrests-by-area {
+        border-spacing: 0;
+      }
+
+
+      .arrests-by-area thead th {
+        text-align: right;
+        font-size: 16px;
+      }
+
+      .arrests-by-area tbody td,
+      .arrests-by-area tbody td.line {
+        padding-right: 10px;
+      }
+
+
+      table.arrests-by-area tbody th,
+      table.arrests-by-area tbody td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 16px;
+      }
+
+      table.arrests-by-area.grouped tbody th {
+        min-width: auto;
+      }
+
+      table.arrests-by-area td {
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: right;
+      }
+
+      .arrests-by-area tbody th,
+      .arrests-by-area .line {
+        border-right-width: 1px;
+        border-right-color: #bfc1c3;
+        border-right-style: solid;
+      }
+
+      .arrests-by-area tbody th {
+        vertical-align: top;
+        padding-right: 10px;
+      }
+
+      .sortable {
+        display: inline-block;
+      }
+
+      .sortable::after {
+        display: inline-block;
+        border-top: 6px solid transparent;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        content: '';
+        line-height: 30px;
+        vertical-align: middle;
+        margin-left: 2px;
+      }
+
+      .sortable:hover::after,
+      .sortable.sorted::after {
+        border-top-color: #005ea5;
+      }
+
+      .na {
+        color: #BFC1C3;
+        display: inline-block;
+        font-size: 0;
+      }
+
+      .na::after {
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 18px;
+        font-size: 14px;
+        content: '!';
+        width: 18px; height: 18px;
+        border-radius: 9px;
+        background-color: #DEE0E2;
+        color: white;
+      }
+
+      .missing {
+        color: #BFC1C3;
+        display: inline-block;
+        font-size: 0;
+      }
+
+      .missing::after {
+        content: '–';
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 18px;
+        font-size: 14px;
+        width: 18px; height: 18px;
+        border-radius: 9px;
+        background-color: #DEE0E2;
+        color: white;
+      }
+
+      .sample-too-small {
+        color: #BFC1C3;
+        display: inline-block;
+        font-size: 0;
+      }
+
+      .sample-too-small::after {
+        content: '?';
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 18px;
+        font-size: 14px;
+        width: 18px; height: 18px;
+        border-radius: 9px;
+        background-color: #DEE0E2;
+        color: white;
+      }
+
+    </style>
+
+
+  </head>
+
+
+
+  <body class="">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <header role="banner" id="global-header" class="with-proposition">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="/static/images/gov.uk_logotype_crown_invert_trans.png?0.19.2" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu">
+                <a href="/" id="proposition-name">
+                  Ethnicity facts and figures
+                </a>
+
+                    <ul id="proposition-links">
+                        <li><a href="/about-ethnicity">About ethnicity</a></li>
+                        <li><a href="/background">Background</a></li>
+                    </u>
+              </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="phase-banner">
+        <p>
+          <strong class="phase-tag">Private Beta</strong>
+          <span>This is a new service – please send your feedback to <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a></span>
+        </p>
+      </div>
+
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href="/" data-event="breadcrumb-homepage">Ethnicity facts and figures</a></li>
+          <li>
+            <a href="/about-ethnicity">About ethnicity</a>
+          </li>
+        </ol>
+      </div>
+
+      <!-- CONTENT STARTS HERE -->
+
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+      <h1 class="heading-xlarge">
+        Ethnic groups and how data on ethnicity is collected
+      </h1>
+      <p>The population of the United Kingdom (UK) is made up of many different ethnic groups, or ethnicities.</p>
+      <p>White British people are the largest, or majority, ethnic group in the UK, and for this reason, other ethnicities are often referred to as 'ethnic minorities'. </p>
+      <p>As well as Black, Asian, Mixed/Multiple and other more detailed categories of ethnicity, the ethnic minorities in the UK include members of White minorities. For example, people from an Irish Traveller background and people from some parts of the European Union are members of a White minority.</p>
+      <p>Membership of a particular ethnic group is subjective and self-defined. For this reason, there are no rules about which ethnic group any individual belongs to.</p>
+      <p>The language used to talk about ethnicity has changed over time in response to evolving social and political attitudes. The term 'ethnic group', as used today, touches on ideas about identity which are of continuing interest. These concepts include race, skin colour, lineage, religion, shared culture, heritage, language, beliefs and tradition, genetic make-up, background and geography.</p>
+
+      <h2 class="heading-medium">How the government collects and reports data on ethnicity</h2>
+      <p>An ethnic group question was first included in the England and Wales census in 1991, to help organisations and government monitor equal opportunities and anti-discrimination policies.</p>
+      <p>In 2007, the Office of National Statistics (ONS) held a public consultation to update the 16 categories used in the 2001 Census. An overwhelming majority of the people who responded supported the inclusion of an ethnic category question, and for the 2011 Census, ONS implemented a standardised list of 18 ethnic categories (below).</p>
+      <p>ONS's <a href="https://www.ons.gov.uk/file?uri=/census/2011census/howourcensusworks/howweplannedthe2011census/questionnairedevelopment/finalisingthe2011questionnaire/final-recommended-questions-2011-ethnic-group_tcm77-183998.pdf">final recommendations</a> give a detailed explanation of how the categories were tested and why they were chosen.</p>
+
+      <h2 class="heading-medium">The 2011 census: 18 standardised ethnic categories</h2>
+      <p>For the 2011 Census, respondents were asked, 'Choose one option that best describes your ethnic group or background' and invited to tick one of the boxes in the list below. There are 5 broad categories, with a number of subcategories, making a total of 18 choices. Options 4, 8, 13, 16 and 18 allow respondents to write in their own description of their ethnic group.</p>
+
+      <p class="heading-small">White</p>
+      <ul class="no-bullets">
+        <li>1. English / Welsh / Scottish / Northern Irish / British</li>
+        <li>2. Irish</li>
+        <li>3. Gypsy or Irish Traveller</li>
+        <li>4. Any other White background, please describe</li>
+      </ul>
+
+      <p class="heading-small">Mixed / Multiple ethnic groups</p>
+      <ul class="no-bullets">
+        <li>5. White and Black Caribbean </li>
+        <li>6. White and Black African</li>
+        <li>7. White and Asian </li>
+        <li>8. Any other Mixed / Multiple ethnic background, please describe </li>
+      </ul>
+
+      <p class="heading-small">Asian / Asian British</p>
+      <ul class="no-bullets">
+        <li>9. Indian</li>
+        <li>10. Pakistani</li>
+        <li>11. Bangladeshi</li>
+        <li>12. Chinese</li>
+        <li>13. Any other Asian background, please describe</li>
+      </ul>
+
+      <p class="heading-small">Mixed / Multiple ethnic groups</p>
+      <ul class="no-bullets">
+        <li>14. African </li>
+        <li>15. Caribbean</li>
+        <li>16. Any other Black / African / Caribbean background, please describe</li>
+      </ul>
+
+      <p class="heading-small">Other ethnic group </p>
+      <ul class="no-bullets">
+        <li>17. Arab </li>
+        <li>18. Any other ethnic group, please describe</li>
+      </ul>
+    </div>
+  </div>
+
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-one-third'>
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+              <li>
+                  <a href="/">Site preview</a>
+              </li>
+              <li>
+                  <a href="/cms/">CMS</a>
+              </li>
+              <li>
+                  <a href="/prototype/">Prototype</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="global-app-error" class="app-error hidden"></div>
+    <script src="/static/javascripts/govuk-template.js?0.19.2"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/javascripts/all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/highcharts.js"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/underscore-min.js"></script>
+    <script src="/static/javascripts/rd-data-tools.js"></script>
+    <script src="/static/javascripts/rd-graph.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/modules/exporting.js"></script>
+    </script>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
