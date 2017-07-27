@@ -118,14 +118,14 @@
       }
 
       .suppressed::after {
+        content: '!';
         display: inline-block;
         text-align: center;
         font-weight: bold;
-        line-height: 18px;
-        font-size: 14px;
-        content: '!';
-        width: 18px; height: 18px;
-        border-radius: 9px;
+        line-height: 20px;
+        font-size: 18px;
+        width: 20px; height: 20px;
+        border-radius: 10px;
         background-color: #DEE0E2;
         color: white;
       }
@@ -178,11 +178,11 @@
         content: '?';
         display: inline-block;
         text-align: center;
-        font-weight: normal;
-        line-height: 18px;
-        font-size: 14px;
-        width: 18px; height: 18px;
-        border-radius: 9px;
+        font-weight: bold;
+        line-height: 20px;
+        font-size: 18px;
+        width: 20px; height: 20px;
+        border-radius: 10px;
         background-color: #DEE0E2;
         color: white;
       }
@@ -1281,7 +1281,7 @@
               <td class="line">74</td>
               <td>91.52</td>
               <td class="line">137</td>
-              <td>9.09</td>
+              <td><span class="suppressed"></span></td>
               <td class="line">45</td>
               <td>14.16</td>
               <td class="line">63</td>
@@ -1523,7 +1523,7 @@
               <td class="line">372</td>
               <td>21.44</td>
               <td class="line">210</td>
-              <td>9.74</td>
+              <td><span class="sample-too-small"></span></td>
               <td class="line">39</td>
               <td>9.32</td>
               <td>5,990</td>
@@ -1537,11 +1537,22 @@
           <p style="font-size: 16px; width: 50%; display: table-cell">
 <!--             <span class="na" style="margin-right: 5px;"></span> <a href="#data-reliability" style="color: #6F777B;">suppressed for privacy</a>
  -->
-            <span  style="color: #6F777B;"><sup>*</sup> Not applicable</span>
 
+            <span  style="color: #6F777B;"><sup>*</sup> Not applicable</span>
             <span class="missing" style="margin-right: 5px; margin-left: 20px;"></span>
 
              <span style="color: #6F777B;">Data not collected</span>
+
+            <span class="na" style="margin-left: 20px; margin-right: 5px;"></span>
+
+            <span style="color: #6F777B;">Data withheld to protect confidentiality</a>
+
+
+
+             <br>
+             <span class="sample-too-small" style="margin-left: 0px; margin-right: 5px;"></span>
+             <span style="color: #6F777B;">Data withheld because a small sample size makes it unreliable</span>
+</p>
 
             <!-- <span class="sample-too-small" style="margin-left: 20px; margin-right: 5px;"></span>
 
