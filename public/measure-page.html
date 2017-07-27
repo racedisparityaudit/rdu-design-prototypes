@@ -30,6 +30,12 @@
   <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
 
+    <script>
+      function openThings() {
+        document.getElementById('things-you-need-to-know').open = true;
+      }
+    </script>
+
   <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
 
     <style>
@@ -488,7 +494,7 @@
 
           <p style="margin-bottom: 5px; margin-top: -45px;" id="data-reliability">
             <i style="vertical-align: middle;" class="icon icon-important"></i>
-            <span style="vertical-align: top; line-height: 38px; padding-left: 10px; font-weight: bold;"><a href="#things-you-need-to-know">Things you need to know</a></span>
+            <span style="vertical-align: top; line-height: 38px; padding-left: 10px; font-weight: bold;"><a href="#things-you-need-to-know" onclick="openThings(); return true;">Things you need to know</a></span>
           </p>
     </div></div>
 
