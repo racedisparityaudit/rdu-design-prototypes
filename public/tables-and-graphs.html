@@ -1,0 +1,2515 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+  <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+
+    <script>
+      function openThings() {
+        document.getElementById('things-you-need-to-know').open = true;
+      }
+    </script>
+
+  <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+
+    <style>
+
+      .panel ul {
+        list-style-type: disc;
+        padding-left: 20px;
+        margin-bottom: 20px;
+      }
+
+      .table-container {
+        display: block;
+        max-height: 400px;
+        overflow-y: scroll;
+      }
+
+      table.arrests-by-area {
+        border-spacing: 0;
+      }
+
+
+      .arrests-by-area thead th {
+        text-align: right;
+        font-size: 16px;
+      }
+
+      .arrests-by-area tbody td,
+      .arrests-by-area tbody td.line {
+        padding-right: 10px;
+      }
+
+
+      table.arrests-by-area tbody th,
+      table.arrests-by-area tbody td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 16px;
+      }
+
+      table.arrests-by-area.grouped tbody th {
+        min-width: auto;
+      }
+
+      table.arrests-by-area td {
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: right;
+      }
+
+      .arrests-by-area tbody th,
+      .arrests-by-area .line {
+        border-right-width: 1px;
+        border-right-color: #bfc1c3;
+        border-right-style: solid;
+      }
+
+      .arrests-by-area tbody th {
+        vertical-align: top;
+        padding-right: 10px;
+      }
+
+      .sortable {
+        display: inline-block;
+      }
+
+      .sortable::after {
+        display: inline-block;
+        border-top: 6px solid transparent;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        content: '';
+        line-height: 30px;
+        vertical-align: middle;
+        margin-left: 2px;
+      }
+
+      .sortable:hover::after,
+      .sortable.sorted::after {
+        border-top-color: #005ea5;
+      }
+
+      .na {
+        color: #BFC1C3;
+        display: inline-block;
+        font-size: 0;
+      }
+
+      .suppressed::after {
+        content: '!';
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 20px;
+        font-size: 18px;
+        width: 20px; height: 20px;
+        border-radius: 10px;
+        background-color: #DEE0E2;
+        color: white;
+      }
+
+      .suppressed {
+        color: #BFC1C3;
+        display: inline-block;
+        font-size: 0;
+      }
+
+      .na::after {
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 18px;
+        font-size: 14px;
+        content: '!';
+        width: 18px; height: 18px;
+        border-radius: 9px;
+        background-color: #DEE0E2;
+        color: white;
+      }
+
+      .missing {
+        color: #BFC1C3;
+        display: inline-block;
+        font-size: 0;
+      }
+
+      .missing::after {
+        content: '–';
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 20px;
+        font-size: 18px;
+        width: 20px; height: 20px;
+        border-radius: 10px;
+        background-color: #DEE0E2;
+        color: white;
+      }
+
+      .sample-too-small {
+        color: #BFC1C3;
+        display: inline-block;
+        font-size: 0;
+      }
+
+      .sample-too-small::after {
+        content: '?';
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 20px;
+        font-size: 18px;
+        width: 20px; height: 20px;
+        border-radius: 10px;
+        background-color: #DEE0E2;
+        color: white;
+      }
+
+      .metadata a {
+        text-decoration: none;
+      }
+
+      .not-applicable {
+        color: #6F777B;
+      }
+
+    </style>
+
+
+  </head>
+
+
+
+  <body class="">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <header role="banner" id="global-header" class="with-proposition">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="/static/images/gov.uk_logotype_crown_invert_trans.png?0.19.2" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu">
+                <a href="/" id="proposition-name">
+                  Ethnicity facts and figures
+                </a>
+
+                    <ul id="proposition-links">
+                        <li><a href="/about-ethnicity">About ethnicity</a></li>
+                        <li><a href="/background">Background</a></li>
+                    </u>
+              </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="phase-banner">
+        <p>
+          <strong class="phase-tag">Private Beta</strong>
+          <span>This is a new service – please send your feedback to <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a></span>
+        </p>
+      </div>
+
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href="/" data-event="breadcrumb-homepage">Ethnicity facts and figures</a></li>
+          <li>
+            <a href="/crime-justice-and-the-law" data-event="breadcrumb-crime-justice-and-the-law">Crime justice and the law</a>
+          </li>
+        </ol>
+      </div>
+
+      <!-- CONTENT STARTS HERE -->
+
+      <div class="grid-row">
+
+        <div class="column-two-thirds">
+          <h1 class="heading-large">
+            Number of arrests
+          </h1>
+
+          <div class="metadata" style="padding-top: 20px; padding-bottom: 40px;">
+            <dl>
+              <dt>Time period:</dt>
+              <dd>2006/2007 to 2015/2016</dd>
+
+              <dt>Area covered:</dt>
+              <dd>England and Wales</dd>
+
+              <dt>Source:</dt>
+              <dd><a href="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/561979/arrests-open-data-tables-ppp.ods">Arrests open data</a></dd>
+
+              <dt>Department:</dt>
+              <dd><a href="#">Home Office</a></dd>
+
+              <dt>Published:</dt>
+              <dd>8 July 2017</dd>
+
+              <dt>Last updated:</dt>
+              <dd>24 July 2017, <a href="#updates">see all updates</a></dd>
+
+            </dl>
+          </div>
+
+          <p class="lede" style="margin-bottom: 30px;">
+            This data measures the number of people arrested for notifiable offences in England and Wales by ethnicity.
+          </p>
+
+          <p>The figures show that:</p>
+
+          <div class="bullets spaced-out">
+            <ul class="list list-bullet">
+              <li>
+                <p>a total of 896,209 arrests were carried out in 2016, a fall of 5% on the previous year</p>
+              </li>
+              <li>
+                <p>Black people were over 3 times more likely to be arrested than White people </p>
+              </li>
+              <li>
+                <p>ethnic minority groups in general were over one and a half times more likely to be arrested than White people</p>
+              </li>
+              <li>
+                <p>Black women are 2.3 times more likely to be arrested than White women</p>
+              </li>
+              <li>
+                <p>wide variations in the rates of arrest of ethnic minorities around the UK in part reflect the different ethnic makeup of different areas</p>
+              </li>
+            </ul>
+          </div>
+
+          <details id="things-you-need-to-know" data-event="data-reliability" class="normalize" style="margin-bottom: 0px;">
+            <summary>
+              <span class="summary">
+                Things you need to know about the data
+              </span>
+            </summary>
+            <div class="panel panel-border-narrow">
+              <p>When looking at arrest rates by area, it’s important to note that a person arrested in a particular area will not necessarily live in that area. Estimates of total population in a particular area are based on permanent residents of that area (not visitors), so figures that compare the total population with the number of arrests should be treated with caution. </p>
+              <p>Where the person’s ethnicity was not identified, or unknown, these cases have been classed as 'unreported' and are not counted in the figures for proportion of arrests by ethnicity.</p>
+
+              <p>After a change in their collection process, Cambridgeshire were unable to provide detailed ethnicity data for 2015/16, and Humberside could not provide detailed data for 2014/15.</p>
+              <p>Due to the small number of people living in the City of London compared to the numbers who visit, this area has been excluded from the analysis.</p>
+              <p>Some forces (Norfolk, Nottinghamshire, Suffolk and Wiltshire) were unable to provide complete data for 2015/16 due to the changes in the data collection process. </p>
+              <p>Arrests broken down by the 5 broad ethnic categories for these forces are therefore estimates, and data for the more detailed 16 ethnic categories (see Ethnicity definitions) is not available.</p>
+            </div>
+          </details>
+
+          <details class="normalize" style="margin-top: 0; margin-bottom: 0;">
+            <summary>
+              <span class="summary">
+                What this data measures
+                <!-- How this is measured -->
+              </span>
+            </summary>
+            <div class="panel panel-border-narrow">
+              <p>‘Notifiable offences’ are offences for which the police must inform the Home Office by completing a crime report form)</p>
+              <p>Data is sourced from the 43 police forces in England and Wales.</p>
+              <p>The data relates to the 'arrest rate' for the UK's different ethnic groups in different areas. It compares the number of people arrested from a particular ethnic group with the total number of people from that ethnic group living in the area.</p>
+              <p>Population by ethnicity is taken from the 2011 Census population.</p>
+            </div>
+          </details>
+
+<!--           <p style="margin-bottom: 5px; margin-top: 25px;" id="data-reliability">
+            <i style="vertical-align: middle;" class="icon icon-important"></i>
+            <span style="vertical-align: top; line-height: 38px; padding-left: 10px; font-weight: bold;">Things you need to know</span>
+          </p> -->
+
+
+
+
+
+          <details data-event="categories-chosen" class="normalize">
+        <summary>
+          <span class="summary">
+            Why these ethnic categories were chosen
+          </span>
+        </summary>
+        <div class="panel panel-border-narrow">
+          <p>
+            </p><p>While the population estimates in this data are based on the results of the 2011 census, the ethnic categories used are those listed in the 2001 census. This is because these ethnic categories are easier to compare with the categories used when recording arrests. </p>
+<p>The 16 categories listed in the 2001 census are broadly the same as those used in the 2011 census, with the following exceptions:</p>
+<ul>
+<li>the 2001 census categorised Chinese people within 'Other ethnic group'.</li>
+<li>the 2001 census did not list Gypsy and Irish Travellers or Arab people. </li>
+</ul>
+<p>The 2001 categories are therefore as follows:</p>
+<p>White:</p>
+<ul>
+<li>
+<p>English/ Welsh/ Scottish/ Northern Irish/ British</p>
+</li>
+<li>
+<p>Irish</p>
+</li>
+<li>
+<p>Any other White background</p>
+</li>
+</ul>
+<p>Mixed/Multiple ethnic groups:</p>
+<ul>
+<li>
+<p>White and Black Caribbean</p>
+</li>
+<li>
+<p>White and Black African</p>
+</li>
+<li>
+<p>White and Asian</p>
+</li>
+<li>
+<p>Any other Mixed/Multiple ethnic background</p>
+</li>
+</ul>
+<p>Asian/Asian British:</p>
+<ul>
+<li>
+<p>Indian</p>
+</li>
+<li>
+<p>Pakistani</p>
+</li>
+<li>
+<p>Bangladeshi</p>
+</li>
+<li>
+<p>Any other Asian background</p>
+</li>
+</ul>
+<p>Black/ African/ Caribbean/ Black British:</p>
+<ul>
+<li>
+<p>African</p>
+</li>
+<li>
+<p>Caribbean</p>
+</li>
+<li>
+<p>Any other Black/ African/ Caribbean background</p>
+</li>
+</ul>
+<p>Other ethnic group:</p>
+<ul>
+<li>
+<p>Chinese</p>
+</li>
+<li>
+<p>Any other ethnic group</p>
+</li>
+</ul>
+          <p></p>
+          <p><a href="/ethnic-groups-and-data-collected">Ethnic groups and how data on ethnicity is collected</a></p>
+        </div>
+      </details>
+
+        </div>
+        <div class="column-one-third">
+          <!-- <p>Test</p> -->
+        </div>
+      </div>
+
+
+      <div class="grid-row">
+        <div class="column-two-thirds">
+
+          <h2 class="heading-medium">Number of arrests by ethnicity </h2>
+
+          <div class="metadata">
+            <dl>
+
+              <dt>Location:</dt>
+              <dd>
+                England and Wales
+              </dd>
+
+
+              <dt>Time period:</dt>
+              <dd>
+                Year ending March 2015 to year ending March 2016
+              </dd>
+
+
+              <dt>Source:</dt>
+              <dd>
+                <p>Arrests open data</p>
+              </dd>
+
+            </dl>
+          </div>
+        </div>
+      </div>
+
+    <div class="grid-row"><div class="column-full" style="">
+
+
+      <div class="rd_chart" id="chart_2eda19b3f47414ea9117869c47e40acffbfdad7c" data-highcharts-chart="0" style="margin-bottom: 0;"><div id="highcharts-whq5asz-0" class="highcharts-container " style="position: relative; overflow: hidden; width: 960px; height: 500px; text-align: left; line-height: normal; z-index: 0;"><svg version="1.1" class="highcharts-root" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;" xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420"><desc>Created with Highcharts 5.0.11</desc><defs><clipPath id="highcharts-whq5asz-1"><rect x="0" y="0" width="296" height="883" fill="none"></rect></clipPath></defs><rect fill="#ffffff" class="highcharts-background" x="0" y="0" width="960" height="460" rx="0" ry="0"></rect><rect fill="none" class="highcharts-plot-background" x="67" y="47" width="883" height="296"></rect><g class="highcharts-grid highcharts-xaxis-grid "><path fill="none" class="highcharts-grid-line" d="M 67 106.5 L 950 106.5" opacity="1"></path><path fill="none" class="highcharts-grid-line" d="M 67 165.5 L 950 165.5" opacity="1"></path><path fill="none" class="highcharts-grid-line" d="M 67 225.5 L 950 225.5" opacity="1"></path><path fill="none" class="highcharts-grid-line" d="M 67 284.5 L 950 284.5" opacity="1"></path><path fill="none" class="highcharts-grid-line" d="M 67 343.5 L 950 343.5" opacity="1"></path><path fill="none" class="highcharts-grid-line" d="M 67 47.5 L 950 47.5" opacity="1"></path></g><g class="highcharts-grid highcharts-yaxis-grid "><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 66.5 47 L 66.5 343" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 154.5 47 L 154.5 343" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 243.5 47 L 243.5 343" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 331.5 47 L 331.5 343" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 419.5 47 L 419.5 343" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 508.5 47 L 508.5 343" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 596.5 47 L 596.5 343" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 684.5 47 L 684.5 343" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 772.5 47 L 772.5 343" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 861.5 47 L 861.5 343" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" opacity="1" class="highcharts-grid-line" d="M 950.5 47 L 950.5 343"></path></g><rect fill="none" class="highcharts-plot-border" x="67" y="47" width="883" height="296"></rect><g class="highcharts-axis highcharts-xaxis "><path fill="none" class="highcharts-tick" stroke="#ccd6eb" stroke-width="1" d="M 67 106.5 L 57 106.5" opacity="1"></path><path fill="none" class="highcharts-tick" stroke="#ccd6eb" stroke-width="1" d="M 67 165.5 L 57 165.5" opacity="1"></path><path fill="none" class="highcharts-tick" stroke="#ccd6eb" stroke-width="1" d="M 67 225.5 L 57 225.5" opacity="1"></path><path fill="none" class="highcharts-tick" stroke="#ccd6eb" stroke-width="1" d="M 67 284.5 L 57 284.5" opacity="1"></path><path fill="none" class="highcharts-tick" stroke="#ccd6eb" stroke-width="1" d="M 67 343.5 L 57 343.5" opacity="1"></path><path fill="none" class="highcharts-tick" stroke="#ccd6eb" stroke-width="1" d="M 67 46.5 L 57 46.5" opacity="1"></path><path fill="none" class="highcharts-axis-line" stroke="#ccd6eb" stroke-width="1" d="M 66.5 47 L 66.5 343"></path></g><g class="highcharts-axis highcharts-yaxis "><text x="508.5" text-anchor="middle" transform="translate(0,0)" class="highcharts-axis-title" style="color:#666666;fill:#666666;" y="389.828125"></text><path fill="none" class="highcharts-axis-line" d="M 67 343 L 950 343"></path></g><g class="highcharts-series-group"><g class="highcharts-series highcharts-series-0 highcharts-bar-series highcharts-color-0 highcharts-tracker " transform="translate(950,343) rotate(90) scale(-1,1) scale(1 1)" clip-path="url(#highcharts-whq5asz-1)" width="883" height="296"><rect x="265.5" y="602.5" width="24" height="281" fill="#2B8CC4" stroke="#ffffff" stroke-width="1" class="highcharts-point highcharts-color-0"></rect><rect x="206.5" y="93.5" width="24" height="790" fill="#2B8CC4" stroke="#ffffff" stroke-width="1" class="highcharts-point highcharts-color-0"></rect><rect x="147.5" y="456.5" width="24" height="427" fill="#2B8CC4" stroke="#ffffff" stroke-width="1" class="highcharts-point highcharts-color-0"></rect><rect x="88.5" y="626.5" width="23" height="257" fill="#2B8CC4" stroke="#ffffff" stroke-width="1" class="highcharts-point highcharts-color-0"></rect><rect x="29.5" y="614.5" width="23" height="269" fill="#2B8CC4" stroke="#ffffff" stroke-width="1" class="highcharts-point highcharts-color-0"></rect></g><g class="highcharts-markers highcharts-series-0 highcharts-bar-series highcharts-color-0 " transform="translate(950,343) rotate(90) scale(-1,1) scale(1 1)" clip-path="none"></g><g class="highcharts-series highcharts-series-1 highcharts-bar-series highcharts-color-1 highcharts-tracker highcharts-series-hover" transform="translate(950,343) rotate(90) scale(-1,1) scale(1 1)" clip-path="url(#highcharts-whq5asz-1)" width="883" height="296"><rect x="242.5" y="607.5" width="23" height="276" fill="#B3CBD9" stroke="#ffffff" stroke-width="1" class="highcharts-point highcharts-color-1"></rect><rect x="183.5" y="99.5" width="23" height="784" fill="#B3CBD9" stroke="#ffffff" stroke-width="1" class="highcharts-point highcharts-color-1"></rect><rect x="123.5" y="463.5" width="24" height="420" fill="#B3CBD9" stroke="#ffffff" stroke-width="1" class="highcharts-point highcharts-color-1"></rect><rect x="64.5" y="617.5" width="24" height="266" fill="#B3CBD9" stroke="#ffffff" stroke-width="1" class="highcharts-point highcharts-color-1"></rect><rect x="5.5" y="640.5" width="24" height="243" fill="#B3CBD9" stroke="#ffffff" stroke-width="1" class="highcharts-point highcharts-color-1"></rect></g><g class="highcharts-markers highcharts-series-1 highcharts-bar-series highcharts-color-1 highcharts-series-hover" transform="translate(950,343) rotate(90) scale(-1,1) scale(1 1)" clip-path="none"></g></g><text x="480" text-anchor="middle" class="highcharts-title" style="color:#333333;font-size:18px;fill:#333333;" y="24"><tspan style="font-weight:bold;">Arrests by ethnicity per 1,000 population</tspan></text><g class="highcharts-data-labels highcharts-series-0 highcharts-bar-series highcharts-color-0 highcharts-tracker " transform="translate(67,47) scale(1 1)" opacity="1" visibility="visible"><g class="highcharts-label highcharts-data-label highcharts-data-label-color-0 " transform="translate(281,4)"><text x="5" style="font-size:14px;font-weight:400;font-family:nta;color:#000,#fff;fill:#000,#fff;" y="19">15.89</text></g><g class="highcharts-label highcharts-data-label highcharts-data-label-color-0 " transform="translate(790,63)"><text x="5" style="font-size:14px;font-weight:400;font-family:nta;color:#000,#fff;fill:#000,#fff;" y="19">44.75</text></g><g class="highcharts-label highcharts-data-label highcharts-data-label-color-0 " transform="translate(427,122)"><text x="5" style="font-size:14px;font-weight:400;font-family:nta;color:#000,#fff;fill:#000,#fff;" y="19">24.17</text></g><g class="highcharts-label highcharts-data-label highcharts-data-label-color-0 " transform="translate(257,181)"><text x="5" style="font-size:14px;font-weight:400;font-family:nta;color:#000,#fff;fill:#000,#fff;" y="19">14.55</text></g><g class="highcharts-label highcharts-data-label highcharts-data-label-color-0 " transform="translate(269,240)"><text x="5" style="font-size:14px;font-weight:400;font-family:nta;color:#000,#fff;fill:#000,#fff;" y="19">15.25</text></g></g><g class="highcharts-data-labels highcharts-series-1 highcharts-bar-series highcharts-color-1 highcharts-tracker highcharts-series-hover" transform="translate(67,47) scale(1 1)" opacity="1" visibility="visible"><g class="highcharts-label highcharts-data-label highcharts-data-label-color-1 " transform="translate(276,27)"><text x="5" style="font-size:14px;font-weight:400;font-family:nta;color:#000,#fff;fill:#000,#fff;" y="19">15.62</text></g><g class="highcharts-label highcharts-data-label highcharts-data-label-color-1 " transform="translate(784,86)"><text x="5" style="font-size:14px;font-weight:400;font-family:nta;color:#000,#fff;fill:#000,#fff;" y="19">44.39</text></g><g class="highcharts-label highcharts-data-label highcharts-data-label-color-1 " transform="translate(420,146)"><text x="5" style="font-size:14px;font-weight:400;font-family:nta;color:#000,#fff;fill:#000,#fff;" y="19">23.80</text></g><g class="highcharts-label highcharts-data-label highcharts-data-label-color-1 " transform="translate(266,205)"><text x="5" style="font-size:14px;font-weight:400;font-family:nta;color:#000,#fff;fill:#000,#fff;" y="19">15.09</text></g><g class="highcharts-label highcharts-data-label highcharts-data-label-color-1 " transform="translate(243,264)"><text x="5" style="font-size:14px;font-weight:400;font-family:nta;color:#000,#fff;fill:#000,#fff;" y="19">13.75</text></g></g>
+
+
+        <g class="highcharts-legend" transform="translate(382,375)"><rect fill="none" class="highcharts-legend-box" rx="0" ry="0" x="0" y="0" width="195" height="33" visibility="visible"></rect><g><g><g class="highcharts-legend-item highcharts-bar-series highcharts-color-0 highcharts-series-0" transform="translate(8,3)"><text x="21" style="color:#333333;font-size:12px;font-weight:bold;cursor:pointer;fill:#333333;" text-anchor="start" y="15">2014/15</text><rect x="2" y="4" width="12" height="12" fill="#2B8CC4" rx="6" ry="6" class="highcharts-point"></rect></g><g class="highcharts-legend-item highcharts-bar-series highcharts-color-1 highcharts-series-1" transform="translate(107.90625,3)"><text x="21" y="15" style="color:#333333;font-size:12px;font-weight:bold;cursor:pointer;fill:#333333;" text-anchor="start">2015/16</text><rect x="2" y="4" width="12" height="12" fill="#B3CBD9" rx="6" ry="6" class="highcharts-point"></rect></g></g></g></g><g class="highcharts-axis-labels highcharts-xaxis-labels "><text x="52" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="end" transform="translate(0,0)" y="77" opacity="1"><tspan>Asian</tspan></text><text x="52" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="end" transform="translate(0,0)" y="136" opacity="1"><tspan>Black</tspan></text><text x="52" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="end" transform="translate(0,0)" y="195" opacity="1"><tspan>Mixed</tspan></text><text x="52" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="end" transform="translate(0,0)" y="254" opacity="1"><tspan>Other</tspan></text><text x="52" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="end" transform="translate(0,0)" y="313" opacity="1"><tspan>White</tspan></text></g><g class="highcharts-axis-labels highcharts-yaxis-labels "><text x="67" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>0</tspan></text><text x="155.3" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>5</tspan></text><text x="243.6" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>10</tspan></text><text x="331.9" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>15</tspan></text><text x="420.2" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>20</tspan></text><text x="508.5" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>25</tspan></text><text x="596.8" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>30</tspan></text><text x="685.1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>35</tspan></text><text x="773.4" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>40</tspan></text><text x="861.7" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>45</tspan></text><text x="942.015625" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" y="362" opacity="1"><tspan>50</tspan></text></g>
+
+
+        <g class="highcharts-label highcharts-tooltip highcharts-color-1" style="cursor:default;pointer-events:none;white-space:nowrap;" transform="translate(707,124)" opacity="0" visibility="visible"><path fill="none" class="highcharts-label-box highcharts-tooltip-box" d="M 3.5 0.5 L 135.5 0.5 C 138.5 0.5 138.5 0.5 138.5 3.5 L 138.5 18 144.5 24 138.5 30 138.5 44.5 C 138.5 47.5 138.5 47.5 135.5 47.5 L 3.5 47.5 C 0.5 47.5 0.5 47.5 0.5 44.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" isShadow="true" stroke="#000000" stroke-opacity="0.049999999999999996" stroke-width="5" transform="translate(1, 1)"></path><path fill="none" class="highcharts-label-box highcharts-tooltip-box" d="M 3.5 0.5 L 135.5 0.5 C 138.5 0.5 138.5 0.5 138.5 3.5 L 138.5 18 144.5 24 138.5 30 138.5 44.5 C 138.5 47.5 138.5 47.5 135.5 47.5 L 3.5 47.5 C 0.5 47.5 0.5 47.5 0.5 44.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" isShadow="true" stroke="#000000" stroke-opacity="0.09999999999999999" stroke-width="3" transform="translate(1, 1)"></path><path fill="none" class="highcharts-label-box highcharts-tooltip-box" d="M 3.5 0.5 L 135.5 0.5 C 138.5 0.5 138.5 0.5 138.5 3.5 L 138.5 18 144.5 24 138.5 30 138.5 44.5 C 138.5 47.5 138.5 47.5 135.5 47.5 L 3.5 47.5 C 0.5 47.5 0.5 47.5 0.5 44.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" isShadow="true" stroke="#000000" stroke-opacity="0.15" stroke-width="1" transform="translate(1, 1)"></path><path fill="rgba(247,247,247,0.85)" class="highcharts-label-box highcharts-tooltip-box" d="M 3.5 0.5 L 135.5 0.5 C 138.5 0.5 138.5 0.5 138.5 3.5 L 138.5 18 144.5 24 138.5 30 138.5 44.5 C 138.5 47.5 138.5 47.5 135.5 47.5 L 3.5 47.5 C 0.5 47.5 0.5 47.5 0.5 44.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" stroke="#B3CBD9" stroke-width="1"></path><text x="8" style="font-size:12px;color:#333333;fill:#333333;" y="20"><tspan style="font-size: 10px">Black</tspan><tspan style="fill:#B3CBD9" x="8" dy="15">●</tspan><tspan dx="0"> 2015/16: </tspan><tspan style="font-weight:bold" dx="0">44.39</tspan></text></g>
+
+<!--       <text x="960" y="410" text-anchor="end" style="font-size: 16px; text-align: right; width: 50%; display: table-cell">Source: Arrests open data</text>
+ -->
+      </svg>
+
+          <p style="margin-bottom: 5px; margin-top: -45px;" id="data-reliability">
+            <i style="vertical-align: middle;" class="icon icon-important"></i>
+            <span style="vertical-align: top; line-height: 38px; padding-left: 10px; font-weight: bold;"><a href="#things-you-need-to-know" onclick="openThings(); return true;">Things you need to know</a></span>
+          </p>
+    </div></div>
+
+
+
+          <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer"><table columns="2" class="table grouped dataTable no-footer" id="DataTables_Table_0" role="grid" style="">
+            <thead>
+
+
+              <tr role="row"><td  rowspan="1" colspan="1">
+
+                </td><td  colspan="2" class="line" rowspan="1">
+
+                2014/15</td><td  colspan="2" class="" rowspan="1">
+
+                2015/16</td></tr>
+
+              <tr role="row"><td class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Ethnicity: activate to sort column descending" width="192" ><button>Ethnicity</button></td><td class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Value: activate to sort column ascending" width="192" ><button>Per 1,000 population</button></td><td class="sorting line" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Number of arrests: activate to sort column ascending" width="192" ><button>Number of arrests</button></td><td class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Value: activate to sort column ascending" width="192" ><button>Per 1,000 population</button></td><td class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Number of arrests: activate to sort column ascending" width="192" ><button>Number of arrests</button></td></tr>
+            </thead>
+            <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr role="row" class="odd">
+
+
+                  <th  class="sorting_1">
+                    <b>All</b>
+                  </th>
+                  <td >
+                    16.88
+                  </td>
+
+
+
+                  <td  class="line">
+                     946,759
+                  </td>
+
+
+
+                  <td >
+                    15.98
+                  </td>
+
+
+
+                  <td >
+                     896,209
+                  </td>
+
+
+              </tr><tr role="row" class="even">
+
+
+                  <th  class="sorting_1">
+                    <b>Asian</b>
+                  </th>
+                  <td >
+                    15.89
+                  </td>
+
+
+
+                  <td  class="line">
+                     60,709
+                  </td>
+
+
+
+                  <td >
+                    15.62
+                  </td>
+
+
+
+                  <td >
+                     59,665
+                  </td>
+
+
+              </tr><tr role="row" class="odd">
+
+
+                  <th  class="sorting_1">
+                    <b>Black</b>
+                  </th>
+                  <td >
+                    44.75
+                  </td>
+
+
+
+                  <td  class="line">
+                     83,461
+                  </td>
+
+
+
+                  <td >
+                    44.39
+                  </td>
+
+
+
+                  <td >
+                     82,789
+                  </td>
+
+
+              </tr><tr role="row" class="even">
+
+
+                  <th  class="sorting_1">
+                    <b>Mixed</b>
+                  </th>
+                  <td >
+                    24.17
+                  </td>
+
+
+
+                  <td  class="line">
+                     29,599
+                  </td>
+
+
+
+                  <td >
+                    23.80
+                  </td>
+
+
+
+                  <td >
+                     29,146
+                  </td>
+
+
+              </tr><tr role="row" class="odd">
+
+
+                  <th  class="sorting_1">
+                    <b>Other</b>
+                  </th>
+                  <td >
+                    14.55
+                  </td>
+
+
+
+                  <td  class="line">
+                     13,926
+                  </td>
+
+
+
+                  <td >
+                    15.09
+                  </td>
+
+
+
+                  <td >
+                     14,443
+                  </td>
+
+
+              </tr><tr role="row" class="even">
+
+
+                  <th  class="sorting_1">
+                    <b>Unreported</b>
+                  </th>
+                  <td >
+                     <span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span>
+                  </td>
+
+
+
+                  <td  class="line">
+                     23,936
+                  </td>
+
+
+
+                  <td >
+                     <span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span>
+                  </td>
+
+
+
+                  <td >
+                     47,107
+                  </td>
+
+
+              </tr>
+              <tr role="row" class="odd">
+
+
+                  <th  class="sorting_1">
+                    <b>White</b>
+                  </th>
+                  <td >
+                    15.25
+                  </td>
+
+
+
+                  <td  class="line">
+                     735,128
+                  </td>
+
+
+
+                  <td >
+                    13.75
+                  </td>
+
+
+
+                  <td >
+                     663,059
+                  </td>
+
+
+              </tr></tbody>
+          </table></div>
+
+<div style="display: table; width: 100%; margin-top: 10px;">
+
+          <p style="font-size: 16px; width: 50%; display: table-cell">
+            <sup>*</sup> Not applicable
+          </p>
+
+    <!--       <p style="font-size: 16px; text-align: right; width: 50%; display: table-cell">Source: <a href="#source">Arrests open data</a></p> -->
+        </div>
+
+      </div>
+
+        </div>
+</div>
+
+    </div>
+  </div>
+
+  <div class="grid-row" style="margin-top: 40px;">
+    <div class="column-two-thirds">
+      <h3 class="heading-small">Summary</h3>
+      <p>
+        </p><p>This data shows that:</p>
+<ul>
+<li>
+<p>there were 50,550 fewer arrests in 2015/16 compared to the previous year, a fall of 5%</p>
+</li>
+<li>
+<p>rates of arrest have fallen for all groups except for those in the Chinese or Other ethnic group; however, for White people they have fallen by 10%, and for ethnic minorities they have fallen by 1%</p>
+</li>
+<li>
+<p>in 2016, 78% of those arrested were White, 10% Black or Black British and 7% Asian or Asian British</p>
+</li>
+</ul>
+      <p></p>
+    </div>
+    <div class="column-one-third" style="">
+      <h3 class="heading-small">Download data</h3>
+      <ul class="no-bullets font-size-small">
+        <li>
+          <a href="##" data-event="measure-download-graph-image" class="download-png" id="download-2eda19b3f47414ea9117869c47e40acffbfdad7c">
+            Image of graphs (PNG)
+          </a>
+        </li>
+        <li>
+
+                <a href="/topic_crime-justice-and-the-law/subtopic_police/measure/HO006/dimension/2eda19b3f47414ea9117869c47e40acffbfdad7c/download" data-event="measure-download-csv"> Source data (CSV)
+                </a>
+
+        </li>
+        <li>
+          <a href="##" data-event="measure-download-odf">
+            Source data – Open document format (ODF)
+          </a>
+        </li>
+        <li>
+          <a href="##" data-event="measure-download-xls">
+            Source data – Microsoft Excel (XLS)
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+
+        <h2 class="heading-medium">Number of arrests by ethnicity and area</h2>
+
+        <div class="metadata">
+          <dl>
+
+            <dt>Location:</dt>
+            <dd>
+              England and Wales
+            </dd>
+
+
+            <dt>Time period:</dt>
+            <dd>
+              2015/2016
+            </dd>
+
+
+            <dt>Source:</dt>
+            <dd>
+              <p>Arrests open data</p>
+            </dd>
+
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="grid-row">
+
+      <div class="column-full" style="">
+
+        <p style="font-weight: bold; text-align: center; font-size: 16px;"> Arrests by ethnicity and area per 1,000 population</p>
+
+        <div class="table-container">
+
+        <table class="arrests-by-area" id="DataTables_Table_2" role="grid">
+          <thead>
+            <tr role="row">
+              <th colspan="1" rowspan="1" class="line"></th>
+              <th class="line" colspan="2" rowspan="1">All</th>
+              <th class="line" colspan="2" rowspan="1">Asian</th>
+              <th class="line" colspan="2" rowspan="1">Black</th>
+              <th class="line" colspan="2" rowspan="1">Mixed</th>
+              <th class="line" colspan="2" rowspan="1">Other</th>
+              <th class="" colspan="2" rowspan="1">White</th>
+            </tr>
+            <tr role="row" class="subhead-row">
+              <td style="padding-left: 0;" aria-controls="DataTables_Table_2" aria-label="Area: activate to sort column descending" aria-sort="ascending" class="line sorting_asc" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable sorted">Area</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Arrests per 1,000: activate to sort column ascending" class="sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Rate</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Number of arrests: activate to sort column ascending" class="line sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Arrests</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Arrests per 1,000: activate to sort column ascending" class="sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Rate</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Number of arrests: activate to sort column ascending" class="line sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Arrests</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Arrests per 1,000: activate to sort column ascending" class="sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Rate</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Number of arrests: activate to sort column ascending" class="line sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Arrests</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Arrests per 1,000: activate to sort column ascending" class="sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Rate</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Number of arrests: activate to sort column ascending" class="line sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Arrests</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Arrests per 1,000: activate to sort column ascending" class="sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Rate</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Number of arrests: activate to sort column ascending" class="line sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Arrests</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Arrests per 1,000: activate to sort column ascending" class="sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Rate</a></td>
+              <td aria-controls="DataTables_Table_2" aria-label="Number of arrests: activate to sort column ascending" class="sorting" colspan="1" rowspan="1" tabindex="0" ><a href="#" class="sortable">Arrests</a></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="odd first-row" role="row">
+              <th class="sorting_1"><b>All</b></th>
+              <td>15.98</td>
+              <td class="line">896,209</td>
+              <td>15.62</td>
+              <td class="line">59,665</td>
+              <td>44.39</td>
+              <td class="line">82,789</td>
+              <td>23.80</td>
+              <td class="line">29,146</td>
+              <td>15.09</td>
+              <td class="line">14,443</td>
+              <td>13.75</td>
+              <td>663,059</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><span>Avon &amp; Somerset</span></th>
+              <td>15.58</td>
+              <td class="line">24,918</td>
+              <td>16.57</td>
+              <td class="line">547</td>
+              <td>56.17</td>
+              <td class="line">1,737</td>
+              <td>30.59</td>
+              <td class="line">865</td>
+              <td>9.88</td>
+              <td class="line">152</td>
+              <td>14.25</td>
+              <td>21,261</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Bedfordshire</b></th>
+              <td>15.91</td>
+              <td class="line">9,783</td>
+              <td>17.66</td>
+              <td class="line">1,439</td>
+              <td>36.13</td>
+              <td class="line">1,074</td>
+              <td>26.77</td>
+              <td class="line">494</td>
+              <td>14.97</td>
+              <td class="line">131</td>
+              <td>13.77</td>
+              <td>6,565</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Cambridgeshire</b></th>
+              <td>13.49</td>
+              <td class="line">10,854</td>
+              <td>20.39</td>
+              <td class="line">806</td>
+              <td>83.74</td>
+              <td class="line">852</td>
+              <td><span class="missing"></span></td>
+              <td class="line"><span class="missing"></span></td>
+              <td>38.58</td>
+              <td class="line">485</td>
+              <td>11.87</td>
+              <td>8,622</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Cheshire</b></th>
+              <td>13.64</td>
+              <td class="line">14,021</td>
+              <td>15.09</td>
+              <td class="line">193</td>
+              <td>69.24</td>
+              <td class="line">226</td>
+              <td>11.99</td>
+              <td class="line">125</td>
+              <td>15.87</td>
+              <td class="line">83</td>
+              <td>13.31</td>
+              <td>13,258</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Cleveland</b></th>
+              <td>25.69</td>
+              <td class="line">14,316</td>
+              <td>22.04</td>
+              <td class="line">384</td>
+              <td>70.03</td>
+              <td class="line">221</td>
+              <td>15.62</td>
+              <td class="line">90</td>
+              <td>28.42</td>
+              <td class="line">126</td>
+              <td>25.61</td>
+              <td>13,484</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Cumbria</b></th>
+              <td>13.82</td>
+              <td class="line">6,907</td>
+              <td>20.25</td>
+              <td class="line">59</td>
+              <td>79.45</td>
+              <td class="line">46</td>
+              <td>11.18</td>
+              <td class="line">28</td>
+              <td>16.82</td>
+              <td class="line">27</td>
+              <td>13.62</td>
+              <td>6,704</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Derbyshire</b></th>
+              <td>15.05</td>
+              <td class="line">15,323</td>
+              <td>17.68</td>
+              <td class="line">652</td>
+              <td>28.74</td>
+              <td class="line">290</td>
+              <td>13.10</td>
+              <td class="line">188</td>
+              <td>32.69</td>
+              <td class="line">238</td>
+              <td>14.67</td>
+              <td>13,936</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Devon &amp; Cornwall</b></th>
+              <td>9.27</td>
+              <td class="line">15,459</td>
+              <td>14.79</td>
+              <td class="line">173</td>
+              <td>75.74</td>
+              <td class="line">311</td>
+              <td>13.61</td>
+              <td class="line">213</td>
+              <td>11.30</td>
+              <td class="line">107</td>
+              <td>8.95</td>
+              <td>14,559</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Dorset</b></th>
+              <td>14.87</td>
+              <td class="line">11,067</td>
+              <td>15.80</td>
+              <td class="line">169</td>
+              <td>127.81</td>
+              <td class="line">410</td>
+              <td>19.04</td>
+              <td class="line">181</td>
+              <td>18.85</td>
+              <td class="line">113</td>
+              <td>13.55</td>
+              <td>9,685</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Durham</b></th>
+              <td>18.17</td>
+              <td class="line">11,245</td>
+              <td>32.66</td>
+              <td class="line">167</td>
+              <td>46.31</td>
+              <td class="line">49</td>
+              <td>19.10</td>
+              <td class="line">81</td>
+              <td>26.40</td>
+              <td class="line">80</td>
+              <td>17.87</td>
+              <td>10,818</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Dyfed-Powys</b></th>
+              <td>10.80</td>
+              <td class="line">5,561</td>
+              <td>10.76</td>
+              <td class="line">46</td>
+              <td>70.09</td>
+              <td class="line">60</td>
+              <td>9.20</td>
+              <td class="line">30</td>
+              <td>7.47</td>
+              <td class="line">15</td>
+              <td>10.64</td>
+              <td>5,370</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Essex</b></th>
+              <td>14.11</td>
+              <td class="line">24,342</td>
+              <td>7.60</td>
+              <td class="line">296</td>
+              <td>18.66</td>
+              <td class="line">647</td>
+              <td>8.47</td>
+              <td class="line">234</td>
+              <td>5.98</td>
+              <td class="line">92</td>
+              <td>4.92</td>
+              <td>7,912</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Gloucestershire</b></th>
+              <td>8.94</td>
+              <td class="line">5,339</td>
+              <td>12.74</td>
+              <td class="line">134</td>
+              <td>56.89</td>
+              <td class="line">293</td>
+              <td>15.47</td>
+              <td class="line">134</td>
+              <td>29.29</td>
+              <td class="line">88</td>
+              <td>7.95</td>
+              <td>4,527</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Greater Manchester</b></th>
+              <td>14.57</td>
+              <td class="line">39,075</td>
+              <td>13.97</td>
+              <td class="line">3,437</td>
+              <td>31.11</td>
+              <td class="line">2,305</td>
+              <td>21.48</td>
+              <td class="line">1,304</td>
+              <td>10.67</td>
+              <td class="line">571</td>
+              <td>13.46</td>
+              <td>30,260</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Gwent</b></th>
+              <td>14.24</td>
+              <td class="line">8,214</td>
+              <td>19.95</td>
+              <td class="line">201</td>
+              <td>45.53</td>
+              <td class="line">145</td>
+              <td>22.53</td>
+              <td class="line">125</td>
+              <td>21.01</td>
+              <td class="line">75</td>
+              <td>13.61</td>
+              <td>7,547</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Hampshire</b></th>
+              <td>12.24</td>
+              <td class="line">23,227</td>
+              <td>9.56</td>
+              <td class="line">548</td>
+              <td>63.51</td>
+              <td class="line">1,108</td>
+              <td>17.89</td>
+              <td class="line">553</td>
+              <td>9.23</td>
+              <td class="line">193</td>
+              <td>11.18</td>
+              <td>19,796</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Hertfordshire</b></th>
+              <td>17.58</td>
+              <td class="line">19,622</td>
+              <td>15.46</td>
+              <td class="line">991</td>
+              <td>49.49</td>
+              <td class="line">1,554</td>
+              <td>31.20</td>
+              <td class="line">858</td>
+              <td>14.53</td>
+              <td class="line">226</td>
+              <td>15.16</td>
+              <td>14,821</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Humberside</b></th>
+              <td>11.44</td>
+              <td class="line">10,502</td>
+              <td>10.91</td>
+              <td class="line">133</td>
+              <td>31.56</td>
+              <td class="line">142</td>
+              <td>14.17</td>
+              <td class="line">116</td>
+              <td>4.80</td>
+              <td class="line">36</td>
+              <td>11.34</td>
+              <td>10,041</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Kent</b></th>
+              <td>13.14</td>
+              <td class="line">22,695</td>
+              <td>12.83</td>
+              <td class="line">695</td>
+              <td>63.38</td>
+              <td class="line">1,450</td>
+              <td>17.63</td>
+              <td class="line">481</td>
+              <td>41.00</td>
+              <td class="line">641</td>
+              <td>11.18</td>
+              <td>17,975</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Lancashire</b></th>
+              <td>15.54</td>
+              <td class="line">22,699</td>
+              <td>11.48</td>
+              <td class="line">1,249</td>
+              <td>42.03</td>
+              <td class="line">226</td>
+              <td>18.40</td>
+              <td class="line">300</td>
+              <td>4.23</td>
+              <td class="line">44</td>
+              <td>15.43</td>
+              <td>20,374</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Leicestershire</b></th>
+              <td>9.68</td>
+              <td class="line">9,853</td>
+              <td>7.61</td>
+              <td class="line">1,185</td>
+              <td>34.89</td>
+              <td class="line">859</td>
+              <td>14.72</td>
+              <td class="line">302</td>
+              <td>4.45</td>
+              <td class="line">85</td>
+              <td>9.09</td>
+              <td>7,254</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Lincolnshire</b></th>
+              <td>12.85</td>
+              <td class="line">9,173</td>
+              <td>17.03</td>
+              <td class="line">95</td>
+              <td>48.03</td>
+              <td class="line">123</td>
+              <td>12.12</td>
+              <td class="line">75</td>
+              <td>27.83</td>
+              <td class="line">79</td>
+              <td>11.99</td>
+              <td>8,350</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>London, City of</b></th>
+              <td><span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span></td>
+              <td class="line">1,775</td>
+              <td><span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span></td>
+              <td class="line">224</td>
+              <td><span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span></td>
+              <td class="line">327</td>
+              <td><span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span></td>
+              <td class="line">94</td>
+              <td><span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span></td>
+              <td class="line">41</td>
+              <td><span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span></td>
+              <td>931</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Merseyside</b></th>
+              <td>20.52</td>
+              <td class="line">28,339</td>
+              <td>17.56</td>
+              <td class="line">331</td>
+              <td>52.84</td>
+              <td class="line">769</td>
+              <td>24.00</td>
+              <td class="line">503</td>
+              <td>15.61</td>
+              <td class="line">336</td>
+              <td>19.89</td>
+              <td>25,966</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Metropolitan Police</b></th>
+              <td>23.29</td>
+              <td class="line">190,195</td>
+              <td>18.13</td>
+              <td class="line">25,141</td>
+              <td>45.89</td>
+              <td class="line">49,948</td>
+              <td>28.58</td>
+              <td class="line">11,575</td>
+              <td>17.64</td>
+              <td class="line">7,143</td>
+              <td>18.54</td>
+              <td>90,494</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Norfolk</b></th>
+              <td>16.64</td>
+              <td class="line">14,272</td>
+              <td>11.93</td>
+              <td class="line">117</td>
+              <td>72.90</td>
+              <td class="line">336</td>
+              <td>18.65</td>
+              <td class="line">187</td>
+              <td>10.51</td>
+              <td class="line">57</td>
+              <td>11.37</td>
+              <td>9,415</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>North Wales</b></th>
+              <td>21.87</td>
+              <td class="line">15,045</td>
+              <td>11.68</td>
+              <td class="line">74</td>
+              <td>91.52</td>
+              <td class="line">137</td>
+              <td><span class="suppressed"></span></td>
+              <td class="line">45</td>
+              <td>14.16</td>
+              <td class="line">63</td>
+              <td>21.79</td>
+              <td>14,616</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>North Yorkshire</b></th>
+              <td>14.66</td>
+              <td class="line">11,677</td>
+              <td>11.30</td>
+              <td class="line">112</td>
+              <td>26.81</td>
+              <td class="line">97</td>
+              <td>11.13</td>
+              <td class="line">83</td>
+              <td>8.66</td>
+              <td class="line">54</td>
+              <td>12.55</td>
+              <td>9,652</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Northamptonshire</b></th>
+              <td>14.46</td>
+              <td class="line">10,004</td>
+              <td>12.84</td>
+              <td class="line">290</td>
+              <td>46.50</td>
+              <td class="line">787</td>
+              <td>21.86</td>
+              <td class="line">310</td>
+              <td>10.10</td>
+              <td class="line">55</td>
+              <td>13.43</td>
+              <td>8,496</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Northumbria</b></th>
+              <td>19.20</td>
+              <td class="line">27,276</td>
+              <td>17.95</td>
+              <td class="line">678</td>
+              <td>46.52</td>
+              <td class="line">419</td>
+              <td>14.38</td>
+              <td class="line">179</td>
+              <td>4.36</td>
+              <td class="line">78</td>
+              <td>19.13</td>
+              <td>25,700</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Nottinghamshire</b></th>
+              <td>21.92</td>
+              <td class="line">23,927</td>
+              <td>23.50</td>
+              <td class="line">1,134</td>
+              <td>59.70</td>
+              <td class="line">1,629</td>
+              <td>37.41</td>
+              <td class="line">1,159</td>
+              <td>16.29</td>
+              <td class="line">252</td>
+              <td>20.08</td>
+              <td>19,471</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>South Wales</b></th>
+              <td>20.80</td>
+              <td class="line">26,701</td>
+              <td>14.94</td>
+              <td class="line">535</td>
+              <td>55.35</td>
+              <td class="line">705</td>
+              <td>23.81</td>
+              <td class="line">423</td>
+              <td>11.17</td>
+              <td class="line">211</td>
+              <td>19.67</td>
+              <td>23,575</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>South Yorkshire</b></th>
+              <td>12.19</td>
+              <td class="line">16,372</td>
+              <td>14.36</td>
+              <td class="line">785</td>
+              <td>32.62</td>
+              <td class="line">840</td>
+              <td>11.50</td>
+              <td class="line">239</td>
+              <td>9.54</td>
+              <td class="line">236</td>
+              <td>11.65</td>
+              <td>14,187</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Staffordshire</b></th>
+              <td>13.75</td>
+              <td class="line">15,090</td>
+              <td>24.27</td>
+              <td class="line">853</td>
+              <td>50.99</td>
+              <td class="line">436</td>
+              <td>27.95</td>
+              <td class="line">394</td>
+              <td>18.44</td>
+              <td class="line">136</td>
+              <td>12.77</td>
+              <td>13,187</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Suffolk</b></th>
+              <td>13.52</td>
+              <td class="line">9,845</td>
+              <td>10.21</td>
+              <td class="line">112</td>
+              <td>53.40</td>
+              <td class="line">366</td>
+              <td>19.32</td>
+              <td class="line">241</td>
+              <td>10.92</td>
+              <td class="line">51</td>
+              <td>9.29</td>
+              <td>6,441</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Surrey</b></th>
+              <td>9.92</td>
+              <td class="line">11,233</td>
+              <td>11.79</td>
+              <td class="line">637</td>
+              <td>53.10</td>
+              <td class="line">660</td>
+              <td>14.94</td>
+              <td class="line">352</td>
+              <td>8.08</td>
+              <td class="line">151</td>
+              <td>8.90</td>
+              <td>9,111</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Sussex</b></th>
+              <td>12.93</td>
+              <td class="line">20,785</td>
+              <td>12.21</td>
+              <td class="line">499</td>
+              <td>82.34</td>
+              <td class="line">1,173</td>
+              <td>19.94</td>
+              <td class="line">599</td>
+              <td>14.80</td>
+              <td class="line">242</td>
+              <td>11.05</td>
+              <td>16,641</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>Thames Valley</b></th>
+              <td>16.66</td>
+              <td class="line">37,809</td>
+              <td>18.28</td>
+              <td class="line">3,519</td>
+              <td>45.50</td>
+              <td class="line">3,140</td>
+              <td>34.47</td>
+              <td class="line">1,930</td>
+              <td>12.06</td>
+              <td class="line">393</td>
+              <td>13.88</td>
+              <td>26,642</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Warwickshire</b></th>
+              <td>9.80</td>
+              <td class="line">5,345</td>
+              <td>10.51</td>
+              <td class="line">239</td>
+              <td>52.44</td>
+              <td class="line">233</td>
+              <td>20.63</td>
+              <td class="line">164</td>
+              <td>14.42</td>
+              <td class="line">67</td>
+              <td>9.06</td>
+              <td>4,583</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>West Mercia</b></th>
+              <td>10.58</td>
+              <td class="line">12,935</td>
+              <td>21.97</td>
+              <td class="line">477</td>
+              <td>81.39</td>
+              <td class="line">412</td>
+              <td>19.46</td>
+              <td class="line">262</td>
+              <td>12.37</td>
+              <td class="line">70</td>
+              <td>9.91</td>
+              <td>11,664</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>West Midlands</b></th>
+              <td>13.58</td>
+              <td class="line">37,170</td>
+              <td>10.32</td>
+              <td class="line">5,094</td>
+              <td>26.40</td>
+              <td class="line">4,332</td>
+              <td>22.27</td>
+              <td class="line">2,142</td>
+              <td>11.37</td>
+              <td class="line">722</td>
+              <td>12.54</td>
+              <td>24,075</td>
+            </tr>
+            <tr class="odd" role="row">
+              <th class="sorting_1"><b>West Yorkshire</b></th>
+              <td>17.62</td>
+              <td class="line">39,223</td>
+              <td>17.90</td>
+              <td class="line">5,026</td>
+              <td>33.20</td>
+              <td class="line">1,543</td>
+              <td>26.56</td>
+              <td class="line">1,278</td>
+              <td>11.63</td>
+              <td class="line">359</td>
+              <td>15.99</td>
+              <td>29,103</td>
+            </tr>
+            <tr class="even" role="row">
+              <th class="sorting_1"><b>Wiltshire</b></th>
+              <td>10.29</td>
+              <td class="line">6,996</td>
+              <td>10.88</td>
+              <td class="line">189</td>
+              <td>61.09</td>
+              <td class="line">372</td>
+              <td>21.44</td>
+              <td class="line">210</td>
+              <td><span class="sample-too-small"></span></td>
+              <td class="line">39</td>
+              <td>9.32</td>
+              <td>5,990</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+        <div style="display: table; width: 100%; margin-bottom: 40px; margin-top: 10px;">
+
+          <p style="font-size: 16px; width: 50%; display: table-cell">
+<!--             <span class="na" style="margin-right: 5px;"></span> <a href="#data-reliability" style="color: #6F777B;">suppressed for privacy</a>
+ -->
+
+            <span  style="color: #6F777B;"><sup>*</sup> Not applicable</span>
+            <span class="missing" style="margin-right: 5px; margin-left: 20px;"></span>
+
+             <span style="color: #6F777B;">Data not collected</span>
+
+            <span class="na" style="margin-left: 20px; margin-right: 5px;"></span>
+
+            <span style="color: #6F777B;">Data withheld to protect confidentiality</a>
+
+
+
+             <br>
+             <span class="sample-too-small" style="margin-left: 0px; margin-right: 5px;"></span>
+             <span style="color: #6F777B;">Data withheld because a small sample size makes it unreliable</span>
+</p>
+
+            <!-- <span class="sample-too-small" style="margin-left: 20px; margin-right: 5px;"></span>
+
+             <a href="#data-reliability" style="color: #6F777B;">Data withheld because a small sample size makes it unreliable</a></p> -->
+
+ <!--          <p style="font-size: 16px; text-align: right; width: 50%; display: table-cell">Source: Arrests open data and Population estimates</p> -->
+        </div>
+
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+        <h3 class="heading-small">Summary</h3>
+        <p>This data shows that:</p>
+        <ul>
+          <li>
+          <p>in North Wales, 2% of people arrested were from an ethnic minority background (the lowest rate)</p>
+          </li>
+          <li>
+          <p>in London, 51% of people arrested were from an ethnic minority background (the highest rate)</p>
+          </li>
+          <li>
+          <p>differences in the rate of ethnic minority arrests around the UK are likely, in part, to reflect the different ethnic makeup of those areas (with many more people from an ethnic minority living in London than in Wales, for example)</p>
+          </li>
+        </ul>
+
+      </div>
+      <div class="column-one-third" style="">
+        <h3 class="heading-small">Download data</h3>
+        <ul class="no-bullets font-size-small">
+          <li>
+            <a href="##" data-event="measure-download-graph-image" class="download-png" id="download-e7431dbf640cadb7374803f612fc90ddd494ab39">
+              Image of graphs (PNG)
+            </a>
+          </li>
+          <li>
+
+                  <a href="/topic_crime-justice-and-the-law/subtopic_police/measure/HO006/dimension/e7431dbf640cadb7374803f612fc90ddd494ab39/download" data-event="measure-download-csv"> Source data (CSV)
+                  </a>
+
+          </li>
+          <li>
+            <a href="##" data-event="measure-download-odf">
+              Source data – Open document format (ODF)
+            </a>
+          </li>
+          <li>
+            <a href="##" data-event="measure-download-xls">
+              Source data – Microsoft Excel (XLS)
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+
+        <h2 class="heading-medium">Number of arrests by ethnicity and gender per 1,000&nbsp;population</h2>
+
+        <div class="metadata">
+          <dl>
+
+            <dt>Location:</dt>
+            <dd>
+              England and Wales
+            </dd>
+
+
+            <dt>Time period:</dt>
+            <dd>
+              2015/2016
+            </dd>
+
+
+            <dt>Source:</dt>
+            <dd>
+              <p><a href="#source">Arrests open data</a></p>
+            </dd>
+
+          </dl>
+        </div>
+      </div>
+      <div class="column-one-third">
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="column-one-half" data-highcharts-chart="1">
+
+        <div class="highcharts-container " style="position: relative; overflow: hidden; width: 460px; height: 285px; text-align: left; line-height: normal; z-index: 0;">
+<svg class="highcharts-root" height="285" version="1.1" viewbox="0 0 460 285" width="460" xmlns="http://www.w3.org/2000/svg">
+
+  <g class="highcharts-grid highcharts-yaxis-grid">
+  <path class="highcharts-grid-line" d="M 65.5 47 L 65.5 247" fill="none" opacity="1" stroke="#e6e6e6" stroke-width="1"></path>
+  <path class="highcharts-grid-line" d="M 155.5 47 L 155.5 247" fill="none" opacity="1" stroke="#e6e6e6" stroke-width="1"></path>
+  <path class="highcharts-grid-line" d="M 245.5 47 L 245.5 247" fill="none" opacity="1" stroke="#e6e6e6" stroke-width="1"></path>
+  <path class="highcharts-grid-line" d="M 335.5 47 L 335.5 247" fill="none" opacity="1" stroke="#e6e6e6" stroke-width="1"></path>
+  <path class="highcharts-grid-line" d="M 425.5 47 L 425.5 247" fill="none" opacity="1" stroke="#e6e6e6" stroke-width="1"></path>
+</g>
+<g class="highcharts-axis-labels highcharts-yaxis-labels">
+  <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" x="65.5" y="266">
+    0
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" x="155.5" y="264">
+    25
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" x="245.5" y="264">
+    50
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" x="335.5" y="264">
+    75
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" x="425.5" y="264">
+    100
+  </text>
+</g>
+
+<g class="highcharts-series-group">
+
+  <rect class="highcharts-point highcharts-color-0" fill="#2B8CC4" height="28" stroke-width="0" width="40" x="65.5" y="50"></rect>
+
+  <rect class="highcharts-point highcharts-color-0" fill="#2B8CC4" height="28" stroke-width="0" width="30" x="65.5" y="90"></rect>
+
+ <rect class="highcharts-point highcharts-color-0" fill="#2B8CC4" height="28" stroke-width="0" width="8" x="65.5" y="130"></rect>
+
+ <rect class="highcharts-point highcharts-color-0" fill="#2B8CC4" height="28" stroke-width="0" width="3" x="65.5" y="210"></rect>
+
+ <rect class="highcharts-point highcharts-color-0" fill="#2B8CC4" height="28" stroke-width="0" width="4" x="65.5" y="170"></rect>
+</g>
+
+<text style="color:#333333;font-size:18px;fill:#333333;font-weight: bold;" text-anchor="middle" x="250" y="24">
+  Female
+</text>
+
+<g class="highcharts-data-labels highcharts-series-0 highcharts-bar-series highcharts-color-0 highcharts-tracker" opacity="1"  style="font-size: 16px;" visibility="visible">
+  <text x="115" y="68">
+    10.37
+  </text>
+  <text x="100" y="108">
+    7.66
+  </text>
+   <text x="80" y="148">
+      2.55
+    </text>
+    <text x="76" y="188">
+      4.51
+    </text>
+    <text x="75" y="228">
+      4.30
+    </text>
+
+  </g>
+</g>
+<g class="highcharts-axis-labels highcharts-xaxis-labels">
+  <text opacity="1" style="color:#666666;cursor:default;font-size:16px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="52" y="67">
+    <tspan>
+      Black
+    </tspan>
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:16px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="52" y="107">
+    <tspan>
+      Mixed
+    </tspan>
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:16px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="52" y="147">
+    <tspan>
+      Asian
+    </tspan>
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:16px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="52" y="227">
+    <tspan>
+      Other
+    </tspan>
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:16px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="52" y="187">
+    <tspan>
+      White
+    </tspan>
+  </text>
+</g>
+</svg>
+
+
+
+          </div>
+      </div>
+
+      <div class="column-one-half" data-highcharts-chart="2">
+
+        <div class="highcharts-container " style="position: relative; overflow: hidden; width: 460px; height: 285px; text-align: left; line-height: normal; z-index: 0;">
+
+<svg class="highcharts-root" height="285" version="1.1" viewbox="0 0 460 285" width="460" xmlns="http://www.w3.org/2000/svg">
+
+  <g class="highcharts-grid highcharts-yaxis-grid">
+  <path class="highcharts-grid-line" d="M 65.5 47 L 65.5 247" fill="none" opacity="1" stroke="#e6e6e6" stroke-width="1"></path>
+  <path class="highcharts-grid-line" d="M 155.5 47 L 155.5 247" fill="none" opacity="1" stroke="#e6e6e6" stroke-width="1"></path>
+  <path class="highcharts-grid-line" d="M 245.5 47 L 245.5 247" fill="none" opacity="1" stroke="#e6e6e6" stroke-width="1"></path>
+  <path class="highcharts-grid-line" d="M 335.5 47 L 335.5 247" fill="none" opacity="1" stroke="#e6e6e6" stroke-width="1"></path>
+  <path class="highcharts-grid-line" d="M 425.5 47 L 425.5 247" fill="none" opacity="1" stroke="#e6e6e6" stroke-width="1"></path>
+</g>
+<g class="highcharts-axis-labels highcharts-yaxis-labels">
+  <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" x="65.5" y="266">
+    0
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" x="155.5" y="264">
+    25
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" x="245.5" y="264">
+    50
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" x="335.5" y="264">
+    75
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="middle" transform="translate(0,0)" x="425.5" y="264">
+    100
+  </text>
+</g>
+
+<g class="highcharts-series-group">
+
+  <rect class="highcharts-point highcharts-color-0" fill="#2B8CC4" height="28" stroke-width="0" width="298" x="65.5" y="50"></rect>
+
+  <rect class="highcharts-point highcharts-color-0" fill="#2B8CC4" height="28" stroke-width="0" width="150" x="65.5" y="90"></rect>
+
+ <rect class="highcharts-point highcharts-color-0" fill="#2B8CC4" height="28" stroke-width="0" width="114" x="65.5" y="130"></rect>
+
+ <rect class="highcharts-point highcharts-color-0" fill="#2B8CC4" height="28" stroke-width="0" width="90.5" x="65.5" y="210"></rect>
+
+ <rect class="highcharts-point highcharts-color-0" fill="#2B8CC4" height="28" stroke-width="0" width="78" x="65.5" y="170"></rect>
+</g>
+
+<text style="color:#333333;font-size:18px;fill:#333333;font-weight: bold;" text-anchor="middle" x="250" y="24">
+  Male
+</text>
+
+<g class="highcharts-data-labels highcharts-series-0 highcharts-bar-series highcharts-color-0 highcharts-tracker" opacity="1"  style="font-size: 16px;" visibility="visible">
+  <text x="370" y="68">
+    81.01
+  </text>
+  <text x="220" y="108">
+    39.98
+  </text>
+   <text x="185" y="148">
+      28.36
+    </text>
+    <text x="160" y="228">
+      25.02
+    </text>
+    <text x="148" y="188">
+      23.37
+    </text>
+  </g>
+</g>
+<g class="highcharts-axis-labels highcharts-xaxis-labels">
+  <text opacity="1" style="color:#666666;cursor:default;font-size:16px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="52" y="67">
+    <tspan>
+      Black
+    </tspan>
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:16px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="52" y="107">
+    <tspan>
+      Mixed
+    </tspan>
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:16px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="52" y="147">
+    <tspan>
+      Asian
+    </tspan>
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:16px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="52" y="228">
+    <tspan>
+      Other
+    </tspan>
+  </text>
+  <text opacity="1" style="color:#666666;cursor:default;font-size:16px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="52" y="187">
+    <tspan>
+      White
+    </tspan>
+  </text>
+</g>
+</svg>
+          </div>
+      </div>
+    </div>
+
+    <div class="grid-row" style="margin-top: 40px;"><div class="column-full">
+
+          <div id="DataTables_Table_4_wrapper" class="dataTables_wrapper no-footer"><table columns="2" class="table grouped dataTable no-footer" id="DataTables_Table_4" role="grid" style="">
+            <thead>
+
+
+              <tr role="row"><td style="width:14.285714285714286%" rowspan="1" colspan="1">
+
+                </td><td style="width:28.571428571428573%" colspan="2" class="line" rowspan="1">
+
+                All</td><td style="width:28.571428571428573%" colspan="2" class="line" rowspan="1">
+
+                Female</td><td style="width:28.571428571428573%" colspan="2" class="" rowspan="1">
+
+                Male</td></tr>
+
+              <tr role="row"><td class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Ethnicity: activate to sort column descending" width="137.14285714285714" style="width:14.285714285714286%"><button>Ethnicity</button></td><td class="sorting" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-label="Rate per 1,000: activate to sort column ascending" width="137.14285714285714" style="width:14.285714285714286%"><button>Rate</button></td><td class="sorting line" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-label="Number of arrests: activate to sort column ascending" width="137.14285714285714" style="width:14.285714285714286%"><button>Arrests</button></td><td class="sorting" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-label="Rate per 1,000: activate to sort column ascending" width="137.14285714285714" style="width:14.285714285714286%"><button>Rate</button></td><td class="sorting line" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-label="Number of arrests: activate to sort column ascending" width="137.14285714285714" style="width:14.285714285714286%"><button>Arrests</button></td><td class="sorting" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-label="Rate per 1,000: activate to sort column ascending" width="137.14285714285714" style="width:14.285714285714286%"><button>Rate</button></td><td class="sorting" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-label="Number of arrests: activate to sort column ascending" width="137.14285714285714" style="width:14.285714285714286%"><button>Arrests</button></td></tr>
+            </thead>
+            <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr role="row" class="odd">
+
+
+                  <th style="width:14.285714285714286%" class="sorting_1">
+                    <b>All</b>
+                  </th>
+                  <td style="width:14.285714285714286%">
+                    15.98
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     896,209
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    4.91
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     139,915
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    27.43
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                     756,294
+                  </td>
+
+
+              </tr><tr role="row" class="even">
+
+
+                  <th style="width:14.285714285714286%" class="sorting_1">
+                    <b>Asian</b>
+                  </th>
+                  <td style="width:14.285714285714286%">
+                    15.62
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     59,665
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    2.55
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     4,810
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    28.36
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                     54,855
+                  </td>
+
+
+              </tr><tr role="row" class="odd">
+
+
+                  <th style="width:14.285714285714286%" class="sorting_1">
+                    <b>Black</b>
+                  </th>
+                  <td style="width:14.285714285714286%">
+                    44.39
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     82,789
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    10.37
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     10,028
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    81.01
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                     72,761
+                  </td>
+
+
+              </tr><tr role="row" class="even">
+
+
+                  <th style="width:14.285714285714286%" class="sorting_1">
+                    <b>Mixed</b>
+                  </th>
+                  <td style="width:14.285714285714286%">
+                    23.80
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     29,146
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    7.66
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     4,695
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    39.98
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                     24,451
+                  </td>
+
+
+              </tr><tr role="row" class="odd">
+
+
+                  <th style="width:14.285714285714286%" class="sorting_1">
+                    <b>Other</b>
+                  </th>
+                  <td style="width:14.285714285714286%">
+                    15.09
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     14,443
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    4.30
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     1,970
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    25.02
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                     12,473
+                  </td>
+
+
+              </tr><tr role="row" class="even">
+
+
+                  <th style="width:14.285714285714286%" class="sorting_1">
+                    <b>Unreported</b>
+                  </th>
+                  <td style="width:14.285714285714286%">
+                     <span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span>
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     47,107
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                     <span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span>
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     7,571
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                     <span class="not-applicable">N/A<span style="display: inline-block; margin-top: -5px; vertical-align: super;">*</span></span>
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                     39,536
+                  </td>
+
+
+              </tr><tr role="row" class="odd">
+
+
+                  <th style="width:14.285714285714286%" class="sorting_1">
+                    <b>White</b>
+                  </th>
+                  <td style="width:14.285714285714286%">
+                    13.75
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     663,059
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    4.51
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%" class="line">
+                     110,841
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                    23.37
+                  </td>
+
+
+
+                  <td style="width:14.285714285714286%">
+                     552,218
+                  </td>
+
+
+              </tr></tbody>
+          </table>
+
+
+          <div style="display: table; width: 100%; margin-top: 10px; margin-bottom: 0px;">
+
+
+
+          <p style="font-size: 16px; width: 50%; display: table-cell">
+
+            <span style="color: #6F777B;"><sup>*</sup> Not applicable</span>
+
+          </p>
+        </div>
+
+        </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="grid-row" style="margin-top: 40px;">
+      <div class="column-two-thirds">
+      <h3 class="heading-small">Summary</h3>
+      <p>
+        </p><p>This data shows that:</p>
+<ul>
+<li>
+<p>in 2016, 15% of all women arrested in England and Wales were from an ethnic minority, compared with 23% of all men arrested, a figure consistent with recent years</p>
+</li>
+<li>
+<p>of the total number of people from ethnic minority groups arrested in 2016, 12% were women</p>
+</li>
+<li>
+<p>of the total number of White people arrested in 2016, 17% were women</p>
+</li>
+<li>
+<p>Black men are almost three and a half times more likely to be arrested than White men</p>
+</li>
+<li>
+<p>Black women are 2.3 times more likely to be arrested than White women</p>
+</li>
+</ul>
+      <p></p>
+    </div>
+    <div class="column-one-third" style="">
+      <h3 class="heading-small">Download data</h3>
+      <ul class="no-bullets font-size-small">
+        <li>
+          <a href="##" data-event="measure-download-graph-image" class="download-png" id="download-35994f1919e83ac58783d4663954d1a5b1c148b7">
+            Image of graphs (PNG)
+          </a>
+        </li>
+        <li>
+
+                <a href="/topic_crime-justice-and-the-law/subtopic_police/measure/HO006/dimension/35994f1919e83ac58783d4663954d1a5b1c148b7/download" data-event="measure-download-csv"> Source data (CSV)
+                </a>
+
+        </li>
+        <li>
+          <a href="##" data-event="measure-download-odf">
+            Source data – Open document format (ODF)
+          </a>
+        </li>
+        <li>
+          <a href="##" data-event="measure-download-xls">
+            Source data – Microsoft Excel (XLS)
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+<div class="grid-row">
+    <div class="accordions-container container">
+      <div class="accordion">
+        <div class="column-two-thirds">
+
+          <div data-event="methodology" class="accordion__header">
+            <h2>
+              <button>
+                Methodology and data type
+              </button>
+            </h2>
+            <span class="plus-minus-icon"></span>
+          </div>
+
+          <div class="accordion__body" style="display: none;">
+
+            <div class="metadata" style="margin-top: 20px;padding-bottom: 0;">
+                <dl>
+                  <dt>Data type</dt>
+                  <dd>Administrative</dd>
+                  <dt>Statistic type</dt>
+                  <dd><a href="#">National statistic</a></dd>
+                </dl>
+              </div>
+
+            <p>
+              </p><p>Data presented here relates to the police power of arrest. In line with police recorded crime statistics, this data covers arrests for all notifiable offences carried out by police in England and Wales. (A notifiable offence is a crime which the police must inform the Home Office about by completing a crime report form.) </p>
+<p>A person arrested for a notifiable offence is counted for each occasion on which they are arrested, provided that the offence is not connected or related to an offence for which the person has already been subject to arrest during the year. If it is connected, or if a person has been arrested for one or more notifiable offences on the same occasion, the offence with the highest maximum penalty is recorded.</p>
+            <p></p>
+
+            <h3 class="heading-small">
+              Purpose Of Data Source
+            </h3>
+            <p>
+              </p><p>This data is an Annual Data Requirement (ADR). This means it is mandatory for police forces in England and Wales to provide the Home Office with the number of arrests carried out each financial year by ethnicity. </p>
+<p>Data on arrests is collected by statisticians in Crime and Policing Analysis. </p>
+            <p></p>
+
+
+            <h3 class="heading-small">
+              Data type
+            </h3>
+            <p>
+              Administrative data
+            </p>
+
+
+
+            <h3 class="heading-small">
+              Type of statistic
+            </h3>
+            <p>
+              National statistic
+            </p>
+
+
+
+
+
+            <h3 class="heading-small">
+              Disclosure control
+            </h3>
+            <p>
+              </p><p>Ethnicity of individuals arrested are collected on 16+1 self-defined ethnicity codes. A small proportion of individuals did not state their ethnicity these are recorded as 'unreported' in the data. For each financial year the proportion (%) of total arrests in the year that recorded with an ethnicity was ‘not stated’ are:</p>
+<ul>
+<li>
+<p>2006/07 – 7%</p>
+</li>
+<li>
+<p>2007/08 – 4%</p>
+</li>
+<li>
+<p>2008/09 – 2%</p>
+</li>
+<li>
+<p>2009/10 – 2%</p>
+</li>
+<li>
+<p>2010/11 – 2%</p>
+</li>
+<li>
+<p>2011/12 – 2%</p>
+</li>
+<li>
+<p>2012/13 – 2%</p>
+</li>
+<li>
+<p>2013/14 – 2% </p>
+</li>
+<li>
+<p>2014/15 – 3% </p>
+</li>
+<li>
+<p>2015/16 – 5%</p>
+</li>
+</ul>
+            <p></p>
+
+
+
+
+
+
+
+            <h3 class="heading-small">
+              Further technical information
+            </h3>
+            <p>
+              </p><p>Data recording
+- Under the code of practice for the Statutory Powers of arrest, arresting officers are required to record details of an arrest at the time of arrest, or as soon as possible.
+-A universal code of practice (PACE code G) ensures arrests are standardised across forces, both in terms of the processes involved, and the data recorded.
+- Forces use arrest records to inform custody records which are used for a number of administrative purposes, including processing arrestees and monitoring performance. It is essential for forces’ operational needs that they keep these records up to date.
+- Police forces have their own internal auditing methods to ensure the data are accurate and up to date before sending data to the Home Office. Custody Sergeants are also employed in police stations to ensure that those brought into custody are processed in line with the code of practice.
+- The self-defined ethnicity of the person arrested is recorded according to the ethnicity stated by the arrestee at the time of arrest.
+-For some forces, an arrest will only be recorded if an individual is taken to a custody suite and a custody record is created</p>
+<p>Quality assurance
+- Forces’ use and recording of arrests are monitored by Her Majesty’s Inspectorate of Constabulary (HMIC). HMIC carries out regular inspections and produce reports on the inspections.
+- The Home Office statisticians undertake quality assurance checks which include looking for missing/incomplete data, inconsistencies in the data, extreme values. Trend analyses also look for unusual or unexpected trends in the data. Any inconsistencies or unusual trends are flagged with forces, who are requested to either explain the trends, or resubmit to amend the data. All data are then confirmed by forces during a data reconciliation to confirm they are content for the figures to be published.</p>
+            <p></p>
+
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="column-two-thirds">
+
+          <div data-event="publishing-details" class="accordion__header" id="source">
+            <h2>
+              <button>
+                Data source
+              </button>
+            </h2>
+            <span class="plus-minus-icon"></span>
+          </div>
+
+          <div class="accordion__body" style="display: none;">
+
+        <p style="margin-top: 20px; margin-bottom: 20px;">
+          <a href="#">Arrests open data</a>, Home Office, July 2016<br>
+          <a href="#">UK population estimates</a>, Office for National Statistics, April 2011</p>
+
+
+
+          <p class="meta-heading">Related publications:</p>
+          <p><a href="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/562977/police-powers-procedures-hosb1516.pdf">Police powers and procedures, England and Wales, year ending 31 March 2016</a></p>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="column-two-thirds">
+
+          <div data-event="download-data" class="accordion__header">
+            <h2>
+              <button>
+                Download the data
+              </button>
+            </h2>
+            <span class="plus-minus-icon"></span>
+          </div>
+
+          <div class="accordion__body downloads" style="display: none;">
+
+        <p style="margin-top: 20px; line-height: 24px; margin-bottom: 10px; font-size: 19px;">
+          <a href="#">Number of arrests 2006-2016 (CSV, 12KB)</a>
+        </p>
+        <p>
+          Arrests by ethnicity, police area and gender.
+        </p>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+    <div class="grid-row" style="margin-top: 40px;">
+      <div class="column-one-third">
+        <p style="margin-bottom: 0; font-size: 16px;">First published:</p>
+        <p style="font-size: 24px; font-weight: bold;">8 July 2016</p>
+
+        <p style="margin-bottom: 0; font-size: 16px;">Last updated:</p>
+        <p style="font-size: 24px; font-weight: bold;">24 July 2016</p>
+
+        <details style="font-size: 16px;">
+          <summary style="font-size: 16px;">Full page history</summary>
+
+          <p>
+            <b style="font-weight: bold;">24 July 2016</b><br>
+            Added arrests by ethnicity and gender.
+          </p>
+
+          <p>
+            <b style="font-weight: bold;">14 July 2016</b><br>
+            Clarified use of ONS population statistics.
+          </p>
+
+
+          <p>
+            <b style="font-weight: bold;">8 July 2016</b><br>
+            Initial publication
+          </p>
+        </details>
+
+
+      </div>
+
+      <div class="column-two-thirds">
+        <p style="margin-bottom: 0; font-size: 16px;">From:</p>
+        <p style="font-size: 24px; font-weight: bold;"><a style="text-decoration: none;" href="#">Home Office</a></p>
+
+        <p style="margin-bottom: 0; font-size: 16px;">Next update:</p>
+        <p style="font-size: 24px; font-weight: bold;">October 2017</p>
+      </div>
+
+    </div>
+
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-one-third'>
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+              <li>
+                  <a href="/">Site preview</a>
+              </li>
+              <li>
+                  <a href="/cms/">CMS</a>
+              </li>
+              <li>
+                  <a href="/prototype/">Prototype</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="global-app-error" class="app-error hidden"></div>
+    <script src="/static/javascripts/govuk-template.js?0.19.2"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/javascripts/all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/highcharts.js"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/underscore-min.js"></script>
+    <script src="/static/javascripts/rd-data-tools.js"></script>
+    <script src="/static/javascripts/rd-graph.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/modules/exporting.js"></script>
+    </script>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
