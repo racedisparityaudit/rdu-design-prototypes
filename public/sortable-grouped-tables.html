@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+
+  <style>
+
+    table th, table td {
+      font-size: 16px;
+    }
+
+   table tr td {
+      text-align: left;
+    }
+
+    [aria-sort] button {
+      background-color: transparent;
+      border-width: 0;
+      -webkit-box-shadow: 0 0 0 0;
+      -moz-box-shadow: 0 0 0 0;
+      box-shadow: 0 0 0 0;
+      color: #005ea5;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: bold;
+      padding: 0;
+      position: relative;
+    }
+
+    [aria-sort] button:before {
+      content: " \25bc";
+      position: absolute;
+      right: -12px;
+      top: 8px;
+      font-size: 0.7em;
+    }
+
+    [aria-sort] button:after {
+      content: " \25b2";
+      position: absolute;
+      right: -12px;
+      top: -1px;
+      font-size: 0.7em;
+    }
+
+    [aria-sort="ascending"] button:before,
+    [aria-sort="descending"] button:before {
+      content: none;
+    }
+
+    [aria-sort="ascending"] button:after {
+      content: " \25b2";
+      font-size: 1em;
+      position: static
+    }
+
+    [aria-sort="descending"] button:after {
+      content: " \25bc";
+      font-size: 1em;
+      position: static;
+    }
+
+
+
+
+
+
+  </style>
+
+  <script>
+    function SortableTable(table, options) {
+
+        this.table = table;
+        this.setupOptions(options);
+        this.createHeadingButtons();
+        this.createStatusBox();
+    };
+
+    SortableTable.prototype.setupOptions = function(options) {
+        options = options || {};
+        options.statusMessage = options.statusMessage || 'Sort by %heading% (%direction%)';
+        options.ascendingText = options.ascendingText || 'ascending';
+        options.descendingText = options.descendingText || 'descending';
+        this.options = options;
+    };
+
+    SortableTable.prototype.createHeadingButtons = function() {
+        var headings = this.table.querySelectorAll('thead th')
+        var heading;
+
+        for(var i = 0; i < headings.length; i++) {
+            heading = headings[i];
+            if(heading.getAttribute('aria-sort')) {
+                this.createHeadingButton(heading, i);
+            }
+        }
+    };
+
+    SortableTable.prototype.createHeadingButton = function(heading, i) {
+        var text = heading.textContent;
+        var button = document.createElement('button')
+        button.setAttribute('type', 'button')
+        button.setAttribute('data-index', i)
+        button.textContent = text
+        button.addEventListener('click', this.sortButtonClicked.bind(this))
+        heading.textContent = '';
+        heading.appendChild(button);
+    };
+
+    SortableTable.prototype.createStatusBox = function() {
+
+        this.status = document.createElement('div')
+        this.status.setAttribute('aria-live', 'polite')
+        this.status.setAttribute('role', 'status')
+        this.status.setAttribute('aria-atomic', 'true')
+        this.status.setAttribute('class', 'sortableTable-status visuallyhidden')
+
+        this.table.parentElement.append(this.status);
+    };
+
+    SortableTable.prototype.sortButtonClicked = function(event) {
+
+      var columnNumber = event.target.getAttribute('data-index')
+      var sortDirection = event.target.parentElement.getAttribute('aria-sort')
+      var newSortDirection;
+        if(sortDirection === 'none' || sortDirection === 'ascending') {
+            newSortDirection = 'descending';
+        } else {
+            newSortDirection = 'ascending';
+        }
+
+      var tBodies = this.table.querySelectorAll('tbody')
+
+      this.sortTBodies(tBodies,columnNumber,newSortDirection)
+
+      for (var i = tBodies.length - 1; i >= 0; i--) {
+
+        var rows = this.getTableRowsArray(tBodies[i])
+        var sortedRows = this.sort(rows, columnNumber, newSortDirection);
+        this.addRows(tBodies[i], sortedRows);
+
+      };
+
+      this.removeButtonStates();
+      this.updateButtonState(event.target, newSortDirection);
+
+    }
+
+    SortableTable.prototype.sortTBodies = function(tBodies, columnNumber, sortDirection) {
+
+      var tBodiesAsArray = []
+      var _this = this
+
+      for (var i = 0; i < tBodies.length; i++) {
+        tBodiesAsArray.push(tBodies[i])
+      };
+
+      var newTbodies = tBodiesAsArray.sort(function(tBodyA, tBodyB) {
+
+        var tBodyAHeaderRow = tBodyA.querySelector('th[scope="rowgroup"]')
+
+        var tBodyBHeaderRow = tBodyB.querySelector('th[scope="rowgroup"]')
+
+
+        if (tBodyAHeaderRow && tBodyBHeaderRow) {
+          tBodyAHeaderRow = tBodyAHeaderRow.parentElement
+          tBodyBHeaderRow = tBodyBHeaderRow.parentElement
+
+          var tBodyACell = tBodyAHeaderRow.querySelectorAll('td, th')[columnNumber]
+          var tBodyBCell = tBodyBHeaderRow.querySelectorAll('td, th')[columnNumber]
+
+          var tBodyAValue = _this.getCellValue(tBodyACell)
+          var tBodyBValue = _this.getCellValue(tBodyBCell)
+
+          return _this.compareValues(tBodyAValue, tBodyBValue, sortDirection)
+
+        } else {
+
+          console.log('no way to compare tbodies')
+          return 0
+        }
+
+
+      });
+
+      for (var i = 0; i < newTbodies.length; i++) {
+        this.table.append(newTbodies[i])
+      };
+
+    }
+
+    SortableTable.prototype.compareValues = function(valueA, valueB, sortDirection) {
+
+      if(sortDirection === 'ascending') {
+          if(valueA < valueB) {
+              return -1;
+          }
+          if(valueA > valueB) {
+              return 1;
+          }
+          return 0;
+      } else {
+          if(valueB < valueA) {
+              return -1;
+          }
+          if(valueB > valueA) {
+              return 1;
+          }
+          return 0;
+      }
+
+    }
+
+    SortableTable.prototype.updateButtonState = function(button, direction) {
+        button.parentElement.setAttribute('aria-sort', direction);
+        var message = this.options.statusMessage;
+        message = message.replace(/%heading%/, button.textContent);
+        message = message.replace(/%direction%/, this.options[direction+'Text']);
+        this.status.textContent = message;
+    };
+
+    SortableTable.prototype.removeButtonStates = function() {
+
+        var tableHeaders = this.table.querySelectorAll('thead th')
+
+        for (var i = tableHeaders.length - 1; i >= 0; i--) {
+          tableHeaders[i].setAttribute('aria-sort', 'none')
+        };
+
+    };
+
+    SortableTable.prototype.addRows = function(tbody, rows) {
+        for(var i = 0; i < rows.length; i++) {
+            tbody.append(rows[i]);
+        }
+    };
+
+    SortableTable.prototype.getTableRowsArray = function(tbody) {
+        var rows = [];
+        var trs = tbody.querySelectorAll('tr');
+        for (var i = 0; i < trs.length; i++) {
+            rows.push(trs[i]);
+        }
+        return rows;
+    };
+
+    SortableTable.prototype.sort = function(rows, columnNumber, sortDirection) {
+
+        var _this = this
+
+        var newRows = rows.sort(function(rowA, rowB) {
+
+          var tdA = rowA.querySelectorAll('td, th')[columnNumber]
+          var tdB = rowB.querySelectorAll('td, th')[columnNumber]
+
+          var rowAIsHeader = rowA.querySelector('th[scope="rowgroup"]')
+          var rowBIsHeader = rowB.querySelector('th[scope="rowgroup"]')
+
+          var valueA = _this.getCellValue(tdA)
+          var valueB = _this.getCellValue(tdB)
+
+            if (rowAIsHeader) {
+              return -1
+            } else if (rowBIsHeader) {
+              return 1
+            } else {
+
+              if(sortDirection === 'ascending') {
+                  if(valueA < valueB) {
+                      return -1;
+                  }
+                  if(valueA > valueB) {
+                      return 1;
+                  }
+                  return 0;
+              } else {
+                  if(valueB < valueA) {
+                      return -1;
+                  }
+                  if(valueB > valueA) {
+                      return 1;
+                  }
+                  return 0;
+              }
+
+            }
+
+        });
+        return newRows
+
+    };
+
+    SortableTable.prototype.getCellValue = function(cell) {
+
+      var cellValue
+
+      if (cell.children.length == 1 && cell.children[0].tagName == "TIME") {
+
+        var timeElement = cell.children[0]
+
+        if (timeElement.getAttribute('datetime')) {
+          cellValue = Date.parse(timeElement.getAttribute('datetime'))
+        } else {
+          cellValue = Date.parse(timeElement.textContent)
+        }
+
+      } else {
+
+        cellValue = cell.getAttribute('data-sort-value') || cell.textContent
+        cellValue = parseFloat(cellValue) || cellValue
+
+      }
+
+
+      return cellValue
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+      var tables = document.querySelectorAll('table');
+
+      for (var i = tables.length - 1; i >= 0; i--) {
+
+        var table = tables[i]
+        var sortableTable = new SortableTable(table, {});
+
+      };
+
+    })
+  </script>
+
+  <style>
+
+    tbody th[scope="rowgroup"] { font-weight: bold; }
+
+    tbody th[scope="row"] {
+      font-weight: normal;
+      padding-left: 10px;
+    }
+
+  </style>
+
+
+  </head>
+
+
+
+  <body class="">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <header role="banner" id="global-header" class="with-proposition">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="/static/images/gov.uk_logotype_crown_invert_trans.png?0.19.2" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu">
+                <a href="/" id="proposition-name">
+                  Ethnicity facts and figures
+                </a>
+
+                    <ul id="proposition-links">
+                        <li><a href="/about-ethnicity">About ethnicity</a></li>
+                        <li><a href="/background">Background</a></li>
+                    </u>
+              </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="phase-banner">
+        <p>
+          <strong class="phase-tag">Private Beta</strong>
+          <span>This is a new service – please send your feedback to <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a></span>
+        </p>
+      </div>
+
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href="/" data-event="breadcrumb-homepage">Ethnicity facts and figures</a></li>
+          <li>
+            <a href="/crime-justice-and-the-law" data-event="breadcrumb-crime-justice-and-the-law">Crime justice and the law</a>
+          </li>
+        </ol>
+      </div>
+
+      <!-- CONTENT STARTS HERE -->
+
+      <div class="grid-row"><div class="column-two-thirds">
+      <table>
+        <thead>
+          <th aria-sort="ascending" width="33%">Ethnicity</th>
+          <th aria-sort="none" width="33%">Score</th>
+          <th aria-sort="none" width="33%">Number</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="100">Asian</th>
+            <td>53</td>
+            <td data-sort-value="51218">51,218</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="110">Bangladeshi</th>
+            <td>52</td>
+            <td data-sort-value="8319">8,319</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="130">Indian</th>
+            <td>57</td>
+            <td data-sort-value="14046">14,046</td>
+          </tr>
+          <tr>
+            <th scope="row" data-sort-value="140">Pakistani</th>
+            <td>49</td>
+            <td data-sort-value="20434">20,434</td>
+          </tr>
+          <tr>
+            <th scope="row" data-sort-value="150">Asian other</th>
+            <td>55</td>
+            <td data-sort-value="8419">8,419</td>
+          </tr>
+
+        </tbody>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="200">Black</th>
+            <td>49</td>
+            <td data-sort-value="27924">27,924</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="210">Black African</th>
+            <td>50</td>
+            <td data-sort-value="17349">17,349</td>
+          </tr>
+
+
+          <tr>
+            <th scope="row" data-sort-value="220">Black Caribbean</th>
+            <td>45</td>
+            <td data-sort-value="7216">7,216</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="230">Black other</th>
+            <td>47</td>
+            <td data-sort-value="3359">3,359</td>
+          </tr>
+
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="290">Chinese</th>
+            <td>62</td>
+            <td data-sort-value="2026">2,026</td>
+          </tr>
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="300">Mixed</th>
+            <td>51</td>
+            <td data-sort-value="22868">22,868</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="310">White and Asian</th>
+            <td>55</td>
+            <td data-sort-value="5089">5,089</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="320">White and Black African</th>
+            <td>50</td>
+            <td data-sort-value="2687">2,687</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="330">White and Black Caribbean</th>
+            <td>46</td>
+            <td data-sort-value="7160">7,160</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="340">Mixed other</th>
+            <td>52</td>
+            <td data-sort-value="7932">7,932</td>
+          </tr>
+
+        </tbody>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="400">White</th>
+            <td>50</td>
+            <td data-sort-value="422763">422,763</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="410">White British</th>
+            <td>50</td>
+            <td data-sort-value="395316">395,316</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="420">White Irish</th>
+            <td>55</td>
+            <td data-sort-value="1774">1,774</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="430">Traveller of Irish Heritage</th>
+            <td>29</td>
+            <td data-sort-value="122">1,22</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="430">Gypsy/Roma</th>
+            <td>20</td>
+            <td data-sort-value="1107">1,107</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="440">White other</th>
+            <td>50</td>
+            <td data-sort-value="24444">24,444</td>
+          </tr>
+
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="500">Other ethnic group</th>
+            <td>50</td>
+            <td data-sort-value="8119">8,119</td>
+          </tr>
+
+        </tbody>
+      </table>
+      </div></div>
+
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-one-third'>
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+              <li>
+                  <a href="/">Site preview</a>
+              </li>
+              <li>
+                  <a href="/cms/">CMS</a>
+              </li>
+              <li>
+                  <a href="/prototype/">Prototype</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="global-app-error" class="app-error hidden"></div>
+    <script src="/static/javascripts/govuk-template.js?0.19.2"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/javascripts/all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/highcharts.js"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/underscore-min.js"></script>
+    <script src="/static/javascripts/rd-data-tools.js"></script>
+    <script src="/static/javascripts/rd-graph.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/modules/exporting.js"></script>
+    </script>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
