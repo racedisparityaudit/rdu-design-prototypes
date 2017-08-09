@@ -126,12 +126,38 @@
         color: white;
       }
 
+      table.new-cropped {
+        display: block;
+        width: 100%;
+        max-height: 300px;
+        overflow-y: scroll;
+        position: relative;
+      }
+
+      table.new-cropped thead {
+        display: block;
+        width: 100%;
+        top: 0;
+      }
+
+      table.new-cropped tbody {
+        display: block;
+        width: 100%;
+      }
+
+      table.new-cropped tr {
+        display: table;
+        width: 100%;
+      }
+
       </style>
 
   <script>
     function SortableTable(table, options) {
 
         this.table = table;
+        this.tableParent = table.parentElement;
+        this.tableValues = this.tableParent.querySelector('.sortable-values')
         this.setupOptions(options);
         this.createHeadingButtons();
         this.createStatusBox();
@@ -190,7 +216,7 @@
             newSortDirection = 'ascending';
         }
 
-      var tBodies = this.table.querySelectorAll('tbody')
+      var tBodies = this.tableValues.querySelectorAll('tbody')
 
       this.sortTBodies(tBodies,columnNumber,newSortDirection)
 
@@ -245,7 +271,7 @@
       });
 
       for (var i = 0; i < newTbodies.length; i++) {
-        this.table.append(newTbodies[i])
+        this.tableValues.append(newTbodies[i])
       };
 
     }
@@ -547,7 +573,7 @@
               <details data-event="data-reliability" class="normalize" role="group">
                 <summary role="button" aria-controls="details-content-0" aria-expanded="false">
                   <span class="summary">
-                    The reliability of the data
+                    Things you need to know
                   </span>
                 </summary>
                 <div class="panel panel-border-narrow" id="details-content-0" aria-hidden="true">
@@ -621,7 +647,7 @@
               <details data-event="categories-chosen" class="normalize" role="group">
                 <summary role="button" aria-controls="details-content-2" aria-expanded="false">
                   <span class="summary">
-                    Why the categories of ethnicities used in this data were chosen
+                    Why these ethnic categories were chosen
                   </span>
                 </summary>
                 <div class="panel panel-border-narrow" id="details-content-2" aria-hidden="true">
@@ -848,10 +874,10 @@
 </g>
 
 
-  <text x="595" y="60" text-anchor="end" style="font-weight: bold;">All</text>
+<!--   <text x="595" y="60" text-anchor="end" style="font-weight: bold;">All</text>
   <text x="615" y="60" text-anchor="middle">53%</text>
   <line x1="610" x2="610" y1="65" y2="810" fill="none" stroke="#2B8CC4" stroke-width="1" />
-
+ -->
 <g class="highcharts-series-group">
 
   <g transform="translate(0,20)">
@@ -1182,164 +1208,171 @@
 
 
 
-  <div>
+  <div class="table-parent">
 
     <table class="grouped-table" style="margin-bottom: 5px;">
-        <thead>
+      <thead>
+        <th aria-sort="ascending" width="33%">Ethnicity</th>
+        <th aria-sort="none" width="33%">Reaching expected standard</th>
+        <th aria-sort="none" width="33%">Reaching higher standard</th>
+      </thead>
+    </table>
+
+    <table class="grouped-table new-cropped sortable-values" style="margin-bottom: 5px;">
+<!--         <thead>
           <th aria-sort="ascending" width="33%">Ethnicity</th>
           <th aria-sort="none" width="33%">Reaching expected standard</th>
           <th aria-sort="none" width="33%">Reaching higher standard</th>
-        </thead>
-
+        </thead> -->
         <tbody>
           <tr>
-            <th scope="rowgroup" data-sort-value="100">All</th>
-            <td data-sort-value="53">53%</td>
-            <td data-sort-value="5">5%</td>
+            <th scope="rowgroup" data-sort-value="100" width="33%">All</th>
+            <td data-sort-value="53" width="33%">53%</td>
+            <td data-sort-value="5" width="33%">5%</td>
           </tr>
         </tbody>
 
         <tbody>
           <tr>
-            <th scope="rowgroup" data-sort-value="100">Asian</th>
-            <td data-sort-value="55">55%</td>
-            <td data-sort-value="6">6%</td>
+            <th scope="rowgroup" data-sort-value="100" width="33%">Asian</th>
+            <td data-sort-value="55" width="33%">55%</td>
+            <td data-sort-value="6" width="33%">6%</td>
           </tr>
 
           <tr>
-            <th scope="row" data-sort-value="110">Bangladeshi</th>
-            <td data-sort-value="56">56%</td>
-            <td data-sort-value="5">5%</td>
+            <th scope="row" data-sort-value="110" width="33%">Bangladeshi</th>
+            <td data-sort-value="56" width="33%">56%</td>
+            <td data-sort-value="5" width="33%">5%</td>
           </tr>
 
           <tr>
-            <th scope="row" data-sort-value="130">Indian</th>
-            <td data-sort-value="65">65%</td>
-            <td data-sort-value="10">10%</td>
+            <th scope="row" data-sort-value="130" width="33%">Indian</th>
+            <td data-sort-value="65" width="33%">65%</td>
+            <td data-sort-value="10" width="33%">10%</td>
           </tr>
           <tr>
-            <th scope="row" data-sort-value="140">Pakistani</th>
-            <td data-sort-value="47">47%</td>
-            <td data-sort-value="3">3%</td>
+            <th scope="row" data-sort-value="140" width="33%">Pakistani</th>
+            <td data-sort-value="47" width="33%">47%</td>
+            <td data-sort-value="3" width="33%">3%</td>
           </tr>
           <tr>
-            <th scope="row" data-sort-value="150">Asian other</th>
-            <td data-sort-value="61">61%</td>
-            <td data-sort-value="9">9%</td>
-          </tr>
-
-        </tbody>
-        <tbody>
-          <tr>
-            <th scope="rowgroup" data-sort-value="200">Black</th>
-            <td data-sort-value="51">51%</td>
-            <td data-sort-value="4">4%</td>
-          </tr>
-
-          <tr>
-            <th scope="row" data-sort-value="210">Black African</th>
-            <td data-sort-value="54">54%</td>
-            <td data-sort-value="5">5%</td>
-          </tr>
-
-          <tr>
-            <th scope="row" data-sort-value="220">Black Caribbean</th>
-            <td data-sort-value="43">43%</td>
-            <td data-sort-value="2">2%</td>
-          </tr>
-
-          <tr>
-            <th scope="row" data-sort-value="230">Black other</th>
-            <td data-sort-value="48">48%</td>
-            <td data-sort-value="3">3%</td>
-          </tr>
-
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th scope="rowgroup" data-sort-value="290">Chinese</th>
-            <td data-sort-value="71">71%</td>
-            <td data-sort-value="18">18%</td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
-            <th scope="rowgroup" data-sort-value="300">Mixed</th>
-            <td data-sort-value="56">56%</td>
-            <td data-sort-value="7">7%</td>
-          </tr>
-
-          <tr>
-            <th scope="row" data-sort-value="310">White and Asian</th>
-            <td data-sort-value="63">63%</td>
-            <td data-sort-value="10">10%</td>
-          </tr>
-
-          <tr>
-            <th scope="row" data-sort-value="320">White and Black African</th>
-            <td data-sort-value="54">54%</td>
-            <td data-sort-value="5">5%</td>
-          </tr>
-
-          <tr>
-            <th scope="row" data-sort-value="330">White and Black Caribbean</th>
-            <td data-sort-value="48">48%</td>
-            <td data-sort-value="3">3%</td>
-          </tr>
-
-          <tr>
-            <th scope="row" data-sort-value="340">Mixed other</th>
-            <td data-sort-value="57">57%</td>
-            <td data-sort-value="8">8%</td>
+            <th scope="row" data-sort-value="150" width="33%">Asian other</th>
+            <td data-sort-value="61" width="33%">61%</td>
+            <td data-sort-value="9" width="33%">9%</td>
           </tr>
 
         </tbody>
         <tbody>
           <tr>
-            <th scope="rowgroup" data-sort-value="400">White</th>
-            <td data-sort-value="53">53%</td>
-            <td data-sort-value="5">5%</td>
+            <th scope="rowgroup" data-sort-value="200" width="33%">Black</th>
+            <td data-sort-value="51" width="33%">51%</td>
+            <td data-sort-value="4" width="33%">4%</td>
           </tr>
 
           <tr>
-            <th scope="row" data-sort-value="410">White British</th>
-            <td data-sort-value="54">54%</td>
-            <td data-sort-value="5">6%</td>
+            <th scope="row" data-sort-value="210" width="33%">Black African</th>
+            <td data-sort-value="54" width="33%">54%</td>
+            <td data-sort-value="5" width="33%">5%</td>
           </tr>
 
           <tr>
-            <th scope="row" data-sort-value="420">White Irish</th>
-            <td data-sort-value="62">62%</td>
-            <td data-sort-value="10">10%</td>
+            <th scope="row" data-sort-value="220" width="33%">Black Caribbean</th>
+            <td data-sort-value="43" width="33%">43%</td>
+            <td data-sort-value="2" width="33%">2%</td>
           </tr>
 
           <tr>
-            <th scope="row" data-sort-value="430">Traveller of Irish Heritage</th>
-            <td data-sort-value="19">19%</td>
-            <td data-sort-value=""><span class="sample-too-small"></span></td>
-          </tr>
-
-          <tr>
-            <th scope="row" data-sort-value="430">Gypsy/Roma</th>
-            <td data-sort-value="13">13%</td>
-            <td data-sort-value=""><span class="sample-too-small"></span></td>
-          </tr>
-
-          <tr>
-            <th scope="row" data-sort-value="440">White other</th>
-            <td data-sort-value="48">48%</td>
-            <td data-sort-value="5">5%</td>
+            <th scope="row" data-sort-value="230" width="33%">Black other</th>
+            <td data-sort-value="48" width="33%">48%</td>
+            <td data-sort-value="3" width="33%">3%</td>
           </tr>
 
         </tbody>
 
         <tbody>
           <tr>
-            <th scope="rowgroup" data-sort-value="500">Other ethnic group</th>
-            <td data-sort-value="50">50%</td>
-            <td data-sort-value="5">5%</td>
+            <th scope="rowgroup" data-sort-value="290" width="33%">Chinese</th>
+            <td data-sort-value="71" width="33%">71%</td>
+            <td data-sort-value="18" width="33%">18%</td>
+          </tr>
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="300" width="33%">Mixed</th>
+            <td data-sort-value="56" width="33%">56%</td>
+            <td data-sort-value="7" width="33%">7%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="310" width="33%">White and Asian</th>
+            <td data-sort-value="63" width="33%">63%</td>
+            <td data-sort-value="10" width="33%">10%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="320" width="33%">White and Black African</th>
+            <td data-sort-value="54" width="33%">54%</td>
+            <td data-sort-value="5" width="33%">5%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="330" width="33%">White and Black Caribbean</th>
+            <td data-sort-value="48" width="33%">48%</td>
+            <td data-sort-value="3" width="33%">3%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="340" width="33%">Mixed other</th>
+            <td data-sort-value="57" width="33%">57%</td>
+            <td data-sort-value="8" width="33%">8%</td>
+          </tr>
+
+        </tbody>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="400" width="33%">White</th>
+            <td data-sort-value="53" width="33%">53%</td>
+            <td data-sort-value="5" width="33%">5%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="410" width="33%">White British</th>
+            <td data-sort-value="54" width="33%">54%</td>
+            <td data-sort-value="5" width="33%">6%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="420" width="33%">White Irish</th>
+            <td data-sort-value="62" width="33%">62%</td>
+            <td data-sort-value="10" width="33%">10%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="430" width="33%">Traveller of Irish Heritage</th>
+            <td data-sort-value="19" width="33%" width="33%">19%</td>
+            <td data-sort-value="" width="33%"><span class="sample-too-small"></span></td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="430" width="33%">Gypsy/Roma</th>
+            <td data-sort-value="13" width="33%">13%</td>
+            <td data-sort-value="" width="33%"><span class="sample-too-small"></span></td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="440" width="33%">White other</th>
+            <td data-sort-value="48" width="33%">48%</td>
+            <td data-sort-value="5" width="33%">5%</td>
+          </tr>
+
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="500" width="33%">Other ethnic group</th>
+            <td data-sort-value="50" width="33%">50%</td>
+            <td data-sort-value="5" width="33%">5%</td>
           </tr>
 
         </tbody>
