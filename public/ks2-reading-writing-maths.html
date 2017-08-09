@@ -100,11 +100,32 @@
           padding-left: 10px;
         }
 
+
         table.grouped-table td,
         table.grouped-table th {
           padding-top: 5px;
           padding-bottom: 5px;
         }
+
+      .sample-too-small {
+        color: #BFC1C3;
+        display: inline-block;
+        font-size: 0;
+      }
+
+      .sample-too-small::after {
+        content: '?';
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        line-height: 20px;
+        font-size: 18px;
+        width: 20px; height: 20px;
+        border-radius: 10px;
+        background-color: #DEE0E2;
+        color: white;
+      }
+
       </style>
 
   <script>
@@ -1163,7 +1184,7 @@
 
   <div>
 
-    <table class="grouped-table" style="margin-bottom: 20px;">
+    <table class="grouped-table" style="margin-bottom: 5px;">
         <thead>
           <th aria-sort="ascending" width="33%">Ethnicity</th>
           <th aria-sort="none" width="33%">Reaching expected standard</th>
@@ -1297,13 +1318,13 @@
           <tr>
             <th scope="row" data-sort-value="430">Traveller of Irish Heritage</th>
             <td data-sort-value="19">19%</td>
-            <td data-sort-value=""></td>
+            <td data-sort-value=""><span class="sample-too-small"></span></td>
           </tr>
 
           <tr>
             <th scope="row" data-sort-value="430">Gypsy/Roma</th>
             <td data-sort-value="13">13%</td>
-            <td data-sort-value=""></td>
+            <td data-sort-value=""><span class="sample-too-small"></span></td>
           </tr>
 
           <tr>
@@ -1326,6 +1347,12 @@
 
 </div>
 
+
+<div style="margin-bottom: 40px; margin-top: 10px;">
+  <p style="font-size: 16px; width: 50%; display: table-cell">
+  <span class="sample-too-small" style="margin-left: 0px; margin-right: 5px;"></span>
+  <span style="color: #6F777B;">Data withheld because a small sample size makes it unreliable</span>
+</div>
 
 
    <div class="print-node"><h3 class="heading-small">View the numbers in a table</h3><div>
