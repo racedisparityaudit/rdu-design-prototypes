@@ -37,8 +37,337 @@
           font-weight: bold;
         }
 
+        table th, table td {
+          font-size: 16px;
+        }
+
+       table tr td {
+          text-align: left;
+        }
+
+        [aria-sort] button {
+          background-color: transparent;
+          border-width: 0;
+          -webkit-box-shadow: 0 0 0 0;
+          -moz-box-shadow: 0 0 0 0;
+          box-shadow: 0 0 0 0;
+          color: #005ea5;
+          cursor: pointer;
+          font-family: inherit;
+          font-size: inherit;
+          font-weight: bold;
+          padding: 0;
+          position: relative;
+        }
+
+        [aria-sort] button:before {
+          content: " \25bc";
+          position: absolute;
+          right: -12px;
+          top: 8px;
+          font-size: 0.7em;
+        }
+
+        [aria-sort] button:after {
+          content: " \25b2";
+          position: absolute;
+          right: -12px;
+          top: -1px;
+          font-size: 0.7em;
+        }
+
+        [aria-sort="ascending"] button:before,
+        [aria-sort="descending"] button:before {
+          content: none;
+        }
+
+        [aria-sort="ascending"] button:after {
+          content: " \25b2";
+          font-size: 1em;
+          position: static
+        }
+
+        [aria-sort="descending"] button:after {
+          content: " \25bc";
+          font-size: 1em;
+          position: static;
+        }
+
+        tbody th[scope="rowgroup"] { font-weight: bold; }
+
+        tbody th[scope="row"] {
+          font-weight: normal;
+          padding-left: 10px;
+        }
+
+        table.grouped-table td,
+        table.grouped-table th {
+          padding-top: 5px;
+          padding-bottom: 5px;
+        }
       </style>
 
+  <script>
+    function SortableTable(table, options) {
+
+        this.table = table;
+        this.setupOptions(options);
+        this.createHeadingButtons();
+        this.createStatusBox();
+    };
+
+    SortableTable.prototype.setupOptions = function(options) {
+        options = options || {};
+        options.statusMessage = options.statusMessage || 'Sort by %heading% (%direction%)';
+        options.ascendingText = options.ascendingText || 'ascending';
+        options.descendingText = options.descendingText || 'descending';
+        this.options = options;
+    };
+
+    SortableTable.prototype.createHeadingButtons = function() {
+        var headings = this.table.querySelectorAll('thead th')
+        var heading;
+
+        for(var i = 0; i < headings.length; i++) {
+            heading = headings[i];
+            if(heading.getAttribute('aria-sort')) {
+                this.createHeadingButton(heading, i);
+            }
+        }
+    };
+
+    SortableTable.prototype.createHeadingButton = function(heading, i) {
+        var text = heading.textContent;
+        var button = document.createElement('button')
+        button.setAttribute('type', 'button')
+        button.setAttribute('data-index', i)
+        button.textContent = text
+        button.addEventListener('click', this.sortButtonClicked.bind(this))
+        heading.textContent = '';
+        heading.appendChild(button);
+    };
+
+    SortableTable.prototype.createStatusBox = function() {
+
+        this.status = document.createElement('div')
+        this.status.setAttribute('aria-live', 'polite')
+        this.status.setAttribute('role', 'status')
+        this.status.setAttribute('aria-atomic', 'true')
+        this.status.setAttribute('class', 'sortableTable-status visuallyhidden')
+
+        this.table.parentElement.append(this.status);
+    };
+
+    SortableTable.prototype.sortButtonClicked = function(event) {
+
+      var columnNumber = event.target.getAttribute('data-index')
+      var sortDirection = event.target.parentElement.getAttribute('aria-sort')
+      var newSortDirection;
+        if(sortDirection === 'none' || sortDirection === 'ascending') {
+            newSortDirection = 'descending';
+        } else {
+            newSortDirection = 'ascending';
+        }
+
+      var tBodies = this.table.querySelectorAll('tbody')
+
+      this.sortTBodies(tBodies,columnNumber,newSortDirection)
+
+      for (var i = tBodies.length - 1; i >= 0; i--) {
+
+        var rows = this.getTableRowsArray(tBodies[i])
+        var sortedRows = this.sort(rows, columnNumber, newSortDirection);
+        this.addRows(tBodies[i], sortedRows);
+
+      };
+
+      this.removeButtonStates();
+      this.updateButtonState(event.target, newSortDirection);
+
+    }
+
+    SortableTable.prototype.sortTBodies = function(tBodies, columnNumber, sortDirection) {
+
+      var tBodiesAsArray = []
+      var _this = this
+
+      for (var i = 0; i < tBodies.length; i++) {
+        tBodiesAsArray.push(tBodies[i])
+      };
+
+      var newTbodies = tBodiesAsArray.sort(function(tBodyA, tBodyB) {
+
+        var tBodyAHeaderRow = tBodyA.querySelector('th[scope="rowgroup"]')
+
+        var tBodyBHeaderRow = tBodyB.querySelector('th[scope="rowgroup"]')
+
+
+        if (tBodyAHeaderRow && tBodyBHeaderRow) {
+          tBodyAHeaderRow = tBodyAHeaderRow.parentElement
+          tBodyBHeaderRow = tBodyBHeaderRow.parentElement
+
+          var tBodyACell = tBodyAHeaderRow.querySelectorAll('td, th')[columnNumber]
+          var tBodyBCell = tBodyBHeaderRow.querySelectorAll('td, th')[columnNumber]
+
+          var tBodyAValue = _this.getCellValue(tBodyACell)
+          var tBodyBValue = _this.getCellValue(tBodyBCell)
+
+          return _this.compareValues(tBodyAValue, tBodyBValue, sortDirection)
+
+        } else {
+
+          console.log('no way to compare tbodies')
+          return 0
+        }
+
+
+      });
+
+      for (var i = 0; i < newTbodies.length; i++) {
+        this.table.append(newTbodies[i])
+      };
+
+    }
+
+    SortableTable.prototype.compareValues = function(valueA, valueB, sortDirection) {
+
+      if(sortDirection === 'ascending') {
+          if(valueA < valueB) {
+              return -1;
+          }
+          if(valueA > valueB) {
+              return 1;
+          }
+          return 0;
+      } else {
+          if(valueB < valueA) {
+              return -1;
+          }
+          if(valueB > valueA) {
+              return 1;
+          }
+          return 0;
+      }
+
+    }
+
+    SortableTable.prototype.updateButtonState = function(button, direction) {
+        button.parentElement.setAttribute('aria-sort', direction);
+        var message = this.options.statusMessage;
+        message = message.replace(/%heading%/, button.textContent);
+        message = message.replace(/%direction%/, this.options[direction+'Text']);
+        this.status.textContent = message;
+    };
+
+    SortableTable.prototype.removeButtonStates = function() {
+
+        var tableHeaders = this.table.querySelectorAll('thead th')
+
+        for (var i = tableHeaders.length - 1; i >= 0; i--) {
+          tableHeaders[i].setAttribute('aria-sort', 'none')
+        };
+
+    };
+
+    SortableTable.prototype.addRows = function(tbody, rows) {
+        for(var i = 0; i < rows.length; i++) {
+            tbody.append(rows[i]);
+        }
+    };
+
+    SortableTable.prototype.getTableRowsArray = function(tbody) {
+        var rows = [];
+        var trs = tbody.querySelectorAll('tr');
+        for (var i = 0; i < trs.length; i++) {
+            rows.push(trs[i]);
+        }
+        return rows;
+    };
+
+    SortableTable.prototype.sort = function(rows, columnNumber, sortDirection) {
+
+        var _this = this
+
+        var newRows = rows.sort(function(rowA, rowB) {
+
+          var tdA = rowA.querySelectorAll('td, th')[columnNumber]
+          var tdB = rowB.querySelectorAll('td, th')[columnNumber]
+
+          var rowAIsHeader = rowA.querySelector('th[scope="rowgroup"]')
+          var rowBIsHeader = rowB.querySelector('th[scope="rowgroup"]')
+
+          var valueA = _this.getCellValue(tdA)
+          var valueB = _this.getCellValue(tdB)
+
+            if (rowAIsHeader) {
+              return -1
+            } else if (rowBIsHeader) {
+              return 1
+            } else {
+
+              if(sortDirection === 'ascending') {
+                  if(valueA < valueB) {
+                      return -1;
+                  }
+                  if(valueA > valueB) {
+                      return 1;
+                  }
+                  return 0;
+              } else {
+                  if(valueB < valueA) {
+                      return -1;
+                  }
+                  if(valueB > valueA) {
+                      return 1;
+                  }
+                  return 0;
+              }
+
+            }
+
+        });
+        return newRows
+
+    };
+
+    SortableTable.prototype.getCellValue = function(cell) {
+
+      var cellValue
+
+      if (cell.children.length == 1 && cell.children[0].tagName == "TIME") {
+
+        var timeElement = cell.children[0]
+
+        if (timeElement.getAttribute('datetime')) {
+          cellValue = Date.parse(timeElement.getAttribute('datetime'))
+        } else {
+          cellValue = Date.parse(timeElement.textContent)
+        }
+
+      } else {
+
+        cellValue = cell.getAttribute('data-sort-value') || cell.textContent
+        cellValue = parseFloat(cellValue) || cellValue
+
+      }
+
+
+      return cellValue
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+      var tables = document.querySelectorAll('table');
+
+      for (var i = tables.length - 1; i >= 0; i--) {
+
+        var table = tables[i]
+        var sortableTable = new SortableTable(table, {});
+
+      };
+
+    })
+  </script>
   </head>
 
 
@@ -758,7 +1087,7 @@
   </text>
   <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="214" y="670">
     <tspan>
-      Irish Traveller
+      Traveller of Irish Heritage
     </tspan>
   </text>
   <text opacity="1" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="end" transform="translate(0,0)" x="214" y="700">
@@ -831,602 +1160,175 @@
     <div class="column-full" style="">
 
 
-        <details data-event="view-table" class="normalize" role="group">
-          <summary role="button" aria-controls="details-content-3" aria-expanded="false">
-            <span class="summary">View the numbers in a table</span>
-          </summary>
 
-
-          <div class="panel-border-narrow panel" id="details-content-3" aria-hidden="true">
-
-
-
-  <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer"><table columns="" class="table cropped dataTable no-footer" id="DataTables_Table_0" role="grid">
-    <thead>
-
-
-
-
-
-      <tr role="row"><td class="first sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Ethnicity: activate to sort column descending" width="320" style="width:33.333333333333336%"><button>Ethnicity</button></td><td class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="
-
-            % Expected standard
-
-        : activate to sort column ascending" width="320" style="width:33.333333333333336%">
-          <button>
-            % Expected standard
-          </button>
-        </td><td class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="
-
-            % Higher standard
-
-        : activate to sort column ascending" width="320" style="width:33.333333333333336%">
-          <button>
-            % Higher standard
-          </button>
-        </td></tr>
-    </thead>
-    <tbody>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="All" class="sorting_1">
-
-            <b>All</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            53
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            5
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Asian" class="sorting_1">
-
-            <b>Asian</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            55
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            6
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Asian - Any other" class="sorting_1">
-
-            <b>Asian - Any other</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            61
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            9
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Asian - Bangladeshi" class="sorting_1">
-
-            <b>Asian - Bangladeshi</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            56
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            5
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Asian - Indian" class="sorting_1">
-
-            <b>Asian - Indian</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            65
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            10
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Asian - Pakistani" class="sorting_1">
-
-            <b>Asian - Pakistani</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            47
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            3
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Black" class="sorting_1">
-
-            <b>Black</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            51
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            4
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Black - African" class="sorting_1">
-
-            <b>Black - African</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            54
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            5
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Black - Any other" class="sorting_1">
-
-            <b>Black - Any other</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            48
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            3
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Black - Caribbean" class="sorting_1">
-
-            <b>Black - Caribbean</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            43
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            2
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Chinese" class="sorting_1">
-
-            <b>Chinese</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            71
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            18
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Mixed" class="sorting_1">
-
-            <b>Mixed</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            56
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            7
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Mixed - Any other" class="sorting_1">
-
-            <b>Mixed - Any other</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            57
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            8
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Mixed - White and Asian" class="sorting_1">
-
-            <b>Mixed - White and Asian</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            63
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            10
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Mixed - White and Black African" class="sorting_1">
-
-            <b>Mixed - White and Black African</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            54
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            5
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Mixed - White and Black Caribbean" class="sorting_1">
-
-            <b>Mixed - White and Black Caribbean</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            48
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            3
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="Other - Any other" class="sorting_1">
-
-            <b>Other - Any other</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            50
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            5
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="White" class="sorting_1">
-
-            <b>White</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            53
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            5
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="White - Any other" class="sorting_1">
-
-            <b>White - Any other</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            48
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            5
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="White - British" class="sorting_1">
-
-            <b>White - British</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            54
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            5
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="White - Gypsy/Roma" class="sorting_1">
-
-            <b>White - Gypsy/Roma</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            13
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-
-          </td>
-
-
-      </tr><tr role="row" class="even">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="White - Irish" class="sorting_1">
-
-            <b>White - Irish</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            62
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-            10
-          </td>
-
-
-      </tr><tr role="row" class="odd">
-
-
-
-
-
-                <th style="width:33.333333333333336%" data-order="White - Traveller of Irish Heritage" class="sorting_1">
-
-            <b>White - Traveller of Irish Heritage</b>
-          </th>
-
-          <td style="width:33.333333333333336%">
-            19
-          </td>
-
-
-
-          <td style="width:33.333333333333336%">
-
-          </td>
-
-
-      </tr></tbody>
-  </table></div>
+  <div>
+
+    <table class="grouped-table" style="margin-bottom: 20px;">
+        <thead>
+          <th aria-sort="ascending" width="33%">Ethnicity</th>
+          <th aria-sort="none" width="33%">Reaching expected standard</th>
+          <th aria-sort="none" width="33%">Reaching higher standard</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="100">All</th>
+            <td data-sort-value="53">53%</td>
+            <td data-sort-value="5">5%</td>
+          </tr>
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="100">Asian</th>
+            <td data-sort-value="55">55%</td>
+            <td data-sort-value="6">6%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="110">Bangladeshi</th>
+            <td data-sort-value="56">56%</td>
+            <td data-sort-value="5">5%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="130">Indian</th>
+            <td data-sort-value="65">65%</td>
+            <td data-sort-value="10">10%</td>
+          </tr>
+          <tr>
+            <th scope="row" data-sort-value="140">Pakistani</th>
+            <td data-sort-value="47">47%</td>
+            <td data-sort-value="3">3%</td>
+          </tr>
+          <tr>
+            <th scope="row" data-sort-value="150">Asian other</th>
+            <td data-sort-value="61">61%</td>
+            <td data-sort-value="9">9%</td>
+          </tr>
+
+        </tbody>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="200">Black</th>
+            <td data-sort-value="51">51%</td>
+            <td data-sort-value="4">4%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="210">Black African</th>
+            <td data-sort-value="54">54%</td>
+            <td data-sort-value="5">5%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="220">Black Caribbean</th>
+            <td data-sort-value="43">43%</td>
+            <td data-sort-value="2">2%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="230">Black other</th>
+            <td data-sort-value="48">48%</td>
+            <td data-sort-value="3">3%</td>
+          </tr>
+
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="290">Chinese</th>
+            <td data-sort-value="71">71%</td>
+            <td data-sort-value="18">18%</td>
+          </tr>
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="300">Mixed</th>
+            <td data-sort-value="56">56%</td>
+            <td data-sort-value="7">7%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="310">White and Asian</th>
+            <td data-sort-value="63">63%</td>
+            <td data-sort-value="10">10%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="320">White and Black African</th>
+            <td data-sort-value="54">54%</td>
+            <td data-sort-value="5">5%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="330">White and Black Caribbean</th>
+            <td data-sort-value="48">48%</td>
+            <td data-sort-value="3">3%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="340">Mixed other</th>
+            <td data-sort-value="57">57%</td>
+            <td data-sort-value="8">8%</td>
+          </tr>
+
+        </tbody>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="400">White</th>
+            <td data-sort-value="53">53%</td>
+            <td data-sort-value="5">5%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="410">White British</th>
+            <td data-sort-value="54">54%</td>
+            <td data-sort-value="5">6%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="420">White Irish</th>
+            <td data-sort-value="62">62%</td>
+            <td data-sort-value="10">10%</td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="430">Traveller of Irish Heritage</th>
+            <td data-sort-value="19">19%</td>
+            <td data-sort-value=""></td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="430">Gypsy/Roma</th>
+            <td data-sort-value="13">13%</td>
+            <td data-sort-value=""></td>
+          </tr>
+
+          <tr>
+            <th scope="row" data-sort-value="440">White other</th>
+            <td data-sort-value="48">48%</td>
+            <td data-sort-value="5">5%</td>
+          </tr>
+
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" data-sort-value="500">Other ethnic group</th>
+            <td data-sort-value="50">50%</td>
+            <td data-sort-value="5">5%</td>
+          </tr>
+
+        </tbody>
+      </table>
 
 </div>
 
 
-        </details><div class="print-node"><h3 class="heading-small">View the numbers in a table</h3><div>
+
+   <div class="print-node"><h3 class="heading-small">View the numbers in a table</h3><div>
 
 
 
@@ -12791,14 +12693,6 @@ In the school level data, any figures relating to a cohort of 5 pupils or fewer 
 
     <div id="global-app-error" class="app-error hidden"></div>
     <script src="/static/javascripts/govuk-template.js?0.19.2"></script>
-    <script type="text/javascript" src="/static/vendor/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/javascripts/all.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/highcharts.js"></script>
-    <script type="text/javascript" src="/static/vendor/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/static/vendor/underscore-min.js"></script>
-    <script src="/static/javascripts/rd-data-tools.js"></script>
-    <script src="/static/javascripts/rd-graph.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/modules/exporting.js"></script>
     </script>
     <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
   </body>
