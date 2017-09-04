@@ -99,6 +99,10 @@
 
   @media (min-width: 800px) {
 
+    .table-container-outer {
+
+    }
+
     #main-table thead th, #main-table thead td {
       opacity: 0;
       border-color: transparent;
@@ -126,6 +130,8 @@
 
     var tableContainerOuter = document.querySelector('.table-container-outer')
 
+    var table = tableContainerOuter.querySelector('table')
+
     var tableHeader = tableContainerOuter.querySelector('table thead')
 
 
@@ -143,6 +149,9 @@
 
     tableContainerOuter.appendChild(fixedTable)
 
+    tableContainerOuter.style.paddingTop = "" + tableHeader.offsetHeight + "px";
+    table.style.marginTop = '-' + tableHeader.offsetHeight + "px";
+
     addWidthsToStickyHeader();
 
   }
@@ -151,17 +160,12 @@
   function addWidthsToStickyHeader() {
 
     var table = document.getElementById('main-table')
-
     var mainTableHeaderCells = table.querySelectorAll('thead th, thead td')
-
     var fixedTable = document.getElementById('fixed-table')
-
     var headerCells = fixedTable.querySelectorAll('thead th, thead td')
 
     for (var i = 0; i < mainTableHeaderCells.length; i++) {
-
       mainTableHeaderCells[i].width = mainTableHeaderCells[i].offsetWidth
-
     };
 
     for (var i = 0; i < mainTableHeaderCells.length; i++) {
@@ -172,7 +176,6 @@
 
 
   document.addEventListener('DOMContentLoaded', setupStickyTable)
-
   window.addEventListener('resize', addWidthsToStickyHeader)
 
 </script>
@@ -186,256 +189,256 @@
 
   <h2>Percentage of adults (16+) who were victims of crime by ethnicity, in England and Wales, 2013/14 - 2015/16</h2>
 
-  <div class="table-container-outer">
-  <div class="table-container">
-  <table id="main-table" class="table grouped grouped-rows no-sort table-test">
-    <thead>
-      <tr>
-        <th class="line"></th>
-        <th class="line" colspan="2" >2013/14</th>
-        <th class="line" colspan="2" >2014/15</th>
-        <th class="" colspan="2" >2015/16</th>
-      </tr>
-      <tr>
-        <th class="line"><button>Standard Ethnicity</button></th>
-        <th class="" ><button>%</button></th>
-        <th class="line" ><button>No. of respondants</button></th>
-        <th class="" ><button>%</button></th>
-        <th class="line" ><button>No. of respondants</button></th>
-        <th class="" ><button>%</button></th>
-        <th><button>No. of respondants</button></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th data-order="100" scope="rowgroup">Asian</th>
-        <td class="" data-order="18.6" >18.6</td>
-        <td class="line" data-order="1824" >1,824</td>
-        <td class="" data-order="15.8" >15.8</td>
-        <td class="line" data-order="1649" >1,649</td>
-        <td class="" data-order="18.2" >18.2</td>
-        <td data-order="1790" >1,790</td>
-      </tr>
-      <tr>
-        <th data-order="101" scope="row" >Bangladeshi</th>
-        <td class="" data-order="17.1" >17.1</td>
-        <td class="line" data-order="138" >138</td>
-        <td class="" data-order="11.6" >11.6</td>
-        <td class="line" data-order="123" >123</td>
-        <td class="" data-order="15.2" >15.2</td>
-        <td data-order="135" >135</td>
-      </tr>
-      <tr>
-        <th data-order="102" scope="row" >Chinese</th>
-        <td class="" data-order="14.6" >14.6</td>
-        <td class="line" data-order="169" >169</td>
-        <td class="" data-order="11.4" >11.4</td>
-        <td class="line" data-order="136" >136</td>
-        <td class="" data-order="16.4" >16.4</td>
-        <td data-order="173" >173</td>
-      </tr>
-      <tr>
-        <th data-order="103" scope="row" >Indian</th>
-        <td class="" data-order="20.3" >20.3</td>
-        <td class="line" data-order="767" >767</td>
-        <td class="" data-order="14.4" >14.4</td>
-        <td class="line" data-order="679" >679</td>
-        <td class="" data-order="17.7" >17.7</td>
-        <td data-order="722" >722</td>
-      </tr>
-      <tr>
-        <th data-order="104" scope="row" >Pakistani</th>
-        <td class="" data-order="20.4" >20.4</td>
-        <td class="line" data-order="398" >398</td>
-        <td class="" data-order="21.9" >21.9</td>
-        <td class="line" data-order="388" >388</td>
-        <td class="" data-order="22.5" >22.5</td>
-        <td data-order="428" >428</td>
-      </tr>
-      <tr>
-        <th data-order="109" scope="row" >Asian other</th>
-        <td class="" data-order="15.2" >15.2</td>
-        <td class="line" data-order="352" >352</td>
-        <td class="" data-order="13.9" >13.9</td>
-        <td class="line" data-order="323" >323</td>
-        <td class="" data-order="15.3" >15.3</td>
-        <td data-order="332" >332</td>
-      </tr>
-    </tbody>
-    <tbody>
-      <tr>
-        <th data-order="200" scope="rowgroup" >Black</th>
-        <td class="" data-order="16.9" >16.9</td>
-        <td class="line" data-order="959" >959</td>
-        <td class="" data-order="18" >18.0</td>
-        <td class="line" data-order="902" >902</td>
-        <td class="" data-order="18.6" >18.6</td>
-        <td data-order="902" >902</td>
-      </tr>
-      <tr>
-        <th data-order="201" scope="row" >Black african</th>
-        <td class="" data-order="16" >16.0</td>
-        <td class="line" data-order="564" >564</td>
-        <td class="" data-order="18.7" >18.7</td>
-        <td class="line" data-order="529" >529</td>
-        <td class="" data-order="18.5" >18.5</td>
-        <td data-order="530" >530</td>
-      </tr>
-      <tr>
-        <th data-order="202" scope="row" >Black caribbean</th>
-        <td class="" data-order="17.3" >17.3</td>
-        <td class="line" data-order="350" >350</td>
-        <td class="" data-order="14.7" >14.7</td>
-        <td class="line" data-order="316" >316</td>
-        <td class="" data-order="15.8" >15.8</td>
-        <td data-order="311" >311</td>
-      </tr>
-      <tr>
-        <th data-order="209" scope="row" >Black other</th>
-        <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
-        <td class="line" data-order="45" >45</td>
-        <td class="" data-order="27.6" >27.6</td>
-        <td class="line" data-order="57" >57</td>
-        <td class="" data-order="30.9" >30.9</td>
-        <td data-order="61" >61</td>
-      </tr>
-    </tbody>
-    <tbody>
-      <tr>
-        <th data-order="300" scope="rowgroup" >Mixed</th>
-        <td class="" data-order="27.2" >27.2</td>
-        <td class="line" data-order="339" >339</td>
-        <td class="" data-order="27.9" >27.9</td>
-        <td class="line" data-order="309" >309</td>
-        <td class="" data-order="21.4" >21.4</td>
-        <td data-order="364" >364</td>
-      </tr>
-      <tr>
-        <th data-order="301" scope="row" >Mixed White/Asian</th>
-        <td class="" data-order="23.5" >23.5</td>
-        <td class="line" data-order="80" >80</td>
-        <td class="" data-order="27.9" >27.9</td>
-        <td class="line" data-order="90" >90</td>
-        <td class="" data-order="16.1" >16.1</td>
-        <td data-order="94" >94</td>
-      </tr>
-      <tr>
-        <th data-order="302" scope="row" >Mixed White/Black african</th>
-        <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
-        <td class="line" data-order="46" >46</td>
-        <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
-        <td class="line" data-order="45" >45</td>
-        <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
-        <td data-order="44" >44</td>
-      </tr>
-      <tr>
-        <th data-order="303" scope="row" >Mixed White/Black caribbean</th>
-        <td class="" data-order="29" >29.0</td>
-        <td class="line" data-order="120" >120</td>
-        <td class="" data-order="29.1" >29.1</td>
-        <td class="line" data-order="98" >98</td>
-        <td class="" data-order="20.5" >20.5</td>
-        <td data-order="135" >135</td>
-      </tr>
-      <tr>
-        <th data-order="309" scope="row" >Mixed other</th>
-        <td class="" data-order="29" >29.0</td>
-        <td class="line" data-order="93" >93</td>
-        <td class="" data-order="22.8" >22.8</td>
-        <td class="line" data-order="76" >76</td>
-        <td class="" data-order="25.9" >25.9</td>
-        <td data-order="91" >91</td>
-      </tr>
-    </tbody>
-    <tbody>
-      <tr>
-        <th data-order="400" scope="rowgroup" >White</th>
-        <td class="" data-order="16.8" >16.8</td>
-        <td class="line" data-order="31980" >31,980</td>
-        <td class="" data-order="15.7" >15.7</td>
-        <td class="line" data-order="30212" >30,212</td>
-        <td class="" data-order="14.7" >14.7</td>
-        <td data-order="31967" >31,967</td>
-      </tr>
-      <tr>
-        <th data-order="401" scope="row" >White British</th>
-        <td class="" data-order="16.7" >16.7</td>
-        <td class="line" data-order="30073" >30,073</td>
-        <td class="" data-order="15.5" >15.5</td>
-        <td class="line" data-order="28476" >28,476</td>
-        <td class="" data-order="14.6" >14.6</td>
-        <td data-order="29993" >29,993</td>
-      </tr>
-      <tr>
-        <th data-order="402" scope="row" >White Irish</th>
-        <td class="" data-order="20.6" >20.6</td>
-        <td class="line" data-order="322" >322</td>
-        <td class="" data-order="17.3" >17.3</td>
-        <td class="line" data-order="299" >299</td>
-        <td class="" data-order="17.3" >17.3</td>
-        <td data-order="287" >287</td>
-      </tr>
-      <tr>
-        <th data-order="404" scope="row" >White Gypsy/Roma</th>
-        <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
-        <td class="line" data-order="12" >12</td>
-        <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
-        <td class="line" data-order="10" >10</td>
-        <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
-        <td data-order="15" >15</td>
-      </tr>
-      <tr>
-        <th data-order="409" scope="row" >White other</th>
-        <td class="" data-order="17.2" >17.2</td>
-        <td class="line" data-order="1573" >1,573</td>
-        <td class="" data-order="18.6" >18.6</td>
-        <td class="line" data-order="1427" >1,427</td>
-        <td class="" data-order="16.4" >16.4</td>
-        <td data-order="1672" >1,672</td>
-      </tr>
-    </tbody>
-    <tbody>
-      <tr>
-        <th data-order="600" scope="rowgroup" >Other</th>
-        <td class="" data-order="13.8" >13.8</td>
-        <td class="line" data-order="236" >236</td>
-        <td class="" data-order="14.8" >14.8</td>
-        <td class="line" data-order="234" >234</td>
-        <td class="" data-order="17" >17.0</td>
-        <td data-order="242" >242</td>
-      </tr>
-      <tr>
-        <th data-order="601" scope="row" >Arab</th>
-        <td class="" data-order="9.9" >9.9</td>
-        <td class="line" data-order="88" >88</td>
-        <td class="" data-order="10.3" >10.3</td>
-        <td class="line" data-order="83" >83</td>
-        <td class="" data-order="10" >10.0</td>
-        <td data-order="87" >87</td>
-      </tr>
-      <tr>
-        <th data-order="609" scope="row" >Any other</th>
-        <td class="" data-order="16" >16.0</td>
-        <td class="line" data-order="148" >148</td>
-        <td class="" data-order="17.5" >17.5</td>
-        <td class="line" data-order="151" >151</td>
-        <td class="" data-order="21.2" >21.2</td>
-        <td data-order="155" >155</td>
-      </tr>
-    </tbody>
-    <tbody>
-      <tr>
-        <th data-order="900" scope="rowgroup" >All</th>
-        <td class="" data-order="17" >17.0</td>
-        <td class="line" data-order="35371" >35,371</td>
-        <td class="" data-order="15.9" >15.9</td>
-        <td class="line" data-order="33350" >33,350</td>
-        <td class="" data-order="15.2" >15.2</td>
-        <td data-order="35324" >35,324</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
+  <div class="table-container-outer js-">
+    <div class="table-container scrollable-table-container">
+      <table id="main-table" class="table grouped grouped-rows no-sort table-test">
+        <thead>
+          <tr>
+            <th class="line"></th>
+            <th class="line" colspan="2" >2013/14</th>
+            <th class="line" colspan="2" >2014/15</th>
+            <th class="" colspan="2" >2015/16</th>
+          </tr>
+          <tr>
+            <th class="line"><button>Standard Ethnicity</button></th>
+            <th class="" ><button>%</button></th>
+            <th class="line" ><button>No. of respondants</button></th>
+            <th class="" ><button>%</button></th>
+            <th class="line" ><button>No. of respondants</button></th>
+            <th class="" ><button>%</button></th>
+            <th><button>No. of respondants</button></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th data-order="100" scope="rowgroup">Asian</th>
+            <td class="" data-order="18.6" >18.6</td>
+            <td class="line" data-order="1824" >1,824</td>
+            <td class="" data-order="15.8" >15.8</td>
+            <td class="line" data-order="1649" >1,649</td>
+            <td class="" data-order="18.2" >18.2</td>
+            <td data-order="1790" >1,790</td>
+          </tr>
+          <tr>
+            <th data-order="101" scope="row" >Bangladeshi</th>
+            <td class="" data-order="17.1" >17.1</td>
+            <td class="line" data-order="138" >138</td>
+            <td class="" data-order="11.6" >11.6</td>
+            <td class="line" data-order="123" >123</td>
+            <td class="" data-order="15.2" >15.2</td>
+            <td data-order="135" >135</td>
+          </tr>
+          <tr>
+            <th data-order="102" scope="row" >Chinese</th>
+            <td class="" data-order="14.6" >14.6</td>
+            <td class="line" data-order="169" >169</td>
+            <td class="" data-order="11.4" >11.4</td>
+            <td class="line" data-order="136" >136</td>
+            <td class="" data-order="16.4" >16.4</td>
+            <td data-order="173" >173</td>
+          </tr>
+          <tr>
+            <th data-order="103" scope="row" >Indian</th>
+            <td class="" data-order="20.3" >20.3</td>
+            <td class="line" data-order="767" >767</td>
+            <td class="" data-order="14.4" >14.4</td>
+            <td class="line" data-order="679" >679</td>
+            <td class="" data-order="17.7" >17.7</td>
+            <td data-order="722" >722</td>
+          </tr>
+          <tr>
+            <th data-order="104" scope="row" >Pakistani</th>
+            <td class="" data-order="20.4" >20.4</td>
+            <td class="line" data-order="398" >398</td>
+            <td class="" data-order="21.9" >21.9</td>
+            <td class="line" data-order="388" >388</td>
+            <td class="" data-order="22.5" >22.5</td>
+            <td data-order="428" >428</td>
+          </tr>
+          <tr>
+            <th data-order="109" scope="row" >Asian other</th>
+            <td class="" data-order="15.2" >15.2</td>
+            <td class="line" data-order="352" >352</td>
+            <td class="" data-order="13.9" >13.9</td>
+            <td class="line" data-order="323" >323</td>
+            <td class="" data-order="15.3" >15.3</td>
+            <td data-order="332" >332</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th data-order="200" scope="rowgroup" >Black</th>
+            <td class="" data-order="16.9" >16.9</td>
+            <td class="line" data-order="959" >959</td>
+            <td class="" data-order="18" >18.0</td>
+            <td class="line" data-order="902" >902</td>
+            <td class="" data-order="18.6" >18.6</td>
+            <td data-order="902" >902</td>
+          </tr>
+          <tr>
+            <th data-order="201" scope="row" >Black african</th>
+            <td class="" data-order="16" >16.0</td>
+            <td class="line" data-order="564" >564</td>
+            <td class="" data-order="18.7" >18.7</td>
+            <td class="line" data-order="529" >529</td>
+            <td class="" data-order="18.5" >18.5</td>
+            <td data-order="530" >530</td>
+          </tr>
+          <tr>
+            <th data-order="202" scope="row" >Black caribbean</th>
+            <td class="" data-order="17.3" >17.3</td>
+            <td class="line" data-order="350" >350</td>
+            <td class="" data-order="14.7" >14.7</td>
+            <td class="line" data-order="316" >316</td>
+            <td class="" data-order="15.8" >15.8</td>
+            <td data-order="311" >311</td>
+          </tr>
+          <tr>
+            <th data-order="209" scope="row" >Black other</th>
+            <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
+            <td class="line" data-order="45" >45</td>
+            <td class="" data-order="27.6" >27.6</td>
+            <td class="line" data-order="57" >57</td>
+            <td class="" data-order="30.9" >30.9</td>
+            <td data-order="61" >61</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th data-order="300" scope="rowgroup" >Mixed</th>
+            <td class="" data-order="27.2" >27.2</td>
+            <td class="line" data-order="339" >339</td>
+            <td class="" data-order="27.9" >27.9</td>
+            <td class="line" data-order="309" >309</td>
+            <td class="" data-order="21.4" >21.4</td>
+            <td data-order="364" >364</td>
+          </tr>
+          <tr>
+            <th data-order="301" scope="row" >Mixed White/Asian</th>
+            <td class="" data-order="23.5" >23.5</td>
+            <td class="line" data-order="80" >80</td>
+            <td class="" data-order="27.9" >27.9</td>
+            <td class="line" data-order="90" >90</td>
+            <td class="" data-order="16.1" >16.1</td>
+            <td data-order="94" >94</td>
+          </tr>
+          <tr>
+            <th data-order="302" scope="row" >Mixed White/Black african</th>
+            <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
+            <td class="line" data-order="46" >46</td>
+            <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
+            <td class="line" data-order="45" >45</td>
+            <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
+            <td data-order="44" >44</td>
+          </tr>
+          <tr>
+            <th data-order="303" scope="row" >Mixed White/Black caribbean</th>
+            <td class="" data-order="29" >29.0</td>
+            <td class="line" data-order="120" >120</td>
+            <td class="" data-order="29.1" >29.1</td>
+            <td class="line" data-order="98" >98</td>
+            <td class="" data-order="20.5" >20.5</td>
+            <td data-order="135" >135</td>
+          </tr>
+          <tr>
+            <th data-order="309" scope="row" >Mixed other</th>
+            <td class="" data-order="29" >29.0</td>
+            <td class="line" data-order="93" >93</td>
+            <td class="" data-order="22.8" >22.8</td>
+            <td class="line" data-order="76" >76</td>
+            <td class="" data-order="25.9" >25.9</td>
+            <td data-order="91" >91</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th data-order="400" scope="rowgroup" >White</th>
+            <td class="" data-order="16.8" >16.8</td>
+            <td class="line" data-order="31980" >31,980</td>
+            <td class="" data-order="15.7" >15.7</td>
+            <td class="line" data-order="30212" >30,212</td>
+            <td class="" data-order="14.7" >14.7</td>
+            <td data-order="31967" >31,967</td>
+          </tr>
+          <tr>
+            <th data-order="401" scope="row" >White British</th>
+            <td class="" data-order="16.7" >16.7</td>
+            <td class="line" data-order="30073" >30,073</td>
+            <td class="" data-order="15.5" >15.5</td>
+            <td class="line" data-order="28476" >28,476</td>
+            <td class="" data-order="14.6" >14.6</td>
+            <td data-order="29993" >29,993</td>
+          </tr>
+          <tr>
+            <th data-order="402" scope="row" >White Irish</th>
+            <td class="" data-order="20.6" >20.6</td>
+            <td class="line" data-order="322" >322</td>
+            <td class="" data-order="17.3" >17.3</td>
+            <td class="line" data-order="299" >299</td>
+            <td class="" data-order="17.3" >17.3</td>
+            <td data-order="287" >287</td>
+          </tr>
+          <tr>
+            <th data-order="404" scope="row" >White Gypsy/Roma</th>
+            <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
+            <td class="line" data-order="12" >12</td>
+            <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
+            <td class="line" data-order="10" >10</td>
+            <td class="" data-order="0" ><span class="missing-data not-collected"></span><span class="visually-hidden">not collected</span></td>
+            <td data-order="15" >15</td>
+          </tr>
+          <tr>
+            <th data-order="409" scope="row" >White other</th>
+            <td class="" data-order="17.2" >17.2</td>
+            <td class="line" data-order="1573" >1,573</td>
+            <td class="" data-order="18.6" >18.6</td>
+            <td class="line" data-order="1427" >1,427</td>
+            <td class="" data-order="16.4" >16.4</td>
+            <td data-order="1672" >1,672</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th data-order="600" scope="rowgroup" >Other</th>
+            <td class="" data-order="13.8" >13.8</td>
+            <td class="line" data-order="236" >236</td>
+            <td class="" data-order="14.8" >14.8</td>
+            <td class="line" data-order="234" >234</td>
+            <td class="" data-order="17" >17.0</td>
+            <td data-order="242" >242</td>
+          </tr>
+          <tr>
+            <th data-order="601" scope="row" >Arab</th>
+            <td class="" data-order="9.9" >9.9</td>
+            <td class="line" data-order="88" >88</td>
+            <td class="" data-order="10.3" >10.3</td>
+            <td class="line" data-order="83" >83</td>
+            <td class="" data-order="10" >10.0</td>
+            <td data-order="87" >87</td>
+          </tr>
+          <tr>
+            <th data-order="609" scope="row" >Any other</th>
+            <td class="" data-order="16" >16.0</td>
+            <td class="line" data-order="148" >148</td>
+            <td class="" data-order="17.5" >17.5</td>
+            <td class="line" data-order="151" >151</td>
+            <td class="" data-order="21.2" >21.2</td>
+            <td data-order="155" >155</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th data-order="900" scope="rowgroup" >All</th>
+            <td class="" data-order="17" >17.0</td>
+            <td class="line" data-order="35371" >35,371</td>
+            <td class="" data-order="15.9" >15.9</td>
+            <td class="line" data-order="33350" >33,350</td>
+            <td class="" data-order="15.2" >15.2</td>
+            <td data-order="35324" >35,324</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <p>Test</p>
