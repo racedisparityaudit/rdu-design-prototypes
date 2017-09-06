@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="/static/javascripts/polyfills/addEventListener.js"></script>
+    <script src="/static/javascripts/polyfills/classList.js"></script>
   </head>
 <body>
 
@@ -31,6 +33,11 @@
 
   thead th, thead td {
     font-weight: bold;
+  }
+
+  thead tr th:first-child,
+  thead tr td:first-child {
+    padding-left: 0;
   }
 
   thead button {
@@ -76,6 +83,7 @@
   /* Hide the fixed table */
   table.fixed {
     display: none;
+    width: auto;
   }
 
   @media (min-width: 800px) {
@@ -152,40 +160,71 @@
       parentParentElement.style.paddingTop = height;
       tableElement.style.marginTop = '-' + height;
 
-
       var mainTableHeaderCells = tableElement.querySelectorAll('thead th, thead td')
       var headerCells = fixedTable.querySelectorAll('thead th, thead td')
 
       for (var i = 0; i < mainTableHeaderCells.length; i++) {
-
         headerCells[i].style.width = widthForElement(mainTableHeaderCells[i])
-
       };
 
 
     }
 
     function heightForElement(element) {
-      return getComputedStyle(element).height
+
+      var height
+
+      if ('getComputedStyle' in window) {
+        height = getComputedStyle(element).height
+      }
+
+      if (height == 'auto') {
+        height = null
+      }
+
+      if (!height && element.getBoundingClientRect &&
+        element.getBoundingClientRect().height) {
+        height = element.getBoundingClientRect().height + 'px'
+      }
+
+
+      return height
     }
 
     function widthForElement(element) {
-      return getComputedStyle(element).width
+
+      var width
+
+      if ('getComputedStyle' in window) {
+        width = getComputedStyle(element).width
+      }
+
+      return width
     }
 
     setup()
 
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  if ('addEventListener' in document &&
+      document.querySelectorAll &&
+      'classList' in document.body
+    ) {
 
-    var tables = document.querySelectorAll('table.fixed-headers')
+    document.addEventListener('DOMContentLoaded', function() {
 
-    for (table of tables) {
-      new TableWithFixedHeader(table)
-    }
+      var tables = document.querySelectorAll('table.fixed-headers')
 
-  })
+      for (var i = tables.length - 1; i >= 0; i--) {
+        new TableWithFixedHeader(tables[i])
+      };
+
+    })
+
+
+  }
+
+
 
 
 </script>
@@ -211,7 +250,7 @@
             <th colspan="2">2015/16</th>
           </tr>
           <tr>
-            <th class="line">Ethnicity</th>
+            <th class="line" id="cell1">Ethnicity</th>
             <th>Amount</th>
             <th class="line">Value</th>
             <th>Amount</th>
