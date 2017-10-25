@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/cms.css" />
+
+  </head>
+
+
+
+  <body class="">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <nav id="global-header" class="top-bar" data-topbar="" role="navigation">
+      <div class="header-wrapper">
+        <div class="column-one-third">
+          <span class="site-title">
+            <a href="/cms">
+              Ethnicity facts and figures
+            </a>
+          </span>
+        </div>
+        <div class="column-two-thirds">
+          <div class="site-sub-title">Content management</div>
+
+            <a href="/auth/logout">
+              Log out
+            </a>
+
+        </div>
+      </div>
+    </nav>
+
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href="/" data-event="breadcrumb-homepage">Home</a></li>
+        </ol>
+      </div>
+
+      <!-- CONTENT STARTS HERE -->
+
+      <style type="text/css">
+
+        fieldset {
+          margin-top: 20px;
+          margin-bottom: 40px;
+        }
+
+        .radio-label {
+          font-weight: normal;
+          padding-top: 7px;
+          padding-bottom: 7px;
+          margin: 0;
+        }
+
+        .radio-heading {
+          margin-bottom: 15px;
+        }
+
+        label {
+          text-transform: none;
+        }
+      </style>
+
+      <script>
+
+        function timeSeriesChanged(event) {
+          showIfYes('time-periods-detail', event.target.value);
+        }
+
+        function geographyChanged(event) {
+          showIfYes('geography-detail', event.target.value);
+        }
+
+        function showIfYes(elementId, value) {
+
+          var element = document.getElementById(elementId)
+
+          if (element) {
+            if (value == 'Yes') {
+              element.classList.remove('js-hidden')
+            } else {
+              element.classList.add('js-hidden')
+            }
+          }
+
+        }
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById('time-series-1').addEventListener('change', timeSeriesChanged)
+          document.getElementById('time-series-2').addEventListener('change', timeSeriesChanged)
+        })
+
+        document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById('geography-1').addEventListener('change', geographyChanged)
+          document.getElementById('geography-2').addEventListener('change', geographyChanged)
+        })
+      </script>
+
+      <fieldset>
+
+        <legend class="radio-heading">
+          <h1 class="heading-medium">
+            What is the main metric?
+          </h1>
+        </legend>
+
+        <div class="multiple-choice">
+          <input id="metric-1" type="radio" name="metric" value="Yes">
+          <label for="metric-1" class="radio-label">Percentage (eg of adults who smoke)</label>
+        </div>
+
+        <div class="multiple-choice">
+          <input id="metric-2" type="radio" name="metric" value="No">
+          <label for="metric-2" class="radio-label">Amount of money (eg average hourly pay)</label>
+        </div>
+
+        <div class="multiple-choice">
+          <input id="metric-4" type="radio" name="metric" value="No">
+          <label for="metric-4" class="radio-label">A rate (eg number of arrests compared to a population estimate)</label>
+        </div>
+
+        <div class="multiple-choice">
+          <input id="metric-3" type="radio" name="metric" value="No">
+          <label for="metric-3" class="radio-label">Other number (eg of homeless households)</label>
+        </div>
+
+      </fieldset>
+
+      <fieldset>
+
+        <legend class="radio-heading">
+          <h1 class="heading-medium">
+            How are the ethnicities categorised?
+          </h1>
+        </legend>
+
+        <div class="multiple-choice">
+          <input id="1" type="radio" name="categories" value="1">
+          <label for="1" class="radio-label">White, Other</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="6" type="radio" name="categories" value="1">
+          <label for="6" class="radio-label">White British, Other</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="2" type="radio" name="categories" value="2">
+          <label for="2" class="radio-label">Asian, Black, Mixed, White, Other</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="3" type="radio"6 name="categories" value="3">
+          <label for="3" class="radio-label">Asian, Black, White, Other</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="4" type="radio" name="categories" value="4">
+          <label for="4" class="radio-label">16 ethnic categories from the 2001 census (in 5 broad categories)</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="4" type="radio" name="categories" value="4">
+          <label for="4" class="radio-label">18 ethnic categories from the 2011 census (in 5 broad categories)</label>
+        </div>
+        <div class="multiple-choice">
+          <input id="5" type="radio" name="categories" value="4">
+          <label for="5" class="radio-label">19 ethnic categories from the Department for Education school census (in 6 broad categories)</label>
+        </div>
+      </fieldset>
+
+
+      <fieldset>
+
+        <legend class="radio-heading">
+          <h1 class="heading-medium">
+            Do you have data by time period?
+          </h1>
+        </legend>
+
+        <div class="multiple-choice">
+          <input id="time-series-1" type="radio" name="time-series" value="Yes">
+          <label for="time-series-1" class="radio-label">Yes</label>
+        </div>
+
+        <div class="panel panel-border-narrow js-hidden" id="time-periods-detail">
+          <fieldset>
+            <div class="multiple-choice">
+              <input id="time-periods-3" type="radio" name="time-periods" value="Yes">
+              <label for="time-periods-3" class="radio-label">By month</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="time-periods-1" type="radio" name="time-periods" value="Yes">
+              <label for="time-periods-1" class="radio-label">By calendar year (Jan-Dec)</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="time-periods-1" type="radio" name="time-periods" value="Yes">
+              <label for="time-periods-1" class="radio-label">By financial year (Apr-Mar)</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="time-periods-4" type="radio" name="time-periods" value="Yes">
+              <label for="time-periods-4" class="radio-label">By quarter</label>
+            </div>
+          </fieldset>
+
+        </div>
+
+        <div class="multiple-choice">
+          <input id="time-series-2" type="radio" name="time-series" value="No">
+          <label for="time-series-2" class="radio-label">No</label>
+        </div>
+
+      </fieldset>
+
+      <fieldset>
+
+        <legend class="radio-heading">
+          <h1 class="heading-medium">
+            Is the data broken down by gender or sex?
+          </h1>
+        </legend>
+
+        <div class="multiple-choice">
+          <input id="gender-1" type="radio" name="metric" value="Yes">
+          <label for="gender-1" class="radio-label">Gender</label>
+        </div>
+
+        <div class="multiple-choice">
+          <input id="gender-2" type="radio" name="metric" value="Yes">
+          <label for="gender-2" class="radio-label">Sex</label>
+        </div>
+
+        <div class="multiple-choice">
+          <input id="gender-3" type="radio" name="metric" value="Yes">
+          <label for="gender-3" class="radio-label">No</label>
+        </div>
+
+      </fieldset>
+
+
+      <fieldset>
+
+        <legend class="radio-heading">
+          <h1 class="heading-medium">
+            Is the data broken down geography?
+          </h1>
+        </legend>
+
+        <div class="multiple-choice">
+          <input id="geography-1" type="radio" name="geography" value="Yes">
+          <label for="geography-1" class="radio-label">Yes</label>
+        </div>
+
+        <div class="panel panel-border-narrow js-hidden" id="geography-detail">
+          <fieldset>
+            <div class="multiple-choice">
+              <input id="geography-type-1" type="radio" name="geography-type" value="">
+              <label for="geography-type-1" class="radio-label">By local authority</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="geography-type-2" type="radio" name="geography-type" value="">
+              <label for="geography-type-2" class="radio-label">By 9 English regions and Wales</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="geography-type-3" type="radio" name="geography-type" value="">
+              <label for="geography-type-3" class="radio-label">Police Force area</label>
+            </div>
+            <div class="multiple-choice">
+              <input id="geography-type-4" type="radio" name="geography-type" value="">
+              <label for="geography-type-4" class="radio-label">England and Wales</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="multiple-choice">
+          <input id="geography-2" type="radio" name="geography" value="No">
+          <label for="geography-2" class="radio-label">No</label>
+        </div>
+
+      </fieldset>
+
+
+      <div>
+        <button class="button">Show me the chart to use</button>
+      </div>
+      <!-- CONTENT ENDS HERE -->
+    </main>
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-one-third'>
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+              <li>
+                  <a href="/">Site preview</a>
+              </li>
+              <li>
+                  <a href="/cms/">CMS</a>
+              </li>
+              <li>
+                  <a href="/prototype/">Prototype</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="global-app-error" class="app-error hidden"></div>
+    <script src="/static/javascripts/govuk-template.js?0.19.2"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/javascripts/all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/highcharts.js"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/underscore-min.js"></script>
+    <script src="/static/javascripts/rd-data-tools.js"></script>
+    <script src="/static/javascripts/rd-graph.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/modules/exporting.js"></script>
+    </script>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
