@@ -30,34 +30,16 @@
     <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
     <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
-    <link rel="stylesheet" type="text/css" href="/static/stylesheets/cms.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/cms-v2.css" />
+
 
   </head>
 
 
 
-  <body class="rd_cms">
+  <body class="admin">
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-    <nav id="global-header" class="top-bar" data-topbar="" role="navigation">
-      <div class="header-wrapper">
-        <div class="column-one-third">
-          <span class="site-title">
-            <a href="/cms">
-              Ethnicity facts and figures
-            </a>
-          </span>
-        </div>
-        <div class="column-two-thirds">
-          <div class="site-sub-title">Content management</div>
-
-            <a href="/auth/logout">
-              Log out
-            </a>
-
-        </div>
-      </div>
-    </nav>
 
     <div id="global-header-bar"></div>
 
@@ -65,98 +47,48 @@
 
       <div class="breadcrumbs">
         <ol>
-          <li><a href="/" data-event="breadcrumb-homepage">Home</a></li>
-          <li>
-            <a href="/crime-justice-and-the-law" data-event="breadcrumb-crime-justice-and-the-law">Crime, justice and the law</a>
-          </li>
-          <li><a href="/sub-topic.html">Crime</a></li>
+          <li><a href="/" data-event="breadcrumb-homepage">Admin</a></li>
         </ol>
       </div>
 
       <!-- CONTENT STARTS HERE -->
 
-      <div class="grid-row">
-        <div class="column-full">
+      <h1 class="heading-xlarge">Measures</h1>
 
-          <div style="margin-top: 10px; border: 4px solid grey; padding: 10px; font-size: 19px;">
+      <p>By topic:</p>
 
-            <div style="display: table; width: 100%;">
-              <div style="display:table-cell; width:50%;">Version <b style="font-weight: bold; margin-right: 20px;">2.0</b> Status: <b style="font-weight: bold; margin-right: 20px;">Published</b> <a href="#">View page</a></div>
-              <div style="display:table-cell; width:50%; text-align: right;">
-
-
-                <button style="border-width: 0; color: white; font-weight: bold; padding: 5px 20px; cursor: pointer;"><a href="create-new-version.html" style="color: white; text-decoration: none;">Edit / Create new edition</a></button>
-
-                <button style="border-width: 0; color: white; font-weight: bold; padding: 5px 20px; cursor: pointer; background-color: #B10E1E;"><a href="create-new-version.html" style="color: white; text-decoration: none;">Unpublish</a></button>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="grid-row">
-
-        <div class="column-one-third">
-          <h1 class="heading-large">Edit measure</h1>
-
-          <style>
-            .rd_cms input[disabled],
-            .rd_cms textarea[disabled] {
-              border-color: #BFC1C3;
-              color: black;
-            }
-
-          </style>
-
-          <div class="preview">
-            <ul class="button-group" style="margin-left:0;" data-topbar="" data-options="sticky_on: large">
-
-              <li>
-                <label style="text-align: left; text-transform: none;">External edit summary</label>
-                <textarea disabled cols="30" rows="3" style="width: 100%; box-sizing: border-box; margin-bottom: 0em; text-align: left; padding: 10px; display: block;" value="">Clarified use of data</textarea>
-
-              </li>
-              <li>
-                <label style="text-align: left; text-transform: none;">Internal edit summary</label>
-                <textarea disabled cols="30" rows="3" style="width: 100%; box-sizing: border-box; margin-bottom: 0em; text-align: left; padding: 10px; display: block;" value="">Made explicit mention of the Open Government licence</textarea>
-
-              </li>
+      <ul class="measures">
+        <li><a href="/cms-measure-topic">Health</a></li>
+        <li><a href="/cms-measure-topic">Work, pay and benefits</a></li>
+        <li><a href="/cms-measure-topic">Housing</a></li>
+        <li><a href="/cms-measure-topic">Education, skills and training</a></li>
+        <li><a href="/cms-measure-topic">Culture and community</a></li>
+        <li><a href="/cms-measure-topic">Crime, justice and the law</a></li>
+        <li class="uncategorised"><a href="/cms-measure-uncategorised">Uncategorised</a></li>
+      </ul>
 
 
-<!--               <li>
-                <label for="submit-form" type="submit" class="button" name="save">
-                    Save
-                </label>
-              </li> -->
-
-            </ul>
-          </div>
-
-        </div>
-
-        <div class="column-two-thirds">
-
-          <div class="edit-form" style="margin-top: 150px;">
-            <form>
-
-              <label for="title"><label for="title">Title</label></label>
-              <input disabled id="title" name="title" type="text" value="Fear of crime" style="font-size: 24px; font-weight: bold; line-height: 30px;">
-
-              <label for="date"><label for="date">Publication date</label></label>
-              <input disabled id="date" name="date" type="text" value="2017-07-03"/>
-
-              <p>etc.</p>
-
-            </form>
-          </div>
-        </div>
+      <div style="margin-top: 44px;"><a href="#" class="button">Add a new measure</a></div>
 
 
-      </div>
+      <style>
 
+        .measures {
+          list-style-type: none;
+          margin-left: 0;
+        }
 
+        .measures li {
+          font-weight: bold;
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+
+        .measures .uncategorised {
+          margin-top: 34px;
+        }
+
+      </style>
 
       <!-- CONTENT ENDS HERE -->
     </main>

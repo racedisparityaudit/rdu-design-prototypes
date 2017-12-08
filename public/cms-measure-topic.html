@@ -30,34 +30,16 @@
     <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
     <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
-    <link rel="stylesheet" type="text/css" href="/static/stylesheets/cms.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/cms-v2.css" />
+
 
   </head>
 
 
 
-  <body class="rd_cms">
+  <body class="admin">
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-    <nav id="global-header" class="top-bar" data-topbar="" role="navigation">
-      <div class="header-wrapper">
-        <div class="column-one-third">
-          <span class="site-title">
-            <a href="/cms">
-              Ethnicity facts and figures
-            </a>
-          </span>
-        </div>
-        <div class="column-two-thirds">
-          <div class="site-sub-title">Content management</div>
-
-            <a href="/auth/logout">
-              Log out
-            </a>
-
-        </div>
-      </div>
-    </nav>
 
     <div id="global-header-bar"></div>
 
@@ -65,98 +47,159 @@
 
       <div class="breadcrumbs">
         <ol>
-          <li><a href="/" data-event="breadcrumb-homepage">Home</a></li>
-          <li>
-            <a href="/crime-justice-and-the-law" data-event="breadcrumb-crime-justice-and-the-law">Crime, justice and the law</a>
-          </li>
-          <li><a href="/sub-topic.html">Crime</a></li>
+          <li><a href="/" data-event="breadcrumb-homepage">Admin</a></li>
+          <li><a href="/measures" data-event="breadcrumb-homepage">Measures</a></li>
         </ol>
       </div>
 
       <!-- CONTENT STARTS HERE -->
 
-      <div class="grid-row">
-        <div class="column-full">
-
-          <div style="margin-top: 10px; border: 4px solid grey; padding: 10px; font-size: 19px;">
-
-            <div style="display: table; width: 100%;">
-              <div style="display:table-cell; width:50%;">Version <b style="font-weight: bold; margin-right: 20px;">2.0</b> Status: <b style="font-weight: bold; margin-right: 20px;">Published</b> <a href="#">View page</a></div>
-              <div style="display:table-cell; width:50%; text-align: right;">
+      <h1 class="heading-xlarge">Health</h1>
 
 
-                <button style="border-width: 0; color: white; font-weight: bold; padding: 5px 20px; cursor: pointer;"><a href="create-new-version.html" style="color: white; text-decoration: none;">Edit / Create new edition</a></button>
+      <table class="measures">
+        <thead style="display: none;">
+          <th>Measure name</th>
+          <th></th>
+          <th>Status</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr>
+            <th colspan="4"><h2>Access to treatment</h2></th>
+          </tr>
+          <tr>
+            <td><a href="/cms-published-measure-read-only">Satisfaction with access to GP services</a></td>
+            <td><a href="#">2 versions</a></td>
+            <td>Published</td>
+            <td><a href="#">View</a></td>
+          </tr>
+          <tr>
+            <td><a href="/cms-published-measure-read-only">Adults receiving treatment for mental or emotional problems</a></td>
+            <td><a href="#">2 versions</a></td>
+            <td>Published</td>
+            <td><a href="#">View</a></td>
+          </tr>
+          <tr>
+            <td><a href="/cms-measure-page-dept-only">Detentions under the Mental Health Act</a></td>
+            <td></td>
+            <td>Draft</td>
+            <td><a href="#">Preview</a></td>
+          </tr>
+          <tr class="other-dept">
+            <td>Access to NHS dental services</td>
+            <td></td>
+            <td>Department review</td>
+            <td></td>
+          </tr>
+          <tr class="other-dept">
+            <td>Adults using NHS-funded mental health and learning disability services</td>
+            <td></td>
+            <td>Department review</td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th colspan="4"><h2>Exercise and activity</h2></th>
+          </tr>
+          <tr class="other-dept">
+            <td>Physical activity</td>
+            <td></td>
+            <td>Draft</td>
+            <td></td>
+          </tr>
+          <tr class="other-dept">
+            <td>Physical inactivity</td>
+            <td></td>
+            <td>Draft</td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th colspan="4"><h2>Patient experiences</h2></th>
+          </tr>
+          <tr>
+            <td><a href="#">Patient experience of primary care - GP services</a></td>
+            <td></td>
+            <td>Approved</td>
+            <td><a href="#">Preview</a></td>
+          </tr>
+          <tr>
+            <td><a href="#">Patient satisfaction with GP out-of-hours services</a></td>
+            <td><a href="#">3 versions</a></td>
+            <td>Published</td>
+            <td><a href="#">View</a></td>
+          </tr>
+          <tr>
+            <td><a href="#">Inpatient satisfaction with hospital care</a></td>
+            <td></td>
+            <td>Approved</td>
+            <td><a href="#">Preview</a></td>
+          </tr>
+          <tr>
+            <td><a href="#">Patient satisfaction with NHS dental services</a></td>
+            <td><a href="#">3 versions</a></td>
+            <td>Published</td>
+            <td><a href="#">View</a></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th colspan="4"><h2>Patient outcomes</h2></th>
+          </tr>
+          <tr>
+            <td><a href="#">Health related quality of life for older people</a></td>
+            <td></td>
+            <td>Approved</td>
+            <td><a href="#">Preview</a></td>
+          </tr>
+          <tr>
+            <td><a href="#">Outcomes for treatment for anxiety and depression</a></td>
+            <td><a href="#">3 versions</a></td>
+            <td>Published</td>
+            <td><a href="#">View</a></td>
+          </tr>
+          <tr>
+            <td><a href="#">HIV infection late-stage diagnosis in people aged 15 and older</a></td>
+            <td></td>
+            <td>Approved</td>
+            <td><a href="#">Preview</a></td>
+          </tr>
+          <tr>
+            <td><a href="#">Cancer diagnosis at an early stage</a></td>
+            <td><a href="#">3 versions</a></td>
+            <td>Published</td>
+            <td><a href="#">View</a></td>
+          </tr>
+        </tbody>
+      </table>
 
-                <button style="border-width: 0; color: white; font-weight: bold; padding: 5px 20px; cursor: pointer; background-color: #B10E1E;"><a href="create-new-version.html" style="color: white; text-decoration: none;">Unpublish</a></button>
+      <style>
 
-              </div>
-            </div>
-          </div>
+        table.measures td,
+        table.measures th {
+          font-size: 19px;
+        }
 
-        </div>
-      </div>
+        table.measures td {
+          text-align: left;
+          padding-right: 10px;
+        }
 
-      <div class="grid-row">
+        table.measures h2 {
+          font-size: 24px;
+          font-weight: bold;
+          padding-top: 14px;
+        }
 
-        <div class="column-one-third">
-          <h1 class="heading-large">Edit measure</h1>
-
-          <style>
-            .rd_cms input[disabled],
-            .rd_cms textarea[disabled] {
-              border-color: #BFC1C3;
-              color: black;
-            }
-
-          </style>
-
-          <div class="preview">
-            <ul class="button-group" style="margin-left:0;" data-topbar="" data-options="sticky_on: large">
-
-              <li>
-                <label style="text-align: left; text-transform: none;">External edit summary</label>
-                <textarea disabled cols="30" rows="3" style="width: 100%; box-sizing: border-box; margin-bottom: 0em; text-align: left; padding: 10px; display: block;" value="">Clarified use of data</textarea>
-
-              </li>
-              <li>
-                <label style="text-align: left; text-transform: none;">Internal edit summary</label>
-                <textarea disabled cols="30" rows="3" style="width: 100%; box-sizing: border-box; margin-bottom: 0em; text-align: left; padding: 10px; display: block;" value="">Made explicit mention of the Open Government licence</textarea>
-
-              </li>
-
-
-<!--               <li>
-                <label for="submit-form" type="submit" class="button" name="save">
-                    Save
-                </label>
-              </li> -->
-
-            </ul>
-          </div>
-
-        </div>
-
-        <div class="column-two-thirds">
-
-          <div class="edit-form" style="margin-top: 150px;">
-            <form>
-
-              <label for="title"><label for="title">Title</label></label>
-              <input disabled id="title" name="title" type="text" value="Fear of crime" style="font-size: 24px; font-weight: bold; line-height: 30px;">
-
-              <label for="date"><label for="date">Publication date</label></label>
-              <input disabled id="date" name="date" type="text" value="2017-07-03"/>
-
-              <p>etc.</p>
-
-            </form>
-          </div>
-        </div>
-
-
-      </div>
-
-
+        table.measures .other-dept td,
+        table.measures .other-dept td a {
+          color: #6F777B;
+          text-decoration: none;
+        }
+      </style>
 
       <!-- CONTENT ENDS HERE -->
     </main>
