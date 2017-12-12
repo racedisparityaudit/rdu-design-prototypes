@@ -57,6 +57,53 @@
         <div class="column-one-third">
 
           <div class="form-group">
+            <label class="form-label" for="measure">Measure</label>
+            <input type="text" class="form-control" id="measure" style="width: 100%;">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="measure-type">Type</label>
+            <select class="form-control" style="width: 100%" id="measure-type">
+              <option value="percentage">Percentage</option>
+              <option value="rate">Rate</option>
+              <option value="number">Number</option>
+              <option value="other">Other</option>
+            </select>
+
+            <div id="include-number-option" class="checkbox-option"><input type="checkbox" id="include-number" /><label for="include-number">Include number</label></div>
+
+            <div id="include-number-option" class="checkbox-option"><input type="checkbox" id="include-respondents" /><label for="include-respondents">Include respondents</label></div>
+
+          </div>
+
+
+<!--           <fieldset>
+
+            <legend class="radio-heading">Type</legend>
+
+            <div class="">
+              <input id="metric-1" type="radio" name="metric" value="Yes">
+              <label for="metric-1" class="radio-label">Percentage</label>
+            </div>
+
+            <div class="">
+              <input id="metric-4" type="radio" name="metric" value="No">
+              <label for="metric-4" class="radio-label">Rate</label>
+            </div>
+
+            <div class="">
+              <input id="metric-2" type="radio" name="metric" value="No">
+              <label for="metric-2" class="radio-label">Amount of money</label>
+            </div>
+
+            <div class="">
+              <input id="metric-3" type="radio" name="metric" value="No">
+              <label for="metric-3" class="radio-label">Other number</label>
+            </div>
+
+          </fieldset> -->
+
+          <div class="form-group">
             <label class="form-label">Ethnicity categories</label>
             <select class="form-control" style="width: 100%" id="ethnicity-categories">
               <option value="white-other">White, Other</option>
@@ -109,6 +156,7 @@
           <div id="warning" class="hidden">Warning: Too many columns and rows</div>
 
           <table class="editable-table" id="editable-table">
+            <legend id="legend">Table title</legend>
             <thead>
               <tr>
                 <th>Ethnicity</th>
@@ -157,6 +205,8 @@
         var fromSelector = document.getElementById('from')
         var toSelector = document.getElementById('to')
         var warningElement = document.getElementById('warning')
+        var measureElement = document.getElementById('measure')
+        var measureTypeElement = document.getElementById('measure-type')
 
         var ethnicityCategories = {
           "white-other": ["White", "Other"],
@@ -293,7 +343,54 @@
           }
         }
 
+        function updateTableName() {
+
+          var title = '';
+
+          switch (measureType.value) {
+            case 'percentage':
+              title += 'Percentage of '; break;
+            case 'rate':
+              title += 'Rate of '; break;
+            case 'number':
+              title += 'Number of '; break;
+          }
+
+          title += measureElement.value + ' '
+
+          title += 'by ethnicity '
+
+          switch (secondaryDimensionsSelect.value) {
+            case 'regions':
+              title += 'and region '; break;
+            case 'calendar-years':
+              title += 'over time '; break;
+            case 'financial-years':
+              title += 'over time '; break;
+            case 'financial-quarters':
+              title += 'over time '; break;
+            case 'gender':
+              title += 'and gender '; break;
+            case 'sex':
+              title += 'and sex '; break;
+            case 'local-authority':
+              title += 'and local authority '; break;
+            case 'age-group':
+              title += 'and age group '; break;
+            case 'social-economic':
+              title += 'and social-economic status '; break;
+            case 'weekly-income':
+              title += 'and household weekly income '; break;
+
+          }
+
+          legend.textContent = title
+
+        }
+
         function secondaryDimensionChanged() {
+
+          updateTableName();
 
           var secondaryDimension = secondaryDimensions[secondaryDimensionsSelect.value]
 
@@ -368,11 +465,34 @@
             firstHeader.textContent = 'Ethnicity'
             theadRow.appendChild(firstHeader)
 
-            for (x of secondaryDimensionCategories) {
+            if (secondaryDimensionsSelect.value == 'none') {
+
               var header = document.createElement('th')
-              header.textContent = x
+
+              switch (measureTypeElement.value) {
+                case 'percentage':
+                  header.textContent = 'Percentage'; break;
+                case 'rate':
+                  header.textContent = 'Rate'; break;
+                case 'number':
+                  header.textContent = 'Number'; break;
+                case 'other':
+                  header.textContent = measureElement.value; break;
+              }
+
               theadRow.appendChild(header)
+
+
+            } else {
+
+              for (x of secondaryDimensionCategories) {
+                var header = document.createElement('th')
+                header.textContent = x
+                theadRow.appendChild(header)
+              }
+
             }
+
             thead.appendChild(theadRow)
 
             for (category of categories) {
@@ -452,9 +572,13 @@
         }
 
 
+        measureElement.addEventListener('change', updateTableName)
+
         secondaryDimensionsSelect.addEventListener('change', secondaryDimensionChanged)
         ethnicityCategoriesSelect.addEventListener('change', updateTable)
         secondaryDimensionsSelect.addEventListener('change', updateTable)
+        measureTypeElement.addEventListener('change', updateTable)
+
         fromSelector.addEventListener('change', updateTable)
         toSelector.addEventListener('change', updateTable)
       </script>
@@ -598,6 +722,20 @@
           margin-bottom: 1em;
           font-size: 16px;
         }
+
+        #legend {
+          font-weight: bold;
+          margin-bottom: 1em;
+        }
+
+        .checkbox-option {
+          margin-top: 5px;
+        }
+
+        .checkbox-option label {
+          margin-left: 5px;
+        }
+
       </style>
 
       <!-- CONTENT ENDS HERE -->
