@@ -473,6 +473,28 @@
 
           var categories = ethnicityCategories[ethnicityCategoriesSelect.value]
           var secondaryDimension = secondaryDimensions[secondaryDimensionsSelect.value]
+          var thirdDimensions = []
+
+
+          switch (measureTypeElement.value) {
+
+            case 'percentage':
+              thirdDimensions.push('%'); break;
+            case 'rate':
+              thirdDimensions.push('Rate'); break;
+            case 'number':
+              thirdDimensions.push('Number'); break;
+            default:
+              thirdDimensions.push(measureTypeElement.value); break;
+          }
+
+          if (includeNumberCheckbox.checked) {
+            thirdDimensions.push('Number')
+          }
+
+          if (includeRespondentsCheckbox.checked) {
+            thirdDimensions.push('Survey respondents')
+          }
 
           var secondaryDimensionCategories
 
@@ -497,6 +519,7 @@
           var tbody = document.createElement('tbody')
 
 
+          // Ethnicities in ROWS
           if (categories.length > 5 || secondaryDimensionCategories.length < 7) {
 
             var theadRow = document.createElement('tr')
@@ -537,10 +560,34 @@
             for (x of secondaryDimensionCategories) {
               var header = document.createElement('th')
               header.textContent = x
+
+              if (secondaryDimensionsSelect.value != 'none' && thirdDimensions.length > 1) {
+                header.setAttribute('colspan', thirdDimensions.length)
+              }
+
               theadRow.appendChild(header)
             }
 
             thead.appendChild(theadRow)
+
+            if (secondaryDimensionsSelect.value != 'none' && thirdDimensions.length > 1) {
+
+              var theadRow = document.createElement('tr')
+              var emptyHeader = document.createElement('th')
+              theadRow.appendChild(emptyHeader)
+
+              for (secondaryCategory of secondaryDimensionCategories) {
+
+                for (thirdCategory of thirdDimensions) {
+
+                  var header = document.createElement('th')
+                  header.textContent = thirdCategory
+                  theadRow.appendChild(header)
+                }
+              }
+
+              thead.appendChild(theadRow)
+            }
 
             for (category of categories) {
 
@@ -563,11 +610,20 @@
               row.appendChild(header)
 
               for (x of secondaryDimensionCategories) {
-                var input = document.createElement('input')
-                input.setAttribute('type', 'text')
-                var cell = document.createElement('td')
-                cell.appendChild(input)
-                row.appendChild(cell)
+
+                if (secondaryDimensionsSelect.value == 'none') {
+                  thirdDimensions = ['x']
+                }
+
+                for (_ of thirdDimensions) {
+
+                  var input = document.createElement('input')
+                  input.setAttribute('type', 'text')
+                  var cell = document.createElement('td')
+                  cell.appendChild(input)
+                  row.appendChild(cell)
+
+                }
               }
               tbody.appendChild(row)
             }
@@ -582,10 +638,30 @@
 
             for (category of categories) {
               var header = document.createElement('th')
+              header.setAttribute('colspan', thirdDimensions.length)
               header.textContent = category
               theadRow.appendChild(header)
             }
             thead.appendChild(theadRow)
+
+            if (thirdDimensions.length > 1) {
+
+              var tr = document.createElement('tr')
+
+              var firstHeader = document.createElement('th')
+              tr.appendChild(firstHeader)
+
+              for (category of categories) {
+                for (thirdDimension of thirdDimensions) {
+                  var header = document.createElement('th')
+                  header.textContent = thirdDimension
+                  tr.appendChild(header)
+                }
+              }
+
+
+              thead.appendChild(tr)
+            }
 
 
             for (dimension of secondaryDimensionCategories) {
@@ -597,11 +673,19 @@
               row.appendChild(header)
 
               for (x of categories) {
-                var input = document.createElement('input')
-                input.setAttribute('type', 'text')
-                var cell = document.createElement('td')
-                cell.appendChild(input)
-                row.appendChild(cell)
+
+
+                for (_ of thirdDimensions) {
+
+                  var input = document.createElement('input')
+                  input.setAttribute('type', 'text')
+                  var cell = document.createElement('td')
+                  cell.appendChild(input)
+                  row.appendChild(cell)
+
+                }
+
+
               }
               tbody.appendChild(row)
             }
