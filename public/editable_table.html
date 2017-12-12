@@ -64,6 +64,7 @@
           <div class="form-group">
             <label class="form-label" for="measure-type">Type</label>
             <select class="form-control" style="width: 100%" id="measure-type">
+              <option value="" selected></option>
               <option value="percentage">Percentage</option>
               <option value="rate">Rate</option>
               <option value="number">Number</option>
@@ -72,7 +73,7 @@
 
             <div id="include-number-option" class="checkbox-option"><input type="checkbox" id="include-number" /><label for="include-number">Include number</label></div>
 
-            <div id="include-number-option" class="checkbox-option"><input type="checkbox" id="include-respondents" /><label for="include-respondents">Include respondents</label></div>
+            <div id="include-respondents-option" class="checkbox-option"><input type="checkbox" id="include-respondents" /><label for="include-respondents">Include respondents</label></div>
 
           </div>
 
@@ -207,6 +208,11 @@
         var warningElement = document.getElementById('warning')
         var measureElement = document.getElementById('measure')
         var measureTypeElement = document.getElementById('measure-type')
+        var includeNumberCheckbox = document.getElementById('include-number')
+        var includeRespondentsCheckbox = document.getElementById('include-respondents')
+
+        var includeNumberOption = document.getElementById('include-number-option')
+        var includeRespondentsOption = document.getElementById('include-respondents-option')
 
         var ethnicityCategories = {
           "white-other": ["White", "Other"],
@@ -347,9 +353,17 @@
 
           var title = '';
 
-          switch (measureType.value) {
+          switch (measureTypeElement.value) {
             case 'percentage':
-              title += 'Percentage of '; break;
+              title += 'Percentage ';
+
+              if (includeNumberCheckbox.checked) {
+                title += 'and number '
+              }
+
+              title += 'of '
+
+              break;
             case 'rate':
               title += 'Rate of '; break;
             case 'number':
@@ -385,6 +399,29 @@
           }
 
           legend.textContent = title
+
+        }
+
+        function updateCheckboxes() {
+
+          switch (measureTypeElement.value) {
+
+            case 'percentage':
+              includeNumberOption.classList.remove('hidden')
+              includeRespondentsOption.classList.remove('hidden')
+              break;
+            case 'rate':
+              includeNumberOption.classList.remove('hidden')
+              includeRespondentsOption.classList.add('hidden')
+              includeRespondentsCheckbox.checked = false
+              break;
+            default:
+              includeNumberOption.classList.add('hidden')
+              includeNumberCheckbox.checked = false
+              includeRespondentsOption.classList.add('hidden')
+              includeRespondentsCheckbox.checked = false
+
+          }
 
         }
 
@@ -431,6 +468,9 @@
 
         function updateTable() {
 
+          updateTableName();
+          updateCheckboxes();
+
           var categories = ethnicityCategories[ethnicityCategoriesSelect.value]
           var secondaryDimension = secondaryDimensions[secondaryDimensionsSelect.value]
 
@@ -467,30 +507,37 @@
 
             if (secondaryDimensionsSelect.value == 'none') {
 
-              var header = document.createElement('th')
-
               switch (measureTypeElement.value) {
                 case 'percentage':
-                  header.textContent = 'Percentage'; break;
+                  secondaryDimensionCategories = ['Percentage'];
+                  break;
                 case 'rate':
-                  header.textContent = 'Rate'; break;
+                  secondaryDimensionCategories = ['Rate']; break;
                 case 'number':
-                  header.textContent = 'Number'; break;
+                  secondaryDimensionCategories = ['Number']; break;
                 case 'other':
-                  header.textContent = measureElement.value; break;
+                  secondaryDimensionCategories = [measureElement.value]; break;
               }
 
+
+              if (measureTypeElement.value == 'percentage' || measureTypeElement.value == 'rate') {
+
+                if (includeNumberCheckbox.checked) {
+                  secondaryDimensionCategories.push('Number')
+                }
+
+                if (includeRespondentsCheckbox.checked) {
+                 secondaryDimensionCategories.push('Survey respondents')
+                }
+
+              }
+
+            }
+
+            for (x of secondaryDimensionCategories) {
+              var header = document.createElement('th')
+              header.textContent = x
               theadRow.appendChild(header)
-
-
-            } else {
-
-              for (x of secondaryDimensionCategories) {
-                var header = document.createElement('th')
-                header.textContent = x
-                theadRow.appendChild(header)
-              }
-
             }
 
             thead.appendChild(theadRow)
@@ -581,6 +628,9 @@
 
         fromSelector.addEventListener('change', updateTable)
         toSelector.addEventListener('change', updateTable)
+        includeNumberCheckbox.addEventListener('change', updateTable)
+        includeRespondentsCheckbox.addEventListener('change', updateTable)
+
       </script>
 
 
