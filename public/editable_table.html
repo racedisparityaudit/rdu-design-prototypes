@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/cms-v2.css" />
+
+
+  </head>
+
+
+
+  <body class="admin">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href="/" data-event="breadcrumb-homepage">Admin</a></li>
+        </ol>
+      </div>
+
+      <!-- CONTENT STARTS HERE -->
+
+      <div class="grid-row">
+        <div class="column-one-third">
+
+          <div class="form-group">
+            <label class="form-label">Ethnicity categories</label>
+            <select class="form-control" style="width: 100%" id="ethnicity-categories">
+              <option value="white-other">White, Other</option>
+              <option value="white-british-other">White British, Other</option>
+              <option selected value="5">Asian, Black, Mixed, White, Other</option>
+              <option value="16">16 categories (2001 census)</option>
+              <option value="18">18 categories (2011 census)</option>
+              <option value="19">19 categories (school census)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Secondary dimension</label>
+            <select class="form-control" style="width: 100%" id="secondary-dimension">
+              <option selected value="none">[None]</option>
+              <option value="calendar-years">Years (calendar)</option>
+              <option value="financial-years">Years (financial)</option>
+              <option value="financial-quarters">Financial quarters</option>
+              <option value="gender">Gender</option>
+              <option value="sex">Sex</option>
+              <option value="regions">Region</option>
+              <option value="local-authority">Local authority</option>
+              <option value="age-group">Age group</option>
+              <option value="social-economic">Social-economic status</option>
+              <option value="weekly-income">Weekly income</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group hidden" id="range-selectors">
+            <div style="display: table; width: 100%;">
+              <div style="display: table-cell; width: 50%; padding-right: 5px;">
+                <label class="form-label" for="from">From</label>
+                <select class="form-control" id="from" style="width: 100%;">
+                </select>
+              </div>
+              <div style="display: table-cell; width: 50%; padding-left: 5px;">
+                <label class="form-label" for="to">To</label>
+                <select class="form-control" id="to" style="width: 100%;">
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="column-two-thirds">
+
+          <div id="warning" class="hidden">Warning: Too many columns and rows</div>
+
+          <table class="editable-table" id="editable-table">
+            <thead>
+              <tr>
+                <th>Ethnicity</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>All</th>
+                <td><input type="text" autofocus></td>
+              </tr>
+              <tr>
+                <th>Asian</th>
+                <td><input type="text"></td>
+              </tr>
+              <tr>
+                <th>Black</th>
+                <td><input type="text"></td>
+              </tr>
+              <tr>
+                <th>Mixed</th>
+                <td><input type="text"></td>
+              </tr>
+              <tr>
+                <th>White</th>
+                <td><input type="text"></td>
+              </tr>
+              <tr>
+                <th>Other</th>
+                <td><input type="text"></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <div style="margin-top: 50px;"><button type="submit" class="button">Save</button></div>
+        </div>
+      </div>
+
+      <script>
+
+        var ethnicityCategoriesSelect = document.getElementById('ethnicity-categories')
+        var secondaryDimensionsSelect = document.getElementById('secondary-dimension')
+        var editableTable = document.getElementById('editable-table')
+        var rangeSelectors = document.getElementById('range-selectors')
+        var fromSelector = document.getElementById('from')
+        var toSelector = document.getElementById('to')
+        var warningElement = document.getElementById('warning')
+
+        var ethnicityCategories = {
+          "white-other": ["White", "Other"],
+          "white-british-other": ["White British", "Other"],
+          "5": ["Asian", "Black", "Mixed", "White", "Other"],
+          "16": [
+            {"label": "Asian", "broad": true},
+            {"label": "Bangladeshi", "broad": false},
+            {"label": "Chinese", "broad": false},
+            {"label": "Indian", "broad": false},
+            {"label": "Pakistani", "broad": false},
+            {"label": "Asian other", "broad": false},
+            {"label": "Black", "broad": true},
+            {"label": "Black African", "broad": false},
+            {"label": "Black Caribbean", "broad": false},
+            {"label": "Black other", "broad": false},
+            {"label": "Mixed", "broad": true},
+            {"label": "Mixed White and Asian", "broad": false},
+            {"label": "Mixed White and Black African", "broad": false},
+            {"label": "Mixed White and Black Caribbean", "broad": false},
+            {"label": "Any other mixed/multiple ethnic background", "broad": false},
+            {"label": "White", "broad": true},
+            {"label": "White British", "broad": false},
+            {"label": "White Irish", "broad": false},
+            {"label": "White other", "broad": false},
+            {"label": "Other", "broad": true},
+            {"label": "Any other", "broad": false}
+          ],
+          "18": [
+            {"label": "Asian", "broad": true},
+            {"label": "Bangladeshi", "broad": false},
+            {"label": "Chinese", "broad": false},
+            {"label": "Indian", "broad": false},
+            {"label": "Pakistani", "broad": false},
+            {"label": "Asian other", "broad": false},
+            {"label": "Black", "broad": true},
+            {"label": "Black African", "broad": false},
+            {"label": "Black Caribbean", "broad": false},
+            {"label": "Black other", "broad": false},
+            {"label": "Mixed", "broad": true},
+            {"label": "Mixed White and Asian", "broad": false},
+            {"label": "Mixed White and Black African", "broad": false},
+            {"label": "Mixed White and Black Caribbean", "broad": false},
+            {"label": "Mixed other", "broad": false},
+            {"label": "White", "broad": true},
+            {"label": "White British", "broad": false},
+            {"label": "White Irish", "broad": false},
+            {"label": "White Gypsy/Traveller", "broad": false},
+            {"label": "White other", "broad": false},
+            {"label": "Other", "broad": true},
+            {"label": "Arab", "broad": false},
+            {"label": "Any other", "broad": false}
+          ],
+          "19": [
+            {"label": "Asian", "broad": true},
+            {"label": "Bangladeshi", "broad": false},
+            {"label": "Indian", "broad": false},
+            {"label": "Pakistani", "broad": false},
+            {"label": "Asian other", "broad": false},
+            {"label": "Black", "broad": true},
+            {"label": "Black African", "broad": false},
+            {"label": "Black Caribbean", "broad": false},
+            {"label": "Black other", "broad": false},
+            {"label": "Chinese", "broad": true},
+            {"label": "Mixed", "broad": true},
+            {"label": "Mixed White and Asian", "broad": false},
+            {"label": "Mixed White and Black African", "broad": false},
+            {"label": "Mixed White and Black Caribbean", "broad": false},
+            {"label": "Mixed other", "broad": false},
+            {"label": "White", "broad": true},
+            {"label": "White British", "broad": false},
+            {"label": "White Irish", "broad": false},
+            {"label": "White Irish Traveller", "broad": false},
+            {"label": "White Gypsy/Roma", "broad": false},
+            {"label": "White other", "broad": false},
+            {"label": "Other", "broad": true}
+          ]
+        }
+
+        var secondaryDimensions = {
+          "none": {
+            "categories": [""],
+            "range": false
+          },
+          "calendar-years": {
+            "label": "Year",
+            "categories": ["2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"],
+            "range": true
+          },
+          "financial-years": {
+            "label": "Year",
+            "categories": ["2009/10", "2010/11", "2011/12", "2012/13", "2013/14", "2014/15", "2015/16", "2016/17"],
+            "range": true
+          },
+          "financial-quarters": {
+            "label": "Quarter",
+            "categories": ["Jan-Mar 2014", "Apr-Jun 2014", "Jul-Sep 2014", "Oct-Dec 2014", "Jan-Mar 2015", "Apr-Jun 2015"],
+            "range": true
+          },
+          "gender": {
+            "label": "Gender",
+            "categories": ["Men", "Women"],
+            "range": false
+          },
+          "sex": {
+            "label": "Sex",
+            "categories": ["Men", "Women"],
+            "range": false
+          },
+          "regions": {
+            "label": "Region",
+            "categories": ["North East", "North West", "Yorkshire and the Humber", "East Midlands", "West Midlands", "East", "London", "South East", "South West"],
+            "range": false
+          },
+          "local-authority": {
+            "label": "Local authority",
+            "categories": ["Barking and Dagenham", "Barnet", "Barnsley", "Bath and North East Somerset", "Bedford", "Bexley", "Birmingham", "Blackburn with Darwen", "Blackpool", "Bolton", "Bournemouth", "Bracknell Forest", "Bradford", "Brent", "Brighton and Hove", "Bristol, City of", "..."],
+            "range": false
+          },
+          "age-group": {
+            "label": "Age group",
+            "categories": ["Under 18", "19-29", "30-39", "40-49", "50-59", "60-69", "70-79"],
+            "range": false
+          },
+          "social-economic": {
+            "label": "Social-economic status",
+            "categories": ["Higher managerial, administrative and professional occupations", "Intermediate occupations", "Routine and manual operations"],
+            "range": false
+          },
+          "weekly-income": {
+            "label": "Weekly income",
+            "categories": ["Up to £99", "£100 to £199", "£200 to £299", "£300 to £399", "£400 to £499", "£500 to £599", "£600 to £699", "£700 to £799", "£800 to £899", "£900 to £999"],
+            "range": true
+          }
+        }
+
+        function secondaryDimensionChanged() {
+
+          var secondaryDimension = secondaryDimensions[secondaryDimensionsSelect.value]
+
+          if (secondaryDimension.range) {
+            rangeSelectors.classList.remove('hidden')
+
+
+            fromSelector.innerHTML = ''
+            toSelector.innerHTML = ''
+
+            for (var i = 0; i < secondaryDimension.categories.length; i++) {
+              var category = secondaryDimension.categories[i]
+
+              var option = document.createElement('option')
+              option.value = category
+              option.textContent  = category
+
+              toOption = option.cloneNode(true)
+
+              if (i == 0) {
+                option.setAttribute('selected', true)
+              }
+
+              if (i + 1 == secondaryDimension.categories.length) {
+                toOption.setAttribute('selected', true)
+              }
+
+              fromSelector.appendChild(option)
+              toSelector.appendChild(toOption)
+            }
+
+
+          } else {
+            rangeSelectors.classList.add('hidden')
+          }
+
+        }
+
+        function updateTable() {
+
+          var categories = ethnicityCategories[ethnicityCategoriesSelect.value]
+          var secondaryDimension = secondaryDimensions[secondaryDimensionsSelect.value]
+
+          var secondaryDimensionCategories
+
+          if (secondaryDimension.range) {
+
+            var fromIndex = secondaryDimension.categories.indexOf(fromSelector.value)
+            var toIndex = secondaryDimension.categories.indexOf(toSelector.value)
+
+            secondaryDimensionCategories = secondaryDimension.categories.slice(fromIndex, toIndex + 1)
+
+          } else {
+            secondaryDimensionCategories = secondaryDimension.categories
+          }
+
+          if (categories.length > 10 && secondaryDimensionCategories.length > 10) {
+            warningElement.classList.remove('hidden')
+          } else {
+            warningElement.classList.add('hidden')
+          }
+
+          var thead = document.createElement('thead');
+          var tbody = document.createElement('tbody')
+
+
+          if (categories.length > 5 || secondaryDimensionCategories.length < 7) {
+
+            var theadRow = document.createElement('tr')
+
+            var firstHeader = document.createElement('th')
+            firstHeader.textContent = 'Ethnicity'
+            theadRow.appendChild(firstHeader)
+
+            for (x of secondaryDimensionCategories) {
+              var header = document.createElement('th')
+              header.textContent = x
+              theadRow.appendChild(header)
+            }
+            thead.appendChild(theadRow)
+
+            for (category of categories) {
+
+              var row = document.createElement('tr')
+              var header = document.createElement('th')
+
+              if (typeof category === 'string') {
+                header.textContent = category
+              } else if (typeof category === 'object') {
+                header.textContent = category.label
+
+                if (category.broad) {
+                  header.classList.add('broad')
+                } else {
+                  header.classList.add('specific')
+                }
+              }
+
+
+              row.appendChild(header)
+
+              for (x of secondaryDimensionCategories) {
+                var input = document.createElement('input')
+                input.setAttribute('type', 'text')
+                var cell = document.createElement('td')
+                cell.appendChild(input)
+                row.appendChild(cell)
+              }
+              tbody.appendChild(row)
+            }
+
+          } else {
+
+            var theadRow = document.createElement('tr')
+
+            var firstHeader = document.createElement('th')
+            firstHeader.textContent = secondaryDimension.label
+            theadRow.appendChild(firstHeader)
+
+            for (category of categories) {
+              var header = document.createElement('th')
+              header.textContent = category
+              theadRow.appendChild(header)
+            }
+            thead.appendChild(theadRow)
+
+
+            for (dimension of secondaryDimensionCategories) {
+
+              var row = document.createElement('tr')
+              var header = document.createElement('th')
+              header.textContent = dimension;
+
+              row.appendChild(header)
+
+              for (x of categories) {
+                var input = document.createElement('input')
+                input.setAttribute('type', 'text')
+                var cell = document.createElement('td')
+                cell.appendChild(input)
+                row.appendChild(cell)
+              }
+              tbody.appendChild(row)
+            }
+
+          }
+
+          var existingThead = editableTable.getElementsByTagName('thead')[0]
+          editableTable.removeChild(existingThead)
+          editableTable.appendChild(thead)
+
+          var existingTbody = editableTable.getElementsByTagName('tbody')[0]
+          editableTable.removeChild(existingTbody)
+          editableTable.appendChild(tbody)
+
+        }
+
+
+        secondaryDimensionsSelect.addEventListener('change', secondaryDimensionChanged)
+        ethnicityCategoriesSelect.addEventListener('change', updateTable)
+        secondaryDimensionsSelect.addEventListener('change', updateTable)
+        fromSelector.addEventListener('change', updateTable)
+        toSelector.addEventListener('change', updateTable)
+      </script>
+
+
+
+      <script>
+
+        function handleTablePaste(event) {
+
+          var input = event.target
+          var clipboardData = event.clipboardData
+
+          if (clipboardData.types.indexOf('text/plain') != -1) {
+
+            var pastedData = clipboardData.getData('text/plain')
+
+            var tabularDataRegex = new RegExp('.+')
+
+            var inputs = document.getElementById('editable-table').querySelectorAll('input')
+
+            var currentCell = input.parentElement;
+            var currentRow = currentCell.parentElement
+
+            var currentX = Array.prototype.slice.call(currentRow.children).indexOf(currentCell) - 1
+            var currentY = Array.prototype.slice.call(currentRow.parentElement.children).indexOf(currentCell.parentElement)
+
+
+            var cellsInRow = currentRow.children.length - 1
+
+
+            if (pastedData.match(tabularDataRegex)) {
+
+              var rows = pastedData.split(/\n/)
+
+              for (var x = 0; x < rows.length; x++) {
+                var row = rows[x]
+
+                var cells = row.split(/\s/)
+
+                for (var y = 0; y < cells.length; y++) {
+                  var cell = cells[y]
+
+                  var cellIndex = y + (x * cellsInRow) + currentX + (currentY * cellsInRow);
+
+                  if (inputs.length > cellIndex) {
+                    inputs[cellIndex].value = cell
+                  }
+
+                }
+              }
+
+              event.stopPropagation();
+              event.preventDefault();
+              return false
+
+            }
+
+
+          }
+
+
+        }
+
+
+        document.getElementById('editable-table').addEventListener('paste', handleTablePaste)
+
+
+      </script>
+
+      <style>
+
+        .editable-table {
+          width: 100%;
+        }
+
+
+        .editable-table td,
+        .editable-table th {
+          border-collapse: collapse;
+          border-width: 1px;
+          border-style: solid;
+          border-top-color: #bfc1c3;
+          border-bottom-color: #bfc1c3;
+          border-left-color: transparent;
+          border-right-color: lightgrey;
+          vertical-align: top;
+          padding: 0;
+          line-height: 20px;
+        }
+
+        .editable-table thead th {
+          border-top-color: transparent;
+        }
+
+        .editable-table tbody th {
+          min-width: 100px;
+          font-weight: normal;
+        }
+
+        .editable-table th {
+          text-align: right;
+          padding-right: 5px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+        }
+
+        .editable-table tr th:first-child {
+          text-align: left;
+        }
+
+        .editable-table tbody th.broad {
+          font-weight: bold;
+        }
+
+        .editable-table tbody th.specific {
+          padding-left: 15px;
+        }
+
+
+        .editable-table tr th:last-child,
+        .editable-table tr td:last-child {
+          border-right-color: transparent;
+          padding-right: 0;
+        }
+
+        .editable-table input,
+        .editable-table span.value {
+          border: 0;
+          margin: 0;
+          display: block;
+          width: 100%;
+          padding: 5px;
+          box-sizing: border-box;
+          text-align: right;
+        }
+
+        #warning {
+          color: #B10E1E;
+          text-align: center;
+          margin-bottom: 1em;
+          font-size: 16px;
+        }
+      </style>
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-one-third'>
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+              <li>
+                  <a href="/">Site preview</a>
+              </li>
+              <li>
+                  <a href="/cms/">CMS</a>
+              </li>
+              <li>
+                  <a href="/prototype/">Prototype</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="global-app-error" class="app-error hidden"></div>
+    <script src="/static/javascripts/govuk-template.js?0.19.2"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/javascripts/all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/highcharts.js"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/underscore-min.js"></script>
+    <script src="/static/javascripts/rd-data-tools.js"></script>
+    <script src="/static/javascripts/rd-graph.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/modules/exporting.js"></script>
+    </script>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
