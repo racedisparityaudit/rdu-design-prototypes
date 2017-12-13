@@ -132,6 +132,7 @@
               <option value="sex">Sex</option>
               <option value="regions">Region</option>
               <option value="local-authority">Local authority</option>
+              <option value="police-force-area">Police force area</option>
               <option value="age-group">Age group</option>
               <option value="social-economic">Social-economic status</option>
               <option value="weekly-income">Weekly income</option>
@@ -336,6 +337,11 @@
             "categories": ["North East", "North West", "Yorkshire and the Humber", "East Midlands", "West Midlands", "East", "London", "South East", "South West"],
             "range": false
           },
+          "police-force-area": {
+            "label": "Police force area",
+            "categories": ["Avon & Somerset", "Bedfordshire", "British Transport Police", "Cambridgeshire", "Cheshire", "Cleveland", "Cumbria", "Derbyshire", "Devon & Cornwall", "Dorset", "Durham", "Dyfed-Powys", "Essex", "Gloucestershire", "Greater Manchester", "Gwent", "Hampshire", "Hertfordshire", "Humberside", "Kent", "Lancashire", "Leicestershire", "Lincolnshire", "London, City of", "Merseyside", "Metropolitan Police", "Norfolk", "North Wales", "North Yorkshire", "Northamptonshire", "Northumbria", "Nottinghamshire", "South Wales", "South Yorkshire", "Staffordshire", "Suffolk", "Surrey", "Sussex", "Thames Valley", "Warwickshire", "West Mercia", "West Midlands", "West Yorkshire"],
+            "range": false
+          },
           "local-authority": {
             "label": "Local authority",
             "categories": ["Barking and Dagenham", "Barnet", "Barnsley", "Bath and North East Somerset", "Bedford", "Bexley", "Birmingham", "Blackburn with Darwen", "Blackpool", "Bolton", "Bournemouth", "Bracknell Forest", "Bradford", "Brent", "Brighton and Hove", "Bristol, City of", "..."],
@@ -348,7 +354,7 @@
           },
           "social-economic": {
             "label": "Social-economic status",
-            "categories": ["Higher managerial, administrative and professional occupations", "Intermediate occupations", "Routine and manual operations"],
+            "categories": ["Higher managerial, administrative and professional occupations", "Intermediate occupations", "Routine and manual operations", "Never worked and long-term unemployed", "Full time students"],
             "range": false
           },
           "weekly-income": {
@@ -831,6 +837,7 @@
           vertical-align: top;
           padding: 0;
           line-height: 20px;
+          width: auto;
         }
 
         .editable-table thead th {
@@ -838,7 +845,7 @@
         }
 
         .editable-table tbody th {
-          min-width: 100px;
+          min-width: 150px;
           font-weight: normal;
         }
 
