@@ -166,7 +166,7 @@
             <legend id="legend"></legend>
             <thead>
               <tr>
-                <th>Ethnicity</th>
+                <th scope="col">Ethnicity</th>
                 <th></th>
               </tr>
             </thead>
@@ -558,6 +558,12 @@
 
             var firstHeader = document.createElement('th')
             firstHeader.textContent = 'Ethnicity'
+            firstHeader.setAttribute('scope', 'col')
+
+            if (secondaryDimensionsSelect.value != 'none' && thirdDimensions.length > 1) {
+              firstHeader.setAttribute('rowspan', 2)
+            }
+
             theadRow.appendChild(firstHeader)
 
             if (secondaryDimensionsSelect.value == 'none') {
@@ -605,8 +611,6 @@
             if (secondaryDimensionsSelect.value != 'none' && thirdDimensions.length > 1) {
 
               var theadRow = document.createElement('tr')
-              var emptyHeader = document.createElement('th')
-              theadRow.appendChild(emptyHeader)
 
               for (secondaryCategory of secondaryDimensionCategories) {
 
@@ -614,6 +618,7 @@
 
                   var header = document.createElement('th')
                   header.textContent = thirdCategory
+                  header.classList.add('secondary')
                   theadRow.appendChild(header)
                 }
               }
@@ -666,6 +671,7 @@
 
             var firstHeader = document.createElement('th')
             firstHeader.textContent = secondaryDimension.label
+            firstHeader.setAttribute('scope', 'col')
             theadRow.appendChild(firstHeader)
 
             for (category of categories) {
@@ -844,6 +850,14 @@
           border-top-color: transparent;
         }
 
+        .editable-table thead th.secondary {
+          font-weight: normal;
+        }
+
+        .editable-table thead th[scope="col"] {
+          text-align: left;
+        }
+
         .editable-table tbody th {
           min-width: 150px;
           font-weight: normal;
@@ -856,7 +870,7 @@
           padding-bottom: 5px;
         }
 
-        .editable-table tr th:first-child {
+        .editable-table tbody tr th:first-child {
           text-align: left;
         }
 
