@@ -71,9 +71,9 @@
               <option value="other">Other</option>
             </select>
 
-            <div id="include-number-option" class="checkbox-option"><input type="checkbox" id="include-number" /><label for="include-number">Include number</label></div>
+            <div id="include-number-option" class="checkbox-option hidden"><input type="checkbox" id="include-number" /><label for="include-number">Include number</label></div>
 
-            <div id="include-respondents-option" class="checkbox-option"><input type="checkbox" id="include-respondents" /><label for="include-respondents">Include respondents</label></div>
+            <div id="include-respondents-option" class="checkbox-option hidden"><input type="checkbox" id="include-respondents" /><label for="include-respondents">Include respondents</label></div>
 
           </div>
 
@@ -114,6 +114,11 @@
               <option value="18">18 categories (2011 census)</option>
               <option value="19">19 categories (school census)</option>
             </select>
+
+            <div id="include-all-option" class="checkbox-option"><input type="checkbox" id="include-all" /><label for="include-all">Include all</label></div>
+
+            <div id="include-unknown-option" class="checkbox-option"><input type="checkbox" id="include-unknown" /><label for="include-unknown">Include unknown</label></div>
+
           </div>
 
           <div class="form-group">
@@ -157,7 +162,7 @@
           <div id="warning" class="hidden">Warning: Too many columns and rows</div>
 
           <table class="editable-table" id="editable-table">
-            <legend id="legend">Table title</legend>
+            <legend id="legend"></legend>
             <thead>
               <tr>
                 <th>Ethnicity</th>
@@ -208,11 +213,15 @@
         var warningElement = document.getElementById('warning')
         var measureElement = document.getElementById('measure')
         var measureTypeElement = document.getElementById('measure-type')
+
         var includeNumberCheckbox = document.getElementById('include-number')
         var includeRespondentsCheckbox = document.getElementById('include-respondents')
-
         var includeNumberOption = document.getElementById('include-number-option')
         var includeRespondentsOption = document.getElementById('include-respondents-option')
+
+        var includeAllCheckbox = document.getElementById('include-all')
+        var includeUnknownCheckbox = document.getElementById('include-unknown')
+
 
         var ethnicityCategories = {
           "white-other": ["White", "Other"],
@@ -471,10 +480,27 @@
           updateTableName();
           updateCheckboxes();
 
-          var categories = ethnicityCategories[ethnicityCategoriesSelect.value]
+          var categories = Object.assign([], ethnicityCategories[ethnicityCategoriesSelect.value])
           var secondaryDimension = secondaryDimensions[secondaryDimensionsSelect.value]
           var thirdDimensions = []
 
+          if (includeUnknownCheckbox.checked) {
+
+            if (typeof categories[0] == 'string') {
+              categories.push('Unknown')
+            } else {
+              categories.push({"label": 'Unknown', "broad": true})
+            }
+          }
+
+          if (includeAllCheckbox.checked) {
+
+            if (typeof categories[0] == 'string') {
+              categories.unshift('All')
+            } else {
+              categories.unshift({"label": 'All', "broad": true})
+            }
+          }
 
           switch (measureTypeElement.value) {
 
@@ -714,6 +740,9 @@
         toSelector.addEventListener('change', updateTable)
         includeNumberCheckbox.addEventListener('change', updateTable)
         includeRespondentsCheckbox.addEventListener('change', updateTable)
+        includeAllCheckbox.addEventListener('change', updateTable)
+        includeUnknownCheckbox.addEventListener('change', updateTable)
+
 
       </script>
 
