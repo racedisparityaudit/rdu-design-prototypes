@@ -138,7 +138,11 @@
               <option value="weekly-income">Weekly income</option>
               <option value="other">Other</option>
             </select>
+
+            <div id="include-all-secondary-option" class="checkbox-option js-hidden"><input type="checkbox" id="include-all-secondary" /><label for="include-all-secondary">Include all</label></div>
+
           </div>
+
 
           <div class="form-group hidden" id="range-selectors">
             <div style="display: table; width: 100%;">
@@ -223,6 +227,8 @@
         var includeAllCheckbox = document.getElementById('include-all')
         var includeUnknownCheckbox = document.getElementById('include-unknown')
 
+        var includeAllSecondaryOption = document.getElementById('include-all-secondary-option')
+        var includeAllSecondaryCheckbox = document.getElementById('include-all-secondary')
 
         var ethnicityCategories = {
           "white-other": ["White", "Other"],
@@ -475,9 +481,17 @@
             }
 
 
+            includeAllSecondaryOption.classList.add('js-hidden')
+            includeAllCheckbox.checked = false
+
           } else {
             rangeSelectors.classList.add('hidden')
+
+            includeAllSecondaryOption.classList.remove('js-hidden')
+
+
           }
+
 
         }
 
@@ -487,8 +501,13 @@
           updateCheckboxes();
 
           var categories = Object.assign([], ethnicityCategories[ethnicityCategoriesSelect.value])
-          var secondaryDimension = secondaryDimensions[secondaryDimensionsSelect.value]
+          var secondaryDimension = Object.assign({}, secondaryDimensions[secondaryDimensionsSelect.value])
           var thirdDimensions = []
+
+          if (includeAllSecondaryCheckbox.checked) {
+            secondaryDimension.categories = Object.assign([], secondaryDimension.categories)
+            secondaryDimension.categories.unshift('All')
+          }
 
           if (includeUnknownCheckbox.checked) {
 
@@ -541,7 +560,8 @@
             secondaryDimensionCategories = secondaryDimension.categories
           }
 
-          if (categories.length > 10 && secondaryDimensionCategories.length > 10) {
+
+          if (categories.length > 9 && (secondaryDimensionCategories.length * thirdDimensions.length) > 9) {
             warningElement.classList.remove('hidden')
           } else {
             warningElement.classList.add('hidden')
@@ -665,6 +685,8 @@
               tbody.appendChild(row)
             }
 
+
+          // Ethnicities in columns
           } else {
 
             var theadRow = document.createElement('tr')
@@ -672,6 +694,9 @@
             var firstHeader = document.createElement('th')
             firstHeader.textContent = secondaryDimension.label
             firstHeader.setAttribute('scope', 'col')
+            firstHeader.setAttribute('rowspan', thirdDimensions.length)
+
+
             theadRow.appendChild(firstHeader)
 
             for (category of categories) {
@@ -686,13 +711,11 @@
 
               var tr = document.createElement('tr')
 
-              var firstHeader = document.createElement('th')
-              tr.appendChild(firstHeader)
-
               for (category of categories) {
                 for (thirdDimension of thirdDimensions) {
                   var header = document.createElement('th')
                   header.textContent = thirdDimension
+                  header.classList.add('secondary')
                   tr.appendChild(header)
                 }
               }
@@ -755,6 +778,7 @@
         includeAllCheckbox.addEventListener('change', updateTable)
         includeUnknownCheckbox.addEventListener('change', updateTable)
 
+        includeAllSecondaryCheckbox.addEventListener('change', updateTable)
 
       </script>
 
