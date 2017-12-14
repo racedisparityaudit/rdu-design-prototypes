@@ -57,23 +57,27 @@
         <div class="column-one-third">
 
           <div class="form-group">
-            <label class="form-label" for="measure-type">Measure</label>
+
+            <label class="form-label" for="measure-type">Type of data</label>
             <select class="form-control" style="width: 100%" id="measure-type">
               <option value="" selected></option>
               <option value="percentage">Percentage</option>
               <option value="rate">Rate</option>
               <option value="number">Number</option>
               <option value="average-months">Average time (in months)</option>
-              <option value="other">Other</option>
+              <!--<option value="other">Other</option>-->
             </select>
 
+            <div id="include-number-option" class="checkbox-option hidden"><input type="checkbox" id="include-number" /><label for="include-number">Include number (numerator)</label></div>
+
+            <div id="include-respondents-option" class="checkbox-option hidden"><input type="checkbox" id="include-respondents" /><label for="include-respondents">Include number of respondents</label></div>
+
             <div style="margin-top: 10px;">
+              <label for="measure">Thing being measured <span class="form-hint">use lowercase (eg 'arrests')</span></label>
               <input type="text" class="form-control" id="measure" style="width: 100%;">
             </div>
 
-            <div id="include-number-option" class="checkbox-option hidden"><input type="checkbox" id="include-number" /><label for="include-number">Include number</label></div>
 
-            <div id="include-respondents-option" class="checkbox-option hidden"><input type="checkbox" id="include-respondents" /><label for="include-respondents">Include respondents</label></div>
 
           </div>
 
@@ -115,9 +119,9 @@
               <option value="19">19 categories (school census)</option>
             </select>
 
-            <div id="include-all-option" class="checkbox-option"><input type="checkbox" id="include-all" /><label for="include-all">Include all</label></div>
+            <div id="include-all-option" class="checkbox-option"><input type="checkbox" id="include-all" /><label for="include-all">Include ‘<span>All</span>’ aggregation</label></div>
 
-            <div id="include-unknown-option" class="checkbox-option"><input type="checkbox" id="include-unknown" /><label for="include-unknown">Include unknown</label></div>
+            <div id="include-unknown-option" class="checkbox-option"><input type="checkbox" id="include-unknown" /><label for="include-unknown">Include ‘Unknown’ category</label></div>
 
           </div>
 
@@ -137,10 +141,10 @@
               <option value="social-economic">Social-economic status</option>
               <option value="weekly-income">Weekly income</option>
               <option value="free-school-meal-eligibility">Free school meal eligibility</option>
-              <option value="other">Other</option>
+              <!-- <option value="other">Other</option> -->
             </select>
 
-            <div id="include-all-secondary-option" class="checkbox-option js-hidden"><input type="checkbox" id="include-all-secondary" /><label for="include-all-secondary">Include all</label></div>
+            <div id="include-all-secondary-option" class="checkbox-option js-hidden"><input type="checkbox" id="include-all-secondary" /><label for="include-all-secondary">Include ‘All’ aggregation</label></div>
 
           </div>
 
