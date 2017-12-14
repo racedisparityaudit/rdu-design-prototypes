@@ -791,8 +791,6 @@
 
         function handleTablePaste(event) {
 
-          console.log(event)
-
           var input = event.target
           var clipboardData = event.clipboardData
 
@@ -907,6 +905,66 @@
 
         document.getElementById('editable-table').addEventListener('focusout', cellBlurred)
         document.getElementById('editable-table').addEventListener('focusin', cellFocused)
+
+
+        function cellKeyPressed(event) {
+
+          if (event.target.tagName === 'INPUT') {
+
+            var cell = event.target.parentElement;
+
+            var tableRow = cell.parentElement;
+            var tableBody = tableRow.parentElement
+            var allCells = tableBody.getElementsByTagName('td')
+
+            var cellsInRowCount = tableRow.children.length - 1
+
+            var currentX = Array.prototype.slice.call(tableRow.children).indexOf(cell) - 1
+            var currentIndex = Array.prototype.slice.call(allCells).indexOf(cell)
+
+            switch (event.key) {
+
+              case 'ArrowLeft':
+
+                if (currentIndex > 0) {
+                  allCells[currentIndex - 1].querySelector('input').focus()
+                }
+
+                break;
+
+              case 'ArrowRight', 'Enter':
+
+                if (currentIndex < allCells.length) {
+                  allCells[currentIndex + 1].querySelector('input').focus()
+                }
+                break;
+
+              case 'ArrowDown':
+
+                if ((currentIndex + cellsInRowCount) < allCells.length) {
+                  allCells[currentIndex + cellsInRowCount].querySelector('input').focus()
+                }
+
+                break;
+
+              case 'ArrowUp':
+
+                if ((currentIndex - cellsInRowCount) >= 0) {
+
+                  allCells[currentIndex - cellsInRowCount].querySelector('input').focus()
+                }
+
+                break;
+
+            }
+
+          }
+
+        }
+
+
+
+        document.getElementById('editable-table').addEventListener('keydown', cellKeyPressed)
 
 
         function formatValue(value, format) {
