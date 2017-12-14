@@ -136,6 +136,7 @@
               <option value="age-group">Age group</option>
               <option value="social-economic">Social-economic status</option>
               <option value="weekly-income">Weekly income</option>
+              <option value="free-school-meal-eligibility">Free school meal eligibility</option>
               <option value="other">Other</option>
             </select>
 
@@ -315,63 +316,81 @@
           },
           "calendar-years": {
             "label": "Year",
+            "title_fragment": "over time",
             "categories": ["2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"],
             "range": true
           },
           "financial-years": {
             "label": "Year",
+            "title_fragment": "over time",
             "categories": ["2009/10", "2010/11", "2011/12", "2012/13", "2013/14", "2014/15", "2015/16", "2016/17"],
             "range": true
           },
           "financial-quarters": {
             "label": "Quarter",
+            "title_fragment": "over time",
             "categories": ["Jan-Mar 2014", "Apr-Jun 2014", "Jul-Sep 2014", "Oct-Dec 2014", "Jan-Mar 2015", "Apr-Jun 2015"],
             "range": true
           },
           "gender": {
             "label": "Gender",
+            "title_fragment": "and gender",
             "categories": ["Men", "Women"],
             "range": false
           },
           "sex": {
             "label": "Sex",
+            "title_fragment": "and sex",
             "categories": ["Men", "Women"],
             "range": false
           },
           "regions": {
             "label": "Region",
+            "title_fragment": "and region",
             "categories": ["North East", "North West", "Yorkshire and the Humber", "East Midlands", "West Midlands", "East", "London", "South East", "South West"],
             "range": false
           },
           "police-force-area": {
             "label": "Police force area",
+            "title_fragment": "and police force area",
             "categories": ["Avon & Somerset", "Bedfordshire", "British Transport Police", "Cambridgeshire", "Cheshire", "Cleveland", "Cumbria", "Derbyshire", "Devon & Cornwall", "Dorset", "Durham", "Dyfed-Powys", "Essex", "Gloucestershire", "Greater Manchester", "Gwent", "Hampshire", "Hertfordshire", "Humberside", "Kent", "Lancashire", "Leicestershire", "Lincolnshire", "London, City of", "Merseyside", "Metropolitan Police", "Norfolk", "North Wales", "North Yorkshire", "Northamptonshire", "Northumbria", "Nottinghamshire", "South Wales", "South Yorkshire", "Staffordshire", "Suffolk", "Surrey", "Sussex", "Thames Valley", "Warwickshire", "West Mercia", "West Midlands", "West Yorkshire"],
             "range": false
           },
           "local-authority": {
             "label": "Local authority",
+            "title_fragment": "and local authority",
             "categories": ["Barking and Dagenham", "Barnet", "Barnsley", "Bath and North East Somerset", "Bedford", "Bexley", "Birmingham", "Blackburn with Darwen", "Blackpool", "Bolton", "Bournemouth", "Bracknell Forest", "Bradford", "Brent", "Brighton and Hove", "Bristol, City of", "..."],
             "range": false
           },
           "age-group": {
             "label": "Age group",
-            "categories": ["Under 18", "19-29", "30-39", "40-49", "50-59", "60-69", "70-79"],
+            "title_fragment": "and age group",
+            "categories": ["16-19", "20-29", "30-39", "40-49", "50-59", "60-64", "65+"],
             "range": false
           },
           "social-economic": {
             "label": "Social-economic status",
+            "title_fragment": "and social-economic status",
             "categories": ["Higher managerial, administrative and professional occupations", "Intermediate occupations", "Routine and manual operations", "Never worked and long-term unemployed", "Full time students"],
             "range": false
           },
           "weekly-income": {
             "label": "Weekly income",
+            "title_fragment": "and weekly household income",
             "categories": ["Up to £99", "£100 to £199", "£200 to £299", "£300 to £399", "£400 to £499", "£500 to £599", "£600 to £699", "£700 to £799", "£800 to £899", "£900 to £999"],
             "range": true
+          },
+          "free-school-meal-eligibility": {
+            "label": "Free school meal eligibility",
+            "title_fragment": "and free school meal eligibility",
+            "categories": ["Eligible", "Not eligible"],
+            "range": false
           }
         }
 
         function updateTableName() {
 
+          var secondaryDimension = secondaryDimensions[secondaryDimensionsSelect.value]
           var title = '';
 
           switch (measureTypeElement.value) {
@@ -395,28 +414,8 @@
 
           title += 'by ethnicity '
 
-          switch (secondaryDimensionsSelect.value) {
-            case 'regions':
-              title += 'and region '; break;
-            case 'calendar-years':
-              title += 'over time '; break;
-            case 'financial-years':
-              title += 'over time '; break;
-            case 'financial-quarters':
-              title += 'over time '; break;
-            case 'gender':
-              title += 'and gender '; break;
-            case 'sex':
-              title += 'and sex '; break;
-            case 'local-authority':
-              title += 'and local authority '; break;
-            case 'age-group':
-              title += 'and age group '; break;
-            case 'social-economic':
-              title += 'and social-economic status '; break;
-            case 'weekly-income':
-              title += 'and household weekly income '; break;
-
+          if (secondaryDimension && secondaryDimension.title_fragment) {
+            title += secondaryDimension.title_fragment;
           }
 
           legend.textContent = title
