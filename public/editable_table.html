@@ -57,19 +57,19 @@
         <div class="column-one-third">
 
           <div class="form-group">
-            <label class="form-label" for="measure">Measure</label>
-            <input type="text" class="form-control" id="measure" style="width: 100%;">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="measure-type">Type</label>
+            <label class="form-label" for="measure-type">Measure</label>
             <select class="form-control" style="width: 100%" id="measure-type">
               <option value="" selected></option>
               <option value="percentage">Percentage</option>
               <option value="rate">Rate</option>
               <option value="number">Number</option>
+              <option value="average-months">Average time (in months)</option>
               <option value="other">Other</option>
             </select>
+
+            <div style="margin-top: 10px;">
+              <input type="text" class="form-control" id="measure" style="width: 100%;">
+            </div>
 
             <div id="include-number-option" class="checkbox-option hidden"><input type="checkbox" id="include-number" /><label for="include-number">Include number</label></div>
 
@@ -406,6 +406,8 @@
               break;
             case 'rate':
               title += 'Rate of '; break;
+            case 'average-months':
+              title += 'Average time (in years and months) '; break;
             case 'number':
               title += 'Number of '; break;
           }
@@ -595,6 +597,8 @@
                   secondaryDimensionCategories = ['Rate']; break;
                 case 'number':
                   secondaryDimensionCategories = ['Number']; break;
+                case 'average-months':
+                  secondaryDimensionCategories = ['Time']; break;
                 case 'other':
                   secondaryDimensionCategories = [measureElement.value]; break;
               }
@@ -787,6 +791,8 @@
 
         function handleTablePaste(event) {
 
+          console.log(event)
+
           var input = event.target
           var clipboardData = event.clipboardData
 
@@ -845,6 +851,101 @@
         document.getElementById('editable-table').addEventListener('paste', handleTablePaste)
 
 
+        function cellBlurred(event) {
+
+          if (event.target.tagName === 'INPUT') {
+
+
+            var currentCell = event.target.parentElement;
+            var currentRow = currentCell.parentElement
+
+            var currentX = Array.prototype.slice.call(currentRow.children).indexOf(currentCell) - 1
+
+
+            var valueTypes = [measureTypeElement.value];
+
+            if (includeNumberCheckbox.checked) {
+              valueTypes.push('number')
+            }
+
+            if (includeRespondentsCheckbox.checked) {
+              valueTypes.push('number')
+            }
+
+            var currentValueType;
+
+            if (currentX + 1 > valueTypes.length) {
+              currentValueType = valueTypes[0]
+            } else {
+              currentValueType = valueTypes[currentX]
+            }
+
+
+            var inputValue = event.target.value;
+
+            if (inputValue != '') {
+
+              event.target.setAttribute('data-raw', inputValue)
+              event.target.value = formatValue(inputValue, currentValueType)
+            }
+
+          }
+
+        }
+
+        function cellFocused(event) {
+
+          if (event.target.tagName === 'INPUT') {
+
+            var rawData = event.target.getAttribute('data-raw')
+            if (rawData) {
+              event.target.value = rawData
+            }
+          }
+
+        }
+
+        document.getElementById('editable-table').addEventListener('focusout', cellBlurred)
+        document.getElementById('editable-table').addEventListener('focusin', cellFocused)
+
+
+        function formatValue(value, format) {
+
+          var formatted = '';
+
+          switch (format) {
+            case 'percentage':
+
+              var fractionDigits = 1; // TODO: set to zero if all values are integers
+
+              formatted = parseFloat(value).toLocaleString('en', {'useGrouping': false, 'minimumFractionDigits': fractionDigits, 'maximumFractionDigits': fractionDigits});
+              break;
+
+            case 'number':
+              formatted = parseFloat(value).toLocaleString('en', {'useGrouping': true});
+              break;
+            case 'average-months':
+
+              var value = parseInt(value)
+              var years = Math.floor(value / 12)
+              var months = value % 12
+
+              if (years > 1) {
+                formatted = years + ' years and '
+              } else if (years == 1) {
+                formatted = '1 year and '
+              }
+
+
+              formatted += months + ' months';
+              break;
+            default:
+              formatted = value
+
+          }
+
+          return formatted
+        }
       </script>
 
       <style>
