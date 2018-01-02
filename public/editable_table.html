@@ -126,9 +126,9 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">Secondary dimension</label>
-            <select class="form-control" style="width: 100%" id="secondary-dimension">
-              <option selected value="none">[None]</option>
+            <label class="form-label">Secondary dimension (optional)</label>
+            <select class="form-control secondary-dimension" id="secondary-dimension">
+              <option selected value="none"></option>
               <option value="calendar-years">Years (calendar)</option>
               <option value="financial-years">Years (financial)</option>
               <option value="financial-quarters">Financial quarters</option>
@@ -141,8 +141,11 @@
               <option value="social-economic">Social-economic status</option>
               <option value="weekly-income">Weekly income</option>
               <option value="free-school-meal-eligibility">Free school meal eligibility</option>
-              <!-- <option value="other">Other</option> -->
+              <option value="other">Other:</option>
             </select>
+
+
+            <input id="secondary-dimension-name" type="text" class="form-control hidden" style="width: 60%;" />
 
             <div id="include-all-secondary-option" class="checkbox-option js-hidden"><input type="checkbox" id="include-all-secondary" /><label for="include-all-secondary">Include ‘All’ aggregation</label></div>
 
@@ -162,6 +165,30 @@
                 </select>
               </div>
             </div>
+
+          </div>
+
+          <div class="form-group hidden" id="other-secondary-dimensions">
+
+            <fieldset>
+              <legend>Other Categories</legend>
+
+              <div>
+                <input id="secondary-dimension-1" type="text" class="form-control" style="width: 100%;" />
+              </div>
+              <div>
+                <input id="secondary-dimension-2" type="text" class="form-control" style="width: 100%;" />
+              </div>
+              <div>
+                <input id="secondary-dimension-3" type="text" class="form-control" style="width: 100%;" />
+              </div>
+              <div>
+                <input id="secondary-dimension-4" type="text" class="form-control hidden" style="width: 100%;" />
+              </div>
+              <div>
+                <input id="secondary-dimension-5" type="text" class="form-control hidden" style="width: 100%;" />
+              </div>
+            </fieldset>
 
           </div>
 
@@ -234,6 +261,16 @@
 
         var includeAllSecondaryOption = document.getElementById('include-all-secondary-option')
         var includeAllSecondaryCheckbox = document.getElementById('include-all-secondary')
+
+        var otherSecondaryDimensionsElement = document.getElementById('other-secondary-dimensions')
+
+        var secondaryDimensionNameElement = document.getElementById('secondary-dimension-name')
+
+        var otherDimension1Element = document.getElementById('secondary-dimension-1')
+        var otherDimension2Element = document.getElementById('secondary-dimension-2')
+        var otherDimension3Element = document.getElementById('secondary-dimension-3')
+        var otherDimension4Element = document.getElementById('secondary-dimension-4')
+        var otherDimension5Element = document.getElementById('secondary-dimension-5')
 
         var ethnicityCategories = {
           "white-other": ["White", "Other"],
@@ -416,12 +453,29 @@
               title += 'Number of '; break;
           }
 
-          title += measureElement.value + ' '
+          if (measureElement.value != '') {
+            title += measureElement.value + ' '
+          } else {
+            title += '[...] '
+          }
+
 
           title += 'by ethnicity '
 
           if (secondaryDimension && secondaryDimension.title_fragment) {
             title += secondaryDimension.title_fragment;
+          }
+
+          if (secondaryDimensionsSelect.value == 'other') {
+
+            title += ' and '
+
+            if (secondaryDimensionNameElement.value != '') {
+              title += secondaryDimensionNameElement.value
+            } else {
+              title += '[...]'
+            }
+
           }
 
           legend.textContent = title
@@ -454,6 +508,9 @@
         function secondaryDimensionChanged() {
 
           updateTableName();
+
+
+          if (secondaryDimensionsSelect.value != 'other') {
 
           var secondaryDimension = secondaryDimensions[secondaryDimensionsSelect.value]
 
@@ -497,16 +554,76 @@
 
           }
 
+          secondaryDimensionsSelect.classList.remove('other')
+          otherSecondaryDimensionsElement.classList.add('hidden')
+          secondaryDimensionNameElement.classList.add('hidden')
+
+          } else {
+
+            rangeSelectors.classList.add('hidden')
+            secondaryDimensionsSelect.classList.add('other')
+            secondaryDimensionNameElement.classList.remove('hidden')
+            otherSecondaryDimensionsElement.classList.remove('hidden')
+          }
 
         }
+
+        function updateOtherInputs() {
+
+
+          if (otherDimension3Element.value != '' || otherDimension4Element.value != '') {
+            otherDimension4Element.classList.remove('hidden')
+          } else {
+            otherDimension4Element.classList.add('hidden')
+          }
+
+          if (otherDimension4Element.value != '' || otherDimension5Element.value != '') {
+            otherDimension5Element.classList.remove('hidden')
+          } else {
+            otherDimension5Element.classList.add('hidden')
+          }
+
+
+        }
+
 
         function updateTable() {
 
           updateTableName();
           updateCheckboxes();
 
+          updateOtherInputs();
+
           var categories = Object.assign([], ethnicityCategories[ethnicityCategoriesSelect.value])
-          var secondaryDimension = Object.assign({}, secondaryDimensions[secondaryDimensionsSelect.value])
+
+
+          var secondaryDimension;
+
+          if (secondaryDimensionsSelect.value != 'other') {
+
+            secondaryDimension = Object.assign({}, secondaryDimensions[secondaryDimensionsSelect.value])
+
+          } else {
+
+            var otherCategories = [
+              otherDimension1Element.value,
+              otherDimension2Element.value,
+              otherDimension3Element.value,
+              otherDimension4Element.value,
+              otherDimension5Element.value
+            ].filter(function(value) {
+              return (value != '')
+            })
+
+
+            secondaryDimension =  {
+              "label": "Test",
+              "title_fragment": "and test",
+              "categories": otherCategories
+            }
+
+          }
+
           var thirdDimensions = []
 
           if (includeAllSecondaryCheckbox.checked) {
@@ -772,6 +889,7 @@
 
 
         measureElement.addEventListener('change', updateTableName)
+        secondaryDimensionNameElement.addEventListener('change', updateTableName)
 
         secondaryDimensionsSelect.addEventListener('change', secondaryDimensionChanged)
         ethnicityCategoriesSelect.addEventListener('change', updateTable)
@@ -784,6 +902,12 @@
         includeRespondentsCheckbox.addEventListener('change', updateTable)
         includeAllCheckbox.addEventListener('change', updateTable)
         includeUnknownCheckbox.addEventListener('change', updateTable)
+
+        otherDimension1Element.addEventListener('change', updateTable)
+        otherDimension2Element.addEventListener('change', updateTable)
+        otherDimension3Element.addEventListener('change', updateTable)
+        otherDimension4Element.addEventListener('change', updateTable)
+        otherDimension5Element.addEventListener('change', updateTable)
 
         includeAllSecondaryCheckbox.addEventListener('change', updateTable)
 
@@ -1104,6 +1228,14 @@
 
         .checkbox-option label {
           margin-left: 5px;
+        }
+
+        select.secondary-dimension {
+          width: 100%;
+        }
+
+        select.secondary-dimension.other {
+          width: 30%;
         }
 
       </style>
