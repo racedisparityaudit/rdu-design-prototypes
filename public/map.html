@@ -424,8 +424,10 @@
 
                   if (diff < 0) {
                     element.textContent = '–' + Math.abs(diff) + '%'
-                  } else {
+                  } else if (diff > 0) {
                     element.textContent = '+' + Math.abs(diff) + '%'
+                  } else {
+                    element.textContent = '0%'
                   }
 
                   mapElement.setAttribute('fill-opacity', ((diffMax - diff) * diffRatio))
