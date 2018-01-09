@@ -1,0 +1,931 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+  <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+
+  <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+
+    <style>
+
+      table.dimensions td {
+        text-align: left;
+        font-size: 19px;
+        vertical-align: middle;
+      }
+
+      .move-controls {
+        text-align: right;
+      }
+
+      .move-up, .move-down {
+        color: #005EA5;
+        display: block;
+        cursor: pointer;
+      }
+
+
+    </style>
+
+
+  </head>
+
+
+
+  <body class="">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <header role="banner" id="global-header" class="with-proposition">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="/static/images/gov.uk_logotype_crown_invert_trans.png?0.19.2" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu">
+                <a href="/" id="proposition-name">
+                  Ethnicity facts and figures
+                </a>
+
+                    <ul id="proposition-links">
+                        <li><a href="/about-ethnicity">About ethnicity</a></li>
+                        <li><a href="/background">Background</a></li>
+                    </u>
+              </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="phase-banner">
+        <p>
+          <strong class="phase-tag">Private Beta</strong>
+          <span>This is a new service – please send your feedback to <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a></span>
+        </p>
+      </div>
+
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href="/" data-event="breadcrumb-homepage">Ethnicity facts and figures</a></li>
+          <li>
+            <a href="/crime-justice-and-the-law" data-event="breadcrumb-crime-justice-and-the-law">Crime justice and the law</a>
+          </li>
+        </ol>
+      </div>
+
+      <style>
+
+        .field-group {
+          margin-bottom: 20px;
+        }
+
+        label {
+          font-weight: bold;
+        }
+
+        input {
+          width: 300px;
+        }
+
+        textarea, input {
+          border: 2px solid black;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+
+        .eg {
+          margin-left: 30px;
+        }
+
+        input.date {
+          width: 200px;
+        }
+
+        input[type=url] {
+          width: 100%;
+        }
+
+        hr {
+          border: 1px solid grey;
+          height: 0;
+        }
+
+        a.delete {
+          float: right;
+          color: #B10E1E;
+          background-color: #DEE0E2;
+          display: inline-block;
+          text-decoration: none;
+          border: 2px solid #B10E1E;
+          padding: 0 5px;
+          margin-top: -50px;
+        }
+
+
+        .source-contact {
+          margin-top: 40px;
+        }
+
+        .source-contact .contact-details label {
+          font-weight: normal;
+        }
+
+        .source-contact .contact-details {
+          border-left: 4px solid #BFC1C3;
+          margin-top: 10px;
+          padding-top: 0;
+          padding-left: 10px;
+        }
+
+      </style>
+
+      <!-- CONTENT STARTS HERE -->
+
+        <div class="grid-row">
+            <div class="column-one-third">
+                <h1 class="heading-xlarge">Edit measure</h1>
+            </div>
+        </div>
+
+      <div class="grid-row">
+
+        <div class="column-one-third">
+            <div>
+              <label for="external_edit_summary">External edit summary</label>
+              <textarea cols="" id="external_edit_summary" name="external_edit_summary" rows="" style="padding: 20px 10px; width: 80%;"></textarea>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <label for="internal_edit_summary">Internal edit summary</label>
+              <textarea cols="" id="internal_edit_summary" name="internal_edit_summary" rows="" style="padding: 20px 10px; width: 80%;"></textarea>
+            </div>
+
+        </div>
+
+        <div class="column-two-thirds">
+
+          <h2 class="heading-medium" style="margin-top: 0;">ID: HO-001</h3>
+
+          <div class="field-group">
+            <div><label>Title</label></div>
+            <div><input type="text" value=""></input></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Publication date</label></div>
+            <div><input type="text" value=""></input></div>
+          </div>
+
+          <div class="">
+          <fieldset style="margin-bottom: 1em;">
+            <legend>
+              <h3 class="heading-small" style="padding-bottom: .5em;">Areas covered</h3>
+            </span>
+
+            </legend>
+
+            <div class="multiple-choice">
+              <input id="england" name="area-covered" type="checkbox" value="england">
+              <label for="england">England</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="wales" name="area-covered" type="checkbox" value="wales">
+              <label for="wales">Wales</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="scotland" name="area-covered" type="checkbox" value="scotland">
+              <label for="scotland">Scotland</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="northern-ireland" name="area-covered" type="checkbox" value="northern-ireland">
+              <label for="northern-ireland">Northern Ireland</label>
+            </div>
+
+          </fieldset>
+          </div>
+
+          <div class="form-group-error">
+          <fieldset style="margin-bottom: 1em;">
+            <legend>
+              <h3 class="heading-small" style="padding-bottom: .5em;">Areas covered
+
+                <span class="error-message">
+                Select at least one
+              </span>
+              </h3>
+
+            </legend>
+
+            <div class="multiple-choice">
+              <input id="england" name="area-covered" type="checkbox" value="england">
+              <label for="england">England</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="wales" name="area-covered" type="checkbox" value="wales">
+              <label for="wales">Wales</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="scotland" name="area-covered" type="checkbox" value="scotland">
+              <label for="scotland">Scotland</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="northern-ireland" name="area-covered" type="checkbox" value="northern-ireland">
+              <label for="northern-ireland">Northern Ireland</label>
+            </div>
+
+          </fieldset>
+          </div>
+
+
+          <div class="field-group">
+            <div><label>Lowest level of geography</label></div>
+            <div>
+              <select class="form-control">
+                <option></option>
+                <option>National</option>
+                <option>Regional</option>
+                <option>Police force</option>
+                <option>Local authority</option>
+              </select>
+            </div>
+          </div>
+
+          <h2 class="heading-medium">Dimensions</h3>
+
+          <table class="dimensions">
+            <tbody><tr class="movable" data-dimension-guid="655744f19f7a71078026693a7c62ddb79d3aa2af">
+                <td>Number of arrests by ethnicity </td>
+                <td>
+                    <a href="/updated-dimension-cms-page.html">
+                        edit</a></td>
+                <td>
+                    <a href="#">delete</a>
+                </td>
+                <td class="move-controls">
+
+                        <span title="move up" class="move-up">▲</span>
+                        <span title="move down" class="move-down">▼</span>
+
+                </td>
+            </tr>
+
+            <tr class="movable" data-dimension-guid="cbe262f7ff3e21e535c6e968b341621377465235">
+                <td>Number of arrests by ethnicity and area</td>
+                <td>
+                    <a href="/updated-dimension-cms-page.html">
+                        edit</a></td>
+                <td>
+                    <a href="#">delete</a>
+                </td>
+                <td class="move-controls">
+
+                        <span title="move up" class="move-up">▲</span>
+                        <span title="move down" class="move-down">▼</span>
+
+                </td>
+            </tr>
+
+            <tr class="movable" data-dimension-guid="92dede43121b30864e23f435196c1a604c02c986">
+                <td>Number of arrests by ethnicity and gender</td>
+                <td>
+                    <a href="/updated-dimension-cms-page.html">
+                        edit</a></td>
+                <td>
+                    <a href="#">delete</a>
+                </td>
+                <td class="move-controls">
+
+                        <span title="move up" class="move-up">▲</span>
+                        <span title="move down" class="move-down">▼</span>
+
+                </td>
+            </tr>
+
+          </tbody></table>
+
+
+          <p style="margin-top: 15px;"><a href="#">Add dimension</a></p>
+
+
+          <h3 class="heading-medium">Primary Source</h3>
+
+          <div class="field-group">
+            <div><label>Source</label></div>
+            <div><input type="text" value=""></input></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>URL</label> <span class="eg">(if available)</span></div>
+            <div><input type="url" value=""></input></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Department source</label></div>
+            <div><input type="text" value=""></input></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Date first published</label></div>
+            <div><input type="text" class="date" value=""></input></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Date publication last updated</label>  &nbsp;&nbsp;&nbsp;(optional)</div>
+            <div><input type="text" class="date" value=""></input></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Next update</label></div>
+            <div><input type="text" class="date" value=""></input></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Frequency of release</label></div>
+            <div>
+              <select class="form-control">
+                <option></option>
+                <option>Annual</option>
+                <option>Quarterly</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+            <div class="field-group">
+              <div><label>Statistic Type</label></div>
+              <div>
+                <select class="form-control">
+                  <option></option>
+                  <option>National</option>
+                  <option>Official</option>
+                  <option>Experimental</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Suppression rules</label></div>
+              <div><textarea style="width: 100%; height: 100px;"></textarea></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Disclosure control</label></div>
+              <div><textarea style="width: 100%; height: 100px;"></textarea></div>
+            </div>
+
+          <fieldset class="source-contact">
+            <label>Contact <span style="font-weight: normal">– person primarily responsible for source</span></label>
+
+            <div class="contact-details">
+              <div class="field-group">
+                <div><label>Name</label></div>
+                <div><input type="text" class="" value=""></input></div>
+              </div>
+
+              <div class="field-group">
+                <div><label>E-mail address</label></div>
+                <div><input type="email" class="" value=""></input></div>
+              </div>
+
+              <div class="field-group">
+                <div><label>Phone number</label></div>
+                <div><input type="tel" class="" value=""></input></div>
+              </div>
+            </div>
+
+          </fieldset>
+
+          <a href="#" id="add-second-contact-to-primary">Add second contact</a>
+
+          <fieldset class="source-contact hidden" id="primary-source-second-contact" style="margin-top: 20px;">
+            <label>Contact 2</label>
+
+            <div class="contact-details">
+              <div class="field-group">
+                <div><label>Name</label></div>
+                <div><input type="text" class="" value=""></input></div>
+              </div>
+
+              <div class="field-group">
+                <div><label>E-mail address</label></div>
+                <div><input type="email" class="" value=""></input></div>
+              </div>
+
+              <div class="field-group">
+                <div><label>Phone number</label></div>
+                <div><input type="tel" class="" value=""></input></div>
+              </div>
+            </div>
+
+          </fieldset>
+
+          <hr>
+
+          <script>
+
+            function showSection(elementId) {
+              document.getElementById(elementId).classList.remove('hidden')
+            }
+
+            function addSecondarySource(event) {
+
+              showSection('secondary-source')
+              event.target.classList.add('hidden')
+
+              event.preventDefault();
+            }
+
+            function removeSecondarySource(event) {
+              document.getElementById('secondary-source').classList.add('hidden')
+              document.getElementById('add-secondary-source').classList.remove('hidden')
+
+              event.preventDefault();
+            }
+
+            document.addEventListener('DOMContentLoaded', function(){
+
+              document.getElementById('add-secondary-source')
+                .addEventListener('click', addSecondarySource)
+
+              document.getElementById('remove-secondary-source')
+                .addEventListener('click', removeSecondarySource)
+
+
+              document.getElementById('remove-secondary-source-two')
+                .addEventListener('click', function(event) {
+
+                  showSection('add-secondary-source-two')
+                  document.getElementById('secondary-source-two').classList.add('hidden')
+                  event.preventDefault()
+                })
+
+
+              document.getElementById('add-second-contact-to-primary')
+                .addEventListener('click', function(event) {
+                  showSection('primary-source-second-contact')
+                  event.target.classList.add('hidden')
+                  event.preventDefault()
+                })
+
+              document.getElementById('add-second-contact-to-secondary-1')
+                .addEventListener('click', function(event) {
+                  showSection('secondary-source-1-second-contact')
+                  event.target.classList.add('hidden')
+                  event.preventDefault()
+                })
+
+
+              document.getElementById('add-second-contact-to-secondary-2')
+                .addEventListener('click', function(event) {
+                  showSection('secondary-source-2-second-contact')
+                  event.target.classList.add('hidden')
+                  event.preventDefault()
+                })
+
+
+              document.getElementById('add-secondary-source-two')
+                .addEventListener('click', function(event) {
+
+                  showSection('secondary-source-two')
+                  event.target.classList.add('hidden')
+                  event.preventDefault()
+
+                })
+
+
+            });
+
+          </script>
+
+          <a id="add-secondary-source" href="#">Add secondary source</a>
+
+          <div id="secondary-source" class="hidden">
+
+            <h3 class="heading-medium">Secondary Source</h3>
+
+            <a href="#" class="delete" id="remove-secondary-source">Remove source</a>
+
+
+            <div class="field-group">
+              <div><label>Title</label></div>
+              <div><input type="text" value=""></input></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Publisher</label> <span class="eg">(eg Dept / Agency)</span></div>
+              <div><input type="text" value=""></input></div>
+            </div>
+
+
+            <div class="field-group">
+              <div><label>URL</label> <span class="eg">if available</span></div>
+              <div><input type="url" value=""></input></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Date</label></div>
+              <div><input type="text" class="date" value=""></input></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Date updated</label>  &nbsp;&nbsp;&nbsp;(optional)</div>
+              <div><input type="text" class="date" value=""></input></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Next update</label></div>
+              <div><input type="text" class="date" value=""></input></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Frequency of release</label></div>
+              <div>
+                <select class="form-control">
+                  <option></option>
+                  <option>Annual</option>
+                  <option>Quarterly</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Statistic Type</label></div>
+              <div>
+                <select class="form-control">
+                  <option></option>
+                  <option>National</option>
+                  <option>Official</option>
+                  <option>Experimental</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Suppression rules</label></div>
+              <div><textarea style="width: 100%; height: 100px;"></textarea></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Disclosure control</label></div>
+              <div><textarea style="width: 100%; height: 100px;"></textarea></div>
+            </div>
+
+            <fieldset class="source-contact">
+              <label>Contact <span style="font-weight: normal">– person primarily responsible for source</span></label>
+
+              <div class="contact-details">
+                <div class="field-group">
+                  <div><label>Name</label></div>
+                  <div><input type="text" class="" value=""></input></div>
+                </div>
+
+                <div class="field-group">
+                  <div><label>E-mail address</label></div>
+                  <div><input type="email" class="" value=""></input></div>
+                </div>
+
+                <div class="field-group">
+                  <div><label>Phone number</label></div>
+                  <div><input type="tel" class="" value=""></input></div>
+                </div>
+              </div>
+
+            </fieldset>
+
+            <a href="#" id="add-second-contact-to-secondary-1">Add second contact</a>
+
+            <fieldset class="source-contact hidden" id="secondary-source-1-second-contact" style="margin-top: 20px;">
+              <label>Contact 2</label>
+
+              <div class="contact-details">
+                <div class="field-group">
+                  <div><label>Name</label></div>
+                  <div><input type="text" class="" value=""></input></div>
+                </div>
+
+                <div class="field-group">
+                  <div><label>E-mail address</label></div>
+                  <div><input type="email" class="" value=""></input></div>
+                </div>
+
+                <div class="field-group">
+                  <div><label>Phone number</label></div>
+                  <div><input type="tel" class="" value=""></input></div>
+                </div>
+              </div>
+
+            </fieldset>
+
+            <hr>
+
+            <a href="#" id="add-secondary-source-two">Add secondary source</a>
+
+          </div>
+
+          <div id="secondary-source-two" class="hidden">
+
+            <h3 class="heading-medium">Secondary Source</h3>
+
+            <a href="#" class="delete" id="remove-secondary-source-two">Remove source</a>
+
+
+            <div class="field-group">
+              <div><label>Title</label></div>
+              <div><input type="text" value=""></input></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Publisher</label> <span class="eg">(eg Dept / Agency)</span></div>
+              <div><input type="text" value=""></input></div>
+            </div>
+
+
+            <div class="field-group">
+              <div><label>URL</label> <span class="eg">if available</span></div>
+              <div><input type="url" value=""></input></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Date</label></div>
+              <div><input type="text" class="date" value=""></input></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Date updated</label>  &nbsp;&nbsp;&nbsp;(optional)</div>
+              <div><input type="text" class="date" value=""></input></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Next update</label></div>
+              <div><input type="text" class="date" value=""></input></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Frequency of release</label></div>
+              <div>
+                <select class="form-control">
+                  <option></option>
+                  <option>Annual</option>
+                  <option>Quarterly</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Statistic Type</label></div>
+              <div>
+                <select class="form-control">
+                  <option></option>
+                  <option>National</option>
+                  <option>Official</option>
+                  <option>Experimental</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Suppression rules</label></div>
+              <div><textarea style="width: 100%; height: 100px;"></textarea></div>
+            </div>
+
+            <div class="field-group">
+              <div><label>Disclosure control</label></div>
+              <div><textarea style="width: 100%; height: 100px;"></textarea></div>
+            </div>
+
+            <fieldset class="source-contact">
+              <label>Contact <span style="font-weight: normal">– person primarily responsible for source</span></label>
+
+              <div class="contact-details">
+                <div class="field-group">
+                  <div><label>Name</label></div>
+                  <div><input type="text" class="" value=""></input></div>
+                </div>
+
+                <div class="field-group">
+                  <div><label>E-mail address</label></div>
+                  <div><input type="email" class="" value=""></input></div>
+                </div>
+
+                <div class="field-group">
+                  <div><label>Phone number</label></div>
+                  <div><input type="tel" class="" value=""></input></div>
+                </div>
+              </div>
+
+            </fieldset>
+
+            <a href="#" id="add-second-contact-to-secondary-2">Add second contact</a>
+
+            <fieldset class="source-contact hidden" id="secondary-source-2-second-contact" style="margin-top: 20px;">
+              <label>Contact 2</label>
+
+              <div class="contact-details">
+                <div class="field-group">
+                  <div><label>Name</label></div>
+                  <div><input type="text" class="" value=""></input></div>
+                </div>
+
+                <div class="field-group">
+                  <div><label>E-mail address</label></div>
+                  <div><input type="email" class="" value=""></input></div>
+                </div>
+
+                <div class="field-group">
+                  <div><label>Phone number</label></div>
+                  <div><input type="tel" class="" value=""></input></div>
+                </div>
+              </div>
+
+            </fieldset>
+
+
+          </div>
+
+          <h2 class="heading-medium">Commentary</h2>
+
+          <div class="field-group">
+            <div><label>Intro line</label></div>
+            <div><textarea style="width: 100%; height: 80px;"></textarea></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Main points</label></div>
+            <div><textarea style="width: 100%; height: 200px;"></textarea></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>What the data measures</label></div>
+            <div><textarea style="width: 100%; height: 200px;"></textarea></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Things you need to know</label></div>
+            <div><textarea style="width: 100%; height: 200px;"></textarea></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Why these ethnic categories were chosen</label></div>
+            <div><textarea style="width: 100%; height: 200px;"></textarea></div>
+          </div>
+
+          <h2 class="heading-medium">Technical details</h2>
+
+            <div class="field-group">
+              <div><label>Type of data</label></div>
+              <div>
+                <select class="form-control">
+                  <option></option>
+                  <option>Survey</option>
+                  <option>Admin</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+          <div class="field-group">
+            <div><label>Purpose of data source</label></div>
+            <div><textarea style="width: 100%; height: 200px;"></textarea></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Methodology</label></div>
+            <div><textarea style="width: 100%; height: 200px;"></textarea></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Rounding</label></div>
+            <div><textarea style="width: 100%; height: 200px;"></textarea></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Related publications</label></div>
+            <div><textarea style="width: 100%; height: 200px;"></textarea></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Quality information and methodology link</label></div>
+            <div><input type="url"></input></div>
+          </div>
+
+          <div class="field-group">
+            <div><label>Further technical information</label></div>
+            <div><textarea style="width: 100%; height: 200px;"></textarea></div>
+          </div>
+
+
+          <h2 class="heading-medium">Downloads</h2>
+
+          <a href="#">Add download</a>
+
+        </div>
+
+
+
+      </div>
+
+      <style>
+
+        fieldset .multiple-choice label { font-weight: normal;  }
+      </style>
+
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-one-third'>
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+              <li>
+                  <a href="/">Site preview</a>
+              </li>
+              <li>
+                  <a href="/cms/">CMS</a>
+              </li>
+              <li>
+                  <a href="/prototype/">Prototype</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="global-app-error" class="app-error hidden"></div>
+    <script src="/static/javascripts/govuk-template.js?0.19.2"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/javascripts/all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/highcharts.js"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/underscore-min.js"></script>
+    <script src="/static/javascripts/rd-data-tools.js"></script>
+    <script src="/static/javascripts/rd-graph.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/modules/exporting.js"></script>
+    </script>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
