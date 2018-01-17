@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/cms-v2.css" />
+
+
+  </head>
+
+
+
+  <body class="admin">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href="/" data-event="breadcrumb-homepage">Admin</a></li>
+        </ol>
+      </div>
+
+      <!-- CONTENT STARTS HERE -->
+
+      <h1 class="heading-xlarge">Measures by time</h1>
+
+      <style>
+
+
+
+        table.measure-stats th.data {
+          width: 26%;
+        }
+
+        .measure-stats thead th.data,
+        .measure-stats tbody td {
+          text-align: left;
+          padding-right: 0;
+        }
+
+        tbody tr.week td,
+        tbody tr.week th {
+          border-bottom-width: 0;
+        }
+
+        tbody tr.measure-titles td {
+          border-top-width: 0;
+          padding-top: 0;
+          padding-left: 0px;
+          line-height: 1.3em;
+        }
+
+         tbody tr.measure-titles p {
+          margin-bottom: 0.4em;
+         }
+
+        .measure-titles ul {
+          list-style-type: none;
+          margin-left: 0;
+          margin-top: 0; margin-bottom: 1em;
+        }
+
+        .measure-titles ul li {
+          margin-bottom: .5em;
+        }
+
+        .time-period {
+          width: 200px;
+          margin-right: 50px;
+        }
+
+        .date {
+          width: 120px;
+          padding-top: 1px;
+          padding-bottom: 1px;
+        }
+
+        .time-period-options {
+          margin-bottom: 1em;
+        }
+
+        select.measure-status {
+          width: 150px;
+          margin-right: 1em;
+        }
+
+        th.measure-date {
+          width: 20%;
+        }
+
+        th.measure-title {
+          width: 45%;
+        }
+
+        th.measure-status {
+          width: 35%;
+        }
+
+        .summary {
+          margin-top: 1em;
+          margin-bottom: 1em;
+        }
+
+      </style>
+
+      <div class="time-period-options">
+
+        Show
+        <select class="form-control measure-status" id="measure-status">
+          <option>All measures</option>
+          <option>New measures</option>
+          <option>Updates</option>
+          <option>New versions</option>
+        </select>
+
+        from
+        <select class="form-control time-period" id="time-period">
+          <option value="7-days">Past 7 days</option>
+          <option value="30-days">Past 30 days</option>
+          <option value="60-days">Past 60 days</option>
+          <option value="1-year">Past year</option>
+          <option value="custom">Custom</option>
+        </select>
+
+        <span class="custom-dates hidden" id="custom-dates">
+          <input type="text" class="form-control date" />
+          to
+          <input type="text" class="form-control date" />
+        </span>
+
+        <script>
+          var customDates = document.getElementById('custom-dates')
+          var timePeriodSelect = document.getElementById('time-period')
+
+          timePeriodSelect.addEventListener('change', function() {
+
+            if (timePeriodSelect.value == 'custom') {
+              customDates.classList.remove('hidden')
+            } else {
+              customDates.classList.add('hidden')
+            }
+
+          })
+
+        </script>
+      </div>
+
+      <div class="grid-row summary">
+        <div class="column-one-third">
+          <div class="data">
+            <span class="data-item bold-xxlarge">10</span>
+            <span class="data-item xsmall">New measures</span>
+          </div>
+        </div>
+        <div class="column-one-third">
+          <div class="data">
+            <span class="data-item bold-xxlarge">2</span>
+            <span class="data-item xsmall">Updates</span>
+          </div>
+        </div>
+        <div class="column-one-third">
+          <div class="data">
+            <span class="data-item bold-xxlarge">1</span>
+            <span class="data-item xsmall">New version</span>
+          </div>
+        </div>
+      </div>
+
+
+
+      <table class="measure-stats">
+
+        <thead>
+          <th class="measure-date">Date published</th>
+          <th class="measure-title">Title</th>
+          <th class="measure-status">Status</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>15 January 2018</td>
+            <td><a href="#">Self harm in prison custody</a></td>
+            <td>New version</td>
+          </tr>
+
+          <tr>
+            <td>15 January 2018</td>
+            <td><a href="#">New social housing lettings</a></td>
+            <td>New measure</td>
+          </tr>
+
+          <tr>
+            <td>14 January 2018</td>
+            <td><a href="#">Routes into social housing</a></td>
+            <td>New measure</td>
+          </tr>
+
+          <tr>
+            <td>10 January 2018</td>
+            <td><a href="#">Confidence in the local police</a></td>
+            <td>New measure</td>
+          </tr>
+
+          <tr>
+            <td>10 January 2018</td>
+            <td><a href="#">Civil Service Workforce</a></td>
+            <td>Update: Duplication in Methodology removed</td>
+          </tr>
+
+          <tr>
+            <td>8 January 2018</td>
+            <td><a href="#">Armed forces workforce</a></td>
+            <td>Update: Correction of typo</td>
+          </tr>
+
+          <tr>
+            <td>6 January 2018</td>
+            <td><a href="#">Armed forces workforce</a></td>
+            <td>New measure</td>
+          </tr>
+
+          <tr>
+            <td>etc</td>
+            <td></td>
+            <td></td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-one-third'>
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+              <li>
+                  <a href="/">Site preview</a>
+              </li>
+              <li>
+                  <a href="/cms/">CMS</a>
+              </li>
+              <li>
+                  <a href="/prototype/">Prototype</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="global-app-error" class="app-error hidden"></div>
+    <script src="/static/javascripts/govuk-template.js?0.19.2"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/javascripts/all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/highcharts.js"></script>
+    <script type="text/javascript" src="/static/vendor/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/underscore-min.js"></script>
+    <script src="/static/javascripts/rd-data-tools.js"></script>
+    <script src="/static/javascripts/rd-graph.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.11/modules/exporting.js"></script>
+    </script>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
