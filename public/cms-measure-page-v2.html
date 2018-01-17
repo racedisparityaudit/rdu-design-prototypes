@@ -277,18 +277,50 @@
           </fieldset>
           </div>
 
+          <div class="">
+          <fieldset style="margin-bottom: 1em;">
+            <legend>
+              <h3 class="heading-small" style="padding-bottom: .5em;">Lowest level of geography</h3>
+            </span>
 
-          <div class="field-group">
-            <div><label>Lowest level of geography</label></div>
-            <div>
-              <select class="form-control">
-                <option></option>
-                <option>National</option>
-                <option>Regional</option>
-                <option>Police force</option>
-                <option>Local authority</option>
-              </select>
+            </legend>
+
+            <div class="multiple-choice">
+              <input id="uk" name="geog-lowest-level" type="radio" value="uk">
+              <label for="uk">United Kingdom</label>
             </div>
+
+            <div class="multiple-choice">
+              <input id="national" name="geog-lowest-level" type="radio" value="national">
+              <label for="national">Country (eg England, Wales, England and Wales, Scotland...)</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="regions" name="geog-lowest-level" type="radio" value="regions">
+              <label for="regions">Region (eg South West, London, North West, Wales...)</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="local-authority-upper" name="geog-lowest-level" type="radio" value="local-authority-upper">
+              <label for="local-authority-upper">Local authority upper <br>(eg County Council, Unitary Authority, Greater London Authority) </label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="local-authority-lower" name="geog-lowest-level" type="radio" value="local-authority-lower">
+              <label for="local-authority-lower">Local authority lower <br>(eg District Council, Unitary Authority, London Borough)</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="police-force-area" name="geog-lowest-level" type="radio" value="police-force-area">
+              <label for="police-force-area">Police force area</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="ccg" name="geog-lowest-level" type="radio" value="ccg">
+              <label for="ccg">Clinical Commissioning Group</label>
+            </div>
+
+          </fieldset>
           </div>
 
           <h2 class="heading-medium">Dimensions</h3>
@@ -390,6 +422,107 @@
                 <option>Other</option>
               </select>
             </div>
+          </div>
+
+          <div class="">
+          <fieldset style="margin-bottom: 1em;">
+            <legend>
+              <h3 class="heading-small" style="padding-bottom: .5em;">Frequency of release</h3>
+            </span>
+
+            </legend>
+
+            <div class="multiple-choice">
+              <input id="monthly" name="frequency" type="radio" value="monthly">
+              <label for="monthly">Monthly</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="quarterly" name="frequency" type="radio" value="quarterly">
+              <label for="quarterly">Quarterly</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="3-times-a-year" name="frequency" type="radio" value="3-times-a-year">
+              <label for="3-times-a-year">3 times per year</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-6-months" name="frequency" type="radio" value="every-6-months">
+              <label for="every-6-months">Twice a year</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="yearly" name="frequency" type="radio" value="yearly">
+              <label for="yearly">Yearly</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-2-years" name="frequency" type="radio" value="every-2-years">
+              <label for="every-2-years">Every 2 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-3-years" name="frequency" type="radio" value="every-2-years">
+              <label for="every-3-years">Every 3 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-4-years" name="frequency" type="radio" value="every-2-years">
+              <label for="every-4-years">Every 4 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-5-years" name="frequency" type="radio" value="every-2-years">
+              <label for="every-5-years">Every 5 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="ad-hoc" name="frequency" type="radio" value="ad-hoc">
+              <label for="ad-hoc">Ad-hoc</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="other" name="frequency" type="radio" value="other">
+              <label for="other">Other</label>
+            </div>
+
+          </fieldset>
+
+          </div>
+
+          <div class="panel" style="border-left-width: 5px; padding-top: 4px;">
+                <label style="font-weight: normal; " class="form-label">Frequency</label>
+                <div><input type="text" class="form-control" value=""></input></div>
+          </div>
+
+
+
+          <div class="">
+          <fieldset style="margin-bottom: 1em;">
+            <legend>
+              <h3 class="heading-small" style="padding-bottom: .5em;">Type of statistic</h3>
+            </span>
+
+            </legend>
+
+            <div class="multiple-choice">
+              <input id="national-statistic" name="stat-type" type="radio" value="national-statistic">
+              <label for="national-statistic">National statistic (certified against Code of Practice)</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="experimental-statistic" name="stat-type" type="radio" value="experimental-statistic">
+              <label for="experimental-statistic">Experimental statistic</label>
+            </div>
+
+
+            <div class="multiple-choice">
+              <input id="official-statistic" name="stat-type" type="radio" value="official-statistic">
+              <label for="official-statistic">Official statistic (any other government statistic) </label>
+            </div>
+
+          </fieldset>
           </div>
 
             <div class="field-group">
@@ -816,6 +949,27 @@
           </div>
 
           <h2 class="heading-medium">Technical details</h2>
+
+          <div class="">
+          <fieldset style="margin-bottom: 1em;">
+            <legend>
+              <h3 class="heading-small" style="padding-bottom: .5em;">Type of data</h3>
+            </span>
+
+            </legend>
+
+            <div class="multiple-choice">
+              <input id="admin" name="data-type" type="checkbox" value="admin">
+              <label for="admin">Administrative</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="survey" name="data-type" type="checkbox" value="survey">
+              <label for="survey">Survey (including census)</label>
+            </div>
+
+          </fieldset>
+          </div>
 
             <div class="field-group">
               <div><label>Type of data</label></div>
