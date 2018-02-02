@@ -59,17 +59,17 @@
     [aria-sort] button:before {
       content: " \25bc";
       position: absolute;
-      right: -12px;
+      right: -14px;
       top: 8px;
-      font-size: 0.7em;
+      font-size: 0.6em;
     }
 
     [aria-sort] button:after {
       content: " \25b2";
       position: absolute;
-      right: -12px;
+      right: -14px;
       top: -1px;
-      font-size: 0.7em;
+      font-size: 0.6em;
     }
 
     [aria-sort="ascending"] button:before,
@@ -80,13 +80,15 @@
     [aria-sort="ascending"] button:after {
       content: " \25b2";
       font-size: 1em;
-      position: static
+      position: absolute;
+      right: -16px;
     }
 
     [aria-sort="descending"] button:after {
       content: " \25bc";
       font-size: 1em;
-      position: static;
+      position: absolute;
+      right: -16px;
     }
 
 
@@ -429,9 +431,9 @@
       <div class="grid-row"><div class="column-two-thirds">
       <table>
         <thead>
-          <th aria-sort="ascending" width="33%">Ethnicity</th>
-          <th aria-sort="none" width="33%">Score</th>
-          <th aria-sort="none" width="33%">Number</th>
+          <th aria-sort="ascending">Ethnicity</th>
+          <th aria-sort="none">Score</th>
+          <th aria-sort="none">Number</th>
         </thead>
 
         <tbody>
