@@ -120,7 +120,7 @@
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Regions-Copy">
-            <g id="Group" transform="translate(300.000000, 100.000000)" fill="#005EA5" stroke="#000000">
+            <g id="Group" transform="translate(300.000000, 100.000000)" fill="#005EA5" stroke="white" stroke-width="2">
                 <path d="M500,900 L400,900 L400,800 L400,700 L500,700 L500,800 L600,800 L600,900 L500,900 Z" id="south-east" fill-opacity="0.9"></path>
                 <path d="M600,700 L500,700 L500,600 L600,600 L700,600 L700,700 L700,800 L600,800 L600,700 Z" id="east" fill-opacity="0.8"></path>
                 <path d="M400,500 L400,400 L500,400 L600,400 L600,500 L600,600 L500,600 L500,700 L400,700 L400,600 L400,500 Z" id="east-midlands" fill-opacity="0.6"></path>
@@ -393,7 +393,7 @@
           var range = max - min
           var diffRange = diffMax - diffMin
 
-          var outputMin = 0.0
+          var outputMin = 0.05
           var outputMax = 1.0
 
           var outputRange = outputMax - outputMin  /* 0.7 */
@@ -434,13 +434,15 @@
                 } else {
 
                   element.textContent = value + '%'
-                  mapElement.setAttribute('fill-opacity', ((parseFloat(value) - min) * ratio))
+                  mapElement.setAttribute('fill-opacity', outputMin + ((parseFloat(value) - min) * ratio))
 
                 }
 
+                mapElement.setAttribute('fill', '#005EA5')
               } else {
                 element.textContent = value
-                mapElement.setAttribute('fill-opacity', '0')
+                mapElement.setAttribute('fill', '#DEE0E2')
+                mapElement.setAttribute('fill-opacity', '1')
               }
 
             } else {
