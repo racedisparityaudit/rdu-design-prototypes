@@ -34,8 +34,13 @@
     <script src="/static/javascripts/accordion.js"></script>
     <script src="/static/javascripts/sticky.js?4"></script>
     <script src="/static/javascripts/uk-countries-select.js"></script>
+    <script src="/static/javascripts/show-hide-control.js"></script>
 
     <style>
+
+      .js-hidden {
+        display: none;
+      }
 
       .status {
       }
@@ -108,7 +113,8 @@
         margin-bottom: 20px;
        }
 
-      .accordion.with-js h2.untitled {
+      .accordion.with-js h2.untitled,
+      .accordion.with-js h2.unused {
         color: #6F777B;
       }
 
@@ -120,6 +126,15 @@
 
       .uk-countries .uk {
         margin-bottom: 30px;
+      }
+
+      input.date {
+        width: 300px;
+      }
+
+      .contact-details {
+        padding-left: 20px;
+        border-left: 5px solid lightgrey;
       }
 
     </style>
@@ -221,6 +236,10 @@
 
       new ukCountriesSelect(document.getElementById('uk-countries-fields'))
 
+      new showHideControl(document.getElementById('other'))
+      new showHideControl(document.getElementById('other-secondary'))
+
+
 
     })
 
@@ -229,6 +248,20 @@
   <script>
 
     document.addEventListener('DOMContentLoaded', function() {
+
+
+        var secondaryHeading = document.getElementById('secondary-heading');
+        var secondaryTitle = document.getElementById('secondary-title');
+
+        secondaryTitle.addEventListener('keyup', function() {
+
+          if (secondaryTitle.value == '') {
+            secondaryHeading.classList.add('unused')
+          } else {
+            secondaryHeading.classList.remove('unused')
+          }
+
+        })
 
 
         document.getElementById('add-dimension').addEventListener('click', function(event){
@@ -601,17 +634,323 @@
             <h2 class="heading-medium">Primary source</h2>
           </div>
 
-          <div class="accordion-section-body">
+          <div class="accordion-section-body" style="padding-top: 20px; padding-bottom: 20px;">
+
+            <div class="form-field">
+              <div><label class="form-label">Title</label></div>
+              <div><input class="form-control" type="text" value=""></input></div>
+            </div>
+
+            <div class="form-field">
+              <div><label class="form-label">URL</div>
+              <div><input class="form-control" type="url" value=""></input></div>
+            </div>
+
+            <div class="form-field">
+              <div><label class="form-label">Publisher</label></div>
+              <div><input class="form-control" type="text" value=""></input></div>
+            </div>
+
+            <div class="form-field">
+              <div><label class="form-label">Date first published</label></div>
+              <div><input type="text" class="form-control date" value=""></input></div>
+            </div>
+
+            <div class="form-field">
+              <div><label class="form-label">Date publication last updated</label></div>
+              <div><input type="text" class="form-control date" value=""></input></div>
+            </div>
+
+            <div class="form-field">
+              <div><label class="form-label">Next update</label></div>
+              <div><input type="text" class="form-control date" value=""></input></div>
+            </div>
+
+
+          <div class="">
+          <fieldset style="margin-bottom: 1em;">
+            <legend>
+              <h3 class="heading-small" style="padding-bottom: .5em;">Frequency of release</h3>
+            </span>
+
+            </legend>
+
+            <div class="multiple-choice">
+              <input id="monthly" name="frequency" type="radio" value="monthly">
+              <label for="monthly">Monthly</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="quarterly" name="frequency" type="radio" value="quarterly">
+              <label for="quarterly">Quarterly</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="3-times-a-year" name="frequency" type="radio" value="3-times-a-year">
+              <label for="3-times-a-year">3 times per year</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-6-months" name="frequency" type="radio" value="every-6-months">
+              <label for="every-6-months">Twice a year</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="yearly" name="frequency" type="radio" value="yearly">
+              <label for="yearly">Yearly</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-2-years" name="frequency" type="radio" value="every-2-years">
+              <label for="every-2-years">Every 2 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-3-years" name="frequency" type="radio" value="every-2-years">
+              <label for="every-3-years">Every 3 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-4-years" name="frequency" type="radio" value="every-2-years">
+              <label for="every-4-years">Every 4 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-5-years" name="frequency" type="radio" value="every-2-years">
+              <label for="every-5-years">Every 5 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="ad-hoc" name="frequency" type="radio" value="ad-hoc">
+              <label for="ad-hoc">Ad-hoc</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="other" name="frequency" type="radio" value="other" aria-controls="frequency-other">
+              <label for="other">Other</label>
+            </div>
+
+            <div class="panel" id="frequency-other" style="border-left-width: 5px;">
+                  <label class="form-label">Other</label>
+                  <div><input type="text" class="form-control" value=""></input></div>
+            </div>
+
+          </fieldset>
+          </div>
+
+
+          <div class="">
+            <fieldset style="margin-bottom: 1em;">
+              <legend>
+                <h3 class="heading-small" style="padding-bottom: .5em;">Type of statistic</h3>
+              </span>
+
+              </legend>
+
+              <div class="multiple-choice">
+                <input id="national-statistic" name="stat-type" type="radio" value="national-statistic">
+                <label for="national-statistic">National statistic (certified against Code of Practice)</label>
+              </div>
+
+              <div class="multiple-choice">
+                <input id="experimental-statistic" name="stat-type" type="radio" value="experimental-statistic">
+                <label for="experimental-statistic">Experimental statistic</label>
+              </div>
+
+
+              <div class="multiple-choice">
+                <input id="official-statistic" name="stat-type" type="radio" value="official-statistic">
+                <label for="official-statistic">Official statistic (any other government statistic) </label>
+              </div>
+
+            </fieldset>
+          </div>
+
+
+          <fieldset class="source-contact">
+            <label style="font-weight: bold;">Contact <span style="font-weight: normal">– person primarily responsible for source</span></label>
+
+            <div class="contact-details">
+              <div class="form-field">
+                <div><label class="form-label">Name</label></div>
+                <div><input type="text" class="form-control" value=""></input></div>
+              </div>
+
+              <div class="form-field">
+                <div><label class="form-label">E-mail address</label></div>
+                <div><input type="email" class="form-control" value=""></input></div>
+              </div>
+
+              <div class="form-field">
+                <div><label class="form-label">Phone number</label></div>
+                <div><input type="tel" class="form-control" value=""></input></div>
+              </div>
+            </div>
+          </fieldset>
+
 
           </div>
         </div>
 
         <div class="accordion-section">
           <div class="accordion-section-header">
-            <h2 class="heading-medium" style="color: #BFC1C3;">Secondary source</h2>
+            <h2 class="heading-medium unused" id="secondary-heading">Secondary source</h2>
           </div>
 
           <div class="accordion-section-body">
+
+            <div class="form-field">
+              <div><label class="form-label">Title</label></div>
+              <div><input class="form-control" type="text" value="" id="secondary-title"></input></div>
+            </div>
+
+            <div class="form-field">
+              <div><label class="form-label">URL</div>
+              <div><input class="form-control" type="url" value=""></input></div>
+            </div>
+
+            <div class="form-field">
+              <div><label class="form-label">Publisher</label></div>
+              <div><input class="form-control" type="text" value=""></input></div>
+            </div>
+
+            <div class="form-field">
+              <div><label class="form-label">Date first published</label></div>
+              <div><input type="text" class="form-control date" value=""></input></div>
+            </div>
+
+            <div class="form-field">
+              <div><label class="form-label">Date publication last updated</label></div>
+              <div><input type="text" class="form-control date" value=""></input></div>
+            </div>
+
+            <div class="form-field">
+              <div><label class="form-label">Next update</label></div>
+              <div><input type="text" class="form-control date" value=""></input></div>
+            </div>
+
+
+          <div class="">
+          <fieldset style="margin-bottom: 1em;">
+            <legend>
+              <h3 class="heading-small" style="padding-bottom: .5em;">Frequency of release</h3>
+            </span>
+
+            </legend>
+
+            <div class="multiple-choice">
+              <input id="monthly-secondarys" name="frequency-secondary" type="radio" value="monthly">
+              <label for="monthly-secondary">Monthly</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="quarterly-secondary" name="frequency-secondary" type="radio" value="quarterly">
+              <label for="quarterly-secondary">Quarterly</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="3-times-a-year-secondary" name="frequency-secondary" type="radio" value="3-times-a-year">
+              <label for="3-times-a-year-secondary">3 times per year</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-6-months-secondary" name="frequency-secondary" type="radio" value="every-6-months">
+              <label for="every-6-months-secondary">Twice a year</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="yearly-secondary" name="frequency-secondary" type="radio" value="yearly">
+              <label for="yearly-secondary">Yearly</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-2-years-secondary" name="frequency-secondary" type="radio" value="every-2-years">
+              <label for="every-2-years-secondary">Every 2 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-3-years-secondary" name="frequency-secondary" type="radio" value="every-2-years">
+              <label for="every-3-years-secondary">Every 3 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-4-years-secondary" name="frequency-secondary" type="radio" value="every-2-years">
+              <label for="every-4-years-secondary">Every 4 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="every-5-years-secondary" name="frequency-secondary" type="radio" value="every-2-years">
+              <label for="every-5-years-secondary">Every 5 years</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="ad-hoc-secondary" name="frequency-secondary" type="radio" value="ad-hoc">
+              <label for="ad-hoc-secondary">Ad-hoc</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="other-secondary" name="frequency-secondary" type="radio" value="other" aria-controls="frequency-other-secondary">
+              <label for="other-secondary">Other</label>
+            </div>
+
+            <div class="panel" id="frequency-other-secondary" style="border-left-width: 5px;">
+                  <label class="form-label">Other</label>
+                  <div><input type="text" class="form-control" value=""></input></div>
+            </div>
+
+          </fieldset>
+          </div>
+
+
+          <div class="">
+            <fieldset style="margin-bottom: 1em;">
+              <legend>
+                <h3 class="heading-small" style="padding-bottom: .5em;">Type of statistic</h3>
+              </span>
+
+              </legend>
+
+              <div class="multiple-choice">
+                <input id="national-statistic-secondary" name="stat-type" type="radio" value="national-statistic">
+                <label for="national-statistic-secondary">National statistic (certified against Code of Practice)</label>
+              </div>
+
+              <div class="multiple-choice">
+                <input id="experimental-statistic-secondary" name="stat-type" type="radio" value="experimental-statistic">
+                <label for="experimental-statistic-secondary">Experimental statistic</label>
+              </div>
+
+
+              <div class="multiple-choice">
+                <input id="official-statistic-secondary" name="stat-type" type="radio" value="official-statistic">
+                <label for="official-statistic-secondary">Official statistic (any other government statistic) </label>
+              </div>
+
+            </fieldset>
+          </div>
+
+
+          <fieldset class="source-contact">
+            <label style="font-weight: bold;">Contact <span style="font-weight: normal">– person primarily responsible for source</span></label>
+
+            <div class="contact-details">
+              <div class="form-field">
+                <div><label class="form-label">Name</label></div>
+                <div><input type="text" class="form-control" value=""></input></div>
+              </div>
+
+              <div class="form-field">
+                <div><label class="form-label">E-mail address</label></div>
+                <div><input type="email" class="form-control" value=""></input></div>
+              </div>
+
+              <div class="form-field">
+                <div><label class="form-label">Phone number</label></div>
+                <div><input type="tel" class="form-control" value=""></input></div>
+              </div>
+            </div>
+          </fieldset>
+
 
           </div>
         </div>
@@ -622,7 +961,54 @@
             <h2 class="heading-medium">Methodology and type of data</h2>
           </div>
 
-          <div class="accordion-section-body">
+          <div class="accordion-section-body" style="padding-top: 20px; padding-bottom: 20px;">
+
+            <div class="form-field">
+              <label class="form-label">Methodology</label>
+              <textarea class="form-control" rows="10"></textarea>
+            </div>
+
+            <div class="">
+              <fieldset style="margin-bottom: 1em;">
+                <legend>
+                  <h3 class="heading-small" style="padding-bottom: .5em;">Type of data</h3>
+                </span>
+
+                </legend>
+
+                <div class="multiple-choice">
+                  <input id="admin" name="data-type" type="checkbox" value="admin">
+                  <label for="admin">Administrative</label>
+                </div>
+
+                <div class="multiple-choice">
+                  <input id="survey" name="data-type" type="checkbox" value="survey">
+                  <label for="survey">Survey (including census)</label>
+                </div>
+
+              </fieldset>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Purpose of data source</label>
+              <textarea class="form-control" rows="10"></textarea>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Rounding</label>
+              <textarea class="form-control" rows="10"></textarea>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Quality Methodology Information link</label>
+              <input type="text" class="form-control" />
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Further technical information</label>
+              <textarea class="form-control" rows="10"></textarea>
+            </div>
+
 
           </div>
         </div>
@@ -633,8 +1019,10 @@
             <h2 class="heading-medium">Download files</h2>
           </div>
 
-          <div class="accordion-section-body">
+          <div class="accordion-section-body" style="padding-top: 20px; padding-bottom: 20px;">
 
+            <label class="form-label">Select file</label>
+            <input type="file">
           </div>
         </div>
 
