@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/accordion.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/sticky.css" />
+    <script src="/static/javascripts/accordion.js"></script>
+    <script src="/static/javascripts/sticky.js?4"></script>
+    <script src="/static/javascripts/uk-countries-select.js"></script>
+
+    <style>
+
+      .status {
+      }
+
+      .status.sticky-js-fixed {
+        margin-top: 0;
+        background-color: white;
+        box-sizing: border-box;
+        width: 100%;
+        top: 0px;
+        left: 0;
+        position: fixed;
+        z-index: 2;
+      }
+
+      .status-container {
+        max-width: 960px;
+        margin: 0 auto;
+        border: 4px solid #BFC1C3;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+
+      .status-inner {
+        width: 100%;
+        display: table;
+      }
+
+      .status .left {
+        display: table-cell;
+      }
+
+      .status .right {
+        display: table-cell;
+        text-align: right;
+      }
+
+      .status .info {
+        margin-right: 20px;
+      }
+
+      .status b {
+        font-weight: bold;
+      }
+
+      .status .button {
+        vertical-align: baseline;
+      }
+
+      .status .actions  .other-versions {
+          display: table-cell;
+          width: 50%;
+          text-align: right;
+          font-size: 16px;
+      }
+
+      .status .actions a {
+            font-size: 16px;
+            color: $link-colour;
+            padding: 0;
+            margin-left: 10px;
+      }
+
+      #dimensions .accordion-section-body {
+        padding: 20px 0;
+      }
+
+      .form-field {
+        margin-top: 10px;
+        margin-bottom: 20px;
+       }
+
+      .accordion.with-js h2.untitled {
+        color: #6F777B;
+      }
+
+      .dimension.drop-destination {
+        border-bottom-color: #6F777B;
+        border-bottom-width: 6px;
+        border-bottom-style: solid;
+      }
+
+      .uk-countries .uk {
+        margin-bottom: 30px;
+      }
+
+    </style>
+
+  </head>
+
+  <body class="">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+
+  <script>
+
+    var elementBeingDragged = null;
+
+    var DraggableDimensions = function(element) {
+
+      var element = element;
+      var elementBeingDragged;
+
+      var dragStarted = function(event) {
+        elementBeingDragged = event.target;
+      }
+
+      var dropped = function(event) {
+        dimensionTarget = event.target;
+
+        while (!dimensionTarget.classList.contains('dimension')) {
+          dimensionTarget = dimensionTarget.parentElement
+        }
+
+        dimensionTarget.parentElement.insertBefore(elementBeingDragged, dimensionTarget.nextSibling);
+
+        for (element of document.querySelectorAll('.drop-destination')) {
+          element.classList.remove('drop-destination');
+        }
+      }
+
+      var draggedOver = function(event) {
+        event.preventDefault()
+        var dimensionTarget = event.target
+
+        while (!dimensionTarget.classList.contains('dimension')) {
+          dimensionTarget = dimensionTarget.parentElement
+        }
+
+        for (el of document.querySelectorAll('.drop-destination')) {
+          el.classList.remove('drop-destination');
+        }
+
+        if (event.target != elementBeingDragged) {
+          dimensionTarget.classList.add('drop-destination')
+        }
+
+
+      }
+
+      element.addEventListener('dragstart', dragStarted);
+      element.addEventListener('drop', dropped);
+      element.addEventListener('dragover', draggedOver);
+
+    }
+
+
+    var Dimension = function(element) {
+
+      var element = element;
+
+      var title = element.querySelector('.accordion-section-header h2')
+      var title_field = element.querySelector('.dimension-title')
+
+      title_field.addEventListener('keyup', updateTitle)
+
+      function updateTitle(event) {
+
+        var titleText = title_field.value;
+
+
+        if (titleText != '') {
+          title.classList.remove('untitled')
+          title.textContent = titleText;
+        } else {
+          title.classList.add('untitled')
+          title.textContent = title.getAttribute('data-empty-value');
+        }
+
+      }
+
+    }
+
+    var draggableDimensions;
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+      new DraggableDimensions(document.querySelector('.dimensions'));
+
+      for (dimension of document.querySelectorAll('.dimension')) {
+        new Dimension(dimension);
+      }
+
+      new ukCountriesSelect(document.getElementById('uk-countries-fields'))
+
+
+    })
+
+  </script>
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+
+        document.getElementById('add-dimension').addEventListener('click', function(event){
+
+          var dimensions = document.getElementById('dimensions');
+          var add_dimension_row = document.getElementById('add-dimension-row');
+
+
+          var html = '<div class="accordion-section-header">    <h2 class="heading-medium untitled" data-empty-value="Untitled dimension">Untitled dimension</h2>  </div>  <div class="accordion-section-body">    <div class="form-field">      <label class="form-label">Title</label>      <input type="text" class="form-control dimension-title" />    </div>    <div class="form-field">      <label class="form-label">Time period</label>      <input type="text" class="form-control" />    </div>    <div class="form-field">      <label class="form-label">Summary</label>      <textarea class="form-control" rows="10" cols="30"></textarea>    </div><fieldset>  <legend></legend>  <h2 class="heading-small"><legend>Ethnicity categorisation</legend></h2>  <div class="form-group">    <label class="form-label" for="ethnicity-category">If chart and table use different categories, select the most detailed one.</label> <select class="form-control" id="ethnicity-category" name="ethnicity_category">      <option value="">        Please select      </option>      <optgroup label="Common">        <option value="1">          2 - White, Other        </option>        <option value="2">          2 - White British, Other        </option>        <option value="3">        a 5 - Asian, Black, White, Mixed, Chinese inc Other        </option>        <option value="4">          5 - Asian, Black, White, Mixed, Other        </option>        <option data-parents="true" value="5">          16 - ONS 2001        </option>        <option data-parents="true" value="6">          18 - ONS 2011        </option>      </optgroup>      <optgroup label="Custom">        <option value="7">          4 - Asian, Black, White, Other        </option>        <option value="8">          4 - Black, Mixed, White, Other        </option>        <option data-parents="true" value="9">          5 - Asian, Black, White British, White other, Other        </option>        <option data-parents="true" value="10">          5 - Black, Indian, Pakistani and Bangladeshi, White, Other        </option>        <option value="11">          6 - Asian, Black, Chinese, Mixed, White, Other        </option>        <option data-parents="true" value="12">          6 - Asian, Black, Mixed, White British, White other, Other        </option>        <option data-parents="true" value="13">          6 - Asian, Black African, Black Caribbean, Black other, White, Other        </option>        <option data-parents="true" value="14">          6 - Black, Indian, Pakistani and Bangladeshi, Mixed, White, Other        </option>        <option data-parents="true" value="21">          7 - Asian, Black, Chinese, Mixed, White British, White other, Other        </option>        <option data-parents="true" value="15">          8 - Indian, Pakistani and Bangladeshi, Asian other, Black, Mixed, White British, White other, Other        </option>        <option data-parents="true" value="16">          10 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other        </option>        <option data-parents="true" value="17">          12 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other, Arab, Gypsy/Traveller/Irish Traveller        </option>        <option data-parents="true" value="18">          18 - ONS 2001 plus Irish Traveller and Gypsy/Roma        </option>        <option data-parents="true" value="19">          19 - ONS 2001 plus Irish Traveller and Gypsy/Roma and Unmatched        </option>      </optgroup>      <optgroup label="Not applicable">        <option value="20">          Not applicable        </option>      </optgroup>    </select>  </div>  <div class="multiple-choice">    <input class="country" id="include_parents" name="include_parents" type="checkbox" value="y"> <label for="include_parents">Values for broad ethnic groups shown</label>  </div>  <div class="multiple-choice">    <input class="country" id="include_all" name="include_all" type="checkbox" value="y"> <label for="include_all">Values for ‘All’ ethnicities shown</label>  </div>  <div class="multiple-choice">    <input class="country" id="include_unknown" name="include_unknown" type="checkbox" value="y"> <label for="include_unknown">Values for ‘Unknown’ ethnicities shown</label>  </div></fieldset><div style="margin-top: 30px;">  <div style="margin-bottom: 20px;"><a href="#" class="button">Open chart builder</a></div>  <div style="margin-bottom: 20px;"><a href="#" class="button">Open table builder</a></div>'
+
+          var new_dimension = document.createElement('div')
+          new_dimension.setAttribute('class', 'accordion-section dimension')
+          new_dimension.setAttribute('draggable', 'true')
+          new_dimension.innerHTML = html
+
+          dimensions.insertBefore(new_dimension, add_dimension_row)
+
+          new AccordionSection(new_dimension, mainAccordion)
+          new Dimension(new_dimension)
+
+          draggableDimensions = new DraggableDimensions(document.querySelector('.dimensions'));
+
+          new_dimension.setAttribute('aria-expanded', 'true')
+
+          event.preventDefault();
+        })
+
+      })
+
+    </script>
+
+    <header role="banner" id="global-header" class="with-proposition">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="/static/images/gov.uk_logotype_crown_invert_trans.png?0.19.2" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu">
+                <a href="/" id="proposition-name">
+                  Ethnicity facts and figures
+                </a>
+
+                    <ul id="proposition-links">
+                        <li><a href="/about-ethnicity">About ethnicity</a></li>
+                        <li><a href="/background">Background</a></li>
+                    </u>
+              </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="phase-banner">
+        <p>
+          <strong class="phase-tag">Private Beta</strong>
+          <span>This is a new service – please send your feedback to <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a></span>
+        </p>
+      </div>
+
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href="/" data-event="breadcrumb-homepage">Ethnicity facts and figures</a></li>
+          <li>
+            <a href="/crime-justice-and-the-law" data-event="breadcrumb-crime-justice-and-the-law">Crime justice and the law</a>
+          </li>
+        </ol>
+      </div>
+
+      <!-- CONTENT STARTS HERE -->
+
+      <h1 class="heading-xlarge">Number of arrests</h1>
+
+      <div class="status sticky-js">
+        <div class="status-container">
+          <div class="status-inner">
+              <div class="version-info left">
+                  <span class="info">Version&nbsp;<b>1.0</b></span>
+              </div>
+              <div class="centre">
+                  <span class="info">Status:&nbsp;<b>Draft</b></span>
+              </div>
+              <div class="right">
+                <a href="/crime-justice-and-the-law/courts-sentencing-and-tribunals/legal-aid/1.0" name="preview">Preview this version</a>
+              </div>
+              <div class="actions right">
+                <button class="button" type="submit" name="save">
+                      Save
+                </button>
+                <button type="submit" class="button neutral" name="save-and-review" id="save-and-review">
+                    Save &amp; Send to review
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div class="accordion" style="margin-top: 50px;">
+
+        <div class="accordion-section" style="border-bottom: 1px solid #bfc1c3;">
+          <div class="accordion-section-header">
+            <h2 class="heading-medium">Main commentary</h2>
+          </div>
+
+          <div class="accordion-section-body" style="padding-top: 20px; padding-bottom: 20px;">
+
+            <div class="form-field">
+              <label class="form-label">Main points</label>
+              <textarea class="form-control" rows="10"></textarea>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Things you need to know</label>
+              <textarea class="form-control" rows="10"></textarea>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">What the data measures</label>
+              <textarea class="form-control" rows="10"></textarea>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">The ethnic categories used in this data</label>
+              <textarea class="form-control" rows="10"></textarea>
+            </div>
+
+
+
+          </div>
+        </div>
+
+        <div style="margin-top: 40px; border-bottom: 1px solid #bfc1c3;" id="dimensions" class="dimensions">
+
+<div class="accordion-section dimension" draggable="true">
+  <div class="accordion-section-header">
+    <h2 class="heading-medium untitled" data-empty-value="Untitled dimension">Untitled dimension</h2>
+  </div>
+
+  <div class="accordion-section-body">
+
+    <div class="form-field">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-control dimension-title" />
+    </div>
+
+    <div class="form-field">
+      <label class="form-label">Time period</label>
+      <input type="text" class="form-control" />
+    </div>
+
+    <div class="form-field">
+      <label class="form-label">Summary</label>
+      <textarea class="form-control" rows="10" cols="30"></textarea>
+    </div>
+
+<fieldset>
+  <legend></legend>
+  <h2 class="heading-small"><legend>Ethnicity categorisation</legend></h2>
+  <div class="form-group">
+    <label class="form-label" for="ethnicity-category">If chart and table use different categories, select the most detailed one.</label> <select class="form-control" id="ethnicity-category" name="ethnicity_category">
+      <option value="">
+        Please select
+      </option>
+      <optgroup label="Common">
+        <option value="1">
+          2 - White, Other
+        </option>
+        <option value="2">
+          2 - White British, Other
+        </option>
+        <option value="3">
+        a 5 - Asian, Black, White, Mixed, Chinese inc Other
+        </option>
+        <option value="4">
+          5 - Asian, Black, White, Mixed, Other
+        </option>
+        <option data-parents="true" value="5">
+          16 - ONS 2001
+        </option>
+        <option data-parents="true" value="6">
+          18 - ONS 2011
+        </option>
+      </optgroup>
+      <optgroup label="Custom">
+        <option value="7">
+          4 - Asian, Black, White, Other
+        </option>
+        <option value="8">
+          4 - Black, Mixed, White, Other
+        </option>
+        <option data-parents="true" value="9">
+          5 - Asian, Black, White British, White other, Other
+        </option>
+        <option data-parents="true" value="10">
+          5 - Black, Indian, Pakistani and Bangladeshi, White, Other
+        </option>
+        <option value="11">
+          6 - Asian, Black, Chinese, Mixed, White, Other
+        </option>
+        <option data-parents="true" value="12">
+          6 - Asian, Black, Mixed, White British, White other, Other
+        </option>
+        <option data-parents="true" value="13">
+          6 - Asian, Black African, Black Caribbean, Black other, White, Other
+        </option>
+        <option data-parents="true" value="14">
+          6 - Black, Indian, Pakistani and Bangladeshi, Mixed, White, Other
+        </option>
+        <option data-parents="true" value="21">
+          7 - Asian, Black, Chinese, Mixed, White British, White other, Other
+        </option>
+        <option data-parents="true" value="15">
+          8 - Indian, Pakistani and Bangladeshi, Asian other, Black, Mixed, White British, White other, Other
+        </option>
+        <option data-parents="true" value="16">
+          10 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other
+        </option>
+        <option data-parents="true" value="17">
+          12 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other, Arab, Gypsy/Traveller/Irish Traveller
+        </option>
+        <option data-parents="true" value="18">
+          18 - ONS 2001 plus Irish Traveller and Gypsy/Roma
+        </option>
+        <option data-parents="true" value="19">
+          19 - ONS 2001 plus Irish Traveller and Gypsy/Roma and Unmatched
+        </option>
+      </optgroup>
+      <optgroup label="Not applicable">
+        <option value="20">
+          Not applicable
+        </option>
+      </optgroup>
+    </select>
+  </div>
+
+  <div class="multiple-choice">
+    <input class="country" id="include_parents" name="include_parents" type="checkbox" value="y"> <label for="include_parents">Values for broad ethnic groups shown</label>
+  </div>
+  <div class="multiple-choice">
+    <input class="country" id="include_all" name="include_all" type="checkbox" value="y"> <label for="include_all">Values for ‘All’ ethnicities shown</label>
+  </div>
+  <div class="multiple-choice">
+    <input class="country" id="include_unknown" name="include_unknown" type="checkbox" value="y"> <label for="include_unknown">Values for ‘Unknown’ ethnicities shown</label>
+  </div>
+</fieldset>
+
+<div style="margin-top: 30px;">
+  <div style="margin-bottom: 20px;"><a href="#" class="button">Open chart builder</a></div>
+  <div style="margin-bottom: 20px;"><a href="#" class="button">Open table builder</a></div>
+</div>
+
+
+            </div>
+          </div>
+
+          <div id="add-dimension-row" style="border-top: 1px solid #bfc1c3; padding: 10px 0;">
+            <a href="#" style="font-weight: normal; color: #005EA5; text-decoration: underline;" id="add-dimension">+ Add dimension</a>
+          </div>
+
+        </div>
+
+        <div class="accordion-section" style="margin-top: 40px;">
+          <div class="accordion-section-header">
+            <h2 class="heading-medium">Page metadata</h2>
+          </div>
+
+          <div class="accordion-section-body">
+
+            <div class="form-field">
+              <label class="form-label">Time period covered</label>
+              <input type="text" class="form-control" />
+
+            </div>
+
+          <div class="" id="uk-countries-fields">
+            <fieldset class="uk-countries" style="margin-bottom: 1em;">
+              <legend>
+                <h3 class="heading-small" style="padding-bottom: .5em;">
+                Areas covered
+                </h3>
+              </span>
+
+              </legend>
+
+              <div class="multiple-choice">
+                <input class="country" id="england" name="area-covered" type="checkbox" value="england">
+                <label for="england">England</label>
+              </div>
+
+              <div class="multiple-choice">
+                <input class="country" id="wales" name="area-covered" type="checkbox" value="wales">
+                <label for="wales">Wales</label>
+              </div>
+
+              <div class="multiple-choice">
+                <input class="country" id="scotland" name="area-covered" type="checkbox" value="scotland">
+                <label for="scotland">Scotland</label>
+              </div>
+
+              <div class="multiple-choice">
+                <input class="country" id="northern-ireland" name="area-covered" type="checkbox" value="northern-ireland">
+                <label for="northern-ireland">Northern Ireland</label>
+              </div>
+
+            </fieldset>
+          </div>
+
+          <div class="">
+          <fieldset style="margin-bottom: 1em;">
+            <legend>
+              <h3 class="heading-small" style="padding-bottom: .5em;">Lowest level of geography</h3>
+            </span>
+
+            </legend>
+
+            <div class="multiple-choice">
+              <input id="united-kingdom" name="geog-lowest-level" type="radio" value="united-kingdom">
+              <label for="united-kingdom">United Kingdom</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="national" name="geog-lowest-level" type="radio" value="national">
+              <label for="national">Country (eg England, Wales, England and Wales, Scotland...)</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="regions" name="geog-lowest-level" type="radio" value="regions">
+              <label for="regions">Region (eg South West, London, North West, Wales...)</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="local-authority-upper" name="geog-lowest-level" type="radio" value="local-authority-upper">
+              <label for="local-authority-upper">Local authority upper <br>(eg County councils and unitary authorities) </label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="local-authority-lower" name="geog-lowest-level" type="radio" value="local-authority-lower">
+              <label for="local-authority-lower">Local authority lower <br>(eg District councils and unitary authorities)</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="police-force-area" name="geog-lowest-level" type="radio" value="police-force-area">
+              <label for="police-force-area">Police force area</label>
+            </div>
+
+            <div class="multiple-choice">
+              <input id="ccg" name="geog-lowest-level" type="radio" value="ccg">
+              <label for="ccg">Clinical Commissioning Group</label>
+            </div>
+
+          </fieldset>
+          </div>
+
+          </div>
+        </div>
+
+
+
+        <div class="accordion-section">
+          <div class="accordion-section-header">
+            <h2 class="heading-medium">Primary source</h2>
+          </div>
+
+          <div class="accordion-section-body">
+
+          </div>
+        </div>
+
+        <div class="accordion-section">
+          <div class="accordion-section-header">
+            <h2 class="heading-medium" style="color: #BFC1C3;">Secondary source</h2>
+          </div>
+
+          <div class="accordion-section-body">
+
+          </div>
+        </div>
+
+
+        <div class="accordion-section">
+          <div class="accordion-section-header">
+            <h2 class="heading-medium">Methodology and type of data</h2>
+          </div>
+
+          <div class="accordion-section-body">
+
+          </div>
+        </div>
+
+
+        <div class="accordion-section">
+          <div class="accordion-section-header">
+            <h2 class="heading-medium">Download files</h2>
+          </div>
+
+          <div class="accordion-section-body">
+
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+    <script>
+
+      var mainAccordion;
+      if (
+        'addEventListener' in document &&
+        document.querySelectorAll
+        ) {
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+          mainAccordion = new Accordion(document.querySelector('.accordion'))
+
+        })
+
+      }
+
+    </script>
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-one-third'>
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+              <li>
+                  <a href="/">Site preview</a>
+              </li>
+              <li>
+                  <a href="/cms/">CMS</a>
+              </li>
+              <li>
+                  <a href="/prototype/">Prototype</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="global-app-error" class="app-error hidden"></div>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
