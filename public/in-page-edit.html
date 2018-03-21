@@ -152,22 +152,22 @@
         function PreviewAndEditSection(element) {
 
           var element = element;
-          var preview, edit, text_input, text_area;
+          var preview, edit, text_inputs, text_area;
           setup();
 
           function setup() {
 
             preview = element.querySelector('.preview')
             edit = element.querySelector('.edit')
-            text_input = edit.querySelector('input[type=text]')
+            text_inputs = edit.querySelectorAll('input[type=text]')
             text_area = edit.querySelector('textarea')
 
             preview.addEventListener('click', previewClicked)
             preview.addEventListener('keyup', previewKeyedUp)
 
-            if (text_input) {
-              text_input.addEventListener('blur', inputBlurred)
-              text_input.addEventListener('keyup', inputKeyPressed)
+            if (text_inputs.length == 1) {
+              text_inputs[0].addEventListener('blur', inputBlurred)
+              text_inputs[0].addEventListener('keyup', inputKeyPressed)
             }
 
             if (text_area) {
@@ -208,11 +208,11 @@
 
             showPreview();
 
-            if (text_input) {
+            if (text_inputs[0]) {
               if (preview.classList.contains('empty')) {
-                text_input.value = '';
+                text_inputs[0].value = '';
               } else {
-                text_input.value = preview.textContent;
+                text_inputs[0].value = preview.textContent;
               }
 
             }
@@ -229,12 +229,12 @@
           function saveAndPreview(event) {
 
 
-            if (text_input) {
-              if (text_input.value == '') {
+            if (text_inputs[0]) {
+              if (text_inputs[0].value == '') {
                 preview.classList.add('empty')
                 preview.textContent = preview.getAttribute('data-empty-text');
               } else {
-                preview.textContent = text_input.value;
+                preview.textContent = text_inputs[0].value;
                 preview.classList.remove('empty')
               }
             }
@@ -276,8 +276,8 @@
           function showEdit() {
             preview.classList.toggle('hidden')
             edit.classList.toggle('hidden')
-            if (text_input) {
-              text_input.focus();
+            if (text_inputs[0]) {
+              text_inputs[0].focus();
             }
             if (text_area) {
               text_area.focus();
