@@ -144,6 +144,7 @@
             text_area = edit.querySelector('textarea')
 
             preview.addEventListener('click', previewClicked)
+            preview.addEventListener('keyup', previewKeyedUp)
 
             if (text_input) {
               text_input.addEventListener('blur', inputBlurred)
@@ -243,14 +244,23 @@
 
           }
 
+          function previewKeyedUp(event) {
+            if (event.keyCode == 13) {
+              showEdit()
+            }
+          }
+
           function previewClicked(event) {
+            showEdit()
+          }
+
+          function showEdit() {
             preview.classList.toggle('hidden')
             edit.classList.toggle('hidden')
             if (text_input) {
               text_input.focus();
             }
           }
-
 
           function showPreview() {
             edit.classList.add('hidden')
@@ -280,7 +290,7 @@
         <div class="column-full">
 
           <div class="preview-and-edit">
-            <h1 class="preview heading-xlarge empty" data-empty-text="Click to add title">Click to add title</h1>
+            <h1 class="preview heading-xlarge empty" data-empty-text="Click to add title" tabindex="0">Click to add title</h1>
             <div class="edit hidden">
               <input type="text" class="form-control for-heading">
               <button class="link save">Save</button>
@@ -301,7 +311,7 @@
           </dt>
           <dd itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
           <div class="preview-and-edit">
-           <span class="preview empty" itemprop="name" data-empty-text="Click to add Department">
+           <span class="preview empty" itemprop="name" data-empty-text="Click to add Department" tabindex="0">
             Click to add Department
            </span>
            <div class="edit hidden">
@@ -327,7 +337,7 @@
           </dt>
           <dd>
           <div class="preview-and-edit">
-            <div class="preview empty" data-empty-text="Click to set areas covered">
+            <div class="preview empty" data-empty-text="Click to set areas covered" tabindex="0">
               Click to set areas covered
             </div>
             <div class="edit hidden">
@@ -344,7 +354,7 @@
           </dt>
           <dd>
             <div class="preview-and-edit">
-              <div class="preview empty" data-empty-text="Click to set time period">
+              <div class="preview empty" data-empty-text="Click to set time period" tabindex="0">
                 Click to set time period
               </div>
               <div class="edit hidden">
@@ -362,7 +372,7 @@
           <p>The main facts and figures show that:</p>
 
           <div class="preview-and-edit">
-            <ul class="bullets spaced-out preview empty" data-empty-text="Click to add main points">
+            <ul class="bullets spaced-out preview empty" data-empty-text="Click to add main points" tabindex="0">
               <li>Click to add main points</li>
             </ul>
             <div class="edit hidden">
@@ -375,7 +385,7 @@
             <summary>Things you need to know</summary>
             <div class="panel panel-border-narrow">
               <div class="preview-and-edit">
-                <div class="empty preview" data-empty-text="Click to add things you need to know">
+                <div class="empty preview" data-empty-text="Click to add things you need to know" tabindex="0">
                  Click to add things you need to know
                 </div>
                 <div class="edit hidden">
@@ -389,7 +399,7 @@
             <summary>What the data measures</summary>
             <div class="panel panel-border-narrow">
               <div class="preview-and-edit">
-                <div class="empty preview" data-empty-text="Click to add what the data measures">
+                <div class="empty preview" data-empty-text="Click to add what the data measures" tabindex="0">
                  Click to add what the data measures
                 </div>
                 <div class="edit hidden">
@@ -403,7 +413,7 @@
             <summary>The ethnic categories used in this data</summary>
             <div class="panel panel-border-narrow">
               <div class="preview-and-edit">
-                <div class="empty preview" data-empty-text="Click to ethnic categories used in this data">
+                <div class="empty preview" data-empty-text="Click to ethnic categories used in this data" tabindex="0">
                   Click to ethnic categories used in this data
                 </div>
                 <div class="edit hidden">
@@ -420,7 +430,7 @@
       <div class="grid-row">
         <div class="column-two-thirds">
           <div class="preview-and-edit">
-            <h2 class="preview heading-medium empty" data-empty-text="Click to add dimension title">Click to add dimension title</h2>
+            <h2 class="preview heading-medium empty" data-empty-text="Click to add dimension title" tabindex="0">Click to add dimension title</h2>
             <div class="edit hidden">
               <input type="text" class="for-heading" /> <button class="link save">Save</button><button class="link cancel">Cancel</button>
             </div>
@@ -433,7 +443,7 @@
           </dt>
           <dd>
           <div class="preview-and-edit">
-            <div class="preview empty" data-empty-text="Click to set areas covered">
+            <div class="preview empty" data-empty-text="Click to set areas covered" tabindex="0">
               Click to set areas covered
             </div>
             <div class="edit hidden">
@@ -450,7 +460,7 @@
           </dt>
           <dd>
             <div class="preview-and-edit">
-              <div class="preview empty" data-empty-text="Click to set time period">
+              <div class="preview empty" data-empty-text="Click to set time period" tabindex="0">
                 Click to set time period
               </div>
               <div class="edit hidden">
@@ -473,7 +483,7 @@
 
       <div class="column-full">
         <div class="preview-and-edit">
-          <h3 class="heading-small empty preview" data-empty-text="Click to add chart title">Click to add chart title</h3>
+          <h3 class="heading-small empty preview" data-empty-text="Click to add chart title" tabindex="0">Click to add chart title</h3>
           <div class="edit hidden">
             <input type="text" class="for-heading" /> <button class="link save">Save</button><button class="link cancel">Cancel</button>
           </div>
@@ -487,7 +497,7 @@
 
       <div class="column-full">
         <div class="preview-and-edit">
-          <h3 class="heading-small empty preview" data-empty-text="Click to add table title">Click to add table title</h3>
+          <h3 class="heading-small empty preview" data-empty-text="Click to add table title" tabindex="0">Click to add table title</h3>
           <div class="edit hidden">
             <input type="text" class="for-heading" /> <button class="link save">Save</button><button class="link cancel">Cancel</button>
           </div>
@@ -504,7 +514,7 @@
         <p>This data shows that:</p>
 
         <div class="preview-and-edit">
-          <ul class="bullets spaced-out preview empty" data-empty-text="Click to add main points about this dimension">
+          <ul class="bullets spaced-out preview empty" data-empty-text="Click to add main points about this dimension" tabindex="0">
             <li>Click to add main points about this dimension</li>
           </ul>
           <div class="edit hidden">
@@ -517,7 +527,7 @@
 
     <div class="column-full">
       <div style="margin-top: 50px; margin-bottom: 50px;">
-        <a href="#">Add another dimension</a> (This doesn’t work yet, but would add another set of fields as above)
+        <a href="#">Add another dimension</a>
       </div>
     </div>
 
@@ -535,7 +545,7 @@
 
             <h3 class="heading-small">Type of data</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add type of data">Click to add type of data</p>
+              <p class="empty preview" data-empty-text="Click to add type of data" tabindex="0">Click to add type of data</p>
               <div class="edit hidden">
                 <input type="text" /> <button class="link save">Save</button><button class="link cancel">Cancel</button>
               </div>
@@ -543,7 +553,7 @@
 
             <h3 class="heading-small">Purpose of data source</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add">Click to add</p>
+              <p class="empty preview" data-empty-text="Click to add" tabindex="0">Click to add</p>
               <div class="edit hidden">
                 <textarea rows="5" cols="30"></textarea> <button class="link save">Save</button><button class="link cancel">Cancel</button>
               </div>
@@ -551,7 +561,7 @@
 
             <h3 class="heading-small">Methodology</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add">Click to add</p>
+              <p class="empty preview" data-empty-text="Click to add" tabindex="0">Click to add</p>
               <div class="edit hidden">
                 <textarea rows="5" cols="30"></textarea> <button class="link save">Save</button><button class="link cancel">Cancel</button>
               </div>
@@ -559,7 +569,7 @@
 
             <h3 class="heading-small">Rounding</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add">Click to add</p>
+              <p class="empty preview" data-empty-text="Click to add" tabindex="0">Click to add</p>
               <div class="edit hidden">
                 <textarea rows="5" cols="30"></textarea> <button class="link save">Save</button><button class="link cancel">Cancel</button>
               </div>
@@ -567,7 +577,7 @@
 
             <h3 class="heading-small">Related publications</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add">Click to add</p>
+              <p class="empty preview" data-empty-text="Click to add" tabindex="0">Click to add</p>
               <div class="edit hidden">
                 <textarea rows="5" cols="30"></textarea> <button class="link save">Save</button><button class="link cancel">Cancel</button>
               </div>
@@ -575,7 +585,7 @@
 
             <h3 class="heading-small">Further technical information</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add">Click to add</p>
+              <p class="empty preview" data-empty-text="Click to add" tabindex="0">Click to add</p>
               <div class="edit hidden">
                 <textarea rows="5" cols="30"></textarea> <button class="link save">Save</button><button class="link cancel">Cancel</button>
               </div>
@@ -592,7 +602,7 @@
 
             <h3 class="heading-small">Source</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add type of data">Click to add type of data</p>
+              <p class="empty preview" data-empty-text="Click to add type of data" tabindex="0">Click to add type of data</p>
               <div class="edit hidden">
                 <div style="margin-bottom: 5px;"><label>Title</label> <input type="text" /></div>
                 <div><label>URL</label> <input type="text" /></div>
@@ -603,7 +613,7 @@
 
             <h3 class="heading-small">Department</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add type of data">Click to add type of data</p>
+              <p class="empty preview" data-empty-text="Click to add type of data" tabindex="0">Click to add type of data</p>
               <div class="edit hidden">
                 <input type="text" /> <button class="link save">Save</button><button class="link cancel">Cancel</button>
               </div>
@@ -611,7 +621,7 @@
 
             <h3 class="heading-small">Type of statistic</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add type of data">Click to add type of data</p>
+              <p class="empty preview" data-empty-text="Click to add type of data" tabindex="0">Click to add type of data</p>
               <div class="edit hidden">
                 <input type="text" /> <button class="link save">Save</button><button class="link cancel">Cancel</button>
               </div>
@@ -619,7 +629,7 @@
 
             <h3 class="heading-small">Publication frequency</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add type of data">Click to add publication frequency</p>
+              <p class="empty preview" data-empty-text="Click to add type of data" tabindex="0">Click to add publication frequency</p>
               <div class="edit hidden">
                 <input type="text" /> <button class="link save">Save</button><button class="link cancel">Cancel</button>
               </div>
@@ -627,7 +637,7 @@
 
             <h3 class="heading-small">Disclosure control</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add">Click to add</p>
+              <p class="empty preview" data-empty-text="Click to add" tabindex="0">Click to add</p>
               <div class="edit hidden">
                 <textarea rows="5" cols="30"></textarea> <button class="link save">Save</button><button class="link cancel">Cancel</button>
               </div>
