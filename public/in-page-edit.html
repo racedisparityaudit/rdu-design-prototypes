@@ -92,7 +92,10 @@
       <!-- CONTENT STARTS HERE -->
 
       <style>
-        .empty { color: #777; }
+
+        .pretend-link { color: #005EA5; cursor: pointer; }
+
+        .empty { color: #777; cursor: auto; }
 
         h1.empty,
         h2.empty,
@@ -637,7 +640,7 @@
 
             <h3 class="heading-small">Source</h3>
             <div class="preview-and-edit">
-              <p class="empty preview" data-empty-text="Click to add source" tabindex="0">Click to add source</p>
+              <p class="empty preview pretend-link" data-empty-text="Click to add source" tabindex="0">Click to add source</p>
               <div class="edit hidden">
                 <div style="margin-bottom: 5px;"><label>Title</label> <input type="text" /></div>
                 <div><label>URL</label> <input type="text" /></div>
