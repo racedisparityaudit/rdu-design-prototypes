@@ -130,6 +130,25 @@
 
       <script>
 
+        function BuilderLink(button) {
+
+          var button = button;
+          setup()
+
+          function setup() {
+            button.addEventListener('click', buttonClicked)
+          }
+
+          function buttonClicked(event) {
+
+            window.open('/builder', 'test', 'height=400,width=800,top=100')
+
+            event.preventDefault()
+          }
+
+        }
+
+
         function PreviewAndEditSection(element) {
 
           var element = element;
@@ -271,18 +290,23 @@
 
         }
 
-        function setupPreviewAndEditSection() {
+        function setup() {
 
           var previewAndEditSections = document.querySelectorAll('.preview-and-edit')
 
           for (previewAndEditSection of previewAndEditSections) {
-
             new PreviewAndEditSection(previewAndEditSection);
+          }
+
+          var builderButtons = document.querySelectorAll('.open-builder');
+
+          for (builderButton of builderButtons) {
+            new BuilderLink(builderButton);
           }
 
         }
 
-        document.addEventListener('DOMContentLoaded', setupPreviewAndEditSection)
+        document.addEventListener('DOMContentLoaded', setup)
 
       </script>
 
@@ -490,7 +514,7 @@
         </div>
 
         <div class="chart-placeholder">
-          <a href="#" class="button">Open chart builder</a>
+          <a href="#" class="button open-builder">Open chart builder</a>
         </div>
 
       </div>
@@ -504,7 +528,7 @@
         </div>
 
         <div class="table-placeholder">
-          <a href="#" class="button">Open table builder</a>
+          <a href="#" class="button open-builder">Open table builder</a>
         </div>
 
       </div>
@@ -652,7 +676,7 @@
             <h2 class="heading-medium">Download the data</h2>
           </div>
           <div class="accordion-section-body">
-            <div>
+            <div style="padding-top: 40px; padding-bottom: 40px;">
               (TBC)
             </div>
           </div>
