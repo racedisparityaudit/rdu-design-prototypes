@@ -146,17 +146,20 @@
             preview.addEventListener('click', previewClicked)
 
             if (text_input) {
-              text_input.addEventListener('blur', saveAndPreview)
+              text_input.addEventListener('blur', inputBlurred)
               text_input.addEventListener('keyup', inputKeyPressed)
             }
 
             if (text_area) {
-              text_area.addEventListener('blur', saveAndPreview)
+              text_area.addEventListener('blur', inputBlurred)
             }
 
 
             var cancel = edit.querySelector('.cancel')
             if (cancel) {
+
+              cancel.addEventListener('mousedown', cancelMousedDown)
+
               cancel.addEventListener('click', cancelClicked)
             }
 
@@ -166,6 +169,19 @@
             }
 
 
+          }
+
+          function inputBlurred(event) {
+
+            if (!edit.classList.contains('hidden')) {
+              saveAndPreview()
+            }
+
+          }
+
+          function cancelMousedDown(event) {
+            // Prevent the blur event firing.
+            event.preventDefault();
           }
 
           function cancelClicked(event) {
