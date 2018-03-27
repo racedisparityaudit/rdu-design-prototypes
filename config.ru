@@ -13,6 +13,6 @@ run lambda { |env|
       'Content-Type'  => 'text/plain',
       'Cache-Control' => 'public, max-age=0'
     },
-    "Not Found"
+    ["Not Found"]
   ]
 }
