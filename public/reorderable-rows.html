@@ -89,6 +89,8 @@
 
           var element = element;
           var elementBeingDragged;
+          var savingIntervalId;
+          var status = document.getElementById('reordering-save-status')
           setup();
 
           function setup() {
@@ -141,6 +143,42 @@
             for (el of document.querySelectorAll('.being-dragged')) {
               el.classList.remove('being-dragged');
             }
+
+            status.classList.remove('status-invisible')
+            status.textContent = 'Saving new order';
+
+            savingIntervalId = setInterval(stillSaving, 300)
+
+            setTimeout(saved, 1500);
+          }
+
+          function saved() {
+
+            if (savingIntervalId) {
+              clearInterval(savingIntervalId);
+              status.textContent = 'Saved';
+              status.classList.add('status-invisible')
+            }
+          }
+
+          function stillSaving() {
+
+            switch (status.textContent) {
+              case 'Saving new order':
+                status.textContent = 'Saving new order.';
+                break
+              case 'Saving new order.':
+                status.textContent = 'Saving new order..';
+                break
+              case 'Saving new order..':
+                status.textContent = 'Saving new order...';
+                break
+              case 'Saving new order...':
+                status.textContent = 'Saving new order';
+                break
+            }
+
+
           }
 
 
@@ -206,9 +244,9 @@
           cursor: move;
         }
 
-        .measures tbody tr:hover td {
+/*        .measures tbody tr:hover td {
           background-color: #EFEFEF
-        }
+        }*/
 
         .measures tr.drop-destination-below td {
           border-bottom: 4px solid grey;
@@ -234,11 +272,25 @@
         }
 
 
+        #reordering-save-status {
+          transition: opacity 0s linear;
+          transition-delay: 0s;
+        }
+
+
+        #reordering-save-status.status-invisible {
+          opacity: 0;
+          transition-duration: 1s;
+          transition-delay: 1s;
+        }
+
+
       </style>
 
 
+      <div id="reordering-save-status" class="" style="margin-top: 30px; font-size: 16px;">&nbsp;</div>
 
-      <table class="measures">
+      <table class="measures" style="margin-top: -0px;">
 
         <thead>
           <th>Measure name</th>
