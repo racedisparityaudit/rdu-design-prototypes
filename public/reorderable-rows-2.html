@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+    <script src="/static/javascripts/accordion.js"></script>
+    <script src="/static/javascripts/reorderable-rows.js?2"></script>
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/accordion.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/reorderable-rows.css" />
+
+
+    <script>
+
+
+      function saveNewOrder(table) {
+
+      }
+
+
+      if (
+        'addEventListener' in document &&
+        document.querySelectorAll
+        ) {
+
+        document.addEventListener('DOMContentLoaded', function() {
+          new Accordion(document.querySelector('.accordion'))
+
+
+          var measureTables = document.querySelectorAll('table.measures')
+
+          for (var i = 0; i < measureTables.length; i++) {
+            var reorderableRows = new ReorderableRows(measureTables[i]);
+
+
+            var statusElement = document.createElement('div')
+            statusElement.classList.add('status')
+            measureTables[i].parentElement.insertBefore(statusElement, measureTables[i])
+
+
+            reorderableRows.onDrop = function() {
+
+              statusElement.textContent = 'Saving';
+
+            }
+
+          }
+
+        })
+
+      }
+
+    </script>
+
+      <style>
+        .table-of-measures td,
+        .table-of-measures td:first-of-type,
+        .table-of-measures th {
+          font-size: 19px;
+          text-align: left;
+          vertical-align: middle;
+        }
+
+        .table-of-measures a {
+          font-size: 19px;
+        }
+      </style>
+
+
+  </head>
+
+
+
+  <body class="">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <header role="banner" id="global-header" class="with-proposition">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="/static/images/gov.uk_logotype_crown_invert_trans.png?0.19.2" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu">
+                <a href="/" id="proposition-name">
+                  Ethnicity facts and figures
+                </a>
+
+                    <ul id="proposition-links">
+                        <li><a href="#">Ethnicity in the UK</a></li>
+                        <li><a href="#">Background</a></li>
+                    </u>
+              </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="phase-banner">
+        <p>
+          <strong class="phase-tag">Beta</strong>
+          <span>This is a new service – please send your feedback to <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a></span>
+        </p>
+      </div>
+
+
+      <!-- CONTENT STARTS HERE -->
+
+      <div class="grid-row">
+        <div class="column-two-thirds">
+          <h1 class="heading-xlarge">Crime, justice and the law</h1>
+
+          <p>Government departments, public services and local authorities collect data on policing, crimes, courts, sentencing, prisons and custody.</p>
+
+          <p>Find information on outcomes for different ethnic groups.</p>
+        </div>
+      </div>
+
+      <div class="grid-row">
+        <div class="column-full">
+
+
+          <div class="accordion" id="topics">
+
+            <div class="accordion-section">
+
+              <div class="accordion-section-header">
+                <h2 class="heading-medium">Policing</h2>
+              </div>
+              <div class="accordion-section-body">
+
+                <div id="reordering-save-status" class="" style="margin-top: 30px; font-size: 16px;">&nbsp;</div>
+
+          <table class="table-of-measures measures">
+            <thead>
+              <tr>
+                <th>Measure name</th>
+                <th></th>
+                <th></th>
+                <th>Status</th>
+                <th style="width: 150px; padding-right: 10px;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="#">Stop and search</a></td>
+                <td><a href="#">2 versions</a></td>
+                <td>1.1</td>
+                <td>Draft</td>
+                <td><a href="#">Edit</a> <a href="#" style="margin-left: 15px;">Delete</a></td>
+              </tr>
+              <tr>
+                <td><a href="#">Confidence in the local police</a></td>
+                <td><a href="#">2 versions</a></td>
+                <td>1.1</td>
+                <td>Published</td>
+                <td><a href="#">Create new version</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+              </div>
+
+            </div>
+            <div class="accordion-section">
+
+              <div class="accordion-section-header">
+                <h2 class="heading-medium">Crime and reoffending</h2>
+              </div>
+              <div class="accordion-section-body">
+
+
+                <table class="table-of-measures measures">
+                  <thead>
+                    <tr>
+                      <th>Measure name</th>
+                      <th></th>
+                      <th></th>
+                      <th>Status</th>
+                      <th style="width: 150px; padding-right: 10px;"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a href="#">Victims of crime</a></td>
+                      <td></td>
+                      <td>1.0</td>
+                      <td>Published</td>
+                      <td><a href="#">Create new version</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">Number of arrests</a></td>
+                      <td><a href="#"></a></td>
+                      <td>1.0</td>
+                      <td>Draft</td>
+                      <td><a href="#">Edit</a> <a href="#" style="margin-left: 15px;">Delete</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">Youth cautions</a></td>
+                      <td><a href="#"></a></td>
+                      <td>1.0</td>
+                      <td>Department review</td>
+                      <td><a href="#">Edit</a></td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">Knife crime convictions</a></td>
+                      <td><a href="#">4 versions</a></td>
+                      <td>2.0</td>
+                      <td>Draft</td>
+                      <td><a href="#">Edit</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+
+
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-two-thirds'>
+            <h2>Further information</h2>
+            <ul>
+              <li>
+                  <a href="#">Race Disparity Audit report</a>
+              </li>
+              <li>
+                  <a href="#">Statement of compliance (PDF)</a>
+              </li>
+              <li>
+                  <a href="#">Style guide and templates</a>
+              </li>
+            </ul>
+          </div>
+          <div class="column-one-third">
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
