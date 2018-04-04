@@ -740,11 +740,11 @@ March 2016
     <h2 class="heading-small">Share this page</h2>
 
     <div class="share">
-      <a href="#">Twitter</a>
-      <a href="#">Facebook</a>
-      <a href="#">Google+</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Email</a>
+      <a class="twitter" href="#">Twitter</a>
+      <a class="facebook" href="#">Facebook</a>
+      <a class="google-plus" href="#">Google+</a>
+      <a class="linkedin" href="#">LinkedIn</a>
+      <a class="email" href="#">Email</a>
     </div>
 
       <!-- CONTENT ENDS HERE -->
@@ -754,24 +754,36 @@ March 2016
       .share {
         margin-top: 25px;
         font-size: 16px;
-        line-height: 1.25;
-
-      }
-
-      .share a:before {
-        content: '?';
-        background-color: #005EA5;
-        color: white;
-        text-align: center;
-        width: 21px; height: 21px;
-        display: inline-block;
-        margin-right: 4px;
-        vertical-align: bottom;
+        line-height: 25px;
       }
 
       .share a {
+        background-repeat: no-repeat;
+        background-size: 21px 21px;
+        padding-left: 25px;
+        margin-right: 4px;
         text-decoration: none;
         margin-right: 10px;
+      }
+
+      .share a.linkedin {
+        background-image: url('/static/images/icon-linkedin.svg');
+      }
+
+      .share a.twitter {
+        background-image: url('/static/images/icon-twitter.svg');
+      }
+
+      .share a.facebook {
+        background-image: url('/static/images/icon-facebook.svg');
+      }
+
+      .share a.google-plus {
+        background-image: url('/static/images/icon-google-plus.svg');
+      }
+
+      .share a.email {
+        background-image: url('/static/images/icon-email.svg');
       }
 
     </style>
