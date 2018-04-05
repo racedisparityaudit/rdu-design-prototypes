@@ -740,11 +740,11 @@ March 2016
     <h2 class="">Share this page</h2>
 
     <div class="share">
-      <a class="twitter" href="#">Twitter</a>
-      <a class="facebook" href="#">Facebook</a>
-      <a class="google-plus" href="#">Google+</a>
-      <a class="linkedin" href="#">LinkedIn</a>
-      <a class="email" href="#">Email</a>
+      <a class="twitter" href="https://twitter.com?test2" rel="noreferrer noopener nofollow"><span class="visually-hidden">Share on </span>Twitter</a>
+      <a class="facebook" href="https://www.facebook.com?test2" rel="noreferrer noopener nofollow"><span class="visually-hidden">Share on </span>Facebook</a>
+      <!-- <a class="google-plus" href="#">Google+</a> -->
+      <a class="linkedin" href="https://www.linkedin.com/?test2" rel="noreferrer noopener nofollow"><span class="visually-hidden">Share on </span>LinkedIn</a>
+      <!-- <a class="email" href="#">Email</a> -->
     </div>
 
       <!-- CONTENT ENDS HERE -->
@@ -780,16 +780,28 @@ March 2016
         border-radius: 1.5px;
       }
 
+      .share a:visited {
+        color: #4C2C92;
+      }
+
+      .share a:hover:before {
+        background-color: #2B8CC4
+      }
+
+      .share a:visited:before {
+        background-color: #4C2C92
+      }
+
       .share a.linkedin:before {
-        background-image: url('/static/images/icon-linkedin.svg');
+        background-image: url('/static/images/icon-linkedin-2.svg');
       }
 
       .share a.twitter:before {
-        background-image: url('/static/images/icon-twitter.svg');
+        background-image: url('/static/images/icon-twitter-2.svg');
       }
 
       .share a.facebook:before {
-        background-image: url('/static/images/icon-facebook.svg');
+        background-image: url('/static/images/icon-facebook-2.svg');
       }
 
       .share a.google-plus:before {
