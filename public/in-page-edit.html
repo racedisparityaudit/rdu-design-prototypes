@@ -237,27 +237,32 @@
 
 
             if (text_inputs[0]) {
-              if (text_inputs[0].value == '') {
+
+              var value = text_inputs[0].value.trim();
+              if (value == '') {
                 preview.classList.add('empty')
                 preview.textContent = preview.getAttribute('data-empty-text');
               } else {
-                preview.textContent = text_inputs[0].value;
+                preview.textContent = value;
                 preview.classList.remove('empty')
               }
             }
 
             if (text_area) {
-              if (text_area.value == '') {
+
+              var value = text_area.value.trim();
+
+              if (value == '') {
                 preview.classList.add('empty')
                 preview.textContent = preview.getAttribute('data-empty-text');
               } else {
 
                 if (text_area.classList.contains('for-bullets')) {
-                  preview.innerHTML = text_area.value.replace(/^\*\s/gm, "<li>").replace(/\n/g, '</li>');
+                  preview.innerHTML = value.replace(/^\*\s/gm, "<li>").replace(/\n/g, '</li>');
                 } else if (text_area.classList.contains('for-paragraphs')) {
-                  preview.innerHTML = text_area.value.replace(/\n/g, "<br>").replace(/\n/g, '</li>');
+                  preview.innerHTML = value.replace(/\n/g, "<br>").replace(/\n/g, '</li>');
                 } else {
-                  preview.innerHTML = text_area.value;
+                  preview.innerHTML = value;
                 }
 
                 preview.classList.remove('empty')
