@@ -84,6 +84,19 @@
           cursor: pointer;
         }
 
+        #highlighted rect,
+        #highlighted path {
+          stroke-width: 3;
+          stroke: #FFBF47;
+          fill: none;
+        }
+
+
+        #highlighted.for-borough rect,
+        #highlighted.for-borough path {
+          stroke-width: 2;
+        }
+
       </style>
 
       <script>
@@ -103,30 +116,74 @@
             area.setAttribute('opacity', 0.2 + Math.round(Math.random() * 80) / 100);
           }
 
+          var highlightedAreaPath = document.getElementById('highlighted-path');
+          var highlightedAreaRect = document.getElementById('highlighted-rect');
+          var highlightedGroup = document.getElementById('highlighted')
 
-          document.getElementById('Map').addEventListener('mouseover', function(event) {
+          document.getElementById('svg').addEventListener('mousemove', function(event) {
 
-            var x, y;
+            var x, y, eventTarget;
 
-            if (event.target.tagName == 'rect') {
-              x = parseFloat(event.target.getAttribute('x')) - 43;
-              y = parseFloat(event.target.getAttribute('y')) - 20;
+            eventTarget = event.target;
+
+            var showArea = true;
+
+            if (event.target.parentElement.id != 'highlighted') {
+              if (event.target.tagName == 'rect') {
+                x = parseFloat(event.target.getAttribute('x')) - 43;
+                y = parseFloat(event.target.getAttribute('y')) - 20;
+
+                highlightedAreaRect.setAttribute('height', eventTarget.getAttribute('height'))
+                highlightedAreaRect.setAttribute('width', eventTarget.getAttribute('width'))
+                highlightedAreaRect.setAttribute('x', eventTarget.getAttribute('x'))
+                highlightedAreaRect.setAttribute('y', eventTarget.getAttribute('y'))
+                highlightedAreaRect.classList.remove('hidden');
+
+                highlightedAreaPath.classList.add('hidden');
+
+
+              } else if (event.target.tagName == 'path') {
+                x = parseFloat(event.target.getAttribute('data-x') - 50)
+                y = parseFloat(event.target.getAttribute('data-y') - 20)
+
+                highlightedAreaPath.setAttribute('d', eventTarget.getAttribute('d'))
+                highlightedAreaPath.classList.remove('hidden');
+
+                highlightedAreaRect.classList.add('hidden');
+
+              } else {
+                showArea = false;
+              }
             } else {
-              x = parseFloat(event.target.getAttribute('data-x') - 50)
-              y = parseFloat(event.target.getAttribute('data-y') - 20)
+              showArea = false;
             }
 
-            if (event.target.parentElement.getAttribute('id') == 'Boroughs') {
-              x += 356;
-              y += 555;
+
+            if (showArea) {
+
+              if (event.target.parentElement.getAttribute('id') == 'Boroughs') {
+                x += 356;
+                y += 555;
+                highlightedGroup.setAttribute('transform', 'translate(410, 605)');
+                highlightedGroup.setAttribute('class', 'for-borough');
+              } else {
+                highlightedGroup.setAttribute('transform', 'translate(50, 50)');
+                highlightedGroup.setAttribute('class', '');
+              }
+
+              // event.target.setAttribute('stroke', 'orange')
+
+              label.setAttribute('transform', 'translate(' + x + ',' + y +')');
+              label.classList.remove('hidden');
+              labelText.textContent = event.target.getAttribute('id').replace(/-/g, ' ')
+              // console.log(event.target)
+
+            } else {
+              label.classList.add('hidden')
+              highlightedAreaPath.classList.add('hidden')
+              highlightedAreaRect.classList.add('hidden')
             }
 
-            // event.target.setAttribute('stroke', 'orange')
-
-            label.setAttribute('transform', 'translate(' + x + ',' + y +')');
-            label.classList.remove('hidden');
-            labelText.textContent = event.target.getAttribute('id').replace(/-/g, ' ')
-            // console.log(event.target)
 
           })
 
@@ -141,7 +198,7 @@
 
           <h1 class="heading-xlarge">Employment by local area</h1>
 
-<svg style="margin-left: auto; margin-right: auto; display: block;" width="600px" height="800px" viewBox="0 0 600 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg style="margin-left: auto; margin-right: auto; display: block;" width="600px" height="800px" viewBox="0 0 600 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svg">
     <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
     <g id="Local-authorities-super-small" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Map" transform="translate(50.000000, 50.000000)" fill="#005EA5" stroke="#FFFFFF" stroke-width="0.5">
@@ -337,11 +394,18 @@
     </g>
 
 
+    <g id="highlighted" transform="translate(50,50)">
+      <rect id="highlighted-rect"></rect>
+      <path id="highlighted-path"></path>
+    </g>
+
     <g transform="translate(100,100)" id="label" class="hidden">
       <!-- <rect x="0" y="0" width="200" height="50" fill="#555555" stroke="white" stroke-width="2"></rect> -->
       <path d="M0,0 L200,0 L200,50 L120,50 L100,65 L80,50 L0,50 Z" fill="#555555" stroke="white" stroke-width="2"></path>
       <text x="100" y="30" fill="white" text-anchor="middle">Islington</text>
     </g>
+
+
 
 
 </svg>
