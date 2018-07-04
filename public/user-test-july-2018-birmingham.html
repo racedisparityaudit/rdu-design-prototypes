@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css?1" />
+
+
+  </head>
+
+
+
+  <body class="">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <header role="banner" id="global-header" class="with-proposition">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="/static/images/gov.uk_logotype_crown_invert_trans.png?0.19.2" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu">
+                <a href="/user-test-july-2018" id="proposition-name">
+                  Ethnicity facts and figures
+                </a>
+                <ul id="proposition-links" style="font-size: 19px;">
+                    <li><a href="/user-test-july-2018-topics" style="font-size: 16px;">Topics</a></li>
+                    <li><a href="/user-test-july-2018-ethnicities" style="font-size: 16px;">Ethnicities</a></li>
+                    <li><a href="/user-test-july-2018-locations" style="font-size: 16px;">Locations</a></li>
+
+                </ul>
+
+              </nav>
+
+            <div style="float:right; margin-top: -40px; position: relative;">
+              <label for="q" id="q-label" style="color: black; top: 8px; left: 16px; position: absolute; z-index: 1; cursor: text;" class="">Search</label>
+              <input id="q" name="q" type="search" class="form-control" style="font-size: 16px; width: 200px; padding-left: 10px;" value="" /><button type="submit" class="button" style="margin-left: 0; font-size: 16px; background-image: url(/static/images/search-icon.png); background-repeat: no-repeat; background-size: 52.5px 35px; background-position: 100% 50%; width: 36px; background-color: #005EA5; border-bottom-width: 0; height: 31px; margin-top: 4px; padding: 0; box-shadow: none;">&nbsp;</button>
+            </div>
+
+            <script>
+
+              function updateSearchLabel() {
+
+                var label = document.getElementById('q-label')
+                var input = document.getElementById('q')
+
+                if (input.value != '') {
+                  label.classList.add('hidden');
+                } else {
+                  label.classList.remove('hidden');
+                }
+              }
+
+              function hideLabel() {
+
+                var label = document.getElementById('q-label')
+                label.classList.add('hidden')
+              }
+
+              document.addEventListener('DOMContentLoaded', function() {
+
+                var input = document.getElementById('q')
+
+                input.addEventListener('focus', hideLabel)
+                input.addEventListener('blur', updateSearchLabel)
+
+              })
+            </script>
+
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="phase-banner">
+        <p>
+          <strong class="phase-tag">Beta</strong>
+          <span>Help us improve this website – <a href="#">answer 4 short questions</a>.</span>
+        </p>
+      </div>
+
+
+    <style>
+
+      * {
+        box-sizing: border-box;
+      }
+
+      table.bar-chart {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      table.bar-chart caption {
+        font-weight: bold;
+        font-size: 19px;
+        margin-bottom: 12px;
+      }
+
+      table.bar-chart th,
+      table.bar-chart td {
+        border-width: 0;     /* No borders by default. */
+      }
+
+      /* Visually hide the header */
+      table.bar-chart thead th {
+        opacity: 0;
+        height: 1px;
+        overflow: hidden;
+        display: none;
+      }
+
+      /* Set a fixed width for the category column,
+        allowing the value column (containing the bars)
+        to flex to fit the remaining width. */
+      table.bar-chart .category {
+        width: 100px;
+      }
+
+
+      table.bar-chart tbody th,
+      table.bar-chart tbody td {
+
+        vertical-align: top;
+
+        /* Spacing between rows using a transparent border. */
+        border-bottom: 10px solid transparent;
+
+      }
+
+      table.bar-chart tbody th {
+        text-align: right;     /* Align right to associate text with the bars */
+        padding: 0 10px 0 0;   /* Spacing between text and the bars. */
+        font-weight: normal;
+        line-height: 36px;
+      }
+
+      table.bar-chart tbody td {
+        text-align: left;
+        padding: 0;
+      }
+
+      /* First row should have some extra space at the top to allow the
+         grid to show through. */
+      table.bar-chart tbody tr:first-child td,
+      table.bar-chart tbody tr:first-child th {
+        padding-top: 5px;
+      }
+
+      /* Bar element (empty) */
+      table.bar-chart tbody .bar {
+        display: inline-block;
+        height: 36px;
+        background-color: #2B8CC4;    /* GOVUK Blue */
+      }
+
+      /* Add a thin space after to avoid weird layout issues from having an
+        empty element. */
+      table.bar-chart .bar:after {
+        content: ' ';
+      }
+
+      /* Value element (contains value as text). */
+      table.bar-chart tbody .value {
+        display: inline-block;
+        padding-left: 5px;
+        line-height: 36px;
+        vertical-align: top;
+        box-sizing: border-box;
+      }
+
+      /* Values close to 100% */
+      table.bar-chart tbody .value.close-to-100 {
+        width: 100px; margin-left: -100px;      /* position inside the bar */
+        padding-left: 0; padding-right: 5px;    /* padding on the right not the left */
+        text-align: right;
+        color: white;
+      }
+
+      table.bar-chart tfoot .grid-labels {
+        padding-top: 0;
+        text-align: center;
+        font-size: 14px;
+        position: relative;
+      }
+
+      table.bar-chart tfoot .label {
+        position: absolute;
+        width: 50px;
+      }
+
+      table.bar-chart .label-0 {
+        left: -25px;
+      }
+
+      table.bar-chart .label-10 {
+        left: calc(10% - 25px);
+      }
+
+      table.bar-chart .label-20 {
+        left: calc(20% - 25px);
+      }
+
+      table.bar-chart .label-30 {
+        left: calc(30% - 25px);
+      }
+
+      table.bar-chart .label-40 {
+        left: calc(40% - 25px);
+      }
+
+      table.bar-chart .label-50 {
+        left: calc(50% - 25px);
+      }
+
+      table.bar-chart .label-60 {
+        left: calc(60% - 25px);
+      }
+
+      table.bar-chart .label-70 {
+        left: calc(70% - 25px);
+      }
+
+      table.bar-chart .label-80 {
+        left: calc(80% - 25px);
+      }
+
+      table.bar-chart .label-90 {
+        left: calc(90% - 25px);
+      }
+
+      table.bar-chart .label-100 {
+        left: calc(100% - 25px);
+      }
+
+      @media (max-width: 2000px) {
+        table.bar-chart .label-10,
+        table.bar-chart .label-30,
+        table.bar-chart .label-50,
+        table.bar-chart .label-70,
+        table.bar-chart .label-90 {
+          display: none;
+        }
+      }
+
+      table tfoot .source {
+        font-size: 14px;
+        padding-top: 4px;
+        /*background-color: yellow;*/
+      }
+
+      table tfoot .source span {
+        margin-right: -12px;
+      }
+
+
+      /* Background grid - line every 10% */
+      table tbody td
+       {
+        background:
+          repeating-linear-gradient(
+            to right,
+            #e6e6e6,
+            #e6e6e6 1px,
+            transparent 1px,
+            transparent 10%
+          ),
+          linear-gradient(
+            to right,
+            transparent,
+            transparent calc(100% - 1px),
+            #e6e6e6 calc(100% - 1px),
+            #e6e6e6
+          )
+        ;
+      }
+
+
+      .breadcrumbs.location a {
+        color: #005EA5;
+        font-size: 19px;
+      }
+
+    </style>
+
+
+      <div class="grid-row">
+        <div class="column-two-thirds">
+
+          <div class="breadcrumbs location" style="margin-top: 0px; margin-bottom: 0; padding-bottom: 10px;">
+            <ol>
+              <li><a href="#">England</a></li>
+              <li><a href="#">West Midlands</a></li>
+            </ol>
+          </div>
+
+          <h1 class="heading-xlarge" style="margin-top: 10px;">Birmingham</h1>
+
+          <p>According to the 2011 Census, 87% of residents in Birmingham are White, and 13% belong to Black, Asian, Mixed or Other ethnic group.</p>
+
+          <p>&nbsp;</p>
+
+          <h2 class="heading-medium">Work, pay and benefits</h2>
+
+          <p>The main facts and figures show that:</p>
+
+          <ul class="bullets spaced-out">
+            <li>in 2016, a larger percentage of White British and White ethnic minority groups were <a href="#">employed</a> than the other ethnic groups combined</li>
+            <li>in 2016, White people in Birmingham were less likely to be <a href="#">unemployed</a> than those from other ethnic groups</li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div class="grid-row">
+        <div class="column-one-half">
+          <table class="bar-chart">
+            <caption>Employment</caption>
+            <thead>
+              <tr>
+                <th class="category">Category</th>
+                <th class="value">Value</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td class="category"></td>
+                <td class="grid-labels" aria-role="presentation">
+                  <span class="label label-0">0%</span>
+                  <span class="label label-10">10</span>
+                  <span class="label label-20">20</span>
+                  <span class="label label-30">30</span>
+                  <span class="label label-40">40</span>
+                  <span class="label label-50">50</span>
+                  <span class="label label-60">60</span>
+                  <span class="label label-70">70</span>
+                  <span class="label label-80">80</span>
+                  <span class="label label-90">90</span>
+                  <span class="label label-100">100%</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="source"><span>Source: <a href="#">Annual Population Survey</a></span></td>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <th class="category">White</th>
+                <td><span class="bar" style="width:76.3%;"></span><span class="value">76.3%</span></td>
+              </tr>
+              <tr>
+                <th class="category">Other</th>
+                <td><span class="bar" style="width:63.4%;"></span><span class="value">63.4%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="column-one-half">
+          <table class="bar-chart">
+            <caption>Unemployment</caption>
+            <thead>
+              <tr>
+                <th class="category">Category</th>
+                <th class="value">Value</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td class="category"></td>
+                <td class="grid-labels" aria-role="presentation">
+                  <span class="label label-0">0%</span>
+                  <span class="label label-10">10</span>
+                  <span class="label label-20">20</span>
+                  <span class="label label-30">30</span>
+                  <span class="label label-40">40</span>
+                  <span class="label label-50">50</span>
+                  <span class="label label-60">60</span>
+                  <span class="label label-70">70</span>
+                  <span class="label label-80">80</span>
+                  <span class="label label-90">90</span>
+                  <span class="label label-100">100%</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="source"><span>Source: <a href="#">Annual Population Survey</a></span></td>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <th class="category">White</th>
+                <td><span class="bar" style="width:12.1%;"></span><span class="value">12.2%</span></td>
+              </tr>
+              <tr>
+                <th class="category">Other</th>
+                <td><span class="bar" style="width:16.3%;"></span><span class="value">16.3%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid-row">
+        <div class="column-one-half" style="padding-top: 60px;">
+          <table class="bar-chart">
+            <caption>Average hourly pay</caption>
+            <thead>
+              <tr>
+                <th class="category">Category</th>
+                <th class="value">Value</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td class="category"></td>
+                <td class="grid-labels" aria-role="presentation">
+                  <span class="label label-0">£0</span>
+                  <span class="label label-10">£1.50</span>
+                  <span class="label label-20">£3</span>
+                  <span class="label label-30">£4.50</span>
+                  <span class="label label-40">£6</span>
+                  <span class="label label-50">£7.50</span>
+                  <span class="label label-60">£9</span>
+                  <span class="label label-70">£10.50</span>
+                  <span class="label label-80">£12</span>
+                  <span class="label label-90">£13.50</span>
+                  <span class="label label-100">£15</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="source"><span>Source: <a href="#">Labour Force Survey</a></span></td>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <th class="category">Asian</th>
+                <td><span class="bar" style="width:95%;"></span><span class="value close-to-100">£14.37</span></td>
+              </tr>
+              <tr>
+                <th class="category">Black</th>
+                <td><span class="bar" style="width:78%;"></span><span class="value">£11.69</span></td>
+              </tr>
+              <tr>
+                <th class="category">Mixed</th>
+                <td><span class="bar" style="width:96.5%;"></span><span class="value close-to-100">£14.87</span></td>
+              </tr>
+              <tr>
+                <th class="category">White</th>
+                <td><span class="bar" style="width:91%;"></span><span class="value close-to-100">£13.75</span></td>
+              </tr>
+              <tr>
+                <th class="category">Other</th>
+                <td><span class="bar" style="width:86%;"></span><span class="value close-to-100">£13.03</span></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid-row">
+        <div class="column-two-thirds">
+
+          <h2 class="heading-medium">Housing</h2>
+
+          <p>The main facts and figures show that:</p>
+
+          <ul class="bullets spaced-out">
+            <li>15% of <a href="#">homeless households</a> in Birmingham were from an Asian, Black, Mixed or Other ethnicity in 2016/17, and 85% were from a White ethnicity</li>
+            <li>The percentage of homeless households in Birmingham from a non-White ethnicity has been increasingly over the past 5 years</li>
+            <li>91% of <a href="#">new social housing</a> went to White households</li>
+          </ul>
+
+          <p>&nbsp;</p>
+
+        </div>
+      </div>
+
+      <div class="grid-row">
+        <div class="column-one-half">
+          <table class="bar-chart">
+            <caption>Percentage of homeless households by ethnicity</caption>
+            <thead>
+              <tr>
+                <th class="category">Category</th>
+                <th class="value">Value</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td class="category"></td>
+                <td class="grid-labels" aria-role="presentation">
+                  <span class="label label-0">0%</span>
+                  <span class="label label-10">10</span>
+                  <span class="label label-20">20</span>
+                  <span class="label label-30">30</span>
+                  <span class="label label-40">40</span>
+                  <span class="label label-50">50</span>
+                  <span class="label label-60">60</span>
+                  <span class="label label-70">70</span>
+                  <span class="label label-80">80</span>
+                  <span class="label label-90">90</span>
+                  <span class="label label-100">100%</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="source"><span>Source: <a href="#">Live tables on homelessness (table 784)</a></span></td>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <th class="category">White</th>
+                <td><span class="bar" style="width:85%;"></span><span class="value">85%</span></td>
+              </tr>
+              <tr>
+                <th class="category">Other</th>
+                <td><span class="bar" style="width:15%;"></span><span class="value">15%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="column-one-half">
+          <table class="bar-chart">
+            <caption>Percentage of new social housing by ethnicity</caption>
+            <thead>
+              <tr>
+                <th class="category">Category</th>
+                <th class="value">Value</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td class="category"></td>
+                <td class="grid-labels" aria-role="presentation">
+                  <span class="label label-0">0%</span>
+                  <span class="label label-10">10</span>
+                  <span class="label label-20">20</span>
+                  <span class="label label-30">30</span>
+                  <span class="label label-40">40</span>
+                  <span class="label label-50">50</span>
+                  <span class="label label-60">60</span>
+                  <span class="label label-70">70</span>
+                  <span class="label label-80">80</span>
+                  <span class="label label-90">90</span>
+                  <span class="label label-100">100%</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="source"><span>Source: <a href="#">Social housing lettings in England: April 2015 to March 2016</a></span></td>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <th class="category">White</th>
+                <td><span class="bar" style="width:91%;"></span><span class="value close-to-100">91%</span></td>
+              </tr>
+              <tr>
+                <th class="category">Other</th>
+                <td><span class="bar" style="width:9%;"></span><span class="value">9%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid-row">
+        <div class="column-one-half" style="padding-top: 60px;">
+          <table class="bar-chart">
+            <caption>Percentage of households with damp problems</caption>
+            <thead>
+              <tr>
+                <th class="category">Category</th>
+                <th class="value">Value</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td class="category"></td>
+                <td class="grid-labels" aria-role="presentation">
+                  <span class="label label-0">0%</span>
+                  <span class="label label-10">1</span>
+                  <span class="label label-20">2</span>
+                  <span class="label label-30">3</span>
+                  <span class="label label-40">4</span>
+                  <span class="label label-50">5</span>
+                  <span class="label label-60">6</span>
+                  <span class="label label-70">7</span>
+                  <span class="label label-80">8</span>
+                  <span class="label label-90">9</span>
+                  <span class="label label-100">10%</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="source"><span>Source: <a href="#">English Housing Survey</a></span></td>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <th class="category">Asian</th>
+                <td><span class="bar" style="width:92%;"></span><span class="value close-to-100">9.2%</span></td>
+              </tr>
+              <tr>
+                <th class="category">Black</th>
+                <td><span class="bar" style="width:98%;"></span><span class="value close-to-100">9.8%</span></td>
+              </tr>
+              <tr>
+                <th class="category">Mixed</th>
+                <td><span class="bar" style="width:76%;"></span><span class="value">7.6%</span></td>
+              </tr>
+              <tr>
+                <th class="category">White</th>
+                <td><span class="bar" style="width:50%;"></span><span class="value">5%</span></td>
+              </tr>
+              <tr>
+                <th class="category">Other</th>
+                <td><span class="bar" style="width:79%;"></span><span class="value">7.9%</span></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+
+
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-two-thirds'>
+            <h2>Further information</h2>
+            <ul>
+              <li>
+                  <a href="#">Race Disparity Audit report</a>
+              </li>
+              <li>
+                  <a href="#">Statement of compliance (PDF)</a>
+              </li>
+              <li>
+                  <a href="#">Project background</a>
+              </li>
+              <li>
+                  <a href="#">Style guide and templates</a>
+              </li>
+            </ul>
+          </div>
+          <div class="column-one-third">
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
