@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+
+
+  </head>
+
+
+
+  <body class="">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <header role="banner" id="global-header" class="with-proposition">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="/static/images/gov.uk_logotype_crown_invert_trans.png?0.19.2" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu">
+                <a href="/" id="proposition-name">
+                  Ethnicity facts and figures
+                </a>
+
+                    <ul id="proposition-links">
+                        <li><a href="#">Ethnicity in the UK</a></li>
+                        <li><a href="#">Background</a></li>
+                    </u>
+              </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="phase-banner">
+        <p>
+          <strong class="phase-tag">Beta</strong>
+          <span>This is a new service – please send your feedback to <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a></span>
+        </p>
+      </div>
+
+
+      <!-- CONTENT STARTS HERE -->
+
+
+      <h1 class="heading-large">Explore the data</h1>
+
+
+      <style>
+
+        .select-measure {
+          margin-bottom: 10px;
+        }
+
+        .select-measure .selected-measure {
+          font-weight: bold;
+          color: #005EA5;
+          cursor: pointer;
+        }
+
+        .select-measure .topics {
+          position: relative;
+          margin-top: 20px;
+          display: none;
+        }
+
+        .select-measure.show .topics {
+          display: block;
+        }
+
+        .select-measure .topics.show {
+          display: block;
+        }
+
+
+        .select-measure ul {
+          list-style-type: none;
+          margin: 0 0 0 0;
+          width: 300px;
+        }
+
+        .select-measure ul li {
+          color: #005EA5;
+          display: block;
+          padding: 5px 10px;
+          cursor: pointer;
+        }
+
+        .select-measure li.selected,
+        .select-measure li.selected:hover {
+          background-color: #005EA5;
+          color: white;
+        }
+
+        .select-measure li:after {
+          content: "\203A";
+          float: right;
+          font-size: 12px;
+          line-height: 22px
+        }
+
+        .select-measure li:hover {
+          background-color: #DEE0E2;
+        }
+
+        .select-measure ul li ul {
+          position: absolute;
+          left: 310px;
+          top: 0;
+          width: 300px;
+          display: none;
+        }
+
+        .select-measure ul li.selected > ul {
+          display: block;
+        }
+
+        .select-measure ul ul ul {
+          position: absolute;
+          left: 310px;
+          top: 0;
+          width: 300px;
+          font-weight: bold;
+          display: none;
+        }
+
+        .select-measure ul ul li.selected > ul {
+          display: block;
+        }
+
+        .select-measure ul ul ul li:after {
+          content: "";
+          display: none;
+        }
+
+        .select-ethnicity {
+          display: none;
+        }
+
+        .select-ethnicity.show {
+          display: block;
+        }
+
+        .select-ethnicity .selected-ethnicity {
+          font-weight: bold;
+          color: #005EA5;
+          cursor: pointer;
+        }
+
+        ul.ethnicities {
+          list-style-type: none;
+          margin: 0 0 0 0;
+          width: 200px;
+          display: none;
+        }
+
+        ul.ethnicities.show {
+          display: block;
+        }
+
+        ul.ethnicities li {
+          color: #005EA5;
+          display: block;
+          padding: 5px 10px;
+          cursor: pointer;
+          font-weight: bold;
+        }
+
+        ul.ethnicities li:hover {
+          background-color: #DEE0E2;
+        }
+
+
+      </style>
+
+      <script>
+
+        function EthnicitySelector(element) {
+          var element = element;
+
+          var ethnicitiesElement = element.querySelector('.ethnicities')
+          var selectedEthnicityElement = element.querySelector('.selected-ethnicity')
+
+          setup();
+
+          this.show = function() {
+            element.classList.add('show')
+          }
+
+          this.hide = function() {
+            element.classList.remove('show')
+          }
+
+          function setup() {
+
+            selectedEthnicityElement.addEventListener('click', showSelector);
+
+            for (ethnicity of element.querySelectorAll('li')) {
+              ethnicity.addEventListener('click', selectEthnicity)
+            }
+          }
+
+
+          function showSelector(event) {
+
+            selectedEthnicityElement.textContent = '';
+            ethnicitiesElement.classList.add('show')
+          }
+
+
+          function selectEthnicity(event) {
+
+            var ethnicity = event.target;
+            ethnicitiesElement.classList.remove('show')
+
+            selectedEthnicityElement.textContent = ethnicity.textContent;
+          }
+
+        }
+
+
+        function MeasureSelector(element, ethnicitiesSelector) {
+          var element = element;
+          var selectedMeasure;
+          var topicsElement = element.querySelector('.topics')
+          this.ethnicitiesSelector = ethnicitiesSelector;
+          var that = this;
+          setup();
+
+
+          function elementClicked(event) {
+
+            var eventTarget = event.target;
+
+            if (eventTarget.classList.contains('topic')) {
+              selectTopic(eventTarget);
+            } else if (eventTarget.classList.contains('sub-topic')) {
+              selectSubTopic(eventTarget)
+            } else if (eventTarget.classList.contains('measure')) {
+              selectMeasure(eventTarget)
+            } else if (eventTarget.classList.contains('selected-measure')) {
+              showSelector()
+            }
+          }
+
+          function selectTopic(selectedTopicElement) {
+
+            var selectedElements = element.parentElement.querySelectorAll('.selected')
+
+            for (selectedElement of selectedElements) {
+              selectedElement.classList.remove('selected')
+            }
+
+            selectedTopicElement.classList.add('selected')
+          }
+
+          function selectSubTopic(selectedSubTopicElement) {
+
+            var selectedElements = selectedSubTopicElement.parentElement.querySelectorAll('.selected')
+
+            for (selectedElement of selectedElements) {
+              selectedElement.classList.remove('selected')
+            }
+
+            selectedSubTopicElement.classList.add('selected')
+
+          }
+
+          function showSelector() {
+            selectedMeasure.setName('')
+            topicsElement.classList.add('show')
+            that.ethnicitiesSelector.hide()
+          }
+
+          function selectMeasure(selectedMeasureElement) {
+            selectedMeasure.setName(selectedMeasureElement.textContent)
+            topicsElement.classList.remove('show')
+            that.ethnicitiesSelector.show()
+
+          }
+
+          function SelectedMeasure(selectedMeasureElement) {
+
+            this.selectedMeasureElement = selectedMeasureElement;
+            var that = this;
+            setup()
+
+            function setup() {
+              that.selectedMeasureElement.addEventListener('click', showTopics)
+            }
+
+            function showTopics() {
+              element.classList.add('show-topics');
+            }
+
+          }
+
+          SelectedMeasure.prototype.setName = function(name) {
+            this.selectedMeasureElement.textContent = name;
+          }
+
+
+          function Measure(measureElement) {
+            var measureElement = measureElement;
+            var name = measureElement.textContent;
+            measureElement.classList.add('measure');
+          }
+
+
+          function Topic(topicElement) {
+            var topicElement = topicElement;
+            topicElement.classList.add('topic')
+          }
+
+          function SubTopic(subTopicElement) {
+            var subTopicElement = subTopicElement;
+            subTopicElement.classList.add('sub-topic');
+          }
+
+
+          function setup() {
+
+            element.addEventListener('click', elementClicked);
+
+            selectedMeasure = new SelectedMeasure(element.querySelector('.selected-measure'));
+
+            var topics = element.parentElement.querySelectorAll('.topics > ul > li');
+
+            for (topic of topics) {
+              new Topic(topic);
+            }
+
+            var subTopics = element.parentElement.querySelectorAll('.topics > ul > li > ul > li');
+
+            for (subTopic of subTopics) {
+              new SubTopic(subTopic);
+            }
+
+            var measures = element.parentElement.querySelectorAll('.topics > ul > li > ul > li > ul > li');
+
+            for (measure of measures) {
+              new Measure(measure);
+            }
+
+          }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+          var ethnicitiesSelector = new EthnicitySelector(document.querySelector('.select-ethnicity'));
+
+          new MeasureSelector(document.querySelector('.select-measure'), ethnicitiesSelector);
+        })
+
+
+      </script>
+
+      <div class="select-measure show-topics">
+
+        <div class="prompt">Select a measure: <span class="selected-measure"></span></div>
+
+        <div class="topics show">
+          <ul>
+            <li>British population</li>
+            <li>
+              Crime, justice and the law
+
+              <ul>
+                <li>Policing
+
+                  <ul>
+                    <li>Confidence in the local police</li>
+                    <li>Youth cautions</li>
+                    <li>Number of arrests</li>
+                    <li>Stop and search</li>
+                  </ul>
+
+                </li>
+                <li>Crime and reoffending
+
+                  <ul>
+                    <li>Victims of crime</li>
+                    <li>Fear of crime</li>
+                    <li>Proven reoffending</li>
+                  </ul>
+
+                </li>
+                <li>Courts, sentencing and tribunals</li>
+                <li>Prison and custody incidents</li>
+              </ul>
+
+            </li>
+            <li>Culture and community</li>
+            <li>Education, skills and training</li>
+            <li>Health</li>
+            <li>Housing</li>
+            <li>Work, pay and benefits</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="select-ethnicity">
+        <div class="prompt">Select ethnicity: <span class="selected-ethnicity"></div>
+
+        <ul class="ethnicities show">
+          <li>Asian</li>
+          <li>Black</li>
+          <li>Mixed</li>
+          <li>White</li>
+          <li>Other</li>
+        </ul>
+
+      </div>
+
+
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+
+
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-two-thirds'>
+            <h2>Further information</h2>
+            <ul>
+              <li>
+                  <a href="#">Race Disparity Audit report</a>
+              </li>
+              <li>
+                  <a href="#">Statement of compliance (PDF)</a>
+              </li>
+              <li>
+                  <a href="#">Style guide and templates</a>
+              </li>
+            </ul>
+          </div>
+          <div class="column-one-third">
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
