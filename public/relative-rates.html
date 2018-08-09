@@ -262,14 +262,6 @@
             selectedEthnicityElement.textContent = '';
             ethnicitiesElement.classList.add('show')
 
-            measure.classList.add('hidden')
-
-            var maps = document.querySelectorAll('.map')
-
-            for (map of maps) {
-              map.classList.add('hidden')
-            }
-
           }
 
 
@@ -281,18 +273,6 @@
             selectedEthnicityElement.textContent = ethnicity.textContent;
 
             measure.classList.remove('hidden')
-
-            var maps = document.querySelectorAll('.map')
-
-            for (map of maps) {
-              map.classList.add('hidden')
-            }
-
-            var area_types = ['police-force-areas', 'regions', 'local-authorities']
-
-            var area_type = area_types[Math.floor(Math.random() * 3)];
-
-            document.querySelector('.map.' + area_type).classList.remove('hidden')
 
           }
 
@@ -357,6 +337,7 @@
             that.ethnicitiesSelector.hide()
 
             document.querySelector('.measure-data').classList.add('hidden')
+            document.querySelector('.measure-title').classList.add('hidden')
 
           }
 
@@ -364,8 +345,25 @@
             selectedMeasure.setName(selectedMeasureElement.textContent)
             topicsElement.classList.remove('show')
             that.ethnicitiesSelector.show()
-            measureTitle.textContent = selectedMeasureElement.dataset.measure;
 
+            var maps = document.querySelectorAll('.map')
+
+            for (map of maps) {
+              map.classList.add('hidden')
+            }
+
+            var area_types = ['police-force-areas', 'regions', 'local-authorities']
+            var area_names = ['police force area', 'region', 'local authority']
+
+            var i = Math.floor(Math.random() * 3);
+
+            document.querySelector('.map.' + area_types[i]).classList.remove('hidden')
+            document.querySelector('.measure-data').classList.remove('hidden')
+
+
+            measureTitle.textContent = selectedMeasureElement.dataset.measure + ' by ' + area_names[i];
+
+            measureTitle.classList.remove('hidden')
 
 
           }
