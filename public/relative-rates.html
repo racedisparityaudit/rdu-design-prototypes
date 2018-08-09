@@ -86,6 +86,10 @@
 
       <style>
 
+        #content {
+          min-height: 1000px;
+        }
+
         .select-measure {
           margin-bottom: 10px;
         }
@@ -230,11 +234,13 @@
           setup();
 
           this.show = function() {
-            element.classList.add('show')
+            element.classList.add('show');
+            ethnicitiesElement.classList.add('show');
           }
 
           this.hide = function() {
-            element.classList.remove('show')
+            element.classList.remove('show');
+            selectedEthnicityElement.textContent = '';
           }
 
           function setup() {
@@ -282,14 +288,14 @@
         function MeasureSelector(element, ethnicitiesSelector) {
           var element = element;
           var selectedMeasure;
+
+          var measureTitle = document.querySelector('.measure-title')
           var topicsElement = element.querySelector('.topics')
           this.ethnicitiesSelector = ethnicitiesSelector;
           var that = this;
 
           var measure = document.querySelector('.measure-data')
 
-
-          console.log(measure)
           setup();
 
 
@@ -344,6 +350,7 @@
             selectedMeasure.setName(selectedMeasureElement.textContent)
             topicsElement.classList.remove('show')
             that.ethnicitiesSelector.show()
+            measureTitle.textContent = selectedMeasureElement.dataset.measure;
 
           }
 
@@ -431,7 +438,7 @@
 
         <div class="topics show">
           <ul>
-            <li>British population</li>
+            <!-- <li>British population</li> -->
             <li>
               Crime, justice and the law
 
@@ -439,24 +446,46 @@
                 <li>Policing
 
                   <ul>
-                    <li>Confidence in the local police</li>
-                    <li>Youth cautions</li>
-                    <li>Number of arrests</li>
-                    <li>Stop and search</li>
+                    <li data-measure="Percentage of people with confidence in the local police">Confidence in the local police</li>
+                    <li data-measure="Number of youth cautions">Youth cautions</li>
+                    <li data-measure>Number of arrests</li>
+                    <li data-measure="Arrests per 1,000 population">Stop and search</li>
                   </ul>
 
                 </li>
                 <li>Crime and reoffending
 
                   <ul>
-                    <li>Victims of crime</li>
-                    <li>Fear of crime</li>
-                    <li>Proven reoffending</li>
+                    <li data-measure="Percentage of people who were victims of crime">Victims of crime</li>
+                    <li data-measure="Percentage of people who had a fear of crime">Fear of crime</li>
+                    <li data-measure="Percentage of offenders who reoffended">Proven reoffending</li>
                   </ul>
 
                 </li>
-                <li>Courts, sentencing and tribunals</li>
-                <li>Prison and custody incidents</li>
+                <li>Courts, sentencing and tribunals
+
+                  <ul>
+                    <li data-measure="Percentage of employment tribunal claims">Employment tribunal claims</li>
+                    <li data-measure="Conviction ratio of defendant">Prosecutions and convictions</li>
+                    <li data-measure="Percentage of people remanded at Crown Court">Remand status at Crown Court</li>
+                    <li data-measure="Percentage of offenders sentenced for indictable offences ">Sentences and custody</li>
+                    <li data-measure="Average custodial sentence length (in months)">Average length of custodial sentences</li>
+                    <li data-measure="Percentage of young people in custody">Young people in custody</li>
+                  </ul>
+
+                </li>
+                <li>Prison and custody incidents
+                  <ul>
+                    <li data-measure="Prisoner assailants, victims and fighters">Violence involving prisoners</li>
+                    <li data-measure="Self-inflicted deaths per 1,000 prisoners">Self-inflicted deaths in prison custody</li>
+                    <li data-measure="Self-harm incidents per 1,000 prisoners">Self-harm in prison custody</li>
+                    <li data-measure="Self-harm incidents per 100 young people">Self-harm by young people in custody</li>
+                    <li data-measure="Average number of use of force incidents per 100 young people in custody">Use of force on young offenders in custody</li>
+                    <li data-measure="Rate of single separation incidents per 100 young people in custody">Single separation incidents for young people in custody</li>
+                    <li data-measure="Rate of restrictive physical interventions per 100 young people in custody">Restrictive physical interventions involving young people in custody</li>
+                    <li data-measure="Assaults per 100 young people in custody">Assaults carried out by young people in custody</li>
+                  </ul>
+                </li>
               </ul>
 
             </li>
