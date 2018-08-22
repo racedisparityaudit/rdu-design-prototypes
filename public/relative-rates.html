@@ -221,6 +221,178 @@
           max-width: 600px;
         }
 
+      table.bar-chart {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      table.bar-chart th,
+      table.bar-chart td {
+        border-width: 0;     /* No borders by default. */
+      }
+
+      /* Visually hide the header */
+      table.bar-chart thead th {
+        opacity: 0;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      /* Set a fixed width for the category column,
+        allowing the value column (containing the bars)
+        to flex to fit the remaining width. */
+      table.bar-chart thead .category {
+        width: 150px;
+      }
+
+
+      table.bar-chart tbody th,
+      table.bar-chart tbody td {
+
+        vertical-align: top;
+
+        /* Spacing between rows using a transparent border. */
+        border-bottom: 10px solid transparent;
+
+      }
+
+      table.bar-chart tbody th {
+        text-align: right;     /* Align right to associate text with the bars */
+        padding: 0 10px 0 0;   /* Spacing between text and the bars. */
+        font-weight: normal;
+        line-height: 36px;
+      }
+
+      table.bar-chart tbody td {
+        text-align: left;
+        padding: 0;
+      }
+
+      /* First row should have some extra space at the top to allow the
+         grid to show through. */
+      table.bar-chart tbody tr:first-child td,
+      table.bar-chart tbody tr:first-child th {
+        padding-top: 5px;
+      }
+
+      /* Bar element (empty) */
+      table.bar-chart tbody .bar {
+        display: inline-block;
+        height: 36px;
+        background-color: #005EA5;    /* GOVUK Blue */
+      }
+
+      /* Add a thin space after to avoid weird layout issues from having an
+        empty element. */
+      table.bar-chart .bar:after {
+        content: ' ';
+      }
+
+      /* Value element (contains value as text). */
+      table.bar-chart tbody .value {
+        display: inline-block;
+        padding-left: 5px;
+        line-height: 36px;
+        vertical-align: top;
+        box-sizing: border-box;
+      }
+
+      /* Values close to 100% */
+      table.bar-chart tbody .value.close-to-100 {
+        width: 100px; margin-left: -100px;      /* position inside the bar */
+        padding-left: 0; padding-right: 5px;    /* padding on the right not the left */
+        text-align: right;
+        color: white;
+      }
+
+      table.bar-chart tfoot .grid-labels {
+        padding-top: 0;
+        text-align: center;
+        font-size: 14px;
+        position: relative;
+      }
+
+      table.bar-chart tfoot .label {
+        position: absolute;
+        width: 50px;
+      }
+
+      table.bar-chart .label-0 {
+        left: -25px;
+      }
+
+      table.bar-chart .label-10 {
+        left: calc(10% - 25px);
+      }
+
+      table.bar-chart .label-20 {
+        left: calc(20% - 25px);
+      }
+
+      table.bar-chart .label-30 {
+        left: calc(30% - 25px);
+      }
+
+      table.bar-chart .label-40 {
+        left: calc(40% - 25px);
+      }
+
+      table.bar-chart .label-50 {
+        left: calc(50% - 25px);
+      }
+
+      table.bar-chart .label-60 {
+        left: calc(60% - 25px);
+      }
+
+      table.bar-chart .label-70 {
+        left: calc(70% - 25px);
+      }
+
+      table.bar-chart .label-80 {
+        left: calc(80% - 25px);
+      }
+
+      table.bar-chart .label-90 {
+        left: calc(90% - 25px);
+      }
+
+      table.bar-chart .label-100 {
+        left: calc(100% - 25px);
+      }
+
+      @media (max-width: 500px) {
+
+        table.bar-chart .label-10,
+        table.bar-chart .label-30,
+        table.bar-chart .label-50,
+        table.bar-chart .label-70,
+        table.bar-chart .label-90 {
+          display: none;
+        }
+      }
+
+      /* Background grid - line every 10% */
+      table tbody td
+       {
+        background:
+          repeating-linear-gradient(
+            to right,
+            #e6e6e6,
+            #e6e6e6 1px,
+            transparent 1px,
+            transparent 10%
+          ),
+          linear-gradient(
+            to right,
+            transparent,
+            transparent calc(100% - 1px),
+            #e6e6e6 calc(100% - 1px),
+            #e6e6e6
+          )
+        ;
+      }
+
 
       </style>
 
@@ -233,6 +405,8 @@
           var selectedEthnicityElement = element.querySelector('.selected-ethnicity')
 
           var measure = document.querySelector('.measure-data')
+
+          var barChart = document.querySelector('.top-level-bar-chart')
 
 
           setup();
@@ -272,6 +446,7 @@
 
             selectedEthnicityElement.textContent = ethnicity.textContent;
 
+            barChart.classList.add('hidden')
             measure.classList.remove('hidden')
 
           }
@@ -287,6 +462,9 @@
           var topicsElement = element.querySelector('.topics')
           this.ethnicitiesSelector = ethnicitiesSelector;
           var that = this;
+
+          var barChart = document.querySelector('.top-level-bar-chart')
+
 
           var measure = document.querySelector('.measure-data')
 
@@ -352,18 +530,27 @@
               map.classList.add('hidden')
             }
 
-            var area_types = ['police-force-areas', 'regions', 'local-authorities']
-            var area_names = ['police force area', 'region', 'local authority']
 
-            var i = Math.floor(Math.random() * 3);
+            var areas = {
+              "Region": {"area_type": "regions", "area_name": "region"},
+              "Country": {"area_type": "countries", "area_name": "country"},
+              "United Kingdom": {"area_type": "countries", "area_name": "country"},
+              "Local authority upper": {"area_type": "local-authorities", "area_name": "local authority"},
+              "Local authority lower": {"area_type": "local-authorities", "area_name": "local authority"},
+              "Police force area": {"area_type": "police-force-areas", "area_name": "police force area"}
+            }
 
-            document.querySelector('.map.' + area_types[i]).classList.remove('hidden')
-            document.querySelector('.measure-data').classList.remove('hidden')
+
+            var geography = selectedMeasureElement.dataset.geography
+
+            document.querySelector('.map.' + areas[geography].area_type).classList.remove('hidden')
 
 
-            measureTitle.textContent = selectedMeasureElement.dataset.measure + ' by ' + area_names[i];
+            measureTitle.textContent = selectedMeasureElement.dataset.measure + ' by ' + areas[geography].area_name;
 
             measureTitle.classList.remove('hidden')
+
+            barChart.classList.remove('hidden')
 
 
           }
@@ -451,64 +638,383 @@
         <div class="prompt">Select a measure: <span class="selected-measure"></span></div>
 
         <div class="topics show">
-          <ul>
-            <!-- <li>British population</li> -->
-            <li>
-              Crime, justice and the law
-
-              <ul>
-                <li>Policing
-
-                  <ul>
-                    <li data-measure="Percentage of people with confidence in the local police">Confidence in the local police</li>
-                    <li data-measure="Number of youth cautions">Youth cautions</li>
-                    <li data-measure>Number of arrests</li>
-                    <li data-measure="Arrests per 1,000 population">Stop and search</li>
-                  </ul>
-
-                </li>
-                <li>Crime and reoffending
-
-                  <ul>
-                    <li data-measure="Percentage of people who were victims of crime">Victims of crime</li>
-                    <li data-measure="Percentage of people who had a fear of crime">Fear of crime</li>
-                    <li data-measure="Percentage of offenders who reoffended">Proven reoffending</li>
-                  </ul>
-
-                </li>
-                <li>Courts, sentencing and tribunals
-
-                  <ul>
-                    <li data-measure="Percentage of employment tribunal claims">Employment tribunal claims</li>
-                    <li data-measure="Conviction ratio of defendant">Prosecutions and convictions</li>
-                    <li data-measure="Percentage of people remanded at Crown Court">Remand status at Crown Court</li>
-                    <li data-measure="Percentage of offenders sentenced for indictable offences ">Sentences and custody</li>
-                    <li data-measure="Average custodial sentence length (in months)">Average length of custodial sentences</li>
-                    <li data-measure="Percentage of young people in custody">Young people in custody</li>
-                  </ul>
-
-                </li>
-                <li>Prison and custody incidents
-                  <ul>
-                    <li data-measure="Prisoner assailants, victims and fighters">Violence involving prisoners</li>
-                    <li data-measure="Self-inflicted deaths per 1,000 prisoners">Self-inflicted deaths in prison custody</li>
-                    <li data-measure="Self-harm incidents per 1,000 prisoners">Self-harm in prison custody</li>
-                    <li data-measure="Self-harm incidents per 100 young people">Self-harm by young people in custody</li>
-                    <li data-measure="Average number of use of force incidents per 100 young people in custody">Use of force on young offenders in custody</li>
-                    <li data-measure="Rate of single separation incidents per 100 young people in custody">Single separation incidents for young people in custody</li>
-                    <li data-measure="Rate of restrictive physical interventions per 100 young people in custody">Restrictive physical interventions involving young people in custody</li>
-                    <li data-measure="Assaults per 100 young people in custody">Assaults carried out by young people in custody</li>
-                  </ul>
-                </li>
-              </ul>
-
-            </li>
-            <li>Culture and community</li>
-            <li>Education, skills and training</li>
-            <li>Health</li>
-            <li>Housing</li>
-            <li>Work, pay and benefits</li>
-          </ul>
+<ul>
+  <li>
+    British population
+    <ul>
+      <li>
+        Demographics
+        <ul>
+          <li data-measure="English language skills by ethnicity" data-geography="Region" data-ethnicity-breakdown="Not applicable">English language skills</li>
+          <li data-measure="Ethnic groups by sex" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">Male and female populations</li>
+          <li data-measure="People living in the most deprived 10% of neighbourhoods, by ethnicity" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">People living in deprived neighbourhoods</li>
+          <li data-measure="Ethnic groups by working age" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">Working age population</li>
+        </ul>
+      </li>
+      <li>
+        National and regional populations
+        <ul>
+          <li data-measure="Population of England and Wales by ethnicity" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">Population of England and Wales</li>
+          <li data-measure="Areas of England and Wales by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="18 - ONS 2011">Regional ethnic diversity</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Crime, justice and the law
+    <ul>
+      <li>
+        Courts, sentencing and tribunals
+        <ul>
+          <li data-measure="Average custodial sentence length by ethnicity and age group of offender" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Average length of custodial sentences</li>
+          <li data-measure="Employment tribunal claims by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="">Employment tribunal claims</li>
+          <li data-measure="Conviction Ratio by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Prosecutions and convictions</li>
+          <li data-measure="Remand status at Crown Court by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Remand status at Crown Court</li>
+          <li data-measure="Custodial sentences by ethnicity of offender and type of offence" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Sentences and custody</li>
+          <li data-measure="Type of custodial order by ethnicity of young person in custody" data-geography="Country" data-ethnicity-breakdown="4 - Black, Mixed, White, Other inc Asian">Young people in custody</li>
+        </ul>
+      </li>
+      <li>
+        Crime and reoffending
+        <ul>
+          <li data-measure="Fear of crime by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Fear of crime</li>
+          <li data-measure="Average number of reoffences per reoffender" data-geography="Country" data-ethnicity-breakdown="4 - Asian, Black, White, Other inc Mixed">Proven reoffending</li>
+          <li data-measure="Victims of crime by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Victims of crime</li>
+        </ul>
+      </li>
+      <li>
+        Policing
+        <ul>
+          <li data-measure="Confidence in the local police by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Confidence in the local police</li>
+          <li data-measure="Number of arrests by ethnicity" data-geography="Police force area" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Number of arrests</li>
+          <li data-measure="Stop and search by ethnicity" data-geography="Police force area" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Stop and search</li>
+          <li data-measure="Young people given youth cautions by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Youth cautions</li>
+        </ul>
+      </li>
+      <li>
+        Prison and custody incidents
+        <ul>
+          <li data-measure="Assaults carried out by young people in custody by ethnicity" data-geography="Country" data-ethnicity-breakdown="2 - White, Other">Assaults carried out by young people in custody</li>
+          <li data-measure="Restrictive physical interventions involving young people in custody by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="2 - White, Other">Restrictive physical interventions involving young people in custody</li>
+          <li data-measure="Incidents of self-harm by young people in custody by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="2 - White, Other">Self-harm by young people in custody</li>
+          <li data-measure="Self-harm incidents per 1,000 prisoners by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Self-harm in prison custody</li>
+          <li data-measure="Self-inflicted deaths per 1,000 prisoners by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Self-inflicted deaths in prison custody</li>
+          <li data-measure="Single separation incidents for young people in custody by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="2 - White, Other">Single separation incidents for young people in custody</li>
+          <li data-measure="Use of force by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="2 - White, Other">Use of force on young offenders in custody</li>
+          <li data-measure="Assaults involving prisoners by ethnicity and time" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Violence involving prisoners</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Culture and community
+    <ul>
+      <li>
+        Civic participation
+        <ul>
+          <li data-measure="People who felt they could influence local decisions, by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Influencing local decisions</li>
+          <li data-measure="Involvement in local decisions, by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Taking part in local decision making</li>
+          <li data-measure="Regular formal volunteering by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Volunteering</li>
+        </ul>
+      </li>
+      <li>
+        Community
+        <ul>
+          <li data-measure="People who chat regularly to their neighbours by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Chatting regularly with neighbours</li>
+          <li data-measure="Feeling of belonging strongly to one's neighbourhood by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Feeling of belonging to a neighbourhood</li>
+          <li data-measure="Feeling of belonging strongly to Britain by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Feeling of belonging to Britain</li>
+          <li data-measure="Feeling of community integration by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Feeling of community integration</li>
+        </ul>
+      </li>
+      <li>
+        Culture and heritage
+        <ul>
+          <li data-measure="Participation in the arts in the past year, by ethnicity" data-geography="Country" data-ethnicity-breakdown="4 - Asian, Black, White, Other inc Mixed">Adults taking part in the arts</li>
+          <li data-measure="People using a public library in the past year, by ethnicity" data-geography="Country" data-ethnicity-breakdown="4 - Asian, Black, White, Other inc Mixed">Adults using public libraries</li>
+          <li data-measure="People visiting a heritage site in the past year, by ethnicity" data-geography="Country" data-ethnicity-breakdown="4 - Asian, Black, White, Other inc Mixed">Adults visiting heritage sites</li>
+          <li data-measure="People visiting a museum or gallery in the past year, by ethnicity" data-geography="Country" data-ethnicity-breakdown="4 - Asian, Black, White, Other inc Mixed">Adults visiting museums and galleries</li>
+          <li data-measure="Visits to the natural environment in the previous 12 months by ethnicity" data-geography="Country" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Visits to the natural environment</li>
+        </ul>
+      </li>
+      <li>
+        Digital
+        <ul>
+          <li data-measure="Internet use by ethnicity" data-geography="Region" data-ethnicity-breakdown="4 - Asian, Black, White, Other inc Mixed">Internet use</li>
+        </ul>
+      </li>
+      <li>
+        Transport
+        <ul>
+          <li data-measure="Car and van ownership by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Car or van ownership</li>
+          <li data-measure="Driving licence holders by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Driving licences</li>
+          <li data-measure="Distance travelled by ethnicity" data-geography="Country" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Travel by distance, trips, type of transport and purpose</li>
+          <li data-measure="Average trip distance to school by ethnicity over time" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Travel to school</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Education, skills and training
+    <ul>
+      <li>
+        11 to 16 years old
+        <ul>
+          <li data-measure="A* to C in English and Maths GCSE by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">A* to C in English and Maths GCSE attainment for children aged 14 to 16 (key stage 4)</li>
+          <li data-measure="EBacc achievement by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">English Baccalaureate (EBacc) achievement for children aged 14 to 16 (key stage 4)</li>
+          <li data-measure="EBacc entry by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">English Baccalaureate (EBacc) entry for children aged 14 to 16 (key stage 4)</li>
+          <li data-measure="GCSE-level exam results (‘Attainment 8’) by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">GCSE results (‘Attainment 8’) for children aged 14 to 16 (key stage 4)</li>
+          <li data-measure="Pupil progress (‘Progress 8’) by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Pupil progress (‘Progress 8’) between ages 11 and 16 (key stage 2 to key stage 4)</li>
+        </ul>
+      </li>
+      <li>
+        5 to 7 years old
+        <ul>
+          <li data-measure="Mathematics attainment for children aged 5 to 7 by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Mathematics attainments for children aged 6 to 7 (key stage 1)</li>
+          <li data-measure="Phonics attainment for children aged 5 to 6 by ethnicity and area" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Phonics attainments for children aged 5 to 7 (key stage 1)</li>
+          <li data-measure="Reading attainment for children aged 5 to 7 by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Reading attainments for children aged 6 to 7 (key stage 1)</li>
+          <li data-measure="Science attainment for children aged 5 to 7 by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Science attainments for children aged 6 to 7 (key stage 1)</li>
+          <li data-measure="Writing attainment for children aged 5 to 7 by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Writing attainments for children aged 6 to 7 (key stage 1)</li>
+        </ul>
+      </li>
+      <li>
+        7 to 11 years old
+        <ul>
+          <li data-measure="Grammar, punctuation and spelling attainment by ethnicity and area" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Grammar, punctuation and spelling attainment for children aged 7 to 11 (key stage 2)</li>
+          <li data-measure="Maths attainment for children aged 10 to 11 by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Maths attainments for children aged 7 to 11 (key stage 2)</li>
+          <li data-measure="Reading attainment for children aged 10 to 11 by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Reading attainments for children aged 7 to 11 (key stage 2)</li>
+          <li data-measure="Reading, writing and maths attainment for children aged 10 to 11 by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Reading, writing and maths attainments for children aged 7 to 11 (key stage 2)</li>
+          <li data-measure="Writing attainment for children aged 10 to 11 by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Writing attainments for children aged 7 to 11 (key stage 2)</li>
+        </ul>
+      </li>
+      <li>
+        Absence and exclusions
+        <ul>
+          <li data-measure="Overall absence by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Absence from school</li>
+          <li data-measure="Fixed period exclusions by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Pupil exclusions</li>
+        </ul>
+      </li>
+      <li>
+        After education
+        <ul>
+          <li data-measure="Average earnings of graduates by ethnicity" data-geography="Country" data-ethnicity-breakdown="10 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other">Destinations and earnings of graduates after higher education</li>
+          <li data-measure="Pupils going into education, employment or training by ethnicity" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2001 plus Irish Traveller and Gypsy/Roma">Destinations of school pupils after key stage 4 (usually aged 16 years)</li>
+          <li data-measure="Students going into education or employment by ethnicity" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2001 plus Irish Traveller and Gypsy/Roma">Destinations of students after key stage 5 (usually aged 18 years)</li>
+        </ul>
+      </li>
+      <li>
+        A levels
+        <ul>
+          <li data-measure="Students aged 16 to 18 achieving 3 A grades or better at A level by ethnicity" data-geography="Country" data-ethnicity-breakdown="19 - ONS 2001 plus Irish Traveller and Gypsy/Roma and Unmatched">Students aged 16 to 18 achieving 3 A grades or better at A level</li>
+        </ul>
+      </li>
+      <li>
+        Apprenticeships, further and higher education
+        <ul>
+          <li data-measure="Apprenticeship starts by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Apprenticeship starts</li>
+          <li data-measure="Entry rates into higher education by ethnicity" data-geography="Country" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Entry rates into higher education</li>
+          <li data-measure="First year entrants onto postgraduate degrees by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">First year entrants onto postgraduate degrees</li>
+          <li data-measure="First year entrants onto undergraduate degrees by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">First year entrants onto undergraduate degrees</li>
+          <li data-measure="Further education participants by ethnicity, compared with the overall population by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Further education participation</li>
+          <li data-measure="Number of apprentices by ethnicity over time" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Participation in apprenticeships</li>
+        </ul>
+      </li>
+      <li>
+        Early years
+        <ul>
+          <li data-measure="Attainment of development goals by ethnicity" data-geography="Local authority upper" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Attainment of development goals by children aged 4 to 5 years</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Health
+    <ul>
+      <li>
+        Access to treatment
+        <ul>
+          <li data-measure="Access to NHS dental services" data-geography="United Kingdom" data-ethnicity-breakdown="18 - ONS 2011">Access to NHS dental services</li>
+          <li data-measure="Adults receiving treatment for mental or emotional problems by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White British, White other, Other inc Mixed">Adults receiving treatment for mental or emotional problems</li>
+          <li data-measure="Rates of adults using NHS-funded secondary mental health and learning disability services" data-geography="United Kingdom" data-ethnicity-breakdown="16 - ONS 2001">Adults using NHS-funded mental health and learning disability services</li>
+          <li data-measure="Rates of detention (per 100,000) under the Mental Health Act 1983 by broad ethnic group" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Detentions under the Mental Health Act</li>
+          <li data-measure="Satisfaction with access to GP services by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="18 - ONS 2011">Satisfaction with access to GP services</li>
+        </ul>
+      </li>
+      <li>
+        Exercise and activity
+        <ul>
+          <li data-measure="Physical activity levels by ethnicity" data-geography="Country" data-ethnicity-breakdown="">Physical activity</li>
+          <li data-measure="Physical inactivity by ethnicity" data-geography="Country" data-ethnicity-breakdown="7 - Asian, Black, Chinese, Mixed, White British, White other, Other">Physical inactivity</li>
+        </ul>
+      </li>
+      <li>
+        Patient experiences
+        <ul>
+          <li data-measure="Inpatient satisfaction with hospital care by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="18 - ONS 2011">Inpatient satisfaction with hospital care</li>
+          <li data-measure="Satisfaction with GP services by ethnicity" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">Patient experience of primary care - GP services</li>
+          <li data-measure="Satisfaction with GP out-of-hours services by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="18 - ONS 2011">Patient satisfaction with GP out-of-hours services</li>
+          <li data-measure="Patients reporting a positive experience of NHS dental services by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="18 - ONS 2011">Patient satisfaction with NHS dental services</li>
+        </ul>
+      </li>
+      <li>
+        Patient outcomes
+        <ul>
+          <li data-measure="Cancer diagnosis at an early stage by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Cancer diagnosis at an early stage</li>
+          <li data-measure="HIV infection with late diagnosis by ethnicity" data-geography="Country" data-ethnicity-breakdown="6 - Asian, Black African, Black Caribbean, Black other, White, Other inc Mixed">HIV infection with late diagnosis</li>
+          <li data-measure="Outcomes of referrals following psychological therapy by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="16 - ONS 2001">Outcomes for treatment for anxiety and depression</li>
+        </ul>
+      </li>
+      <li>
+        Physical and mental health
+        <ul>
+          <li data-measure="Psychotic disorder in adults by ethnicity and sex" data-geography="Country" data-ethnicity-breakdown="4 - Asian, Black, White, Other inc Mixed">Adults experiencing a psychotic disorder</li>
+          <li data-measure="Percentage of people with a common mental disorder by sex and ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White British, White other, Other inc Mixed">Adults experiencing common mental disorders</li>
+          <li data-measure="Lifetime suicidal thoughts, attempts and self-harm in adults" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White British, White other, Other inc Mixed">Adults reporting suicidal thoughts, attempts and self harm</li>
+          <li data-measure="Adults screening positive for bipolar disorder by ethnicity and sex" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White British, White other, Other inc Mixed">Adults screening positive for bipolar disorder</li>
+          <li data-measure="Percentage of adults screening positive for PTSD in the month prior to the survey by ethnicity and sex" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White British, White other, Other inc Mixed">Adults with post-traumatic stress disorder (PTSD) in the month prior to survey</li>
+          <li data-measure="Drug dependency amongst adults" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White British, White other, Other inc Mixed">Drug dependency in adults</li>
+          <li data-measure="Illicit drug use in the past year in adults, England, 2014" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White British, White other, Other inc Mixed">Illicit drug use among adults</li>
+          <li data-measure="Positive screenings for ADHD in adults" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White British, White other, Other inc Mixed">Prevalence of ADHD among adults</li>
+          <li data-measure="Positive screenings for personality disorder in adults by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White British, White other, Other inc Mixed">Prevalence of personality disorder in adults</li>
+          <li data-measure="Anxiety by ethnicity and sex" data-geography="United Kingdom" data-ethnicity-breakdown="12 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other, Arab, Gypsy/Traveller/Irish Traveller">Well-being: anxiety yesterday</li>
+          <li data-measure="Happiness by ethnicity and gender" data-geography="United Kingdom" data-ethnicity-breakdown="12 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other, Arab, Gypsy/Traveller/Irish Traveller">Well-being: happiness yesterday</li>
+          <li data-measure="Feeling the things you do in your life are worthwhile, by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="12 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other, Arab, Gypsy/Traveller/Irish Traveller">Well-being: how worthwhile people feel the things they do in their life are</li>
+          <li data-measure="Life satisfaction by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="12 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other, Arab, Gypsy/Traveller/Irish Traveller">Well-being: Life satisfaction</li>
+        </ul>
+      </li>
+      <li>
+        Preventing illness
+        <ul>
+          <li data-measure="Absence of tooth decay in 5 year olds" data-geography="United Kingdom" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Absence of tooth decay in 5 year olds</li>
+          <li data-measure="Adult smokers by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Adult smokers</li>
+          <li data-measure="Cigarette smoking among 15 year olds by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Cigarette smoking among 15 year olds</li>
+          <li data-measure="Healthy eating of 5-a-day among 15 year olds by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Healthy eating of 5-a-day among 15 year olds</li>
+          <li data-measure="Healthy eating of 5-a-day among adults by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Healthy eating of 5-a-day among adults</li>
+          <li data-measure="Overweight adults by ethnicity over time" data-geography="United Kingdom" data-ethnicity-breakdown="7 - Asian, Black, Chinese, Mixed, White British, White other, Other">Overweight adults</li>
+          <li data-measure="Overweight children by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="16 - ONS 2001">Overweight children</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Housing
+    <ul>
+      <li>
+        Homelessness
+        <ul>
+          <li data-measure="Number of homeless households by ethnicity" data-geography="Local authority lower" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Statutory homelessness</li>
+        </ul>
+      </li>
+      <li>
+        Housing conditions
+        <ul>
+          <li data-measure="Households in fuel poverty by ethnicity over time" data-geography="United Kingdom" data-ethnicity-breakdown="2 - White, Other">Fuel poverty</li>
+          <li data-measure="Average fuel poverty gap by ethnicity over time" data-geography="United Kingdom" data-ethnicity-breakdown="2 - White, Other">Fuel poverty gap</li>
+          <li data-measure="Households under-occupying their home by ethnicity" data-geography="Region" data-ethnicity-breakdown="2 - White British, Other">Households under-occupying their home</li>
+          <li data-measure="Households with damp problems by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="18 - ONS 2011">Housing with damp problems</li>
+          <li data-measure="Households living in non-decent homes by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="18 - ONS 2011">Non-decent homes</li>
+          <li data-measure="Overcrowded households by ethnicity" data-geography="Region" data-ethnicity-breakdown="2 - White British, Other">Overcrowded households</li>
+        </ul>
+      </li>
+      <li>
+        Owning and renting
+        <ul>
+          <li data-measure="Average age of first-time buyers by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="18 - ONS 2011">Age of first-time buyers</li>
+          <li data-measure="Deposits paid by first-time buyers by ethnicity" data-geography="Country" data-ethnicity-breakdown="2 - White British, Other">Deposits paid by first-time buyers</li>
+          <li data-measure="Financial help from family members to buy a home" data-geography="United Kingdom" data-ethnicity-breakdown="18 - ONS 2011">Financial help from family to buy a home</li>
+          <li data-measure="Home ownership by ethnicity" data-geography="Region" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Home ownership</li>
+          <li data-measure="Households renting from a private landlord by ethnicity" data-geography="Region" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Renting from a private landlord</li>
+          <li data-measure="Spending on mortgages by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="18 - ONS 2011">Spending on rent and mortgages</li>
+          <li data-measure="Time spent living in current home by ethnicity" data-geography="Region" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Time spent living in current home</li>
+        </ul>
+      </li>
+      <li>
+        Social housing
+        <ul>
+          <li data-measure="Income spent on rent by ethnicity" data-geography="Region" data-ethnicity-breakdown="18 - ONS 2011">Income spent on rent for new lettings of social housing</li>
+          <li data-measure="Length of fixed-term tenancies for new lettings in social housing by ethnicity" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">Length of fixed-term tenancies in social housing</li>
+          <li data-measure="New social housing lettings by ethnicity" data-geography="Local authority lower" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">New social housing lettings</li>
+          <li data-measure="Households renting social housing by ethnicity" data-geography="Region" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Renting from a local authority or housing association (‘social housing’)</li>
+          <li data-measure="Routes into social housing by ethnicity" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">Routes into social housing</li>
+          <li data-measure="Vulnerable households going into social housing by ethnicity and type of priority need" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">Vulnerable households going into social housing</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Workforce and business
+    <ul>
+      <li>
+        Business and self-employment
+        <ul>
+          <li data-measure="Access to Start Up Loans by ethnicity over time" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Access to Start Up Loans</li>
+          <li data-measure="Self-employment by ethnicity over time" data-geography="United Kingdom" data-ethnicity-breakdown="6 - Black, Indian, Pakistani and Bangladeshi, Mixed, White, Other">Self-employment</li>
+        </ul>
+      </li>
+      <li>
+        Workforce diversity
+        <ul>
+          <li data-measure="All armed forces personnel by ethnicity and rank" data-geography="United Kingdom" data-ethnicity-breakdown="2 - White, Other">Armed forces workforce</li>
+          <li data-measure="Civil servants' median pay by ethnicity and area" data-geography="Region" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Civil Service Workforce</li>
+          <li data-measure="Ethnic groups broken down by their judicial roles" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Judges and non-legal members of the judiciary</li>
+          <li data-measure="NHS trust board members by ethnicity and area" data-geography="Region" data-ethnicity-breakdown="2 - White, Other">NHS trust board membership</li>
+          <li data-measure="NHS medical workforce by ethnicity and grade" data-geography="Country" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">NHS workforce</li>
+          <li data-measure="Appointment of shortlisted applicants to NHS jobs by ethnicity and area" data-geography="Region" data-ethnicity-breakdown="2 - White, Other">NHS workforce appointments from shortlisting</li>
+          <li data-measure="Police officers by ethnicity" data-geography="Police force area" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Police workforce</li>
+          <li data-measure="Prison officers by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Prison officer workforce</li>
+          <li data-measure="Head teachers by ethnicity and gender" data-geography="Country" data-ethnicity-breakdown="16 - ONS 2001">School teacher workforce</li>
+          <li data-measure="Children and family social workers by ethnicity" data-geography="Country" data-ethnicity-breakdown="16 - ONS 2001">Social workers for children and families</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Work, pay and benefits
+    <ul>
+      <li>
+        Benefits
+        <ul>
+          <li data-measure="Customer satisfaction with Department for Work and Pensions (DWP) services by ethnicity" data-geography="Country" data-ethnicity-breakdown="6 - Asian, Black, Mixed, White British, White other, Other">Customer satisfaction with Department for Work and Pensions services</li>
+          <li data-measure="Employment and Support Allowance claimants sanctioned, by ethnicity" data-geography="Region" data-ethnicity-breakdown="6 - Asian, Black, Mixed, White British, White other, Other">Employment and Support Allowance: sanctions</li>
+          <li data-measure="Claims for Jobseeker’s Allowance lasting for 13 weeks or less, by ethnicity and area" data-geography="Region" data-ethnicity-breakdown="">Jobseeker’s Allowance: how long people claim for</li>
+          <li data-measure="Jobseeker’s Allowance claimants sanctioned, by ethnicity" data-geography="Region" data-ethnicity-breakdown="6 - Asian, Black, Mixed, White British, White other, Other">Jobseeker's Allowance: sanctions</li>
+          <li data-measure="People claiming Jobseeker’s Allowance by ethnicity" data-geography="Region" data-ethnicity-breakdown="2 - White, Other">People claiming Jobseeker’s Allowance</li>
+          <li data-measure="Family units receiving income-related benefits" data-geography="United Kingdom" data-ethnicity-breakdown="10 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other">State support</li>
+        </ul>
+      </li>
+      <li>
+        Employment
+        <ul>
+          <li data-measure="Employed 16 to 24 year olds by ethnicity over time" data-geography="Local authority lower" data-ethnicity-breakdown="8 - Indian, Pakistani and Bangladeshi, Asian other, Black, Mixed, White British, White other, Other inc Chinese">Employment</li>
+          <li data-measure="Employment by type of occupation and ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="">Employment by occupation</li>
+          <li data-measure="Employed men by ethnicity and qualification level" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Employment by qualification level</li>
+          <li data-measure="Employment by sector and ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="6 - Black, Indian, Pakistani and Bangladeshi, Mixed, White, Other">Employment by sector</li>
+        </ul>
+      </li>
+      <li>
+        Pay and income
+        <ul>
+          <li data-measure="Average hourly pay by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="6 - Black, Indian, Pakistani and Bangladeshi, Mixed, White, Other">Average hourly pay</li>
+          <li data-measure="Weekly household income by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="10 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other">Household income</li>
+          <li data-measure="Income distribution after housing costs (AHC) by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="6 - Asian, Black, Mixed, White British, White other, Other">Income distribution</li>
+          <li data-measure="[BHC vs -PROBABLY DELETE] People living in persistent low income households, before housing costs, by ethnicity and age group" data-geography="United Kingdom" data-ethnicity-breakdown="6 - Asian, Black, Mixed, White British, White other, Other">Low income</li>
+          <li data-measure="Income from occupational pensions over time" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White British, White other, Other inc Mixed">Pensioner income</li>
+          <li data-measure="Share of income from benefits and tax credits by ethnicity over time" data-geography="United Kingdom" data-ethnicity-breakdown="10 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other">Sources of household income</li>
+        </ul>
+      </li>
+      <li>
+        Unemployment and economic inactivity
+        <ul>
+          <li data-measure="Economic inactivity by ethnicity" data-geography="Local authority lower" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Economic inactivity</li>
+          <li data-measure="Economically inactive men by ethnicity and qualification level" data-geography="Country" data-ethnicity-breakdown="6 - Asian, Black, Chinese, Mixed, White, Other">Economic inactivity by qualification level</li>
+          <li data-measure="Time spent in unemployment" data-geography="United Kingdom" data-ethnicity-breakdown="2 - White, Other">Length of time spent in unemployment</li>
+          <li data-measure="Unemployed 16-24 year olds by ethnicity over time" data-geography="Local authority lower" data-ethnicity-breakdown="2 - White, Other">Unemployment</li>
+          <li data-measure="Unemployed men by ethnicity and qualification level" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Unemployment by qualification level</li>
+          <li data-measure="Percentage of young people not in employment, education or training by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="10 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other">Young people not in employment, education or training (NEET)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
         </div>
       </div>
 
@@ -528,7 +1034,61 @@
 
       </div>
 
+        <div class="top-level-bar-chart hidden">
+          <table class="bar-chart">
+            <thead>
+              <tr>
+                <th class="category">Category</th>
+                <th class="value">Value</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td class="grid-labels" aria-role="presentation">
+                  <span class="label label-0">0</span>
+                  <span class="label label-10">10</span>
+                  <span class="label label-20">20</span>
+                  <span class="label label-30">30</span>
+                  <span class="label label-40">40</span>
+                  <span class="label label-50">50</span>
+                  <span class="label label-60">60</span>
+                  <span class="label label-70">70</span>
+                  <span class="label label-80">80</span>
+                  <span class="label label-90">90</span>
+                  <span class="label label-100">100</span>
+                </td>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <th>Asian</th>
+                <td><span class="bar" style="width:50%;"></span><span class="value">50%</span></td>
+              </tr>
+              <tr>
+                <th>Black</th>
+                <td><span class="bar" style="width:1%;"></span><span class="value">1%</span></td>
+              </tr>
+              <tr>
+                <th>Mixed</th>
+                <td><span class="bar" style="width:100%;"></span><span class="value close-to-100">100%</span></td>
+              </tr>
+              <tr>
+                <th>White</th>
+                <td><span class="bar" style="width:100%;"></span><span class="value close-to-100">100%</span></td>
+              </tr>
+              <tr>
+                <th>Other</th>
+                <td><span class="bar" style="width:100%;"></span><span class="value close-to-100">100%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+
       <div class="measure-data hidden">
+
 
 <?xml version="1.0" encoding="UTF-8"?>
 <svg class="map regions hidden" style="max-width: 400px;" width="600px" height="800px" viewBox="0 200 600 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -761,6 +1321,22 @@
       <text x="100" y="30" fill="white" text-anchor="middle">Islington</text>
     </g>
 
+</svg>
+
+<svg class="map hidden countries" width="450px" height="600px" viewBox="0 0 600 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Combined maps</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Combined-maps" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" x="0" y="0" width="600" height="800"></rect>
+        <g id="Countries" transform="translate(50.000000, 50.000000)" fill="#005EA5" stroke="#FFFFFF" stroke-width="2">
+            <path d="M400,600 L400,650 L350,650 L300,650 L250,650 L200,650 L200,700 L150,700 L100,700 L100,650 L150,650 L150,600 L200,600 L250,600 L250,550 L200,550 L200,500 L200,450 L200,400 L200,350 L200,300 L250,300 L250,250 L250,200 L300,200 L300,250 L350,250 L350,300 L350,350 L350,400 L400,400 L400,450 L400,500 L450,500 L450,550 L450,600 L400,600 Z" id="England"></path>
+            <path d="M150,450 L150,400 L200,400 L200,450 L200,500 L200,550 L150,550 L100,550 L100,500 L100,450 L150,450 Z" id="Wales"></path>
+            <path d="M100,300 L100,350 L50,350 L0,350 L0,300 L0,250 L50,250 L100,250 L100,300 Z" id="Northern-Ireland"></path>
+            <path d="M150,200 L100,200 L100,150 L100,100 L100,50 L100,0 L150,0 L200,0 L200,50 L250,50 L300,50 L300,100 L300,150 L250,150 L250,200 L250,250 L250,300 L200,300 L150,300 L150,250 L150,200 Z" id="Scotland"></path>
+        </g>
+    </g>
 </svg>
 
 <svg class="map hidden police-force-areas" width="600px" height="600px" viewBox="0 200 600 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
