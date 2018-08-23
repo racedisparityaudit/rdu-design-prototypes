@@ -423,11 +423,13 @@
 
           function setup() {
 
+            ethnicitiesElement.addEventListener('click', selectEthnicity)
+
             selectedEthnicityElement.addEventListener('click', showSelector);
 
-            for (ethnicity of element.querySelectorAll('li')) {
-              ethnicity.addEventListener('click', selectEthnicity)
-            }
+            // for (ethnicity of element.querySelectorAll('li')) {
+            //   ethnicity.addEventListener('click', selectEthnicity)
+            // }
           }
 
 
@@ -538,6 +540,71 @@
               "Local authority upper": {"area_type": "local-authorities", "area_name": "local authority"},
               "Local authority lower": {"area_type": "local-authorities", "area_name": "local authority"},
               "Police force area": {"area_type": "police-force-areas", "area_name": "police force area"}
+            }
+
+            var ethnicities = {
+              "Not applicable": [],
+              "18 - ONS 2011": ["Bangladeshi", "Chinese", "Indian", "Pakistani", "Asian other", "Black African", "Black Caribbean", "Black other", "Mixed White/Asian", "Mixed White/Black African", "Mixed White/Black Caribbean", "Mixed other", "White Irish", "White Gypsy/Traveller", "White other", "Arab", "Other"],
+              "5 - Asian, Black, White, Mixed, Other inc Chinese": ["Asian","Black", "Mixed", "White", "Other"],
+              "4 - Black, Mixed, White, Other inc Asian": ["Black", "Mixed", "White", "Other"],
+              "5 - Asian, Black, White, Mixed, Other": ["Asian","Black", "Mixed", "White", "Other"],
+              "4 - Asian, Black, White, Other inc Mixed": ["Asian","Black", "White", "Other"],
+              "2 - White, Other": ["White", "Other"],
+              "6 - Asian, Black, Chinese, Mixed, White, Other": ["Asian","Black", "Chinese", "Mixed", "White", "Other"],
+              "10 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other": [],
+              "18 - ONS 2001 plus Irish Traveller and Gypsy/Roma": [],
+              "19 - ONS 2001 plus Irish Traveller and Gypsy/Roma and Unmatched": [],
+              "5 - Asian, Black, White British, White other, Other inc Mixed": [],
+              "16 - ONS 2001": [],
+              "7 - Asian, Black, Chinese, Mixed, White British, White other, Other": [],
+              "6 - Asian, Black African, Black Caribbean, Black other, White, Other inc Mixed": [],
+              "12 - Bangladeshi, Chinese, Indian, Pakistani, Asian other, Black, Mixed, White British, White other, Other, Arab, Gypsy/Traveller/Irish Traveller": [],
+              "2 - White British, Other": ["White British", "Other"],
+              "6 - Black, Indian, Pakistani and Bangladeshi, Mixed, White, Other": [],
+              "6 - Asian, Black, Mixed, White British, White other, Other": [],
+              "8 - Indian, Pakistani and Bangladeshi, Asian other, Black, Mixed, White British, White other, Other inc Chinese            ": []
+            }
+
+            var ethnicityBreakdown = selectedMeasureElement.dataset.ethnicityBreakdown
+
+            var ethnicitiesList = document.querySelector('.ethnicities')
+
+
+            ethnicitiesList.innerHTML = ""
+
+            for (ethnicity of ethnicities[ethnicityBreakdown]) {
+
+              var li = document.createElement('li')
+              li.textContent = ethnicity
+
+              ethnicitiesList.appendChild(li)
+            }
+
+              // <tr>
+              //   <th>Asian</th>
+              //   <td><span class="bar" style="width:50%;"></span><span class="value">50%</span></td>
+              // </tr>
+
+            var barChartBody = document.querySelector('.bar-chart-body')
+
+            barChartBody.innerHTML = ""
+
+            for (ethnicity of ethnicities[ethnicityBreakdown]) {
+
+              var percentage = Math.random() * 100
+
+              var tr = document.createElement('tr')
+
+              var th = document.createElement('th')
+              th.textContent = ethnicity
+
+              var td = document.createElement('td')
+              td.innerHTML = '<span class="bar" style="width:'+ percentage + '%;"></span><span class="value">' + Math.round(percentage) + '%</span>'
+
+              tr.appendChild(th)
+              tr.appendChild(td)
+
+              barChartBody.appendChild(tr)
             }
 
 
@@ -1060,7 +1127,7 @@
                 </td>
               </tr>
             </tfoot>
-            <tbody>
+            <tbody class="bar-chart-body">
               <tr>
                 <th>Asian</th>
                 <td><span class="bar" style="width:50%;"></span><span class="value">50%</span></td>
