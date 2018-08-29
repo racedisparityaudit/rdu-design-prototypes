@@ -1,4 +1,4 @@
-
+s
 <!DOCTYPE html>
 <!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
 <!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
@@ -85,6 +85,21 @@
 
 
       <style>
+
+        .bad {
+          background-color: #DF3034;
+          fill: #DF3034;
+        }
+
+        .good {
+          background-color: #006435;
+          fill: #006435;
+        }
+
+        .neutral {
+          background-color: #2B8CC4;
+          fill: #2B8CC4;
+        }
 
         #content {
           min-height: 1000px;
@@ -438,6 +453,7 @@
             selectedEthnicityElement.textContent = '';
             ethnicitiesElement.classList.add('show')
 
+
           }
 
 
@@ -448,8 +464,33 @@
 
             selectedEthnicityElement.textContent = ethnicity.textContent;
 
+            document.querySelector('.scale').classList.remove('hidden')
+
             barChart.classList.add('hidden')
             measure.classList.remove('hidden')
+
+            var areas = document.querySelectorAll('.areas path, .areas rect');
+
+            var good_bad_neutral = ['good', 'bad', 'neutral'];
+
+            for (area of areas) {
+
+              area.classList.remove('good')
+              area.classList.remove('bad')
+              area.classList.remove('neutral')
+
+              var x = Math.floor(Math.random() * 3);
+
+              area.classList.add(good_bad_neutral[x])
+
+              if (x == 2) {
+                area.setAttribute('opacity', '0.6');
+              } else {
+                area.setAttribute('opacity', 0.2 + Math.round(Math.random() * 80) / 100);
+              }
+
+            }
+
 
           }
 
@@ -518,6 +559,8 @@
 
             document.querySelector('.measure-data').classList.add('hidden')
             document.querySelector('.measure-title').classList.add('hidden')
+
+            document.querySelector('.scale').classList.add('hidden')
 
           }
 
@@ -1153,9 +1196,41 @@
         </div>
 
 
+<style>
+
+  .scale {
+    position: relative;
+    top: 0px;
+    left: 400px;
+    font-size: 16px;
+  }
+
+  .scale .item {
+    margin: 4px 0 2px 0;
+  }
+
+  .scale span {
+    line-height: 20px;
+  }
+
+  .scale .box {
+    display: inline-block;
+    margin-right: 4px;
+    width: 20px; height: 20px;
+    vertical-align: middle;
+  }
+</style>
+
+
+<div class="scale hidden">
+  <div class="item"><div class="box bad" style="opacity: .6;"></div> <span>10% less likely</span></div>
+  <div class="item"><div class="box bad" style="opacity: .2;"></div> <span>5% less likely</span></div>
+  <div class="item"><div class="box neutral" style="opacity: .4;"></div> <span>average</span></div>
+  <div class="item"><div class="box good" style="opacity: .2;"></div> <span>5% more likely</span></div>
+  <div class="item"><div class="box good" style="opacity: .6;"></div> <span>10% more likely</span></div>
+</div>
 
       <div class="measure-data hidden">
-
 
 <?xml version="1.0" encoding="UTF-8"?>
 <svg class="map regions hidden" style="max-width: 400px;" width="600px" height="800px" viewBox="0 200 600 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -1165,7 +1240,7 @@
     <defs></defs>
     <g id="Combined-maps" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <rect fill="#FFFFFF" x="0" y="0" width="600" height="800"></rect>
-        <g id="Regions" transform="translate(150.000000, 50.000000)" fill="#005EA5" stroke="#FFFFFF" stroke-width="2">
+        <g id="Regions" class="areas" transform="translate(150.000000, 50.000000)" fill="#005EA5" stroke="#FFFFFF" stroke-width="2">
             <path d="M250,650 L200,650 L200,600 L200,550 L250,550 L250,600 L300,600 L300,650 L250,650 Z" id="South-East"></path>
             <path d="M300,550 L250,550 L250,500 L300,500 L350,500 L350,550 L350,600 L300,600 L300,550 Z" id="East-of-England"></path>
             <path d="M200,450 L200,400 L250,400 L300,400 L300,450 L300,500 L250,500 L250,550 L200,550 L200,500 L200,450 Z" id="East-Midlands"></path>
@@ -1186,7 +1261,7 @@
     <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
     <g id="Local-authorities-super-small" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Map" transform="translate(50.000000, 50.000000)" fill="#005EA5" stroke="#FFFFFF" stroke-width="0.5">
-            <g id="Areas">
+            <g id="Areas" class="areas">
                 <rect id="Torbay" x="195.25" y="660.25" width="14.5" height="14.5"></rect>
                 <rect id="Plymouth" x="165.25" y="660.25" width="14.5" height="14.5"></rect>
                 <rect id="Isle-of-Wight" x="315.25" y="645.25" width="14.5" height="14.5"></rect>
@@ -1338,7 +1413,7 @@
                 <path data-x="450" data-y="30" d="M480.25,29.75 L494.75,29.75 L494.75,0.25 L480.25,0.25 L480.25,29.75 Z M450.25,59.75 L465.25,59.75 L465.25,89.75 L479.75,89.75 L479.75,30.25 L450.25,30.25 L450.25,59.75 Z" id="Shetland-Islands"></path>
                 <path data-x="180" data-y="30" d="M209.75,59.75 L209.75,44.75 L224.75,44.75 L224.75,29.75 L239.75,29.75 L239.75,0.25 L150.25,0.25 L150.25,60.25 L135.25,60.25 L135.25,90.25 L120.25,90.25 L120.25,105.25 L104.75,105.25 L104.75,90.25 L90.25,90.25 L90.25,119.75 L120.25,119.75 L120.25,150.25 L105.25,150.25 L105.25,164.75 L134.75,164.75 L134.75,149.75 L150.25,149.75 L150.25,164.75 L164.75,164.75 L164.75,149.75 L179.75,149.75 L179.75,134.75 L209.75,134.75 L209.75,119.75 L224.75,119.75 L224.75,90.25 L194.75,90.25 L194.75,59.75 L209.75,59.75 Z" id="Highland"></path>
             </g>
-            <g id="Boroughs" transform="translate(360.000000, 555.000000)">
+            <g id="Boroughs" class="areas" transform="translate(360.000000, 555.000000)">
                 <path data-x="40" data-y="30" d="M37.75,44.75 L44.75,44.75 L44.75,30.25 L37.75,30.25 L37.75,44.75 Z" id="Bromley"></path>
                 <path data-x="30" data-y="30" d="M30.25,44.75 L37.25,44.75 L37.25,30.25 L30.25,30.25 L30.25,44.75 Z" id="Croydon"></path>
                 <rect id="Sutton" x="22.75" y="37.75" width="7" height="7"></rect>
@@ -1397,7 +1472,7 @@
     <defs></defs>
     <g id="Combined-maps" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <rect fill="#FFFFFF" x="0" y="0" width="600" height="800"></rect>
-        <g id="Countries" transform="translate(50.000000, 50.000000)" fill="#005EA5" stroke="#FFFFFF" stroke-width="2">
+        <g class="areas" id="Countries" transform="translate(50.000000, 50.000000)" fill="#005EA5" stroke="#FFFFFF" stroke-width="2">
             <path d="M400,600 L400,650 L350,650 L300,650 L250,650 L200,650 L200,700 L150,700 L100,700 L100,650 L150,650 L150,600 L200,600 L250,600 L250,550 L200,550 L200,500 L200,450 L200,400 L200,350 L200,300 L250,300 L250,250 L250,200 L300,200 L300,250 L350,250 L350,300 L350,350 L350,400 L400,400 L400,450 L400,500 L450,500 L450,550 L450,600 L400,600 Z" id="England"></path>
             <path d="M150,450 L150,400 L200,400 L200,450 L200,500 L200,550 L150,550 L100,550 L100,500 L100,450 L150,450 Z" id="Wales"></path>
             <path d="M100,300 L100,350 L50,350 L0,350 L0,300 L0,250 L50,250 L100,250 L100,300 Z" id="Northern-Ireland"></path>
@@ -1414,7 +1489,7 @@
     <g id="Combined-maps" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <rect fill="#FFFFFF" x="0" y="0" width="600" height="800"></rect>
         <g id="Police-forces" transform="translate(50.000000, 50.000000)" fill="#005EA5" stroke="#FFFFFF" stroke-width="0.5">
-            <g id="Areas">
+            <g id="Areas" class="areas">
                 <path d="M330.25,644.75 L344.75,644.75 L344.75,614.75 L359.75,614.75 L359.75,600.25 L300.25,600.25 L300.25,644.75 L314.75,644.75 L314.75,629.75 L330.25,629.75 L330.25,644.75 Z M315.25,645.25 L315.25,659.75 L329.75,659.75 L329.75,645.25 L315.25,645.25 Z" id="Hampshire"></path>
                 <path d="M345.25,644.75 L404.75,644.75 L404.75,629.75 L434.75,629.75 L434.75,615.25 L345.25,615.25 L345.25,644.75 Z" id="Sussex"></path>
                 <path d="M434.75,570.25 L420.25,570.25 L420.25,585.25 L405.25,585.25 L405.25,614.75 L449.75,614.75 L449.75,599.75 L464.75,599.75 L464.75,585.25 L434.75,585.25 L434.75,570.25 Z" id="Kent"></path>
