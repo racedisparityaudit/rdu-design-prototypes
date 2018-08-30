@@ -1,4 +1,3 @@
-s
 <!DOCTYPE html>
 <!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
 <!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
@@ -85,6 +84,15 @@ s
 
 
       <style>
+
+        .measure-description {
+          max-width: 600px;
+          margin-bottom: 1em;
+        }
+
+        .measure-description p {
+          margin-bottom: 0;
+        }
 
         .bad {
           background-color: #DF3034;
@@ -662,6 +670,8 @@ s
 
             barChart.classList.remove('hidden')
 
+            document.querySelector('.measure-description').classList.remove('hidden')
+
 
           }
 
@@ -677,6 +687,8 @@ s
 
             function showTopics() {
               element.classList.add('show-topics');
+              document.querySelector('.measure-description').classList.add('hidden')
+
             }
 
           }
@@ -755,8 +767,8 @@ s
       <li>
         Demographics
         <ul>
-          <li data-measure="English language skills by ethnicity" data-geography="Region" data-ethnicity-breakdown="Not applicable">English language skills</li>
-          <li data-measure="Ethnic groups by sex" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">Male and female populations</li>
+<!--           <li data-measure="English language skills by ethnicity" data-geography="Region" data-ethnicity-breakdown="Not applicable">English language skills</li>
+ -->          <li data-measure="Ethnic groups by sex" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">Male and female populations</li>
           <li data-measure="People living in the most deprived 10% of neighbourhoods, by ethnicity" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">People living in deprived neighbourhoods</li>
           <li data-measure="Ethnic groups by working age" data-geography="Country" data-ethnicity-breakdown="18 - ONS 2011">Working age population</li>
         </ul>
@@ -776,7 +788,7 @@ s
       <li>
         Courts, sentencing and tribunals
         <ul>
-          <li data-measure="Average custodial sentence length by ethnicity and age group of offender" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Average length of custodial sentences</li>
+          <li data-measure="Average length of custodial sentence ethnicity compared to the average" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Average length of custodial sentences</li>
           <li data-measure="Employment tribunal claims by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="">Employment tribunal claims</li>
           <li data-measure="Conviction Ratio by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Prosecutions and convictions</li>
           <li data-measure="Remand status at Crown Court by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other inc Chinese">Remand status at Crown Court</li>
@@ -787,8 +799,8 @@ s
       <li>
         Crime and reoffending
         <ul>
-          <li data-measure="Fear of crime by ethnicity" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Fear of crime</li>
-          <li data-measure="Average number of reoffences per reoffender" data-geography="Country" data-ethnicity-breakdown="4 - Asian, Black, White, Other inc Mixed">Proven reoffending</li>
+          <li data-measure="People who had a fear of crime by ethnicity, compared to the average" data-geography="United Kingdom" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Fear of crime</li>
+          <li data-measure="Average number of reoffences per reoffender by ethnicity, compared to the average" data-geography="Country" data-ethnicity-breakdown="4 - Asian, Black, White, Other inc Mixed">Proven reoffending</li>
           <li data-measure="Victims of crime by ethnicity" data-geography="Country" data-ethnicity-breakdown="5 - Asian, Black, White, Mixed, Other">Victims of crime</li>
         </ul>
       </li>
@@ -1130,6 +1142,10 @@ s
 
         <h1 class="heading-medium measure-title"></h1>
 
+        <div class="measure-description hidden">
+          <p>This data measures employment tribunal claims made by people who feel they have suffered a workplace grievance.</p>
+          <a href="#">More details</a>
+        </div>
 
       <div class="select-ethnicity">
         <div class="prompt">Select ethnicity: <span class="selected-ethnicity"></div>
@@ -1193,6 +1209,8 @@ s
               </tr>
             </tbody>
           </table>
+
+          <div class="source">Source: <a href="#">National Survey of Statistics</a></div>
         </div>
 
 
@@ -1542,6 +1560,7 @@ s
 
 
 
+        <div class="source">Source: <a href="#">National Survey of Statistics</a></div>
       </div>
 
 
