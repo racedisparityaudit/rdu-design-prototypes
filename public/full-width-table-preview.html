@@ -166,6 +166,23 @@
         dataColumns.init()
       })
 
+
+      document.addEventListener('DOMContentLoaded', function() {
+
+         var elements = document.querySelectorAll('.rows-or-cols');
+
+         for (element of elements) {
+
+          element.addEventListener('click', function() {
+
+            document.getElementById('complex-options').classList.remove('hidden')
+          })
+
+         }
+
+
+      })
+
     </script>
 
 
@@ -226,7 +243,7 @@
       <form>
 
         <fieldset>
-          <legend class="heading-small">
+          <legend class="">
                         <label for="data">Data
 
               <span class="form-hint">
@@ -247,12 +264,16 @@
 
         </fieldset>
 
+        <div class="form-group">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" class="form-control" value="Percentage of people who were victims of crime, by ethnicity over time" style="width: 100%" />
+        </div>
 
         <fieldset>
-          <legend class="heading-small">Ethnicity</legend>
+          <!-- <legend class="heading-small">Ethnicity</legend> -->
 
           <div class="form-group">
-            <label class="form-label" for="ethnicity-classification">Classification used</label>
+            <label class="form-label" for="ethnicity-classification">Ethnicity classification</label>
             <select class="form-control" id="ethnicity-classification">
               <option>ONS 2011 - 18+1</option>
               <option>Other</option>
@@ -262,7 +283,7 @@
         </fieldset>
 
         <fieldset>
-          <legend class="heading-small">Complex table options</legend>
+          <!-- <legend class="heading-small">Complex table options</legend> -->
 
             <div class="form-group" style="margin-bottom: 10px;">
               <fieldset class="inline">
@@ -274,18 +295,18 @@
                 </legend>
 
                 <div class="multiple-choice">
-                  <input id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes">
-                  <label for="radio-inline-1">In rows</label>
+                  <input class="rows-or-cols" id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes">
+                  <label for="radio-inline-1">Rows</label>
                 </div>
                 <div class="multiple-choice">
-                  <input id="radio-inline-2" type="radio" name="radio-inline-group" value="No">
-                  <label for="radio-inline-2">In Columns</label>
+                  <input class="rows-or-cols" id="radio-inline-2" type="radio" name="radio-inline-group" value="No">
+                  <label for="radio-inline-2">Columns</label>
                 </div>
 
               </fieldset>
             </div>
 
-          <div class="panel panel-border-narrow" style="padding-top: 10px; padding-bottom: 0;">
+          <div class="panel panel-border-narrow hidden" style="padding-top: 10px; padding-bottom: 0;" id="complex-options">
 
             <div class="form-group" style="margin-bottom: 20px;">
               <label for="column-groups" class="form-label">Column groups</label>
@@ -332,7 +353,7 @@
               </div>
               <div class="form-group" style="margin-bottom: 10px; padding-bottom: 40px;" >
                 <label for="column-value-1-heading" class="form-label">Heading</label>
-                <input class="form-control" type="text" id="column-value-1-heading" style="width: 180px" />
+                <input class="form-control" type="text" id="column-value-1-heading" style="width: 100%" />
               </div>
             </div>
 
@@ -355,7 +376,7 @@
               </div>
               <div class="form-group" style="margin-bottom: 20px;">
                 <label for="column-value-1-heading" class="form-label">Heading</label>
-                <input class="form-control" type="text" id="column-value-1-heading" style="width: 180px" />
+                <input class="form-control" type="text" id="column-value-1-heading" style="width: 100%" />
               </div>
             </div>
 
@@ -382,7 +403,7 @@
               </div>
               <div class="form-group" style="margin-bottom: 20px;">
                 <label for="column-value-1-heading" class="form-label">Heading</label>
-                <input class="form-control" type="text" id="column-value-1-heading" style="width: 180px" />
+                <input class="form-control" type="text" id="column-value-1-heading" style="width: 100%" />
               </div>
             </div>
 
@@ -409,7 +430,7 @@
               </div>
               <div class="form-group" style="margin-bottom: 20px;">
                 <label for="column-value-1-heading" class="form-label">Heading</label>
-                <input class="form-control" type="text" id="column-value-1-heading" style="width: 180px" />
+                <input class="form-control" type="text" id="column-value-1-heading" style="width: 100%" />
               </div>
             </div>
 
@@ -425,15 +446,17 @@
       </form>
 
 
+<hr>
 
 <div id="preview_container">
-                    <h2 class="heading-medium" style="margin-top: 10px;">Preview</h2>
+                    <!-- <h2 class="heading-medium" style="margin-top: 10px;">Preview</h2> -->
                     <div id="container">
 
                       <figure>
-                      <caption>
-                        <label for="title" class="form-label visuallyhidden">Table title</label>
-                        <input type="text" id="title" class="form-control" value="Victims of crime by ethnicity over time" style="width: 100%;"></caption>
+                      <figcaption style="font-weight: bold; margin-bottom: 10px;">
+                        Percentage of people who were victims of crime, by ethnicity over time
+                      </figcaption>
+
                       <table class="table table-sm"><thead><tr><th>Ethnicity</th><td colspan="2">2013/14</td><td colspan="2">2014/15</td><td colspan="2">2015/16</td><td colspan="2">2016/17</td></tr><tr><td></td><td>%</td><td>Sample size</td><td>%</td><td>Sample size</td><td>%</td><td>Sample size</td><td>%</td><td>Sample size</td></tr></thead><tbody><tr><th class="parent_row">All</th><td>17</td><td>35,371</td><td>16</td><td>33,350</td><td>15</td><td>35,324</td><td>14</td><td>35,420</td></tr><tr><th class="parent_row">Asian</th><td>19</td><td>1,824</td><td>16</td><td>1,649</td><td>18</td><td>1,790</td><td>15</td><td>1,956</td></tr><tr><th class="child_row">Bangladeshi</th><td>17</td><td>138</td><td>12</td><td>123</td><td>15</td><td>135</td><td>19</td><td>168</td></tr><tr><th class="child_row">Chinese</th><td>15</td><td>169</td><td>11</td><td>136</td><td>16</td><td>173</td><td>13</td><td>182</td></tr><tr><th class="child_row">Indian</th><td>20</td><td>767</td><td>14</td><td>679</td><td>18</td><td>722</td><td>15</td><td>772</td></tr><tr><th class="child_row">Pakistani</th><td>20</td><td>398</td><td>22</td><td>388</td><td>23</td><td>428</td><td>16</td><td>498</td></tr><tr><th class="child_row">Asian other</th><td>15</td><td>352</td><td>14</td><td>323</td><td>15</td><td>332</td><td>13</td><td>336</td></tr><tr><th class="parent_row">Black</th><td>17</td><td>959</td><td>18</td><td>902</td><td>19</td><td>902</td><td>17</td><td>1,026</td></tr><tr><th class="child_row">Black African</th><td>16</td><td>564</td><td>19</td><td>529</td><td>19</td><td>530</td><td>17</td><td>629</td></tr><tr><th class="child_row">Black Caribbean</th><td>17</td><td>350</td><td>15</td><td>316</td><td>16</td><td>311</td><td>14</td><td>318</td></tr><tr><th class="child_row">Black other</th><td>?</td><td>45</td><td>28</td><td>57</td><td>31</td><td>61</td><td>22</td><td>79</td></tr><tr><th class="parent_row">Mixed</th><td>27</td><td>339</td><td>28</td><td>309</td><td>21</td><td>364</td><td>20</td><td>370</td></tr><tr><th class="child_row">Mixed White/Asian</th><td>24</td><td>80</td><td>28</td><td>90</td><td>16</td><td>94</td><td>17</td><td>105</td></tr><tr><th class="child_row">Mixed White/Black African</th><td>?</td><td>46</td><td>?</td><td>45</td><td>?</td><td>44</td><td>13</td><td>56</td></tr><tr><th class="child_row">Mixed White/Black Caribbean</th><td>29</td><td>120</td><td>29</td><td>98</td><td>21</td><td>135</td><td>20</td><td>121</td></tr><tr><th class="child_row">Mixed other</th><td>29</td><td>93</td><td>23</td><td>76</td><td>26</td><td>91</td><td>29</td><td>88</td></tr><tr><th class="parent_row">White</th><td>17</td><td>31,980</td><td>16</td><td>30,212</td><td>15</td><td>31,967</td><td>14</td><td>31,673</td></tr><tr><th class="child_row">White British</th><td>17</td><td>30,073</td><td>16</td><td>28,476</td><td>15</td><td>29,993</td><td>14</td><td>29,366</td></tr><tr><th class="child_row">White Irish</th><td>21</td><td>322</td><td>17</td><td>299</td><td>17</td><td>287</td><td>10</td><td>296</td></tr><tr><th class="child_row">White Gypsy/Traveller</th><td>?</td><td>12</td><td>?</td><td>10</td><td>?</td><td>15</td><td>?</td><td>21</td></tr><tr><th class="child_row">White other</th><td>17</td><td>1,573</td><td>19</td><td>1,427</td><td>16</td><td>1,672</td><td>14</td><td>1,990</td></tr><tr><th class="parent_row">Other</th><td>14</td><td>236</td><td>15</td><td>234</td><td>17</td><td>242</td><td>15</td><td>349</td></tr><tr><th class="child_row">Arab</th><td>10</td><td>88</td><td>10</td><td>83</td><td>10</td><td>87</td><td>18</td><td>141</td></tr><tr><th class="child_row">Any other</th><td>16</td><td>148</td><td>17</td><td>151</td><td>21</td><td>155</td><td>12</td><td>208</td></tr></tbody></table>
                     </figure>
                     </div>
