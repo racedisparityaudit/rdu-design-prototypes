@@ -1,0 +1,595 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+
+
+  </head>
+
+
+
+  <body class="">
+
+    <style>
+      .link {
+        border-width: 0;
+        font-size: inherit;
+        background-color: inherit;
+        color: #005EA5;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      .link.remove {
+        color: #B10E1E;
+      }
+
+      .column-data-add button {
+        display: block;
+        width: 100%;
+        height: 80px;
+        background-color: #F8F8F8;
+      }
+
+      .toggle-preview {
+        position: absolute;
+        left: -6px;
+        top: 10px;
+        background-color: lightgrey;
+        border-width: 0;
+        padding: 0;
+        width: 10px;
+        height: 450px;
+        cursor: pointer;
+        border-radius: 2px;
+      }
+
+      .toggle-preview:hover {
+        background-color: grey;
+        color: white;
+      }
+
+      .toggle-preview span {
+        display: none;
+      }
+
+
+      .toggle-preview:after {
+        content: '<';
+        font-weight: bold;
+      }
+
+      .toggle-preview.full-width:after {
+        content: '>';
+      }
+
+      main#content {
+        max-width: 1320px;
+      }
+
+    </style>
+
+    <script>
+
+
+      var DataColumn = function(element, dataColumns) {
+        this.element = element
+        this.dataColumns = dataColumns
+      }
+
+      DataColumn.prototype.init = function() {
+
+        this.addButton = this.element.querySelector('.column-data-add');
+        this.removeButton = this.element.querySelector('.column-data-remove');
+        this.fields = this.element.querySelector('.column-data-fields');
+
+        this.addButton.addEventListener('click', this.showFields.bind(this))
+
+        if (this.removeButton) {
+          this.removeButton.addEventListener('click', this.hideFields.bind(this))
+        }
+      }
+
+      DataColumn.prototype.showFields = function(event) {
+
+        this.addButton.classList.add('hidden')
+        this.fields.classList.remove('hidden')
+
+        if (this.removeButton) {
+          this.removeButton.classList.remove('hidden')
+        }
+
+        this.dataColumns.dataFieldsShown(this)
+
+      }
+
+      DataColumn.prototype.hideFields = function(event) {
+
+        this.addButton.classList.remove('hidden')
+        this.fields.classList.add('hidden')
+
+        if (this.removeButton) {
+          this.removeButton.classList.add('hidden')
+        }
+
+        this.dataColumns.dataFieldsRemoved(this)
+
+      }
+
+      DataColumn.prototype.showAddButton = function() {
+
+        if (this.fields.classList.contains('hidden')) {
+          this.addButton.classList.remove('hidden')
+        }
+
+      }
+
+      DataColumn.prototype.hideAddButton = function() {
+        this.addButton.classList.add('hidden')
+      }
+
+
+      var DataColumns = function(element) {
+        this.element = element
+        this.dataColumns = []
+      }
+
+      DataColumns.prototype.init = function() {
+
+        var elements = this.element.querySelectorAll('.column-data');
+
+        for (element of elements) {
+
+          var dataColumn = new DataColumn(element, this)
+          dataColumn.init()
+          this.dataColumns.push(dataColumn)
+        }
+
+      }
+
+      DataColumns.prototype.dataFieldsShown = function(dataColumn) {
+
+        var indexOfDataColumn = this.dataColumns.indexOf(dataColumn)
+
+        if ((indexOfDataColumn + 1) < this.dataColumns.length) {
+          this.dataColumns[indexOfDataColumn + 1].showAddButton()
+        }
+
+      };
+
+      DataColumns.prototype.dataFieldsRemoved = function(dataColumn) {
+
+        var indexOfDataColumn = this.dataColumns.indexOf(dataColumn)
+
+        if ((indexOfDataColumn + 1) < this.dataColumns.length) {
+          this.dataColumns[indexOfDataColumn + 1].hideAddButton()
+        }
+
+      }
+
+      var dataColumns
+
+      document.addEventListener('DOMContentLoaded', function() {
+        dataColumns = new DataColumns(document)
+        dataColumns.init()
+      })
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+
+         var elements = document.querySelectorAll('.rows-or-cols');
+
+         for (element of elements) {
+
+          element.addEventListener('click', function() {
+
+            document.getElementById('complex-options').classList.remove('hidden')
+          })
+
+         }
+
+
+         var toggleButton = document.getElementsByClassName('js-toggle-preview-full-width')[0];
+
+         toggleButton.addEventListener('click', function(event) {
+
+          var tableControls = document.querySelector('.js-form-controls')
+          var tablePreview = document.querySelector('.js-table-preview')
+
+
+          event.target.classList.toggle('full-width')
+
+
+          if (tablePreview.classList.contains('column-two-thirds')) {
+
+            tableControls.classList.add('hidden')
+
+            tablePreview.classList.remove('column-two-thirds')
+            tablePreview.classList.add('column-full')
+
+          } else {
+
+            tableControls.classList.remove('hidden')
+
+            tablePreview.classList.add('column-two-thirds')
+            tablePreview.classList.remove('column-full')
+
+          }
+
+         })
+
+      })
+
+    </script>
+
+
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <header role="banner" id="global-header" class="with-proposition">
+      <div class="header-wrapper" style="max-width: 1320px;">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="/static/images/gov.uk_logotype_crown_invert_trans.png?0.19.2" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu">
+                <a href="/" id="proposition-name">
+                  Ethnicity facts and figures
+                </a>
+
+                    <ul id="proposition-links">
+                        <li><a href="#">Ethnicity in the UK</a></li>
+                        <li><a href="#">Background</a></li>
+                    </u>
+              </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div>
+      <div id="global-header-bar" style="max-width: 99999px;"></div>
+    </div>
+
+    <main id="content" role="main" style="padding: 0 10px;">
+
+      <div class="breadcrumbs">
+        <ol>
+          <li><a href="#">Ethnicity facts and figures</a></li>
+          <li><a href="#">Victims of Crime</a></li>
+          <li><a href="#">Victims of crime by ethnicity over time</a></li>
+        </ol>
+      </div>
+
+
+
+      <div style="max-width: 1320; box-sizing: border-box;">
+      <h1 class="heading-xlarge">Table builder</h1>
+
+<!--
+        <fieldset>
+          <legend class="">
+                        <label for="data">Data
+
+              <span class="form-hint">
+                Paste data from a spreadsheet, using a row for each measurement,
+                and columns for 'Ethnicity', the value being measured, and additional columns for another dimensions (eg 'Year' or 'Local authory')
+                <a style="margin-left: 20px;" href="https://guide.ethnicity-facts-figures.service.gov.uk/templates">See examples</a>
+              </span>
+
+            </label>
+          </legend>
+
+          <div class="form-group">
+
+            <textarea id="data" class="form-control" style="width: 100%; height: 200px;"></textarea>
+
+            <div style="margin-top: 10px; font-size: 16px; color: #6F777B;">Data contains: 200 rows by 12 columns</div>
+          </div>
+
+        </fieldset> -->
+      </div>
+
+
+
+
+      <div style="width: 100%; margin: 0 auto; box-sizing: border-box;">
+        <div style="display: table; width: 100%;box-sizing: border-box;">
+          <div style="display: table-cell; padding: 0 10px 0 0; vertical-align: top;; ">
+
+            <div style="padding-right: 10px;">
+      <form>
+
+        <fieldset>
+          <!-- <legend class="heading-small">Ethnicity</legend> -->
+
+          <div class="form-group">
+            <label class="form-label" for="ethnicity-classification">Ethnicity classification</label>
+            <select class="form-control" id="ethnicity-classification" style="width: 100%;">
+              <option>ONS 2011 - 18+1</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+        </fieldset>
+
+        <fieldset>
+          <!-- <legend class="heading-small">Complex table options</legend> -->
+
+            <div class="form-group" style="margin-bottom: 10px;">
+              <fieldset class="">
+
+                <legend>
+                  <h3 class="" style="padding-bottom: 10px;">
+                    How should ethnicity be displayed?
+                  </h3>
+                </legend>
+
+                <div class="multiple-choice">
+                  <input class="rows-or-cols" id="radio-inline-1" type="radio" name="radio-inline-group" value="Yes">
+                  <label for="radio-inline-1">Rows</label>
+                </div>
+                <div class="multiple-choice">
+                  <input class="rows-or-cols" id="radio-inline-2" type="radio" name="radio-inline-group" value="No">
+                  <label for="radio-inline-2">Columns</label>
+                </div>
+
+              </fieldset>
+            </div>
+
+          <div class="panel panel-border-narrow hidden" style="padding-top: 10px; padding-bottom: 0;" id="complex-options">
+
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label for="column-groups" class="form-label">Column groups</label>
+              <select id="column-groups" class="form-control" style="width: 100%;">
+                  <option selected="">Please select</option>
+                  <option>Time</option>
+                  <option>Value</option>
+                  <option>Gender</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="column-order" class="form-label">Column group order</label>
+              <select id="column-order" class="form-control" style="width: 100%;">
+                  <option selected="">Please select</option>
+                  <option>Time</option>
+                  <option>Value</option>
+                  <option>Gender</option>
+              </select>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <h2 class="heading-small">Data columns</h2>
+
+        <div class="">
+
+          <div class="column-data" data-column-number="1">
+
+            <div class="column-data-add hidden">
+              <button class="link" type="button">Add column</button>
+            </div>
+
+            <div class="column-data-fields">
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label for="column-value-2" class="form-label">Data source</label>
+                <select id="column-value-2" class="form-control" style="width: 100%;">
+                    <option selected="">Please select</option>
+                    <option>Time</option>
+                    <option>Value</option>
+                    <option>Gender</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom: 10px; padding-bottom: 40px;" >
+                <label for="column-value-1-heading" class="form-label">Heading</label>
+                <input class="form-control" type="text" id="column-value-1-heading" style="width: 100%" />
+              </div>
+            </div>
+
+          </div>
+          <div class=" column-data" data-column-number="2">
+
+            <div class="column-data-add">
+              <button class="link" type="button">Add column</button>
+            </div>
+
+            <div class="column-data-fields hidden">
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label for="column-value-2" class="form-label">Data source</label>
+                <select id="column-value-2" class="form-control" style="width: 100%;">
+                    <option selected="">Please select</option>
+                    <option>Time</option>
+                    <option>Value</option>
+                    <option>Gender</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom: 20px;">
+                <label for="column-value-1-heading" class="form-label">Heading</label>
+                <input class="form-control" type="text" id="column-value-1-heading" style="width: 100%" />
+              </div>
+            </div>
+
+            <div class="column-data-remove hidden">
+              <button class="link remove" type="button">Remove column</button>
+            </div>
+
+          </div>
+          <div class=" column-data" data-column-number="2">
+
+            <div class="column-data-add hidden">
+              <button class="link" type="button">Add column</button>
+            </div>
+
+            <div class="column-data-fields hidden">
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label for="column-value-2" class="form-label">Data source</label>
+                <select id="column-value-2" class="form-control" style="width: 100%;">
+                    <option selected="">Please select</option>
+                    <option>Time</option>
+                    <option>Value</option>
+                    <option>Gender</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom: 20px;">
+                <label for="column-value-1-heading" class="form-label">Heading</label>
+                <input class="form-control" type="text" id="column-value-1-heading" style="width: 100%" />
+              </div>
+            </div>
+
+            <div class="column-data-remove hidden">
+              <button class="link remove" type="button">Remove column</button>
+            </div>
+
+          </div>
+          <div class=" column-data" data-column-number="2">
+
+            <div class="column-data-add hidden">
+              <button class="link" type="button">Add column</button>
+            </div>
+
+            <div class="column-data-fields hidden">
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label for="column-value-2" class="form-label">Data source</label>
+                <select id="column-value-2" class="form-control" style="width: 100%;">
+                    <option selected="">Please select</option>
+                    <option>Time</option>
+                    <option>Value</option>
+                    <option>Gender</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom: 20px;">
+                <label for="column-value-1-heading" class="form-label">Heading</label>
+                <input class="form-control" type="text" id="column-value-1-heading" style="width: 100%" />
+              </div>
+            </div>
+
+            <div class="column-data-remove hidden">
+              <button class="link remove" type="button">Remove column</button>
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </form>
+    </div>
+
+
+          </div>
+          <div style="display: table-cell; width: 1000px; padding-left: 10px; border-left: 1px solid lightgrey; vertical-align: top; box-sizing: border-box;">
+
+<div id="preview_container">
+                    <!-- <h2 class="heading-medium" style="margin-top: 10px;">Preview</h2> -->
+                    <div id="container">
+
+                      <figure>
+                      <figcaption style="font-weight: bold; margin-bottom: 10px;">
+        <div class="form-group">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" class="form-control" value="Percentage of people who were victims of crime, by ethnicity over time" style="width: 100%" />
+        </div>
+
+                      </figcaption>
+
+                      <table class="table table-sm"><thead><tr><th>Ethnicity</th><td colspan="2">2013/14</td><td colspan="2">2014/15</td><td colspan="2">2015/16</td><td colspan="2">2016/17</td></tr><tr><td></td><td>%</td><td>Sample size</td><td>%</td><td>Sample size</td><td>%</td><td>Sample size</td><td>%</td><td>Sample size</td></tr></thead><tbody><tr><th class="parent_row">All</th><td>17</td><td>35,371</td><td>16</td><td>33,350</td><td>15</td><td>35,324</td><td>14</td><td>35,420</td></tr><tr><th class="parent_row">Asian</th><td>19</td><td>1,824</td><td>16</td><td>1,649</td><td>18</td><td>1,790</td><td>15</td><td>1,956</td></tr><tr><th class="child_row">Bangladeshi</th><td>17</td><td>138</td><td>12</td><td>123</td><td>15</td><td>135</td><td>19</td><td>168</td></tr><tr><th class="child_row">Chinese</th><td>15</td><td>169</td><td>11</td><td>136</td><td>16</td><td>173</td><td>13</td><td>182</td></tr><tr><th class="child_row">Indian</th><td>20</td><td>767</td><td>14</td><td>679</td><td>18</td><td>722</td><td>15</td><td>772</td></tr><tr><th class="child_row">Pakistani</th><td>20</td><td>398</td><td>22</td><td>388</td><td>23</td><td>428</td><td>16</td><td>498</td></tr><tr><th class="child_row">Asian other</th><td>15</td><td>352</td><td>14</td><td>323</td><td>15</td><td>332</td><td>13</td><td>336</td></tr><tr><th class="parent_row">Black</th><td>17</td><td>959</td><td>18</td><td>902</td><td>19</td><td>902</td><td>17</td><td>1,026</td></tr><tr><th class="child_row">Black African</th><td>16</td><td>564</td><td>19</td><td>529</td><td>19</td><td>530</td><td>17</td><td>629</td></tr><tr><th class="child_row">Black Caribbean</th><td>17</td><td>350</td><td>15</td><td>316</td><td>16</td><td>311</td><td>14</td><td>318</td></tr><tr><th class="child_row">Black other</th><td>?</td><td>45</td><td>28</td><td>57</td><td>31</td><td>61</td><td>22</td><td>79</td></tr><tr><th class="parent_row">Mixed</th><td>27</td><td>339</td><td>28</td><td>309</td><td>21</td><td>364</td><td>20</td><td>370</td></tr><tr><th class="child_row">Mixed White/Asian</th><td>24</td><td>80</td><td>28</td><td>90</td><td>16</td><td>94</td><td>17</td><td>105</td></tr><tr><th class="child_row">Mixed White/Black African</th><td>?</td><td>46</td><td>?</td><td>45</td><td>?</td><td>44</td><td>13</td><td>56</td></tr><tr><th class="child_row">Mixed White/Black Caribbean</th><td>29</td><td>120</td><td>29</td><td>98</td><td>21</td><td>135</td><td>20</td><td>121</td></tr><tr><th class="child_row">Mixed other</th><td>29</td><td>93</td><td>23</td><td>76</td><td>26</td><td>91</td><td>29</td><td>88</td></tr><tr><th class="parent_row">White</th><td>17</td><td>31,980</td><td>16</td><td>30,212</td><td>15</td><td>31,967</td><td>14</td><td>31,673</td></tr><tr><th class="child_row">White British</th><td>17</td><td>30,073</td><td>16</td><td>28,476</td><td>15</td><td>29,993</td><td>14</td><td>29,366</td></tr><tr><th class="child_row">White Irish</th><td>21</td><td>322</td><td>17</td><td>299</td><td>17</td><td>287</td><td>10</td><td>296</td></tr><tr><th class="child_row">White Gypsy/Traveller</th><td>?</td><td>12</td><td>?</td><td>10</td><td>?</td><td>15</td><td>?</td><td>21</td></tr><tr><th class="child_row">White other</th><td>17</td><td>1,573</td><td>19</td><td>1,427</td><td>16</td><td>1,672</td><td>14</td><td>1,990</td></tr><tr><th class="parent_row">Other</th><td>14</td><td>236</td><td>15</td><td>234</td><td>17</td><td>242</td><td>15</td><td>349</td></tr><tr><th class="child_row">Arab</th><td>10</td><td>88</td><td>10</td><td>83</td><td>10</td><td>87</td><td>18</td><td>141</td></tr><tr><th class="child_row">Any other</th><td>16</td><td>148</td><td>17</td><td>151</td><td>21</td><td>155</td><td>12</td><td>208</td></tr></tbody></table>
+                    </figure>
+                    </div>
+
+                </div>
+
+
+        </div>
+      </div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- CONTENT STARTS HERE -->
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+
+
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-two-thirds'>
+            <h2>Further information</h2>
+            <ul>
+              <li>
+                  <a href="#">Race Disparity Audit report</a>
+              </li>
+              <li>
+                  <a href="#">Statement of compliance (PDF)</a>
+              </li>
+              <li>
+                  <a href="#">Style guide and templates</a>
+              </li>
+            </ul>
+          </div>
+          <div class="column-one-third">
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
