@@ -200,17 +200,19 @@
         color: black;
       }
 
-      .likelihood thead .ethnic-group button {
+      .likelihood.show-only thead .all button {
         display: inline-block;
         position: relative;
+        color: #005EA5;
+        text-decoration: underline;
       }
 
-      .likelihood.show-only thead .ethnic-group button:before {
+      .likelihood.show-only thead .all button:before {
         content: '';
         display: block;
         position: absolute;
         left: -15px;
-        bottom: 9px;
+        bottom: 12px;
         margin-right: 10px;
         width: 8px;
         height: 8px;
@@ -261,6 +263,8 @@
 
       document.addEventListener('DOMContentLoaded', function() {
 
+        var allButton = document.querySelector('thead .all button')
+
         var asianHeader = document.querySelector('thead .asian');
         var blackHeader = document.querySelector('thead .black');
         var mixedHeader = document.querySelector('thead .mixed');
@@ -269,29 +273,39 @@
 
         var table = document.querySelector('table.likelihood')
 
+        allButton.addEventListener('click', function() {
+          table.classList.remove('show-only')
+          table.classList.remove('asian')
+          table.classList.remove('black')
+          table.classList.remove('mixed')
+          table.classList.remove('white')
+          table.classList.remove('other')
+
+        })
+
         asianHeader.addEventListener('click', function() {
-          table.classList.toggle('show-only');
-          table.classList.toggle('asian');
+          table.classList.add('show-only');
+          table.classList.add('asian');
         })
 
         blackHeader.addEventListener('click', function() {
-          table.classList.toggle('show-only');
-          table.classList.toggle('black');
+          table.classList.add('show-only');
+          table.classList.add('black');
         })
 
         mixedHeader.addEventListener('click', function() {
-          table.classList.toggle('show-only');
-          table.classList.toggle('mixed');
+          table.classList.add('show-only');
+          table.classList.add('mixed');
         })
 
         whiteHeader.addEventListener('click', function() {
-          table.classList.toggle('show-only');
-          table.classList.toggle('white');
+          table.classList.add('show-only');
+          table.classList.add('white');
         })
 
         otherHeader.addEventListener('click', function() {
-          table.classList.toggle('show-only');
-          table.classList.toggle('other');
+          table.classList.add('show-only');
+          table.classList.add('other');
         })
 
       })
@@ -356,7 +370,7 @@
             <thead>
               <tr class="ethnic-groups">
                 <th style="width: 33%;"></th>
-                <th style="width: 80px;" class="all">All</th>
+                <th style="width: 80px;" class="all"><button type="button">All</button></th>
                 <th class="asian ethnic-group"><button type="button">Asian</button></th>
                 <th class="asian detailed ethnic-group">Indian</th>
                 <th class="asian detailed ethnic-group">Pakistani</th>
