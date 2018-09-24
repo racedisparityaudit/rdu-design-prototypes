@@ -1,0 +1,1143 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>GOV.UK - The best place to find government services and information</title>
+
+    <!--[if gt IE 8]><!--><link href="/static/stylesheets/govuk-template.css?0.19.2" media="screen" rel="stylesheet" /><!--<![endif]-->
+    <!--[if IE 6]><link href="/static/stylesheets/govuk-template-ie6.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 7]><link href="/static/stylesheets/govuk-template-ie7.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!--[if IE 8]><link href="/static/stylesheets/govuk-template-ie8.css?0.19.2" media="screen" rel="stylesheet" /><![endif]-->
+    <!-- <link href="/static/stylesheets/govuk-template-print.css?0.19.2" media="print" rel="stylesheet" /> -->
+
+    <!--[if IE 8]><link href="/static/stylesheets/fonts-ie8.css?0.19.2" media="all" rel="stylesheet" /><![endif]-->
+    <!--[if gte IE 9]><!--><link href="/static/stylesheets/fonts.css?0.19.2" media="all" rel="stylesheet" /><!--<![endif]-->
+    <!--[if lt IE 9]><script src="/static/javascripts/ie.js?0.19.2"></script><![endif]-->
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico?0.19.2" type="image/x-icon" />
+    <link rel="mask-icon" href="/static/images/gov.uk_logotype_crown.svg?0.19.2" color="#0b0c0c" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/apple-touch-icon-152x152.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/apple-touch-icon-120x120.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/apple-touch-icon-76x76.png?0.19.2" />
+    <link rel="apple-touch-icon-precomposed" href="/static/images/apple-touch-icon-60x60.png?0.19.2" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:image" content="/static/images/opengraph-image.png?0.19.2" />
+
+
+    <meta name="viewport" content="width=100%, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/static/govuk_template-0.20.0/assets/stylesheets/govuk-elements.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/application.css" />
+    <style>
+
+
+      .breadcrumbs.location a {
+        color: #005EA5;
+        font-size: 19px;
+      }
+
+      .likelihood .title {
+        width: 30%;
+      }
+
+      .likelihood .less-likely {
+        text-align: right;
+      }
+
+      .likelihood thead .ethnic-groups th {
+        border-bottom-width: 0;
+      }
+
+      .likelihood thead .ethnic-group,
+      .likelihood thead .all {
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 19px;
+        padding-bottom: 0;
+        height: 47px;
+      }
+
+      .likelihood thead .ethnic-group.detailed {
+        font-weight: bold;
+        font-size: 15px;
+      }
+
+      .likelihood thead .less-likely,
+      .likelihood thead .more-likely {
+        width: 7%;
+        font-size: 12px;
+        font-weight: normal;
+        padding-top: 0;
+      }
+
+      .likelihood.show-only thead .asian.less-likely,
+      .likelihood.show-only thead .asian.more-likely {
+        width: 5.83%;
+      }
+
+      .likelihood.show-only thead .mixed.less-likely,
+      .likelihood.show-only thead .mixed.more-likely {
+        width: 7%;
+      }
+
+      .likelihood.show-only thead .black.less-likely,
+      .likelihood.show-only thead .black.more-likely {
+        width: 8.75%;
+      }
+
+      .likelihood.show-only thead  .detailed.other.less-likely,
+      .likelihood.show-only thead  .detailed.other.more-likely {
+        width: 11.6%;
+      }
+
+      .likelihood thead .less-likely {
+        padding-right: 6px;
+        padding-left: 12px;
+      }
+
+      .likelihood thead .more-likely {
+        padding-left: 6px;
+        padding-right: 10px;
+      }
+
+      .likelihood tbody .less-likely {
+        border-right: 1px dashed grey;
+        padding-right: 0;
+      }
+
+      .likelihood tbody .more-likely {
+        text-align: left;
+      }
+
+      .likelihood tbody span {
+        display: inline-block;
+        background-color: #005EA5;
+        height: 30px;
+        vertical-align: middle;
+      }
+
+      .detailed,
+      table tr td.detailed:last-child {
+        display: none;
+      }
+
+      .show-only thead .ethnic-group,
+      .show-only thead .less-likely,
+      .show-only thead .more-likely,
+      .show-only tbody td {
+        display: none;
+      }
+
+      .show-only.asian .asian,
+      .show-only.asian .asian,
+      .show-only.asian thead .ethnic-group.asian,
+      .show-only.asian thead .less-likely.asian,
+      .show-only.asian thead .more-likely.asian {
+        display: table-cell;
+      }
+
+      .show-only.black .black,
+      .show-only.black .black,
+      .show-only.black thead .ethnic-group.black,
+      .show-only.black thead .less-likely.black,
+      .show-only.black thead .more-likely.black {
+        display: table-cell;
+      }
+
+      .show-only.mixed .mixed,
+      .show-only.mixed .mixed,
+      .show-only.mixed thead .ethnic-group.mixed,
+      .show-only.mixed thead .less-likely.mixed,
+      .show-only.mixed thead .more-likely.mixed {
+        display: table-cell;
+      }
+
+      .show-only.white .white,
+      .show-only.white .white,
+      .show-only.white thead .ethnic-group.white,
+      .show-only.white thead .less-likely.white,
+      .show-only.white thead .more-likely.white {
+        display: table-cell;
+      }
+
+      .show-only.other .other,
+      .show-only.other .other,
+      .show-only.other thead .ethnic-group.other,
+      .show-only.other thead .less-likely.other,
+      .show-only.other thead .more-likely.other {
+        display: table-cell;
+      }
+
+      .show-only .all {
+        display: table-cell;
+      }
+
+      .likelihood button {
+        font-size: inherit;
+        border-width: 0;
+        color: inherit;
+        font-weight: inherit;
+        background-color: inherit;
+        text-decoration: inherit;
+        cursor: pointer;
+      }
+
+      .likelihood thead .ethnic-group {
+        color: #005EA5;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      .likelihood thead .ethnic-group:hover {
+        color: #2b8cc4;
+      }
+
+      .likelihood.show-only thead .ethnic-group {
+        text-decoration: none;
+        color: black;
+      }
+
+      .likelihood thead .ethnic-group button {
+        display: inline-block;
+        position: relative;
+      }
+
+      .likelihood.show-only thead .ethnic-group button:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: -15px;
+        bottom: 9px;
+        margin-right: 10px;
+        width: 8px;
+        height: 8px;
+        color: #005EA5;
+        margin: 0 auto;
+        transform: rotate(-135deg);
+        border: solid;
+        border-width: 3px 3px 0 0;
+      }
+
+      .likelihood.show-only thead .ethnic-group:hover button:before {
+        border-color: #2b8cc4;
+      }
+
+
+
+      .likelihood thead .ethnic-group.detailed {
+        color: black;
+        cursor: auto;
+        text-decoration: none;
+      }
+
+        .measure-changes thead th {
+          text-align: center;
+          padding: 0;
+        }
+
+
+        .measure-changes tbody td {
+          text-align: center;
+        }
+
+        .measure-changes tbody th[scope=rowgroup] {
+          border-bottom-width: 0;
+          font-size: 19px;
+          padding-bottom: 0;
+          padding-top: 20px;
+        }
+
+        .measure-changes a {
+          font-weight: normal;
+        }
+
+    </style>
+
+    <script>
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+
+        var asianHeader = document.querySelector('thead .asian');
+        var blackHeader = document.querySelector('thead .black');
+        var mixedHeader = document.querySelector('thead .mixed');
+        var whiteHeader = document.querySelector('thead .white');
+        var otherHeader = document.querySelector('thead .other');
+
+        var table = document.querySelector('table.likelihood')
+
+        asianHeader.addEventListener('click', function() {
+          table.classList.toggle('show-only');
+          table.classList.toggle('asian');
+        })
+
+        blackHeader.addEventListener('click', function() {
+          table.classList.toggle('show-only');
+          table.classList.toggle('black');
+        })
+
+        mixedHeader.addEventListener('click', function() {
+          table.classList.toggle('show-only');
+          table.classList.toggle('mixed');
+        })
+
+        whiteHeader.addEventListener('click', function() {
+          table.classList.toggle('show-only');
+          table.classList.toggle('white');
+        })
+
+        otherHeader.addEventListener('click', function() {
+          table.classList.toggle('show-only');
+          table.classList.toggle('other');
+        })
+
+      })
+
+    </script>
+
+  </head>
+
+
+
+  <body class="">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <header role="banner" id="global-header" class="with-proposition">
+      <div class="header-wrapper">
+        <div class="header-global">
+          <div class="header-logo">
+            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
+              <img src="/static/images/gov.uk_logotype_crown_invert_trans.png?0.19.2" width="36" height="32" alt=""> GOV.UK
+            </a>
+          </div>
+
+        </div>
+        <div class="header-proposition">
+          <div class="content">
+            <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+            <nav id="proposition-menu">
+                <a href="/" id="proposition-name">
+                  Ethnicity facts and figures
+                </a>
+
+                    <ul id="proposition-links">
+                        <li><a href="#">Ethnicity in the UK</a></li>
+                        <li><a href="#">Background</a></li>
+                    </u>
+              </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="global-header-bar"></div>
+
+    <main id="content" role="main">
+
+      <div class="phase-banner">
+        <p>
+          <strong class="phase-tag">Beta</strong>
+          <span>This is a new service – please send your feedback to <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a></span>
+        </p>
+      </div>
+
+
+      <!-- CONTENT STARTS HERE -->
+
+      <div class="grid-row">
+        <div class="column-full">
+
+          <h1 class="heading-xlarge">Measure changes</h1>
+
+          <table class="likelihood measure-changes">
+
+            <thead>
+              <tr class="ethnic-groups">
+                <th style="width: 33%;"></th>
+                <th style="width: 80px;" class="all">All</th>
+                <th class="asian ethnic-group"><button type="button">Asian</button></th>
+                <th class="asian detailed ethnic-group">Indian</th>
+                <th class="asian detailed ethnic-group">Pakistani</th>
+                <th class="asian detailed ethnic-group">Bangladeshi</th>
+                <th class="asian detailed ethnic-group">Chinese</th>
+                <th class="asian detailed ethnic-group">Asian other</th>
+
+                <th class="black ethnic-group"><button type="button">Black</button></th>
+                <th class="black detailed ethnic-group">African</th>
+                <th class="black detailed ethnic-group">Caribbean</th>
+                <th class="black detailed ethnic-group">Black other</th>
+
+                <th class="mixed ethnic-group"><button type="button">Mixed</button></th>
+                <th class="mixed detailed ethnic-group">White and <br>Asian</th>
+                <th class="mixed detailed ethnic-group">White and <br>Black African</th>
+                <th class="mixed detailed ethnic-group">White and <br>Black Caribbean</th>
+
+                <th class="mixed detailed ethnic-group">Mixed other</th>
+
+
+                <th class="white ethnic-group"><button type="button">White</button></th>
+                <th class="white detailed ethnic-group">White British</th>
+                <th class="white detailed ethnic-group">White Irish</th>
+                <th class="white detailed ethnic-group">White Gypsy or <br>Irish Traveller</th>
+                <th class="white detailed ethnic-group">White other</th>
+
+                <th class="other ethnic-group"><button type="button">Other</button></th>
+                <th class="other detailed ethnic-group">Arab</th>
+                <th class="other detailed ethnic-group">Any other <br>ethnic group</th>
+              </tr>
+            </thead>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" colspan="7">Crime, justice and the law</th>
+          </tr>
+
+            <tr>
+              <th><a href="#">Confidence in the local police</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Youth cautions</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Number of arrests</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Stop and search</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Victims of crime</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Fear of crime</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Proven reoffending</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Employment tribunal claims</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+
+
+            </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" colspan="7">Culture and community</th>
+          </tr>
+
+            <tr>
+              <th><a href="#">Confidence in the local police</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Youth cautions</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Number of arrests</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Stop and search</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Victims of crime</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Fear of crime</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Proven reoffending</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Employment tribunal claims</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+
+
+            </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="rowgroup" colspan="7">Education, skills and training</th>
+          </tr>
+
+            <tr>
+              <th><a href="#">Confidence in the local police</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Youth cautions</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Number of arrests</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Stop and search</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Victims of crime</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Fear of crime</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Proven reoffending</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+            <tr>
+              <th><a href="#">Employment tribunal claims</a></th>
+<td class="all">⬆︎</td>
+<td class="asian ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬇︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="asian detailed ethnic-group">⬆︎</td>
+<td class="black ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬆︎</td>
+<td class="black detailed ethnic-group">⬇︎</td>
+<td class="black detailed ethnic-group">—</td>
+<td class="mixed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">⬇︎</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="mixed detailed ethnic-group">—</td>
+<td class="white ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">⬆︎</td>
+<td class="white detailed ethnic-group">⬇︎</td>
+<td class="white detailed ethnic-group">—</td>
+<td class="other ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬇︎</td>
+<td class="other detailed ethnic-group">⬆︎</td>
+            </tr>
+
+
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+
+      <!-- CONTENT ENDS HERE -->
+    </main>
+
+
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+      <div class="footer-wrapper">
+
+        <div class='footer-categories grid-row'>
+          <div class='column-two-thirds'>
+            <h2>Further information</h2>
+            <ul>
+              <li>
+                  <a href="#">Race Disparity Audit report</a>
+              </li>
+              <li>
+                  <a href="#">Statement of compliance (PDF)</a>
+              </li>
+              <li>
+                  <a href="#">Style guide and templates</a>
+              </li>
+            </ul>
+          </div>
+          <div class="column-one-third">
+            <h2>Contact</h2>
+            <ul>
+              <li>
+                  <a href="mailto:ethnicity@cabinetoffice.gov.uk">ethnicity@cabinetoffice.gov.uk</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-meta-inner">
+            <div class="open-government-licence">
+              <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+                <p>All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated</p>
+            </div>
+          </div>
+          <div class="copyright">
+            <a href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">&copy; Crown copyright</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>if (typeof window.GOVUK === 'undefined') document.body.className = document.body.className.replace('js-enabled', '');</script>
+  </body>
+</html>
