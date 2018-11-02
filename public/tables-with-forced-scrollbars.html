@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tables with forced scrollbars (macOS style)</title>
+</head>
+<body>
+
+  <style>
+
+    body {
+      font-family: sans-serif;
+      font-size: 19px;
+    }
+
+    p {
+      line-height: 1.5em;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px
+    }
+
+    th, td {
+      border: 1px solid #777;
+      padding: 5px 8px;
+      font-size: 16px;
+    }
+
+    tr th:first-child {
+      border-left-width: 0;
+      padding-left: 0;
+    }
+
+    tr td:last-child,
+    tr th:last-child {
+      border-right-width: 0;
+    }
+
+    thead tr:first-child th {
+      border-top-width: 0;
+    }
+
+    thead tr th {
+      text-align: right;
+    }
+
+    thead tr th:first-child {
+      text-align: left;
+    }
+
+    tbody th {
+      text-align: left;
+    }
+
+    tbody td {
+      text-align: right;
+      font-family: monospace;
+    }
+
+    .table-with-fixed-header div {
+      margin-right: -11px;
+    }
+
+    .table-with-fixed-header div::-webkit-scrollbar {
+      -webkit-appearance: none;
+      height: 0;
+    }
+
+    .table-with-fixed-header div::-webkit-scrollbar:vertical {
+        width: 11px
+    }
+
+    .table-with-fixed-header div::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        border: 2px solid white;
+        background-color: rgba(0, 0, 0, 0.5)
+    }
+
+    .table-with-fixed-header div::-webkit-scrollbar-track {
+        background-color: #fff;
+        border-radius: 8px
+    }
+
+
+    table caption {
+      text-align: left;
+      font-weight: bold;
+      font-size: 19px;
+      margin-bottom: .5em;
+    }
+
+  </style>
+
+  <script>
+
+    function widthForElement(element) {
+
+      if (typeof window.getComputedStyle === "function") {
+        return getComputedStyle(element).width
+      } else {
+        return element.getBoundingClientRect().right - element.getBoundingClientRect().left;
+      }
+
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+      var tablesWithFixedHeaders = document.querySelectorAll('.table-with-fixed-header')
+
+      for (table of tablesWithFixedHeaders) {
+
+        var fixedHeaderTable = table.querySelector('.fixed')
+        var scrollableTable = table.querySelector('.scrollable')
+
+        var fixedHeaderCells = fixedHeaderTable.querySelectorAll('thead th, thead td')
+        var scrollableTableCells = scrollableTable.querySelectorAll('tbody th, tbody td')
+
+        for (var i = 0; i < fixedHeaderCells.length; i++) {
+          fixedHeaderCells[i].style.width = widthForElement(scrollableTableCells[i])
+        }
+
+      }
+
+    })
+
+  </script>
+
+  <main>
+
+    <h1>Tables with forced scrollbars (macOS style)</h1>
+
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+
+    <div class="table-with-fixed-header">
+      <table style="margin-bottom: -1px;" class="fixed">
+        <caption>Title of the table</caption>
+        <thead>
+          <tr><th>Name</th><th>Value A</th><th>Value B</th><th>Value C</th><th>Value D</th></tr>
+        </thead>
+      </table>
+      <div style="max-height: 400px; overflow: scroll; margin-bottom: 30px;">
+        <table class="scrollable">
+          <thead style="display: none;">
+            <tr><th>Name</th><th>Value A</th><th>Value B</th><th>Value C</th><th>Value D</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Lorem ipsum</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor sit amet</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Consectetur adipiscing</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sed do eiusmod</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Tempor incididunt</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Ut labore et</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Exercitation ullamco laboris</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cillum dolore eu</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Excepteur</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cupidatat</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sunt in culpa</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Deserunt mollit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor in</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Adipiscing elit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Irure dolor</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Lorem ipsum</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor sit amet</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Consectetur adipiscing</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sed do eiusmod</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Tempor incididunt</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Ut labore et</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Exercitation ullamco laboris</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cillum dolore eu</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Excepteur</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cupidatat</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sunt in culpa</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Deserunt mollit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor in</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Adipiscing elit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Irure dolor</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Lorem ipsum</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor sit amet</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Consectetur adipiscing</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sed do eiusmod</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Tempor incididunt</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Ut labore et</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Exercitation ullamco laboris</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cillum dolore eu</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Excepteur</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cupidatat</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sunt in culpa</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Deserunt mollit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor in</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Adipiscing elit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Irure dolor</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <div class="table-with-fixed-header">
+      <table style="margin-bottom: -1px;" class="fixed">
+        <caption>Title of the table</caption>
+        <thead>
+          <tr><th>Name</th><th>Value A</th><th>Value B</th><th>Value C</th><th>Value D</th></tr>
+        </thead>
+      </table>
+      <div style="max-height: 400px; overflow: scroll; margin-bottom: 30px;">
+        <table class="scrollable">
+          <thead style="display: none;">
+            <tr><th>Name</th><th>Value A</th><th>Value B</th><th>Value C</th><th>Value D</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Lorem ipsum</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor sit amet</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Consectetur adipiscing</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sed do eiusmod</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Tempor incididunt</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Ut labore et</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Exercitation ullamco laboris</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cillum dolore eu</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Excepteur</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cupidatat</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sunt in culpa</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Deserunt mollit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor in</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Adipiscing elit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Irure dolor</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Lorem ipsum</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor sit amet</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Consectetur adipiscing</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sed do eiusmod</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Tempor incididunt</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Ut labore et</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Exercitation ullamco laboris</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cillum dolore eu</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Excepteur</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cupidatat</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sunt in culpa</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Deserunt mollit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor in</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Adipiscing elit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Irure dolor</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Lorem ipsum</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor sit amet</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Consectetur adipiscing</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sed do eiusmod</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Tempor incididunt</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Ut labore et</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Exercitation ullamco laboris</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cillum dolore eu</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Excepteur</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cupidatat</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sunt in culpa</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Deserunt mollit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor in</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Adipiscing elit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Irure dolor</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <div class="table-with-fixed-header">
+      <table style="margin-bottom: -1px;" class="fixed">
+        <caption>Title of the table</caption>
+        <thead>
+          <tr><th>Name</th><th>Value A</th><th>Value B</th><th>Value C</th><th>Value D</th></tr>
+        </thead>
+      </table>
+      <div style="max-height: 400px; overflow: scroll; margin-bottom: 30px;">
+        <table class="scrollable">
+          <thead style="display: none;">
+            <tr><th>Name</th><th>Value A</th><th>Value B</th><th>Value C</th><th>Value D</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Lorem ipsum</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor sit amet</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Consectetur adipiscing</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sed do eiusmod</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Tempor incididunt</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Ut labore et</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Exercitation ullamco laboris</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cillum dolore eu</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Excepteur</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cupidatat</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sunt in culpa</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Deserunt mollit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor in</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Adipiscing elit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Irure dolor</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Lorem ipsum</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor sit amet</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Consectetur adipiscing</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sed do eiusmod</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Tempor incididunt</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Ut labore et</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Exercitation ullamco laboris</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cillum dolore eu</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Excepteur</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cupidatat</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sunt in culpa</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Deserunt mollit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor in</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Adipiscing elit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Irure dolor</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Lorem ipsum</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor sit amet</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Consectetur adipiscing</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sed do eiusmod</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Tempor incididunt</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Ut labore et</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Exercitation ullamco laboris</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cillum dolore eu</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Excepteur</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Cupidatat</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sunt in culpa</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Deserunt mollit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor in</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Adipiscing elit</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Irure dolor</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <div class="table-with-fixed-header">
+      <table style="margin-bottom: -1px;" class="fixed">
+        <caption>Title of the table</caption>
+
+        <thead>
+          <tr><th>Name</th><th>Value A</th><th>Value B</th><th>Value C</th><th>Value D</th></tr>
+        </thead>
+      </table>
+      <div style="max-height: 400px; overflow: scroll; margin-bottom: 30px;">
+        <table class="scrollable">
+          <thead style="display: none;">
+            <tr><th>Name</th><th>Value A</th><th>Value B</th><th>Value C</th><th>Value D</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Lorem ipsum</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Dolor sit amet</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Consectetur adipiscing</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Sed do eiusmod</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+            <tr><th>Tempor incididunt</th><td>140</td><td>12.%</td><td>10,000</td><td>19%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+    <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+  </main>
+
+
+</body>
+</html>
+
+
